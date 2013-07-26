@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		07F713D117A3142C00861126 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713D017A3142C00861126 /* main.cpp */; };
 		07F713D317A3142C00861126 /* n8.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 07F713D217A3142C00861126 /* n8.1 */; };
+		07F713DB17A3149F00861126 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F713DA17A3149F00861126 /* SDLMain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		07F713CC17A3142C00861126 /* n8 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = n8; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F713D017A3142C00861126 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		07F713D217A3142C00861126 /* n8.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = n8.1; sourceTree = "<group>"; };
+		07F713D917A3149F00861126 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
+		07F713DA17A3149F00861126 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 		07F713CF17A3142C00861126 /* n8 */ = {
 			isa = PBXGroup;
 			children = (
+				07F713D917A3149F00861126 /* SDLMain.h */,
+				07F713DA17A3149F00861126 /* SDLMain.m */,
 				07F713D017A3142C00861126 /* main.cpp */,
 				07F713D217A3142C00861126 /* n8.1 */,
 			);
@@ -117,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07F713D117A3142C00861126 /* main.cpp in Sources */,
+				07F713DB17A3149F00861126 /* SDLMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
