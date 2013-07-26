@@ -10,6 +10,9 @@
 		07F713D117A3142C00861126 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713D017A3142C00861126 /* main.cpp */; };
 		07F713D317A3142C00861126 /* n8.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 07F713D217A3142C00861126 /* n8.1 */; };
 		07F713DB17A3149F00861126 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F713DA17A3149F00861126 /* SDLMain.m */; };
+		07F713E317A3167400861126 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E017A3167400861126 /* Cocoa.framework */; };
+		07F713E417A3167400861126 /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E117A3167400861126 /* RubyCocoa.framework */; };
+		07F713E517A3167400861126 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E217A3167400861126 /* SDL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +34,9 @@
 		07F713D217A3142C00861126 /* n8.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = n8.1; sourceTree = "<group>"; };
 		07F713D917A3149F00861126 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
 		07F713DA17A3149F00861126 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
+		07F713E017A3167400861126 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		07F713E117A3167400861126 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = System/Library/Frameworks/RubyCocoa.framework; sourceTree = SDKROOT; };
+		07F713E217A3167400861126 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Library/Frameworks/SDL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F713E317A3167400861126 /* Cocoa.framework in Frameworks */,
+				07F713E417A3167400861126 /* RubyCocoa.framework in Frameworks */,
+				07F713E517A3167400861126 /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +56,9 @@
 		07F713C117A3142C00861126 = {
 			isa = PBXGroup;
 			children = (
+				07F713E017A3167400861126 /* Cocoa.framework */,
+				07F713E117A3167400861126 /* RubyCocoa.framework */,
+				07F713E217A3167400861126 /* SDL.framework */,
 				07F713CF17A3142C00861126 /* n8 */,
 				07F713CD17A3142C00861126 /* Products */,
 			);
@@ -134,8 +146,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -161,9 +174,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -179,6 +193,7 @@
 		07F713D717A3142C00861126 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -186,6 +201,7 @@
 		07F713D817A3142C00861126 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

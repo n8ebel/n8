@@ -52,7 +52,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 }
 
 
-int main( int argc, char* args[] )
+int main( int argc, char* argv[] )
 {
     /*
     cEntity* foo = n8::create_user_entity(n8::nextID, "Nate", 3,3);
