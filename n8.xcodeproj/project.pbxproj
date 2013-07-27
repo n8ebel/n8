@@ -110,6 +110,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = n8Tech;
 			};
 			buildConfigurationList = 07F713C617A3142C00861126 /* Build configuration list for PBXProject "n8" */;
 			compatibilityVersion = "Xcode 3.2";

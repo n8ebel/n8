@@ -3,7 +3,7 @@
 //  n8
 //
 //  Created by Nate Ebel on 7/26/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2013 n8Tech. All rights reserved.
 //
 
 #include "SDL/SDL.h"
