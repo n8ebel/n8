@@ -7,7 +7,7 @@
 //
 
 #include "SDL/SDL.h"
-//#include "n8.h"
+#include "n8.h"
 #include <iostream>
 
 using namespace std;
@@ -54,7 +54,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 
 int main( int argc, char* argv[] )
 {
-    /*
+    
     cEntity* foo = n8::create_user_entity(n8::nextID, "Nate", 3,3);
     
     cEntity* goo = new cEntity(99);
@@ -68,14 +68,14 @@ int main( int argc, char* argv[] )
     
     cout << "Name: " << n8::get_name_component(foo)->get_name() << endl;  
     cout << "X: " << n8::get_position_component(foo)->get_position()->get_x() << endl;
-    */
     
     
     
     
     
-    //delete foo;
-    //delete goo;
+    
+    delete foo;
+    delete goo;
     
     
     
