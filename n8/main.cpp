@@ -54,7 +54,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 
 int main( int argc, char* argv[] )
 {
-    
+    // Testing code for the engine
     cEntity* foo = n8::create_user_entity(n8::nextID, "Nate", 3,3);
     
     cEntity* goo = new cEntity(99);
