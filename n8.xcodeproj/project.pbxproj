@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		07F713D117A3142C00861126 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713D017A3142C00861126 /* main.cpp */; };
-		07F713D317A3142C00861126 /* n8.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 07F713D217A3142C00861126 /* n8.1 */; };
 		07F713DB17A3149F00861126 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F713DA17A3149F00861126 /* SDLMain.m */; };
 		07F713E317A3167400861126 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E017A3167400861126 /* Cocoa.framework */; };
 		07F713E417A3167400861126 /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E117A3167400861126 /* RubyCocoa.framework */; };
@@ -28,7 +27,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				07F713D317A3142C00861126 /* n8.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -36,10 +34,9 @@
 
 /* Begin PBXFileReference section */
 		07F713CC17A3142C00861126 /* n8 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = n8; sourceTree = BUILT_PRODUCTS_DIR; };
-		07F713D017A3142C00861126 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		07F713D217A3142C00861126 /* n8.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = n8.1; sourceTree = "<group>"; };
-		07F713D917A3149F00861126 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
-		07F713DA17A3149F00861126 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
+		07F713D017A3142C00861126 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = n8/main.cpp; sourceTree = "<group>"; };
+		07F713D917A3149F00861126 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLMain.h; path = n8/SDL/SDLMain.h; sourceTree = "<group>"; };
+		07F713DA17A3149F00861126 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDLMain.m; path = n8/SDL/SDLMain.m; sourceTree = "<group>"; };
 		07F713E017A3167400861126 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		07F713E117A3167400861126 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = System/Library/Frameworks/RubyCocoa.framework; sourceTree = SDKROOT; };
 		07F713E217A3167400861126 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Library/Frameworks/SDL.framework; sourceTree = SDKROOT; };
@@ -51,8 +48,8 @@
 		07F713EE17A43FC700861126 /* cName_Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cName_Component.h; sourceTree = "<group>"; };
 		07F713EF17A43FC700861126 /* cPosition_Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cPosition_Component.cpp; sourceTree = "<group>"; };
 		07F713F017A43FC700861126 /* cPosition_Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPosition_Component.h; sourceTree = "<group>"; };
-		07F713F117A43FC700861126 /* cPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cPoint.cpp; path = n8/cPoint.cpp; sourceTree = "<group>"; };
-		07F713F217A43FC700861126 /* cPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cPoint.h; path = n8/cPoint.h; sourceTree = "<group>"; };
+		07F713F117A43FC700861126 /* cPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cPoint.cpp; path = n8/Utils/cPoint.cpp; sourceTree = "<group>"; };
+		07F713F217A43FC700861126 /* cPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cPoint.h; path = n8/Utils/cPoint.h; sourceTree = "<group>"; };
 		07F713F417A43FC700861126 /* cEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cEntity.cpp; sourceTree = "<group>"; };
 		07F713F517A43FC700861126 /* cEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cEntity.h; sourceTree = "<group>"; };
 		07F713F617A43FC700861126 /* n8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = n8.cpp; sourceTree = "<group>"; };
@@ -73,18 +70,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07C844AB17A444200084C474 /* SDL */ = {
+			isa = PBXGroup;
+			children = (
+				07F713DA17A3149F00861126 /* SDLMain.m */,
+				07F713D917A3149F00861126 /* SDLMain.h */,
+			);
+			name = SDL;
+			sourceTree = "<group>";
+		};
 		07F713C117A3142C00861126 = {
 			isa = PBXGroup;
 			children = (
+				07F713FE17A4412F00861126 /* Utils */,
+				07F713E017A3167400861126 /* Cocoa.framework */,
+				07F713E217A3167400861126 /* SDL.framework */,
+				07F713E117A3167400861126 /* RubyCocoa.framework */,
+				07F713D017A3142C00861126 /* main.cpp */,
 				07F713E617A43FC700861126 /* Assets */,
 				07F713EA17A43FC700861126 /* Components */,
-				07F713F117A43FC700861126 /* cPoint.cpp */,
-				07F713F217A43FC700861126 /* cPoint.h */,
 				07F713F317A43FC700861126 /* n8 */,
-				07F713E017A3167400861126 /* Cocoa.framework */,
-				07F713E117A3167400861126 /* RubyCocoa.framework */,
-				07F713E217A3167400861126 /* SDL.framework */,
-				07F713CF17A3142C00861126 /* n8 */,
+				07C844AB17A444200084C474 /* SDL */,
 				07F713CD17A3142C00861126 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,17 +101,6 @@
 				07F713CC17A3142C00861126 /* n8 */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		07F713CF17A3142C00861126 /* n8 */ = {
-			isa = PBXGroup;
-			children = (
-				07F713D917A3149F00861126 /* SDLMain.h */,
-				07F713DA17A3149F00861126 /* SDLMain.m */,
-				07F713D017A3142C00861126 /* main.cpp */,
-				07F713D217A3142C00861126 /* n8.1 */,
-			);
-			path = n8;
 			sourceTree = "<group>";
 		};
 		07F713E617A43FC700861126 /* Assets */ = {
@@ -150,6 +145,15 @@
 			);
 			name = n8;
 			path = n8/n8;
+			sourceTree = "<group>";
+		};
+		07F713FE17A4412F00861126 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				07F713F117A43FC700861126 /* cPoint.cpp */,
+				07F713F217A43FC700861126 /* cPoint.h */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +305,7 @@
 				07F713D817A3142C00861126 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
