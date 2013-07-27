@@ -21,6 +21,9 @@ const string n8::INTERACTABLE = "INTERACTABLE";
 
 // Static constants for system identifiers
 const string n8::RENDER_SYSTEM = "RENDER_SYSTEM";
+const string n8::MOVEMENT_SYSTEM = "MOVEMENT-SYSTEM";
+const string n8::COLLISION_SYSTEM = "COLLISION_SYSTEM";
+const string n8::INTERACTION_SYSTEM ="INTERACTION_SYSTEM";
 
 
 

@@ -26,6 +26,9 @@ class n8{
     
     // Static constants for system identifiers
     static const string RENDER_SYSTEM;
+    static const string MOVEMENT_SYSTEM;
+    static const string COLLISION_SYSTEM;
+    static const string INTERACTION_SYSTEM;
     
     
     static cEntity* create_user_entity(int id, string initName, int initX, int initY);
