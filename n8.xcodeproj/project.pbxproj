@@ -13,6 +13,12 @@
 		07F713E317A3167400861126 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E017A3167400861126 /* Cocoa.framework */; };
 		07F713E417A3167400861126 /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E117A3167400861126 /* RubyCocoa.framework */; };
 		07F713E517A3167400861126 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F713E217A3167400861126 /* SDL.framework */; };
+		07F713F817A43FC700861126 /* cComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713EB17A43FC700861126 /* cComponent.cpp */; };
+		07F713F917A43FC700861126 /* cName_Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713ED17A43FC700861126 /* cName_Component.cpp */; };
+		07F713FA17A43FC700861126 /* cPosition_Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713EF17A43FC700861126 /* cPosition_Component.cpp */; };
+		07F713FB17A43FC700861126 /* cPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713F117A43FC700861126 /* cPoint.cpp */; };
+		07F713FC17A43FC700861126 /* cEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713F417A43FC700861126 /* cEntity.cpp */; };
+		07F713FD17A43FC700861126 /* n8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07F713F617A43FC700861126 /* n8.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +43,20 @@
 		07F713E017A3167400861126 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		07F713E117A3167400861126 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = System/Library/Frameworks/RubyCocoa.framework; sourceTree = SDKROOT; };
 		07F713E217A3167400861126 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Library/Frameworks/SDL.framework; sourceTree = SDKROOT; };
+		07F713E817A43FC700861126 /* background.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = background.bmp; sourceTree = "<group>"; };
+		07F713E917A43FC700861126 /* hello.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = hello.bmp; sourceTree = "<group>"; };
+		07F713EB17A43FC700861126 /* cComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cComponent.cpp; sourceTree = "<group>"; };
+		07F713EC17A43FC700861126 /* cComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cComponent.h; sourceTree = "<group>"; };
+		07F713ED17A43FC700861126 /* cName_Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cName_Component.cpp; sourceTree = "<group>"; };
+		07F713EE17A43FC700861126 /* cName_Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cName_Component.h; sourceTree = "<group>"; };
+		07F713EF17A43FC700861126 /* cPosition_Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cPosition_Component.cpp; sourceTree = "<group>"; };
+		07F713F017A43FC700861126 /* cPosition_Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPosition_Component.h; sourceTree = "<group>"; };
+		07F713F117A43FC700861126 /* cPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cPoint.cpp; path = n8/cPoint.cpp; sourceTree = "<group>"; };
+		07F713F217A43FC700861126 /* cPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cPoint.h; path = n8/cPoint.h; sourceTree = "<group>"; };
+		07F713F417A43FC700861126 /* cEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cEntity.cpp; sourceTree = "<group>"; };
+		07F713F517A43FC700861126 /* cEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cEntity.h; sourceTree = "<group>"; };
+		07F713F617A43FC700861126 /* n8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = n8.cpp; sourceTree = "<group>"; };
+		07F713F717A43FC700861126 /* n8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = n8.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +76,11 @@
 		07F713C117A3142C00861126 = {
 			isa = PBXGroup;
 			children = (
+				07F713E617A43FC700861126 /* Assets */,
+				07F713EA17A43FC700861126 /* Components */,
+				07F713F117A43FC700861126 /* cPoint.cpp */,
+				07F713F217A43FC700861126 /* cPoint.h */,
+				07F713F317A43FC700861126 /* n8 */,
 				07F713E017A3167400861126 /* Cocoa.framework */,
 				07F713E117A3167400861126 /* RubyCocoa.framework */,
 				07F713E217A3167400861126 /* SDL.framework */,
@@ -81,6 +106,50 @@
 				07F713D217A3142C00861126 /* n8.1 */,
 			);
 			path = n8;
+			sourceTree = "<group>";
+		};
+		07F713E617A43FC700861126 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				07F713E717A43FC700861126 /* gfx */,
+			);
+			name = Assets;
+			path = n8/Assets;
+			sourceTree = "<group>";
+		};
+		07F713E717A43FC700861126 /* gfx */ = {
+			isa = PBXGroup;
+			children = (
+				07F713E817A43FC700861126 /* background.bmp */,
+				07F713E917A43FC700861126 /* hello.bmp */,
+			);
+			path = gfx;
+			sourceTree = "<group>";
+		};
+		07F713EA17A43FC700861126 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				07F713EB17A43FC700861126 /* cComponent.cpp */,
+				07F713EC17A43FC700861126 /* cComponent.h */,
+				07F713ED17A43FC700861126 /* cName_Component.cpp */,
+				07F713EE17A43FC700861126 /* cName_Component.h */,
+				07F713EF17A43FC700861126 /* cPosition_Component.cpp */,
+				07F713F017A43FC700861126 /* cPosition_Component.h */,
+			);
+			name = Components;
+			path = n8/Components;
+			sourceTree = "<group>";
+		};
+		07F713F317A43FC700861126 /* n8 */ = {
+			isa = PBXGroup;
+			children = (
+				07F713F417A43FC700861126 /* cEntity.cpp */,
+				07F713F517A43FC700861126 /* cEntity.h */,
+				07F713F617A43FC700861126 /* n8.cpp */,
+				07F713F717A43FC700861126 /* n8.h */,
+			);
+			name = n8;
+			path = n8/n8;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +205,12 @@
 			files = (
 				07F713D117A3142C00861126 /* main.cpp in Sources */,
 				07F713DB17A3149F00861126 /* SDLMain.m in Sources */,
+				07F713F817A43FC700861126 /* cComponent.cpp in Sources */,
+				07F713F917A43FC700861126 /* cName_Component.cpp in Sources */,
+				07F713FA17A43FC700861126 /* cPosition_Component.cpp in Sources */,
+				07F713FB17A43FC700861126 /* cPoint.cpp in Sources */,
+				07F713FC17A43FC700861126 /* cEntity.cpp in Sources */,
+				07F713FD17A43FC700861126 /* n8.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
