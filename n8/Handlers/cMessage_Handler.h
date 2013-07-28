@@ -11,8 +11,21 @@
 #ifndef cmessage_handler_h
 #define cmessage_handler_h
 
+#include "cEntity.h"
+#include <string>
+
+using namespace std;
+
 class cMessage_Handler{
+
+private:
     
+public:
+    
+    ~cMessage_Handler();
+    cMessage_Handler();
+    
+    bool send_message(string systemID, cEntity* entity1, cEntity* entity2);
 };
 
 

@@ -11,3 +11,7 @@
 #include <iostream>
 
 #include "cGame_Manager.h"
+
+const int cGame_Manager::LOADING_SCREEN = 1;
+const int cGame_Manager::MENU = 2;
+const int cGame_Manager::WORLD_VIEW = 3;
