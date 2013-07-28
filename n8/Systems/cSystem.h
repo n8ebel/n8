@@ -35,7 +35,7 @@ public:
     bool check_requirements(cEntity* entity);
     void register_entity(cEntity* newEntity);
     
-    virtual void update() = 0;
+    virtual void update();
 };
 
 #endif

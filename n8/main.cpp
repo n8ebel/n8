@@ -54,6 +54,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 
 int main( int argc, char* argv[] )
 {
+    /*
     // Testing code for the engine
     //
     cEntity* foo = n8::create_user_entity(n8::nextID, "Nate", 3,3);
@@ -71,13 +72,19 @@ int main( int argc, char* argv[] )
     cout << "X: " << n8::get_position_component(foo)->get_position()->get_x() << endl;
     
     
-    
-    
-    
-    
     delete foo;
     delete goo;
+    */
     
+    cGame_Manager* game = new cGame_Manager();
+    cSystem* baseSystem = game->create_system(n8::BASE_SYSTEM);
+    
+    if( baseSystem == NULL){
+        n8::log_error("Game manager wasn't initialized");
+    }
+    else{
+        n8::log_info("Game manager was initialized");
+    }
     
     
     

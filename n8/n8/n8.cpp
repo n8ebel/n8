@@ -22,6 +22,7 @@ const string n8::POSITION = "POSITION";
 const string n8::INTERACTABLE = "INTERACTABLE";
 
 // Static constants for system identifiers
+const string n8::BASE_SYSTEM = "BASE_SYSTEM";
 const string n8::RENDER_SYSTEM = "RENDER_SYSTEM";
 const string n8::MOVEMENT_SYSTEM = "MOVEMENT-SYSTEM";
 const string n8::COLLISION_SYSTEM = "COLLISION_SYSTEM";
@@ -57,3 +58,13 @@ cName_Component* n8:: get_name_component(cEntity* entity){
 cPosition_Component* n8:: get_position_component(cEntity* entity){
     return (cPosition_Component*)entity->get_components()[POSITION];
 }
+
+void n8::log_error(string msg){
+    cout << "(ERROR) " << msg << endl;
+}
+
+void n8::log_info(string msg){
+    cout << "(INFO) " << msg << endl;
+}
+
+

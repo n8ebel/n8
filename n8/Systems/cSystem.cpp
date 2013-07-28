@@ -29,3 +29,7 @@ bool cSystem::check_requirements(cEntity* entity){
 void cSystem::register_entity(cEntity* newEntity){
     
 }
+
+void cSystem::update(){
+    
+}

@@ -11,6 +11,7 @@
 #ifndef N8_H
 #define N8_H
 
+#include "cGame_Manager.h"
 #include "cEntity.h"
 #include "cName_Component.h"
 #include "cPosition_Component.h"
@@ -35,6 +36,7 @@ class n8{
     static const string INTERACTABLE;
     
     // Static constants for system identifiers
+    static const string BASE_SYSTEM;
     static const string RENDER_SYSTEM;
     static const string MOVEMENT_SYSTEM;
     static const string COLLISION_SYSTEM;
@@ -45,6 +47,9 @@ class n8{
     static cEntity* create_user_entity(int id, string initName, int initX, int initY);
     static cName_Component* get_name_component(cEntity* entity);
     static cPosition_Component* get_position_component(cEntity* entity);
+    
+    static void log_error(string msg);
+    static void log_info(string msg);
 
 };
 

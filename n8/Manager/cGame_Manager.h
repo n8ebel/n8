@@ -23,7 +23,7 @@ class cGame_Manager{
 private:
     int state;
     cMessage_Handler* messanger;
-    map<string, cSystem*> registered_system;
+    map<string, cSystem*> registered_systems;
     map<int,cEntity*> registered_entities;
     cResource_Handler* resource_handler;
     cScreen* screen;
@@ -38,11 +38,11 @@ public:
     cGame_Manager();
     cGame_Manager(string resource_config, int screenW, int screenH);
     
-    cSystem* add_system(cSystem* newSystem);
-    cSystem* get_system(cSystem* system);
+    bool add_system(string ID, cSystem* newSystem);
+    cSystem* get_system(string ID);
     
     cEntity* register_entity(cEntity* newEntity);
-    cEntity* get_entity(cEntity* entity);
+    cEntity* get_entity(int ID);
     
     cSystem* create_system(string ID);
     
