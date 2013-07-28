@@ -13,6 +13,7 @@
 
 using namespace std;
 
+const string ID = "BASE_SYSTEM";
 
 cSystem::~cSystem(){
     
@@ -23,7 +24,8 @@ cSystem::cSystem(){
 }
 
 bool cSystem::check_requirements(cEntity* entity){
-    
+
+    return false;
 }
 
 void cSystem::register_entity(cEntity* newEntity){

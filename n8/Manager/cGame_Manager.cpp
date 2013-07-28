@@ -79,6 +79,8 @@ cEntity* cGame_Manager::register_entity(cEntity* newEntity){
     // for each system in registered_systems
         // check if entity matches system requirements
             // if YES then register with system
+    
+    return NULL;
 }
 
 cEntity* cGame_Manager::get_entity(int ID){

@@ -26,7 +26,7 @@ private:
     vector<int> registered_entities;
     cMessage_Handler* message_system;
     
-    const string ID = "BASE_SYSTEM";
+    const string ID;
     
 public:
     ~cSystem();
