@@ -1,10 +1,12 @@
-//
-//  n8.cpp
-//  SDL_Test
-//
-//  Created by Nate Ebel on 7/21/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
-//
+/*
+ * n8.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            7/27/13
+ * Organization:    n8Tech
+ *
+ */
 
 #include "n8.h"
 #include <iostream>

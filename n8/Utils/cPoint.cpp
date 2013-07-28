@@ -1,10 +1,12 @@
-//
-//  cPoint.cpp
-//  SDL_Test
-//
-//  Created by Nate Ebel on 7/22/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
-//
+/*
+ * cPoint.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            7/27/13
+ * Organization:    n8Tech
+ *
+ */
 
 #include <iostream>
 #include "cPoint.h"
