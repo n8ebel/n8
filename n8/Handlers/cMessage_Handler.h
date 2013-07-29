@@ -25,7 +25,7 @@ public:
     ~cMessage_Handler();
     cMessage_Handler();
     
-    bool send_message(string systemID, cEntity* entity1, cEntity* entity2);
+    bool send_message(string systemID, int entity1, int entity2);
 };
 
 

@@ -20,11 +20,12 @@ class cComponent {
   string id;
 
  public:
-  ~cComponent();
-  cComponent();
-  cComponent(string newID);
 
-  string get_id();
+    ~cComponent();
+    cComponent();
+    cComponent(string newID);
+
+    string get_id();
 
 };
 

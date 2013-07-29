@@ -22,7 +22,7 @@ class cGame_Manager{
   
 private:
     int state;
-    cMessage_Handler* messanger;
+    cMessage_Handler* message_handler;
     map<string, cSystem*> registered_systems;
     map<int,cEntity*> registered_entities;
     cResource_Handler* resource_handler;

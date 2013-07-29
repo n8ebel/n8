@@ -22,16 +22,19 @@ using namespace std;
 
 class cSystem {
 private:
+    
+    
     map<string,int> requirements;
-    vector<int> registered_entities;
+    vector<cEntity*> registered_entities;
     cMessage_Handler* message_system;
     
-    const string ID;
+    string ID;
     
 public:
     ~cSystem();
     cSystem();
     
+    void connect_message_handler(cMessage_Handler* msgr);
     bool check_requirements(cEntity* entity);
     void register_entity(cEntity* newEntity);
     

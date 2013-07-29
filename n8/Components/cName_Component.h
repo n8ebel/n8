@@ -21,6 +21,7 @@ private:
     string name;
     
 public:
+    
     ~cName_Component();
     cName_Component();
     cName_Component(string newID,string newName);

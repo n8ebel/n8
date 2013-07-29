@@ -12,7 +12,7 @@
 #include "cComponent.h"
 #include <vector>
 #include <map>
-
+#include <iostream>
 
 using namespace std;
 
@@ -37,7 +37,9 @@ int cEntity::get_id(){
 }
 
 void cEntity::add_component(cComponent* newComponent){
+    cout << "Add Component.  ID= " << newComponent->get_id() << endl;
     componentMap[newComponent->get_id()] = newComponent;
+    
     
 }
 

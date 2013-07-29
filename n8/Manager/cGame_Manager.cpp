@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "n8.h"
+#include "constants.h"
 
 
 #include "cGame_Manager.h"
@@ -23,7 +24,7 @@ cGame_Manager::~cGame_Manager(){
 }
 
 cGame_Manager::cGame_Manager(){
-    
+    message_handler = NULL;
 }
 
 cGame_Manager::cGame_Manager(string resource_config, int screenW, int screenH){
@@ -44,6 +45,7 @@ bool cGame_Manager::add_system(string ID, cSystem* newSystem){
         return false;
     }
     else{
+        newSystem->connect_message_handler(message_handler);
         registered_systems[ID] = newSystem;
     }
     
@@ -75,12 +77,20 @@ cSystem* cGame_Manager::get_system(string ID){
 */
 cEntity* cGame_Manager::register_entity(cEntity* newEntity){
     //add entity to registered_entities
+    registered_entities[newEntity->get_id()] = newEntity;
     
     // for each system in registered_systems
         // check if entity matches system requirements
             // if YES then register with system
     
-    return NULL;
+    map<string,cSystem*>::iterator ii;
+    for( ii=registered_systems.begin(); ii != registered_systems.end(); ii++){
+        if (ii->second->check_requirements(newEntity)) {
+            ii->second->register_entity(newEntity);
+        }
+    }
+    
+    return newEntity;
 }
 
 cEntity* cGame_Manager::get_entity(int ID){
@@ -101,8 +111,9 @@ cEntity* cGame_Manager::get_entity(int ID){
     The method returns a pointer to the created object.
  */
 cSystem* cGame_Manager::create_system(string ID){
-    if (ID == n8::BASE_SYSTEM) {
+    if (ID == BASE_SYSTEM) {
         cSystem* newSystem = new cSystem();
+        newSystem->connect_message_handler(message_handler);
         if( add_system(ID, newSystem) ){
             return newSystem;
         }
@@ -119,7 +130,7 @@ cSystem* cGame_Manager::create_system(string ID){
     Returns a pointer to the game's message handler
  */
 cMessage_Handler* cGame_Manager::get_message_handler(){
-    return messanger;
+    return message_handler;
 }
 
 

@@ -8,6 +8,7 @@
 
 #include "SDL/SDL.h"
 #include "n8.h"
+#include "constants.h"
 #include <iostream>
 
 using namespace std;
@@ -16,9 +17,9 @@ SDL_Surface* load_image(string);
 void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
-{
+{   
     cGame_Manager* game = new cGame_Manager();
-    cSystem* baseSystem = game->create_system(n8::BASE_SYSTEM);
+    cSystem* baseSystem = game->create_system(BASE_SYSTEM);
     
     if( baseSystem == NULL){
         n8::log_error("Game manager wasn't initialized");
@@ -27,6 +28,12 @@ int main( int argc, char* argv[] )
         n8::log_info("Game manager was initialized");
     }
     
+    cEntity* nate = game->register_entity(n8::create_user_entity(n8::nextID, "Nate", 0, 0));
+    game->register_entity(n8::create_user_entity(n8::nextID, "Megan", 0, 0));
+        
+    cEntity* test = new cEntity(n8::nextID);
+    test->add_component(new cPosition_Component(POSITION, 0, 0));
+    game->register_entity(test);
     
     
     
@@ -80,14 +87,36 @@ int main( int argc, char* argv[] )
     
     //Show window until the user clicks 'exit'
     bool running = true;
+    //The timer starting time
+    Uint32 start = 0;
     
     SDL_Event event;
     while (running) {
+        
+        start = SDL_GetTicks();
+        
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = false;
             }
+            else if( event.type == SDL_KEYDOWN )
+            { 
+                switch( event.key.keysym.sym )
+                {}
+            }
+            else if( event.type == SDL_MOUSEBUTTONDOWN )
+            {}
+            else if( event.type == SDL_MOUSEBUTTONUP )
+            {}
         }
+        
+        cout << "Game Logic" << endl;
+        game->get_system(BASE_SYSTEM)->update();
+        //game->get_system(COLLISION_SYSTEM)->update();
+        //game->get_system(INTERACTION_SYSTEM)->update();
+        //game->get_system(RENDER_SYSTEM)->update();
+        
+        cout << endl;
     }
     
     //Free the surfaces

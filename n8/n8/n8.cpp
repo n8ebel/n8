@@ -9,26 +9,12 @@
  */
 
 #include "n8.h"
+#include "constants.h"
 #include <iostream>
 #include <string>
 
 
 using namespace std;
-
-// Static constants for component identifiers
-const string n8::NAME = "NAME";
-const string n8::DRAWABLE = "DRAWABLE";
-const string n8::POSITION = "POSITION";
-const string n8::INTERACTABLE = "INTERACTABLE";
-
-// Static constants for system identifiers
-const string n8::BASE_SYSTEM = "BASE_SYSTEM";
-const string n8::RENDER_SYSTEM = "RENDER_SYSTEM";
-const string n8::MOVEMENT_SYSTEM = "MOVEMENT-SYSTEM";
-const string n8::COLLISION_SYSTEM = "COLLISION_SYSTEM";
-const string n8::INTERACTION_SYSTEM ="INTERACTION_SYSTEM";
-const string n8::MESSAGE_SYSTEM = "MESSAGE_SYSTEM";
-
 
 
 // Static counter for unique entity ID's
@@ -42,16 +28,20 @@ n8::n8(){
 }
 
 cEntity* n8::create_user_entity(int id, string initName, int initX, int initY){
-    cEntity* foo = new cEntity(id);
     
-    foo->add_component(new cName_Component(n8::NAME, initName));
-    foo->add_component(new cPosition_Component(n8::POSITION, initX, initY));
+    cEntity* foo = new cEntity(id);
+    cName_Component* name = new cName_Component(NAME, initName);
+    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY);
+    
+    foo->add_component(name);
+    foo->add_component(position);
     
     return foo;
     
 }
 
 cName_Component* n8:: get_name_component(cEntity* entity){
+    cout << entity->get_components().size() << endl;
     return (cName_Component*)entity->get_components()[NAME];
 }
 

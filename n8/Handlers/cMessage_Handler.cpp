@@ -21,7 +21,7 @@ cMessage_Handler::cMessage_Handler(){
     
 }
 
-bool cMessage_Handler::send_message(string systemID, cEntity* entity1, cEntity* entity2){
+bool cMessage_Handler::send_message(string systemID, int entity1, int entity2){
     
     return true;
 }
