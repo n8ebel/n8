@@ -1,10 +1,12 @@
-//
-//  cName_Component.cpp
-//  SDL_Test
-//
-//  Created by Nate Ebel on 7/21/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
-//
+/*
+ * cName_Component.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            7/27/13
+ * Organization:    n8Tech
+ *
+ */
 
 #include "cName_Component.h"
 #include <iostream>
@@ -21,7 +23,10 @@ cName_Component::cName_Component(){
 }
 
 cName_Component::cName_Component(string newID, string newName) : cComponent(newID){
+    
+    
     name = newName;
+    cout << "name component: " << name << endl;
 }
 
 string cName_Component::get_name(){

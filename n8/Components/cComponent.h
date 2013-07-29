@@ -1,3 +1,13 @@
+/*
+ * cComponent.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            7/27/13
+ * Organization:    n8Tech
+ *
+ */
+
 #ifndef CCOMPONENT_H
 #define CCOMPONENT_H
 
@@ -10,11 +20,12 @@ class cComponent {
   string id;
 
  public:
-  ~cComponent();
-  cComponent();
-  cComponent(string newID);
 
-  string get_id();
+    ~cComponent();
+    cComponent();
+    cComponent(string newID);
+
+    string get_id();
 
 };
 

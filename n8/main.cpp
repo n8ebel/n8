@@ -8,76 +8,32 @@
 
 #include "SDL/SDL.h"
 #include "n8.h"
+#include "constants.h"
 #include <iostream>
 
 using namespace std;
 
-
-SDL_Surface *load_image( std::string filename ) 
-{
-    //Temporary storage for the image that's loaded
-    SDL_Surface* loadedImage = NULL;
-    
-    //The optimized image that will be used
-    SDL_Surface* optimizedImage = NULL;
-    
-    //Load the image
-    loadedImage = SDL_LoadBMP( filename.c_str() );
-    
-    //If nothing went wrong in loading the image
-    if( loadedImage != NULL )
-    {
-        //Create an optimized image
-        optimizedImage = SDL_DisplayFormat( loadedImage );
-        
-        //Free the old image
-        SDL_FreeSurface( loadedImage );
-    }
-    
-    //Return the optimized image
-    return optimizedImage;
-}
-
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination )
-{
-    //Make a temporary rectangle to hold the offsets
-    SDL_Rect offset;
-    
-    //Give the offsets to the rectangle
-    offset.x = x;
-    offset.y = y;
-    
-    //Blit the surface
-    SDL_BlitSurface( source, NULL, destination, &offset );
-}
-
+SDL_Surface* load_image(string);
+void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
-{
-    // Testing code for the engine
-    cEntity* foo = n8::create_user_entity(n8::nextID, "Nate", 3,3);
+{   
+    cGame_Manager* game = new cGame_Manager();
+    cSystem* baseSystem = game->create_system(BASE_SYSTEM);
     
-    cEntity* goo = new cEntity(99);
+    if( baseSystem == NULL){
+        n8::log_error("Game manager wasn't initialized");
+    }
+    else{
+        n8::log_info("Game manager was initialized");
+    }
     
-    goo->add_component(new cName_Component(n8::NAME,"Goku"));
-    goo->add_component(new cPosition_Component(n8::POSITION, new cPoint(5,5)));
-    
-    
-    cout << "Name: " << n8::get_name_component(goo)->get_name() << endl;  
-    cout << "X: " << n8::get_position_component(goo)->get_position()->get_x() << endl;
-    
-    cout << "Name: " << n8::get_name_component(foo)->get_name() << endl;  
-    cout << "X: " << n8::get_position_component(foo)->get_position()->get_x() << endl;
-    
-    
-    
-    
-    
-    
-    delete foo;
-    delete goo;
-    
-    
+    cEntity* nate = game->register_entity(n8::create_user_entity(n8::nextID, "Nate", 0, 0));
+    game->register_entity(n8::create_user_entity(n8::nextID, "Megan", 0, 0));
+        
+    cEntity* test = new cEntity(n8::nextID);
+    test->add_component(new cPosition_Component(POSITION, 0, 0));
+    game->register_entity(test);
     
     
     
@@ -131,14 +87,36 @@ int main( int argc, char* argv[] )
     
     //Show window until the user clicks 'exit'
     bool running = true;
+    //The timer starting time
+    Uint32 start = 0;
     
     SDL_Event event;
     while (running) {
+        
+        start = SDL_GetTicks();
+        
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = false;
             }
+            else if( event.type == SDL_KEYDOWN )
+            { 
+                switch( event.key.keysym.sym )
+                {}
+            }
+            else if( event.type == SDL_MOUSEBUTTONDOWN )
+            {}
+            else if( event.type == SDL_MOUSEBUTTONUP )
+            {}
         }
+        
+        cout << "Game Logic" << endl;
+        game->get_system(BASE_SYSTEM)->update();
+        //game->get_system(COLLISION_SYSTEM)->update();
+        //game->get_system(INTERACTION_SYSTEM)->update();
+        //game->get_system(RENDER_SYSTEM)->update();
+        
+        cout << endl;
     }
     
     //Free the surfaces
@@ -150,4 +128,42 @@ int main( int argc, char* argv[] )
     
     //Return
     return 0;
+}
+
+SDL_Surface *load_image( std::string filename ) 
+{
+    //Temporary storage for the image that's loaded
+    SDL_Surface* loadedImage = NULL;
+    
+    //The optimized image that will be used
+    SDL_Surface* optimizedImage = NULL;
+    
+    //Load the image
+    loadedImage = SDL_LoadBMP( filename.c_str() );
+    
+    //If nothing went wrong in loading the image
+    if( loadedImage != NULL )
+    {
+        //Create an optimized image
+        optimizedImage = SDL_DisplayFormat( loadedImage );
+        
+        //Free the old image
+        SDL_FreeSurface( loadedImage );
+    }
+    
+    //Return the optimized image
+    return optimizedImage;
+}
+
+void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination )
+{
+    //Make a temporary rectangle to hold the offsets
+    SDL_Rect offset;
+    
+    //Give the offsets to the rectangle
+    offset.x = x;
+    offset.y = y;
+    
+    //Blit the surface
+    SDL_BlitSurface( source, NULL, destination, &offset );
 }

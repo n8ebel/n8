@@ -1,10 +1,12 @@
-//
-//  cName_Component.h
-//  SDL_Test
-//
-//  Created by Nate Ebel on 7/21/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
-//
+/*
+ * cName_Component.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            7/27/13
+ * Organization:    n8Tech
+ *
+ */
 
 #ifndef SDL_Test_cName_Component_h
 #define SDL_Test_cName_Component_h
@@ -19,6 +21,7 @@ private:
     string name;
     
 public:
+    
     ~cName_Component();
     cName_Component();
     cName_Component(string newID,string newName);

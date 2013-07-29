@@ -1,8 +1,18 @@
+/*
+ * cEntity.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            7/27/13
+ * Organization:    n8Tech
+ *
+ */
+
 #include "cEntity.h"
 #include "cComponent.h"
 #include <vector>
 #include <map>
-
+#include <iostream>
 
 using namespace std;
 
@@ -27,7 +37,9 @@ int cEntity::get_id(){
 }
 
 void cEntity::add_component(cComponent* newComponent){
+    cout << "Add Component.  ID= " << newComponent->get_id() << endl;
     componentMap[newComponent->get_id()] = newComponent;
+    
     
 }
 
