@@ -26,7 +26,7 @@ int n8::nextID = 0;
 n8::n8(){
     
 }
-
+/*
 cEntity* n8::create_user_entity(int id, string initName, int initX, int initY){
     
     cEntity* foo = new cEntity(id);
@@ -39,7 +39,7 @@ cEntity* n8::create_user_entity(int id, string initName, int initX, int initY){
     return foo;
     
 }
-
+*/
 cName_Component* n8:: get_name_component(cEntity* entity){
     cout << entity->get_components().size() << endl;
     return (cName_Component*)entity->get_components()[NAME];

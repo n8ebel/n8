@@ -18,22 +18,7 @@ void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
 {   
-    cGame_Manager* game = new cGame_Manager();
-    cSystem* baseSystem = game->create_system(BASE_SYSTEM);
     
-    if( baseSystem == NULL){
-        n8::log_error("Game manager wasn't initialized");
-    }
-    else{
-        n8::log_info("Game manager was initialized");
-    }
-    
-    cEntity* nate = game->register_entity(n8::create_user_entity(n8::nextID, "Nate", 0, 0));
-    game->register_entity(n8::create_user_entity(n8::nextID, "Megan", 0, 0));
-        
-    cEntity* test = new cEntity(n8::nextID);
-    test->add_component(new cPosition_Component(POSITION, 0, 0));
-    game->register_entity(test);
     
     
     
@@ -46,7 +31,7 @@ int main( int argc, char* argv[] )
     SDL_Surface *message = NULL;
     SDL_Surface *background = NULL;
     SDL_Surface *screen = NULL;
-    
+        
     //Initialize all SDL subsystems
     if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
     {
@@ -69,6 +54,33 @@ int main( int argc, char* argv[] )
     message = load_image("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp");
     background = load_image( "/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/background.bmp" );
     
+    
+    cSprite* sprite = new cSprite("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp",message);
+    
+    
+    
+    cGame_Manager* game = new cGame_Manager();
+    cSystem* baseSystem = game->create_system(BASE_SYSTEM);
+    
+    if( baseSystem == NULL){
+        n8::log_error("Game manager wasn't initialized");
+    }
+    else{
+        n8::log_info("Game manager was initialized");
+    }
+    
+    cEntity* nate = game->register_entity(game->create_user_entity(n8::nextID, "Nate", 0, 0, sprite));
+    //game->register_entity(game->create_user_entity(n8::nextID, "Megan", 0, 0));
+    
+    cEntity* test = new cEntity(n8::nextID);
+    test->add_component(new cPosition_Component(POSITION, 0, 0));
+    game->register_entity(test);
+    
+    
+    
+    
+    
+    
     //Apply the background to the screen
     apply_surface( 0, 0, background, screen );
     apply_surface( 320, 0, background, screen );
@@ -77,7 +89,7 @@ int main( int argc, char* argv[] )
     
     
     //Apply the message to the screen
-    apply_surface( 180, 140, message, screen );
+    apply_surface( 180, 140, ((cDrawable_Component*)nate->get_component(DRAWABLE))->get_sprite()->get_sprite(), screen );
     
     //Update the screen
     if( SDL_Flip( screen ) == -1 )

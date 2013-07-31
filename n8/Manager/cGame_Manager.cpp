@@ -133,4 +133,23 @@ cMessage_Handler* cGame_Manager::get_message_handler(){
     return message_handler;
 }
 
+/* creates a basic user entity
+ *
+ */
+cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite){
+    
+    cEntity* foo = new cEntity(id);
+    cName_Component* name = new cName_Component(NAME, initName);
+    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY);
+    
+    cDrawable_Component* drawable = new cDrawable_Component(DRAWABLE, sprite);    
+    
+    foo->add_component(name);
+    foo->add_component(position);
+    foo->add_component(drawable);
+    
+    return foo;
+    
+}
+
 

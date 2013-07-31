@@ -15,6 +15,7 @@
 #include "cSystem.h"
 #include "cResource_Handler.h"
 #include "cScreen.h"
+#include "cSprite.h"
 
 #include <string>
 
@@ -47,6 +48,8 @@ public:
     cSystem* create_system(string ID);
     
     cMessage_Handler* get_message_handler();
+    
+    cEntity* create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite);
     
 };
 
