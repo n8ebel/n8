@@ -20,14 +20,15 @@
 
 class n8{
 
- private:
-
- public:
+private:
     static int nextID;
+public:
     
     n8();
     
-    
+    static int get_next_id();
+        
+        
    // static cEntity* create_user_entity(int id, string initName, int initX, int initY);
     static cName_Component* get_name_component(cEntity* entity);
     static cPosition_Component* get_position_component(cEntity* entity);

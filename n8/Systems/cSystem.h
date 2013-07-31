@@ -13,6 +13,7 @@
 
 #include "cMessage_Handler.h"
 #include "cEntity.h"
+#include "constants.h"
 
 #include <string>
 #include <map>
@@ -21,7 +22,7 @@
 using namespace std;
 
 class cSystem {
-private:
+protected:
     
     
     map<string,int> requirements;

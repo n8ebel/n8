@@ -13,6 +13,7 @@
 
 #include "cMessage_Handler.h"
 #include "cSystem.h"
+#include "cRender_System.h"
 #include "cResource_Handler.h"
 #include "cScreen.h"
 #include "cSprite.h"

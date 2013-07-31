@@ -15,6 +15,7 @@
 
 #include "cGame_Manager.h"
 
+
 const int cGame_Manager::LOADING_SCREEN = 1;
 const int cGame_Manager::MENU = 2;
 const int cGame_Manager::WORLD_VIEW = 3;
@@ -108,11 +109,22 @@ cEntity* cGame_Manager::get_entity(int ID){
  
     Creates a new system object.
     The system type is specified by the passed argument.
+    The system is then added to the game manager registered systems map
     The method returns a pointer to the created object.
  */
 cSystem* cGame_Manager::create_system(string ID){
     if (ID == BASE_SYSTEM) {
         cSystem* newSystem = new cSystem();
+        newSystem->connect_message_handler(message_handler);
+        if( add_system(ID, newSystem) ){
+            return newSystem;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else if(ID == RENDER_SYSTEM){
+        cRender_System* newSystem = new cRender_System();
         newSystem->connect_message_handler(message_handler);
         if( add_system(ID, newSystem) ){
             return newSystem;
@@ -137,6 +149,7 @@ cMessage_Handler* cGame_Manager::get_message_handler(){
  *
  */
 cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite){
+    
     
     cEntity* foo = new cEntity(id);
     cName_Component* name = new cName_Component(NAME, initName);

@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include "cSystem.h"
-#include "constants.h"
+//#include "constants.h"
 #include "cName_Component.h"
 
 using namespace std;
@@ -22,7 +22,7 @@ cSystem::~cSystem(){
 }
 
 cSystem::cSystem(){
-    requirements[NAME] = 1;
+    //requirements[NAME] = 1;
     ID = BASE_SYSTEM;
 }
 
@@ -51,7 +51,6 @@ void cSystem::register_entity(cEntity* newEntity){
 void cSystem::update(){
     cout << "    BASE_SYSTEM.Update()" << registered_entities.size() << endl;
     for (int i = 0; i < registered_entities.size(); i++) {
-        cName_Component* name = (cName_Component*)registered_entities[i]->get_component(NAME);
-        cout << "      " << name->get_name() << endl;
+        cout << "      " << registered_entities[i]->get_id() << endl;
     }
 }

@@ -61,6 +61,8 @@ int main( int argc, char* argv[] )
     
     cGame_Manager* game = new cGame_Manager();
     cSystem* baseSystem = game->create_system(BASE_SYSTEM);
+    cRender_System* renderSystem = (cRender_System*)game->create_system(RENDER_SYSTEM);
+    
     
     if( baseSystem == NULL){
         n8::log_error("Game manager wasn't initialized");
@@ -69,10 +71,17 @@ int main( int argc, char* argv[] )
         n8::log_info("Game manager was initialized");
     }
     
-    cEntity* nate = game->register_entity(game->create_user_entity(n8::nextID, "Nate", 0, 0, sprite));
-    //game->register_entity(game->create_user_entity(n8::nextID, "Megan", 0, 0));
+    if (renderSystem == NULL) {
+        n8::log_error("Render system wasn't initialized");
+    }
+    else{
+        n8::log_info("Render system was initialized");
+    }
     
-    cEntity* test = new cEntity(n8::nextID);
+    cEntity* nate = game->register_entity(game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, sprite));
+    game->register_entity(game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, sprite));
+    
+    cEntity* test = new cEntity(n8::get_next_id());
     test->add_component(new cPosition_Component(POSITION, 0, 0));
     game->register_entity(test);
     
@@ -126,7 +135,7 @@ int main( int argc, char* argv[] )
         game->get_system(BASE_SYSTEM)->update();
         //game->get_system(COLLISION_SYSTEM)->update();
         //game->get_system(INTERACTION_SYSTEM)->update();
-        //game->get_system(RENDER_SYSTEM)->update();
+        game->get_system(RENDER_SYSTEM)->update();
         
         cout << endl;
     }

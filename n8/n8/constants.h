@@ -23,6 +23,7 @@ static const string DRAWABLE =              "DRAWABLE";
 static const string POSITION =              "POSITION";
 static const string INTERACTABLE =          "INTERACTABLE";
 
+
 // Static constants for system identifiers
 static const string BASE_SYSTEM =           "BASE_SYSTEM";
 static const string RENDER_SYSTEM =         "RENDER_SYSTEM";

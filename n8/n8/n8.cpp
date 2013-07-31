@@ -26,6 +26,13 @@ int n8::nextID = 0;
 n8::n8(){
     
 }
+
+int n8::get_next_id(){
+    nextID++;
+    return nextID;
+}
+
+
 /*
 cEntity* n8::create_user_entity(int id, string initName, int initX, int initY){
     
