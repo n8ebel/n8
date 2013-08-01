@@ -28,7 +28,7 @@ public:
 	cSprite(string id, SDL_Surface* img);
 
 	string get_id();
-	SDL_Surface* get_sprite();
+	SDL_Surface* get_image();
 	int get_height();
 	int get_width();
 };

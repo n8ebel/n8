@@ -24,9 +24,7 @@ cName_Component::cName_Component(){
 
 cName_Component::cName_Component(string newID, string newName) : cComponent(newID){
     
-    
     name = newName;
-    cout << "name component: " << name << endl;
 }
 
 string cName_Component::get_name(){

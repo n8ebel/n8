@@ -24,10 +24,22 @@ cRender_System::cRender_System(){
     ID = BASE_SYSTEM;
 }
 
+/** render
+ *
+ *  Use-    Renders the game frames
+ *
+ */
 void cRender_System::render(){
-    
+    //apply_surface( 0, 0, background, screen );
+
 }
 
+/** update
+ *
+ *  Use-    Overrides the base system update method
+ *          Used to update any render specific component data
+ *
+ */
 void cRender_System::update(){
     cout << "    RENDER_SYSTEM.Update()" << registered_entities.size() << endl;
     for (int i = 0; i < registered_entities.size(); i++) {

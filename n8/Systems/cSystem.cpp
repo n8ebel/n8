@@ -26,10 +26,25 @@ cSystem::cSystem(){
     ID = BASE_SYSTEM;
 }
 
+/** connect_message_handler
+ *
+ *  msgr-   the message handler pointer from the game manager to store a reference to
+ *
+ *  Use-    Using this allows the system to use the same message_handler as everything else
+ *
+ */
 void cSystem::connect_message_handler(cMessage_Handler* msgr){
     message_system = msgr;
 }
 
+/** check_requirements
+ *
+ *  entity- the entity to check if it has the requirements to register to the system
+ *
+ *  Use-    If the passed entity contains all the required components the method returns true
+ *          Required components are specified in the 'requirements' map
+ *
+ */
 bool cSystem::check_requirements(cEntity* entity){
     cout << "Checking requirements for " << ID << endl;
     map<string,int>::iterator ii;
@@ -43,11 +58,33 @@ bool cSystem::check_requirements(cEntity* entity){
     return true;
 }
 
-void cSystem::register_entity(cEntity* newEntity){
+/** register_entity
+ *
+ *  newEntity-  the new entity to attempt to register with the system
+ *
+ *  Use-    The entity is checked to see if it has the required components
+ *          If the components are all their, the entity is added to the 
+ *            registered entities vector
+ *
+ */
+bool cSystem::register_entity(cEntity* newEntity){
+    if (check_requirements(newEntity)) {
+        registered_entities.push_back(newEntity);
+        return true;
+    }
+    else{
+        return false;
+    }
     
-    registered_entities.push_back(newEntity);
+    
 }
 
+/** update
+ *
+ *  Use-    This is the base update method for all systems
+ *          Can be used to update game logic on any component data
+ *
+ */
 void cSystem::update(){
     cout << "    BASE_SYSTEM.Update()" << registered_entities.size() << endl;
     for (int i = 0; i < registered_entities.size(); i++) {

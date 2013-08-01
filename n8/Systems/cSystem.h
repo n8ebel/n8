@@ -31,13 +31,15 @@ protected:
     
     string ID;
     
+    bool check_requirements(cEntity* entity);
+    
 public:
     ~cSystem();
     cSystem();
     
     void connect_message_handler(cMessage_Handler* msgr);
-    bool check_requirements(cEntity* entity);
-    void register_entity(cEntity* newEntity);
+    
+    bool register_entity(cEntity* newEntity);
     
     virtual void update();
 };

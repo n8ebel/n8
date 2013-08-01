@@ -13,20 +13,16 @@
 
 using namespace std;
 
+//The attributes of the screen
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+const int SCREEN_BPP = 32;
+
 SDL_Surface* load_image(string);
 void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
 {   
-    
-    
-    
-    
-    //The attributes of the screen
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
-    const int SCREEN_BPP = 32;
-    
     //The surfaces that will be used
     SDL_Surface *message = NULL;
     SDL_Surface *background = NULL;
@@ -40,10 +36,12 @@ int main( int argc, char* argv[] )
     
     //Set up the screen
     screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE );
+    screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
     
     //If there was an error in setting up the screen
     if( screen == NULL )
     {
+        n8::log_error("Problem setting up screen");
         return 1;    
     }
     
@@ -57,13 +55,13 @@ int main( int argc, char* argv[] )
     
     cSprite* sprite = new cSprite("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp",message);
     
-    
-    
+/*** Create the game manager ****/
     cGame_Manager* game = new cGame_Manager();
+    
+/*** Set up the game systems ***/
+    
+    /* Create a base system */
     cSystem* baseSystem = game->create_system(BASE_SYSTEM);
-    cRender_System* renderSystem = (cRender_System*)game->create_system(RENDER_SYSTEM);
-    
-    
     if( baseSystem == NULL){
         n8::log_error("Game manager wasn't initialized");
     }
@@ -71,6 +69,8 @@ int main( int argc, char* argv[] )
         n8::log_info("Game manager was initialized");
     }
     
+    /* Create a render system */
+    cRender_System* renderSystem = (cRender_System*)game->create_system(RENDER_SYSTEM);
     if (renderSystem == NULL) {
         n8::log_error("Render system wasn't initialized");
     }
@@ -78,9 +78,11 @@ int main( int argc, char* argv[] )
         n8::log_info("Render system was initialized");
     }
     
+/*** Create 2 user entities ***/
     cEntity* nate = game->register_entity(game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, sprite));
     game->register_entity(game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, sprite));
-    
+  
+/*** Create a generic entity with only a position ***/
     cEntity* test = new cEntity(n8::get_next_id());
     test->add_component(new cPosition_Component(POSITION, 0, 0));
     game->register_entity(test);
@@ -98,7 +100,7 @@ int main( int argc, char* argv[] )
     
     
     //Apply the message to the screen
-    apply_surface( 180, 140, ((cDrawable_Component*)nate->get_component(DRAWABLE))->get_sprite()->get_sprite(), screen );
+    apply_surface( 180, 140, n8::get_drawable_component(nate)->get_sprite()->get_image(), screen );
     
     //Update the screen
     if( SDL_Flip( screen ) == -1 )
@@ -131,11 +133,14 @@ int main( int argc, char* argv[] )
             {}
         }
         
-        cout << "Game Logic" << endl;
+    /*** Update the game logic ***/
         game->get_system(BASE_SYSTEM)->update();
         //game->get_system(COLLISION_SYSTEM)->update();
         //game->get_system(INTERACTION_SYSTEM)->update();
         game->get_system(RENDER_SYSTEM)->update();
+        
+    /*** Render the frame ***/
+        ((cRender_System*)game->get_system(RENDER_SYSTEM))->render();
         
         cout << endl;
     }

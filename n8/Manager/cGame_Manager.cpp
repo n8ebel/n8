@@ -32,13 +32,17 @@ cGame_Manager::cGame_Manager(string resource_config, int screenW, int screenH){
     
 }
 
-/*  add_system
-   
-    Adds a new system to the manager
-    This registers the system with the game manager
-    It also allows the game manager to pass a reference
-     to the message system object to the system
-*/
+/** add_system
+ *  
+ *  ID- The string ID specifier for the system to add
+ *  newSystem- The system pointer
+ *
+ *  Use- Adds a new system to the manager
+ *       This registers the system with the game manager
+ *       It also allows the game manager to pass a reference
+ *         to the message system object to the system
+ *
+ */
 bool cGame_Manager::add_system(string ID, cSystem* newSystem){
     map<string,cSystem*>::iterator ii = registered_systems.find(ID);
     
@@ -53,12 +57,14 @@ bool cGame_Manager::add_system(string ID, cSystem* newSystem){
     return true;
 }
 
-/* get_system
- 
-    Returns a pointer to the specified system or NULL
-      if the system is not registered with the game
-      manager
-*/
+/** get_system
+ *
+ *  ID- The system specifier
+ *  
+ *  Use- Returns a pointer to the specified system or NULL
+ *       If the system is not registered with the game manager
+ *
+ */
 cSystem* cGame_Manager::get_system(string ID){
     map<string,cSystem*>::iterator ii = registered_systems.find(ID);
     
@@ -70,30 +76,37 @@ cSystem* cGame_Manager::get_system(string ID){
     }
 }
 
-/*  register_entity
- 
-    Registers an entity with the game system.
-    Takes each system and registers the entity with it
-      if it meets the system requirements.
-*/
+/**  register_entity
+ *
+ *  newEntity- the new entity to register with the game manager
+ *  
+ *  Use- Registers an entity with the game system.
+ *       Takes each system and registers the entity with it
+ *          if it meets the system requirements.
+ *
+ */
 cEntity* cGame_Manager::register_entity(cEntity* newEntity){
-    //add entity to registered_entities
-    registered_entities[newEntity->get_id()] = newEntity;
     
-    // for each system in registered_systems
-        // check if entity matches system requirements
-            // if YES then register with system
+    
+    registered_entities[newEntity->get_id()] = newEntity;
     
     map<string,cSystem*>::iterator ii;
     for( ii=registered_systems.begin(); ii != registered_systems.end(); ii++){
-        if (ii->second->check_requirements(newEntity)) {
-            ii->second->register_entity(newEntity);
-        }
+        ii->second->register_entity(newEntity);
     }
     
     return newEntity;
 }
 
+
+/** get_entity
+ *
+ *  ID- The id of the entity to return
+ *
+ *  Use- If an entity with the specified ID exists it is returned
+ *       If the ID doesn't exist, NULL is returned
+ *
+ */
 cEntity* cGame_Manager::get_entity(int ID){
     map<int, cEntity*>::iterator ii = registered_entities.find(ID);
     
@@ -105,12 +118,14 @@ cEntity* cGame_Manager::get_entity(int ID){
     }
 }
 
-/*  create_system
- 
-    Creates a new system object.
-    The system type is specified by the passed argument.
-    The system is then added to the game manager registered systems map
-    The method returns a pointer to the created object.
+/** create_system
+ *
+ *  ID- the string specifier for the system to create and add to the system
+ *
+ *  Use- Creates a new system object.
+ *       The system type is specified by the passed argument.
+ *       The system is then added to the game manager registered systems map
+ *       The method returns a pointer to the created object.
  */
 cSystem* cGame_Manager::create_system(string ID){
     if (ID == BASE_SYSTEM) {
@@ -137,15 +152,29 @@ cSystem* cGame_Manager::create_system(string ID){
     return NULL;
 }
 
-/*  get_message_handler
- 
-    Returns a pointer to the game's message handler
+/** get_message_handler
+ *
+ *  Use- returns a pointer to the message_handler
+ *
  */
 cMessage_Handler* cGame_Manager::get_message_handler(){
     return message_handler;
 }
 
-/* creates a basic user entity
+/** create_user_entity
+ *
+ *  id-         the id for the new user entity
+ *  initName-   the name of the new user entity
+ *  initX-      the initial x position
+ *  intiY-      the initial y position
+ *  sprite-     the sprite to use to draw the entity
+ *
+ *  Use-    Creates a new user entity
+ *          Using this method ensures the proper components are added to the user entity
+ *          Added components include:
+ *              Name
+ *              Position
+ *              Drawable
  *
  */
 cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite){

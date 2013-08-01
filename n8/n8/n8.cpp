@@ -32,28 +32,41 @@ int n8::get_next_id(){
     return nextID;
 }
 
-
-/*
-cEntity* n8::create_user_entity(int id, string initName, int initX, int initY){
-    
-    cEntity* foo = new cEntity(id);
-    cName_Component* name = new cName_Component(NAME, initName);
-    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY);
-    
-    foo->add_component(name);
-    foo->add_component(position);
-    
-    return foo;
-    
-}
-*/
+/** get_name_component
+ *
+ *  entity- the entity from which to retrieve the component
+ *
+ *  Use-    Provides a static helper method for getting a component from an entity
+ *          Returns a cName_Component* if the component exists, or NULL
+ *
+ */
 cName_Component* n8:: get_name_component(cEntity* entity){
     cout << entity->get_components().size() << endl;
     return (cName_Component*)entity->get_components()[NAME];
 }
 
+/** get_position_component
+ *
+ *  entity- the entity from which to retrieve the component
+ *
+ *  Use-    Provides a static helper method for getting a component from an entity
+ *          Returns a cPosition_Component* if the component exists, or NULL
+ *
+ */
 cPosition_Component* n8:: get_position_component(cEntity* entity){
     return (cPosition_Component*)entity->get_components()[POSITION];
+}
+
+/** get_drawable_component
+ *
+ *  entity- the entity from which to retrieve the component
+ *
+ *  Use-    Provides a static helper method for getting a component from an entity
+ *          Returns a cDrawable_Component* if the component exists, or NULL
+ *
+ */
+cDrawable_Component* n8:: get_drawable_component(cEntity* entity){
+    return (cDrawable_Component*)entity->get_components()[DRAWABLE];
 }
 
 void n8::log_error(string msg){

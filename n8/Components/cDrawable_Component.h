@@ -21,6 +21,7 @@ private:
     cSprite* sprite;
     
 public:
+    
     cDrawable_Component();
     ~cDrawable_Component();
     

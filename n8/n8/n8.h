@@ -32,6 +32,7 @@ public:
    // static cEntity* create_user_entity(int id, string initName, int initX, int initY);
     static cName_Component* get_name_component(cEntity* entity);
     static cPosition_Component* get_position_component(cEntity* entity);
+    static cDrawable_Component* get_drawable_component(cEntity* entity);
     
     static void log_error(string msg);
     static void log_info(string msg);

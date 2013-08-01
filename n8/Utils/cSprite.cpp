@@ -26,12 +26,17 @@ cSprite::cSprite(string id, SDL_Surface* img){
 	
 }
 
+/** get_id
+ *
+ *  Use-    returns the string specifier for the image
+ *
+ */
 string cSprite::get_id(){
 	return ID;
 }
 
 
-SDL_Surface* cSprite::get_sprite(){
+SDL_Surface* cSprite::get_image(){
 	return image;
 }
 

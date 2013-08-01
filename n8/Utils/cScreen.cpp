@@ -8,5 +8,6 @@
  *
 */
 
+#include "cScreen.h"
 #include <iostream>
 
