@@ -28,7 +28,7 @@ public:
     cDrawable_Component(string newID, cSprite* newSprite);
     
     cSprite* get_sprite();
-    cSprite* set_sprite();
+    cSprite* set_sprite(cSprite* newSprite);
     
     
 };

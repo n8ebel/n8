@@ -13,22 +13,43 @@
 
 #include <iostream>
 
+/** default constructor
+ *
+ */
 cDrawable_Component::cDrawable_Component(){
     sprite = NULL;
 }
 
+/** default destructor
+ *
+ */
 cDrawable_Component::~cDrawable_Component(){
     
 }
 
+/** additional constructor that will be used most often
+ *
+ */
 cDrawable_Component::cDrawable_Component(string newID, cSprite* newSprite) : cComponent(newID){
     sprite = newSprite;
 }
 
+/** get_sprite
+ *
+ *  Use-    returns the component's sprite
+ *
+ */
 cSprite* cDrawable_Component::get_sprite(){
     return sprite;
 }
 
-cSprite* cDrawable_Component::set_sprite(){
-    
+/** set_sprite
+ *
+ *  newSprite-  the new sprite for the component
+ *
+ *  Use-    allows the user to change the sprite for a drawable component
+ *
+ */
+cSprite* cDrawable_Component::set_sprite(cSprite* newSprite){
+    sprite = newSprite;
 }
