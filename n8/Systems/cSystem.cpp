@@ -86,8 +86,10 @@ bool cSystem::register_entity(cEntity* newEntity){
  *
  */
 void cSystem::update(){
-    cout << "    BASE_SYSTEM.Update()" << registered_entities.size() << endl;
-    for (int i = 0; i < registered_entities.size(); i++) {
-        cout << "      " << registered_entities[i]->get_id() << endl;
+    if (DEBUG_MODE) {
+        cout << "    BASE_SYSTEM.Update()" << registered_entities.size() << endl;
+        for (int i = 0; i < registered_entities.size(); i++) {
+            cout << "      " << registered_entities[i]->get_id() << endl;
+        }
     }
 }

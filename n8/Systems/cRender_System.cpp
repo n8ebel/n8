@@ -41,14 +41,16 @@ void cRender_System::render(){
  *
  */
 void cRender_System::update(){
-    cout << "    RENDER_SYSTEM.Update()" << registered_entities.size() << endl;
-    for (int i = 0; i < registered_entities.size(); i++) {
-        cName_Component* name = (cName_Component*)registered_entities[i]->get_component(NAME);
-        if (name == NULL) {
-            cout << "      " << registered_entities[i]->get_id() << endl;
-        }
-        else{
-            cout << "      " << name->get_name() << endl;   
+    if (DEBUG_MODE) {
+        cout << "    RENDER_SYSTEM.Update()" << registered_entities.size() << endl;
+        for (int i = 0; i < registered_entities.size(); i++) {
+            cName_Component* name = (cName_Component*)registered_entities[i]->get_component(NAME);
+            if (name == NULL) {
+                cout << "      " << registered_entities[i]->get_id() << endl;
+            }
+            else{
+                cout << "      " << name->get_name() << endl;   
+            }
         }
     }
 }

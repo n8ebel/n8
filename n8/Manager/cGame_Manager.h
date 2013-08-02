@@ -30,7 +30,9 @@ private:
     cResource_Handler* resource_handler;
     cScreen* screen;
     
-    
+    Uint32 start;
+    SDL_Event event;
+    bool running;
     
 public:
     static const int LOADING_SCREEN;
@@ -41,7 +43,12 @@ public:
     ~cGame_Manager();
     cGame_Manager();
     cGame_Manager(string resource_config, int screenW, int screenH);
+    
     bool initializeSDL();
+    bool initializeGameLoop();
+    
+    void handle_input();
+    bool is_running();
     
     bool add_system(string ID, cSystem* newSystem);
     cSystem* get_system(string ID);

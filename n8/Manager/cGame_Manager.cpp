@@ -26,13 +26,14 @@ cGame_Manager::~cGame_Manager(){
 
 cGame_Manager::cGame_Manager(){
     message_handler = NULL;
-    
+    running = false;
     initializeSDL();
 }
 
 cGame_Manager::cGame_Manager(string resource_config, int screenW, int screenH){
-    
+    message_handler = NULL;
     initializeSDL();
+    running = false;
     
 }
 
@@ -44,6 +45,37 @@ bool cGame_Manager::initializeSDL(){
     }
     else{
         return true;
+    }
+}
+
+bool cGame_Manager::initializeGameLoop(){
+    //The timer starting time
+    start = 0;
+    running = true;
+    start = SDL_GetTicks();
+}
+
+bool cGame_Manager::is_running(){
+    return running;
+}
+
+void cGame_Manager::handle_input(){
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            running = false;
+        }
+        else if( event.type == SDL_KEYDOWN )
+        { 
+            cout << "key pressed" << endl;
+            switch( event.key.keysym.sym )
+            {
+                    
+            }
+        }
+        else if( event.type == SDL_MOUSEBUTTONDOWN )
+        {}
+        else if( event.type == SDL_MOUSEBUTTONUP )
+        {}
     }
 }
 

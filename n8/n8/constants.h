@@ -16,6 +16,8 @@
 
 using namespace std;
 
+static const bool DEBUG_MODE = false;
+
 const int SCREEN = -1;
 
 

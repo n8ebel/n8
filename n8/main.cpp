@@ -23,6 +23,11 @@ void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
 {   
+    /*** Create the game manager ****/
+    cGame_Manager* game = new cGame_Manager();
+    game->initializeSDL();
+    
+    
     //The surfaces that will be used
     SDL_Surface *message = NULL;
     SDL_Surface *background = NULL;
@@ -31,12 +36,10 @@ int main( int argc, char* argv[] )
     SDL_WM_SetCaption( "Hello World", NULL );
     
     //Load the images
-    message = load_image("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp");
-    background = load_image( "/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/background.bmp" );
+    message = load_image("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
+    background = load_image( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
     
-/*** Create the game manager ****/
-    cGame_Manager* game = new cGame_Manager();
-    game->initializeSDL();
+
     
 /*** Set up the game systems ***/
     
@@ -90,30 +93,12 @@ int main( int argc, char* argv[] )
         return 1;    
     }
     
-    //Show window until the user clicks 'exit'
-    bool running = true;
-    //The timer starting time
-    Uint32 start = 0;
     
-    SDL_Event event;
-    while (running) {
+    game->initializeGameLoop();
+   
+    while (game->is_running()) {
+        game->handle_input();
         
-        start = SDL_GetTicks();
-        
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
-            }
-            else if( event.type == SDL_KEYDOWN )
-            { 
-                switch( event.key.keysym.sym )
-                {}
-            }
-            else if( event.type == SDL_MOUSEBUTTONDOWN )
-            {}
-            else if( event.type == SDL_MOUSEBUTTONUP )
-            {}
-        }
         
     /*** Update the game logic ***/
         game->get_system(BASE_SYSTEM)->update();
@@ -124,8 +109,11 @@ int main( int argc, char* argv[] )
     /*** Render the frame ***/
         ((cRender_System*)game->get_system(RENDER_SYSTEM))->render();
         
-        cout << endl;
+        //cout << endl;
     }
+    
+    
+    
     
     //Free the surfaces
     SDL_FreeSurface( message );
