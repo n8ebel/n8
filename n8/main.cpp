@@ -25,8 +25,17 @@ int main( int argc, char* argv[] )
 {   
     /*** Create the game manager ****/
     cGame_Manager* game = new cGame_Manager();
-    game->initializeSDL();
+    if(game->initializeSDL()){
+        cout << "SDL initialized" << endl;
+    }
+    else
+    {
+        cout << "SDL not initialized" << endl;
+    }   
     
+    /*** Create the screen and register it ***/
+    cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+
     
     //The surfaces that will be used
     SDL_Surface *message = NULL;
@@ -36,10 +45,17 @@ int main( int argc, char* argv[] )
     SDL_WM_SetCaption( "Hello World", NULL );
     
     //Load the images
+    
     message = load_image("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
     background = load_image( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
     
-
+    if (message == NULL) {
+        cout << "message null" << endl;
+    }
+    
+    if (background == NULL) {
+        cout << "background null" << endl;
+    }
     
 /*** Set up the game systems ***/
     
@@ -71,8 +87,6 @@ int main( int argc, char* argv[] )
     test->add_component(new cPosition_Component(POSITION, 0, 0));
     game->register_entity(test);
     
-/*** Create the screen and register it ***/
-    cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
 
     
     
@@ -137,12 +151,15 @@ SDL_Surface *load_image( std::string filename )
     //Load the image
     loadedImage = SDL_LoadBMP( filename.c_str() );
     
+    
     //If nothing went wrong in loading the image
     if( loadedImage != NULL )
-    {
+    {   
         //Create an optimized image
         optimizedImage = SDL_DisplayFormat( loadedImage );
-        
+        if (optimizedImage != NULL) {
+            cout << "goooooo" << endl;
+        }
         //Free the old image
         SDL_FreeSurface( loadedImage );
     }
