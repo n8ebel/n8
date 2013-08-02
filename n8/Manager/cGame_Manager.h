@@ -30,6 +30,8 @@ private:
     cResource_Handler* resource_handler;
     cScreen* screen;
     
+    
+    
 public:
     static const int LOADING_SCREEN;
     static const int MENU;
@@ -39,6 +41,7 @@ public:
     ~cGame_Manager();
     cGame_Manager();
     cGame_Manager(string resource_config, int screenW, int screenH);
+    bool initializeSDL();
     
     bool add_system(string ID, cSystem* newSystem);
     cSystem* get_system(string ID);
@@ -50,6 +53,9 @@ public:
     
     cMessage_Handler* get_message_handler();
     
+    
+    //Entity creation methods
+    cEntity* create_screen_entity(int w, int h, int bpp);
     cEntity* create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite);
     
 };

@@ -26,10 +26,25 @@ cGame_Manager::~cGame_Manager(){
 
 cGame_Manager::cGame_Manager(){
     message_handler = NULL;
+    
+    initializeSDL();
 }
 
 cGame_Manager::cGame_Manager(string resource_config, int screenW, int screenH){
     
+    initializeSDL();
+    
+}
+
+bool cGame_Manager::initializeSDL(){
+    //Initialize all SDL subsystems
+    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+    {
+        return false;    
+    }
+    else{
+        return true;
+    }
 }
 
 /** add_system
@@ -190,8 +205,44 @@ cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, i
     foo->add_component(position);
     foo->add_component(drawable);
     
+    
+    register_entity(foo);
     return foo;
     
 }
 
+/** create_screen_entity
+ *
+ *  w-      width of the screen
+ *  h-      height of the screen
+ *  bpp-    bits per pixel
+ *
+ *  Use-    Creates a new entity to represent the screen
+ *          
+ *
+ */
+cEntity* cGame_Manager::create_screen_entity(int w, int h, int bpp){
+    SDL_Surface *screen_surface = NULL;
+    
+    
+    
+    //Set up the screen
+    screen_surface = SDL_SetVideoMode(w, h, bpp, SDL_SWSURFACE);
+    
+    //If there was an error in setting up the screen
+    if( screen_surface == NULL )
+    {
+        n8::log_error("Problem setting up screen");
+        return NULL;    
+    }
+    
+    cEntity* entScreen = new cEntity(SCREEN);  // uses 'SCREEN' const value of -1
+    cSprite* screenSprite = new cSprite("SCREEN", screen_surface);
+    entScreen->add_component(new cDrawable_Component(DRAWABLE, screenSprite));
+    
+    register_entity(entScreen);
+    
+    return entScreen;
+    
+}
 

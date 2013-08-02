@@ -16,6 +16,8 @@
 
 using namespace std;
 
+const int SCREEN = -1;
+
 
 // Static constants for component identifiers
 static const string NAME =                  "NAME";

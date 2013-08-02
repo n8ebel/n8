@@ -26,25 +26,7 @@ int main( int argc, char* argv[] )
     //The surfaces that will be used
     SDL_Surface *message = NULL;
     SDL_Surface *background = NULL;
-    SDL_Surface *screen = NULL;
         
-    //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-    {
-        return 1;    
-    }
-    
-    //Set up the screen
-    screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE );
-    screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
-    
-    //If there was an error in setting up the screen
-    if( screen == NULL )
-    {
-        n8::log_error("Problem setting up screen");
-        return 1;    
-    }
-    
     //Set the window caption
     SDL_WM_SetCaption( "Hello World", NULL );
     
@@ -52,11 +34,9 @@ int main( int argc, char* argv[] )
     message = load_image("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp");
     background = load_image( "/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/background.bmp" );
     
-    
-    cSprite* sprite = new cSprite("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp",message);
-    
 /*** Create the game manager ****/
     cGame_Manager* game = new cGame_Manager();
+    game->initializeSDL();
     
 /*** Set up the game systems ***/
     
@@ -79,31 +59,33 @@ int main( int argc, char* argv[] )
     }
     
 /*** Create 2 user entities ***/
-    cEntity* nate = game->register_entity(game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, sprite));
-    game->register_entity(game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, sprite));
+    cSprite* sprite = new cSprite("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp",message);
+    cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, sprite);
+    game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, sprite);
   
 /*** Create a generic entity with only a position ***/
     cEntity* test = new cEntity(n8::get_next_id());
     test->add_component(new cPosition_Component(POSITION, 0, 0));
     game->register_entity(test);
     
-    
-    
+/*** Create the screen and register it ***/
+    cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+
     
     
     
     //Apply the background to the screen
-    apply_surface( 0, 0, background, screen );
-    apply_surface( 320, 0, background, screen );
-    apply_surface( 0, 240, background, screen );
-    apply_surface( 320, 240, background, screen );
+    apply_surface( 0, 0, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 320, 0, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 0, 240, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 320, 240, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
     
     
     //Apply the message to the screen
-    apply_surface( 180, 140, n8::get_drawable_component(nate)->get_sprite()->get_image(), screen );
+    apply_surface( 180, 140, n8::get_drawable_component(nate)->get_sprite()->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
     
     //Update the screen
-    if( SDL_Flip( screen ) == -1 )
+    if( SDL_Flip( n8::get_drawable_component(entScreen)->get_sprite()->get_image() ) == -1 )
     {
         return 1;    
     }
