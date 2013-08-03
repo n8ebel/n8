@@ -59,6 +59,7 @@ public:
     cSystem* create_system(string ID);
     
     cMessage_Handler* get_message_handler();
+    cResource_Handler* get_resource_handler();
     
     
     //Entity creation methods

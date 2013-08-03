@@ -21,17 +21,28 @@ const int cGame_Manager::MENU = 2;
 const int cGame_Manager::WORLD_VIEW = 3;
 
 cGame_Manager::~cGame_Manager(){
+    if (resource_handler != NULL) {
+        delete resource_handler;
+    }
+    
+    map<int, cEntity*>::iterator ii;
+    for (ii= registered_entities.begin(); ii != registered_entities.end(); ii++) {
+        delete ii->second;
+    }
+    
     
 }
 
 cGame_Manager::cGame_Manager(){
     message_handler = NULL;
+    resource_handler = new cResource_Handler();
     running = false;
     initializeSDL();
 }
 
 cGame_Manager::cGame_Manager(string resource_config, int screenW, int screenH){
     message_handler = NULL;
+    resource_handler = new cResource_Handler();
     initializeSDL();
     running = false;
     
@@ -206,6 +217,15 @@ cSystem* cGame_Manager::create_system(string ID){
  */
 cMessage_Handler* cGame_Manager::get_message_handler(){
     return message_handler;
+}
+
+/** get_resource_handler
+ *
+ *  Use-    returns a pointer to the resource handler
+ *
+ */
+cResource_Handler* cGame_Manager::get_resource_handler(){
+    return resource_handler;
 }
 
 /** create_user_entity

@@ -35,25 +35,25 @@ int main( int argc, char* argv[] )
     
     /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
-
+    game->get_resource_handler()->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");
     
     //The surfaces that will be used
-    SDL_Surface *message = NULL;
-    SDL_Surface *background = NULL;
+    cSprite* message = NULL;
+    cSprite* background = NULL;
         
     //Set the window caption
     SDL_WM_SetCaption( "Hello World", NULL );
     
     //Load the images
     
-    message = load_image("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
-    background = load_image( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
+    message = game->get_resource_handler()->get_sprite("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
+    background = game->get_resource_handler()->get_sprite( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
     
-    if (message == NULL) {
+    if (message == NULL || message->get_image() == NULL) {
         cout << "message null" << endl;
     }
     
-    if (background == NULL) {
+    if (background == NULL || background->get_image()==NULL) {
         cout << "background null" << endl;
     }
     
@@ -78,9 +78,8 @@ int main( int argc, char* argv[] )
     }
     
 /*** Create 2 user entities ***/
-    cSprite* sprite = new cSprite("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp",message);
-    cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, sprite);
-    game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, sprite);
+    cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
+    game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, message);
   
 /*** Create a generic entity with only a position ***/
     cEntity* test = new cEntity(n8::get_next_id());
@@ -92,10 +91,10 @@ int main( int argc, char* argv[] )
     
     
     //Apply the background to the screen
-    apply_surface( 0, 0, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    apply_surface( 320, 0, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    apply_surface( 0, 240, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    apply_surface( 320, 240, background, n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 0, 0, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 320, 0, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 0, 240, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
+    apply_surface( 320, 240, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
     
     
     //Apply the message to the screen
@@ -129,9 +128,7 @@ int main( int argc, char* argv[] )
     
     
     
-    //Free the surfaces
-    SDL_FreeSurface( message );
-    SDL_FreeSurface( background );
+    delete game;
     
     //Quit SDL
     SDL_Quit();
@@ -140,33 +137,7 @@ int main( int argc, char* argv[] )
     return 0;
 }
 
-SDL_Surface *load_image( std::string filename ) 
-{
-    //Temporary storage for the image that's loaded
-    SDL_Surface* loadedImage = NULL;
-    
-    //The optimized image that will be used
-    SDL_Surface* optimizedImage = NULL;
-    
-    //Load the image
-    loadedImage = SDL_LoadBMP( filename.c_str() );
-    
-    
-    //If nothing went wrong in loading the image
-    if( loadedImage != NULL )
-    {   
-        //Create an optimized image
-        optimizedImage = SDL_DisplayFormat( loadedImage );
-        if (optimizedImage != NULL) {
-            cout << "goooooo" << endl;
-        }
-        //Free the old image
-        SDL_FreeSurface( loadedImage );
-    }
-    
-    //Return the optimized image
-    return optimizedImage;
-}
+
 
 void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination )
 {

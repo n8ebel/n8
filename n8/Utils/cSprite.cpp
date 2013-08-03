@@ -17,7 +17,8 @@ cSprite::cSprite() {
 }
 
 cSprite::~cSprite() {
-	// TODO Auto-generated destructor stub
+	SDL_FreeSurface( image );
+    
 }
 
 cSprite::cSprite(string id, SDL_Surface* img){

@@ -1,0 +1,2 @@
+/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp
+/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp
