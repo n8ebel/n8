@@ -34,6 +34,10 @@ private:
     SDL_Event event;
     bool running;
     
+    cMessage_Handler* get_message_handler();
+    cResource_Handler* get_resource_handler();
+
+    
 public:
     static const int LOADING_SCREEN;
     static const int MENU;
@@ -44,27 +48,20 @@ public:
     cGame_Manager();
     cGame_Manager(string resource_config, int screenW, int screenH);
     
-    bool initializeSDL();
-    bool initializeGameLoop();
-    
-    void handle_input();
-    bool is_running();
-    
     bool add_system(string ID, cSystem* newSystem);
-    cSystem* get_system(string ID);
-    
-    cEntity* register_entity(cEntity* newEntity);
-    cEntity* get_entity(int ID);
-    
-    cSystem* create_system(string ID);
-    
-    cMessage_Handler* get_message_handler();
-    cResource_Handler* get_resource_handler();
-    
-    
-    //Entity creation methods
     cEntity* create_screen_entity(int w, int h, int bpp);
+    cSystem* create_system(string ID);
     cEntity* create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite);
+    cEntity* get_entity(int ID);
+    cSprite* get_sprite(string id);
+    cSystem* get_system(string ID);
+    void handle_input();
+    bool initializeSDL();
+    void initializeGameLoop();
+    bool is_running();
+    void load_images(string filepath);
+    cEntity* register_entity(cEntity* newEntity);
+    
     
 };
 

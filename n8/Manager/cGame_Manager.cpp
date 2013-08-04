@@ -59,7 +59,7 @@ bool cGame_Manager::initializeSDL(){
     }
 }
 
-bool cGame_Manager::initializeGameLoop(){
+void cGame_Manager::initializeGameLoop(){
     //The timer starting time
     start = 0;
     running = true;
@@ -144,7 +144,9 @@ cSystem* cGame_Manager::get_system(string ID){
  *
  */
 cEntity* cGame_Manager::register_entity(cEntity* newEntity){
-    
+    if (DEBUG_MODE) {
+        cout << "cGame_Manager.register_entity(cEntity* newEntity)" << endl;
+    }
     
     registered_entities[newEntity->get_id()] = newEntity;
     
@@ -228,6 +230,25 @@ cResource_Handler* cGame_Manager::get_resource_handler(){
     return resource_handler;
 }
 
+/** get_sprite
+ *
+ *  Use-    returns a cSprite*.  Used to retrieve sprite object without neededing
+ *            to get the resource manager first
+ *
+ */
+cSprite* cGame_Manager::get_sprite(string id){
+    return resource_handler->get_sprite(id);
+}
+
+/** load_images
+ *
+ *  Use- wrapper method for calling resource_handler->load images
+ *
+ */
+void cGame_Manager::load_images(string filepath){
+    resource_handler->load_images(filepath);
+}
+
 /** create_user_entity
  *
  *  id-         the id for the new user entity
@@ -291,6 +312,7 @@ cEntity* cGame_Manager::create_screen_entity(int w, int h, int bpp){
     cEntity* entScreen = new cEntity(SCREEN);  // uses 'SCREEN' const value of -1
     cSprite* screenSprite = new cSprite("SCREEN", screen_surface);
     entScreen->add_component(new cDrawable_Component(DRAWABLE, screenSprite));
+    entScreen->add_component(new cPosition_Component(POSITION, 0, 0));
     
     register_entity(entScreen);
     

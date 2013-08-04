@@ -33,30 +33,6 @@ int main( int argc, char* argv[] )
         cout << "SDL not initialized" << endl;
     }   
     
-    /*** Create the screen and register it ***/
-    cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
-    game->get_resource_handler()->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");
-    
-    //The surfaces that will be used
-    cSprite* message = NULL;
-    cSprite* background = NULL;
-        
-    //Set the window caption
-    SDL_WM_SetCaption( "Hello World", NULL );
-    
-    //Load the images
-    
-    message = game->get_resource_handler()->get_sprite("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
-    background = game->get_resource_handler()->get_sprite( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
-    
-    if (message == NULL || message->get_image() == NULL) {
-        cout << "message null" << endl;
-    }
-    
-    if (background == NULL || background->get_image()==NULL) {
-        cout << "background null" << endl;
-    }
-    
 /*** Set up the game systems ***/
     
     /* Create a base system */
@@ -77,35 +53,39 @@ int main( int argc, char* argv[] )
         n8::log_info("Render system was initialized");
     }
     
+/*** Create the screen and register it ***/
+    cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    game->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");
+    
+    //The surfaces that will be used
+    cSprite* message = NULL;
+    cSprite* background = NULL;
+        
+    //Set the window caption
+    SDL_WM_SetCaption( "Hello World", NULL );
+    
+    //Load the images
+    
+    message = game->get_sprite("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
+    background = game->get_sprite( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
+    
+    if (message == NULL || message->get_image() == NULL) {
+        cout << "message null" << endl;
+    }
+    
+    if (background == NULL || background->get_image()==NULL) {
+        cout << "background null" << endl;
+    }
+    
+
+    
 /*** Create 2 user entities ***/
     cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
     game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, message);
   
-/*** Create a generic entity with only a position ***/
-    cEntity* test = new cEntity(n8::get_next_id());
-    test->add_component(new cPosition_Component(POSITION, 0, 0));
-    game->register_entity(test);
     
 
-    
-    
-    
-    //Apply the background to the screen
-    apply_surface( 0, 0, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    apply_surface( 320, 0, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    apply_surface( 0, 240, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    apply_surface( 320, 240, background->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    
-    
-    //Apply the message to the screen
-    apply_surface( 180, 140, n8::get_drawable_component(nate)->get_sprite()->get_image(), n8::get_drawable_component(entScreen)->get_sprite()->get_image() );
-    
-    //Update the screen
-    if( SDL_Flip( n8::get_drawable_component(entScreen)->get_sprite()->get_image() ) == -1 )
-    {
-        return 1;    
-    }
-    
+/*** GAME LOOP ***/
     
     game->initializeGameLoop();
    
@@ -139,15 +119,4 @@ int main( int argc, char* argv[] )
 
 
 
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination )
-{
-    //Make a temporary rectangle to hold the offsets
-    SDL_Rect offset;
-    
-    //Give the offsets to the rectangle
-    offset.x = x;
-    offset.y = y;
-    
-    //Blit the surface
-    SDL_BlitSurface( source, NULL, destination, &offset );
-}
+

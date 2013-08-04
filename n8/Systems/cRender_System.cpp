@@ -10,6 +10,8 @@
 
 #include "cRender_System.h"
 #include "cName_Component.h"
+#include "cDrawable_Component.h"
+#include "cPosition_Component.h"
 #include <iostream>
 
 using namespace std;
@@ -24,13 +26,39 @@ cRender_System::cRender_System(){
     ID = BASE_SYSTEM;
 }
 
+void cRender_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface* destination )
+{
+    //Make a temporary rectangle to hold the offsets
+    SDL_Rect offset;
+    
+    //Give the offsets to the rectangle
+    offset.x = x;
+    offset.y = y;
+    
+    //Blit the surface
+    SDL_BlitSurface( source, NULL, destination, &offset );
+}
+
 /** render
  *
  *  Use-    Renders the game frames
  *
  */
 void cRender_System::render(){
+    cout << "render" << endl;
     //apply_surface( 0, 0, background, screen );
+    //Apply the background to the screen
+    
+    cEntity* screen = registered_entities[0];
+    
+    /*** Draw images to the screen ***/
+    for (int i = 0; i < registered_entities.size(); i++) {
+        cout << "entity " << registered_entities[i]->get_id() << endl;
+        draw_image( ((cPosition_Component*)screen->get_component(POSITION))->get_position()->get_x(), ((cPosition_Component*)screen->get_component(POSITION))->get_position()->get_x(), ((cDrawable_Component*)registered_entities[i]->get_component(DRAWABLE))->get_sprite()->get_image(), ((cDrawable_Component*)screen->get_component(DRAWABLE))->get_sprite()->get_image());
+    }
+    
+    //Update the screen
+    SDL_Flip( ((cDrawable_Component*)screen->get_component(DRAWABLE))->get_sprite()->get_image() );
 
 }
 
