@@ -12,6 +12,7 @@
 #define n8_cRender_System_h
 
 #include "cSystem.h"
+#include "SDL/SDL.h"
 
 class cRender_System : public cSystem {
 
@@ -23,6 +24,8 @@ public:
     
     void update();
     void render();
+    
+    void draw_image( int x, int y, SDL_Surface* source, SDL_Surface* destination );
     
 };
 

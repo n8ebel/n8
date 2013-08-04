@@ -69,6 +69,18 @@ cDrawable_Component* n8:: get_drawable_component(cEntity* entity){
     return (cDrawable_Component*)entity->get_components()[DRAWABLE];
 }
 
+cComponent* n8::get_component(cEntity* entity, string component){
+    if (component == DRAWABLE) {
+        return (cDrawable_Component*)entity->get_components()[DRAWABLE];
+    }
+    else if(component == NAME){
+        return (cName_Component*)entity->get_components()[NAME];
+    }
+    else if(component == POSITION){
+        return (cPosition_Component*)entity->get_components()[POSITION];
+    }
+}
+
 void n8::log_error(string msg){
     cout << "(ERROR) " << msg << endl;
 }

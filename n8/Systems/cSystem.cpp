@@ -10,8 +10,9 @@
 
 #include <iostream>
 #include "cSystem.h"
+#include "n8.h"
 //#include "constants.h"
-#include "cName_Component.h"
+//#include "cName_Component.h"
 
 using namespace std;
 
@@ -68,7 +69,9 @@ bool cSystem::check_requirements(cEntity* entity){
  *
  */
 bool cSystem::register_entity(cEntity* newEntity){
+    cout << "cSystem.register_entity" << endl;
     if (check_requirements(newEntity)) {
+        cout << "  entity passed check " << endl;
         registered_entities.push_back(newEntity);
         return true;
     }

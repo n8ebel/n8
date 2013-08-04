@@ -15,7 +15,7 @@
 #include <string>
 
 using namespace std;
-
+/*
 static const bool DEBUG_MODE = false;
 
 const int SCREEN = -1;
@@ -35,5 +35,5 @@ static const string MOVEMENT_SYSTEM =       "MOVEMENT_SYSTEM";
 static const string COLLISION_SYSTEM =      "COLLISION_SYSTEM";
 static const string INTERACTION_SYSTEM =    "INTERACTION_SYSTEM";
 static const string MESSAGE_SYSTEM =        "MESSAGE_SYSTEM";
-
+*/
 #endif

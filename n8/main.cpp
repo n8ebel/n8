@@ -8,6 +8,7 @@
 
 #include "SDL/SDL.h"
 #include "n8.h"
+#include "cGame_Manager.h"
 #include "constants.h"
 #include <iostream>
 
@@ -23,15 +24,11 @@ void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
 {   
-    /*** Create the game manager ****/
+    
+/*** Create the game manager ****/
     cGame_Manager* game = new cGame_Manager();
-    if(game->initializeSDL()){
-        cout << "SDL initialized" << endl;
-    }
-    else
-    {
-        cout << "SDL not initialized" << endl;
-    }   
+    if(game->initializeSDL()){ cout << "SDL initialized" << endl; }
+    else{ cout << "SDL not initialized" << endl; }   
     
 /*** Set up the game systems ***/
     
@@ -55,19 +52,14 @@ int main( int argc, char* argv[] )
     
 /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    /***  Set the window caption  ***/
+    SDL_WM_SetCaption( "Hello World", NULL );
+
+/*** Load image resources ***/
     game->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");
     
-    //The surfaces that will be used
-    cSprite* message = NULL;
-    cSprite* background = NULL;
-        
-    //Set the window caption
-    SDL_WM_SetCaption( "Hello World", NULL );
-    
-    //Load the images
-    
-    message = game->get_sprite("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
-    background = game->get_sprite( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
+    cSprite* message = game->get_sprite("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
+    cSprite* background = game->get_sprite( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
     
     if (message == NULL || message->get_image() == NULL) {
         cout << "message null" << endl;
@@ -78,7 +70,6 @@ int main( int argc, char* argv[] )
     }
     
 
-    
 /*** Create 2 user entities ***/
     cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
     game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, message);
