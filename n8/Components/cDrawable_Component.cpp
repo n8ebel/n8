@@ -34,6 +34,16 @@ cDrawable_Component::cDrawable_Component(string newID, cSprite* newSprite) : cCo
     sprite = newSprite;
 }
 
+
+/** get_image
+ *
+ *  Use- returns the actual SDL_surface stored by the sprite object
+ *
+ */
+SDL_Surface* cDrawable_Component::get_image(){
+    return sprite->get_image();
+}
+
 /** get_sprite
  *
  *  Use-    returns the component's sprite

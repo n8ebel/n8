@@ -29,6 +29,14 @@ cPoint* cPosition_Component::get_position(){
     return position;
 }
 
+int cPosition_Component::get_x(){
+    return position->get_x();
+}
+
+int cPosition_Component::get_y(){
+    return position->get_y();
+}
+
 void cPosition_Component::update_position(int xOffset, int yOffset){
     position->add_x(xOffset);
     position->add_y(yOffset);

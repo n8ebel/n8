@@ -23,7 +23,10 @@ public:
     ~cPosition_Component();
     cPosition_Component(string newID, cPoint* newPosition);
     cPosition_Component(string newID, int initX, int initY);
+    
     cPoint* get_position();
+    int get_x();
+    int get_y();
     
     void update_position(int xOffset, int yOffset);
 };

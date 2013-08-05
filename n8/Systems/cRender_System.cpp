@@ -45,18 +45,19 @@ void cRender_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface*
 void cRender_System::render(){
     
     cEntity* screen = registered_entities[0];
-    SDL_Surface* screen_surface = ((cDrawable_Component*)screen->get_component(DRAWABLE))->get_sprite()->get_image();
+    SDL_Surface* screen_surface = n8::get_drawable_component(screen)->get_image();
     SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0, 0, 0));
     
     /*** Draw images to the screen ***/
     for (int i = 0; i < registered_entities.size(); i++) {
         
-        draw_image( ((cPosition_Component*)screen->get_component(POSITION))->get_position()->get_x(), ((cPosition_Component*)screen->get_component(POSITION))->get_position()->get_y(), ((cDrawable_Component*)registered_entities[i]->get_component(DRAWABLE))->get_sprite()->get_image(), screen_surface);
+        draw_image( n8::get_position_component(screen)->get_x(), n8::get_position_component(screen)->get_y(), 
+                    n8::get_drawable_component(registered_entities[i])->get_image(), screen_surface);
          
     }
     
     //Update the screen
-    SDL_Flip( ((cDrawable_Component*)screen->get_component(DRAWABLE))->get_sprite()->get_image() );
+    SDL_Flip( n8::get_drawable_component(screen)->get_image() );
 
 }
 
