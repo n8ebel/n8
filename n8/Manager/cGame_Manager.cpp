@@ -98,20 +98,23 @@ void cGame_Manager::handle_input(){
     
     if ( keysHeld[SDLK_LEFT] )
     {
-        cout << "moved left" << endl;
+        n8::log_debug("cGame_Manager","Moved left");
+        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->left();
     }
     if ( keysHeld[SDLK_RIGHT] )
     {
-        cout << "moved right" << endl;
-        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->key_right();
+        n8::log_debug("cGame_Manager","Moved right");
+        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->right();
     }
     if ( keysHeld[SDLK_UP] )
     {
-        cout << "moved up" << endl;
+        n8::log_debug("cGame_Manager","Moved up");
+        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->up();
     }
     if (keysHeld[SDLK_DOWN])
     {
-        cout << "moved down" << endl;
+        n8::log_debug("cGame_Manager","Moved down");
+        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->down();
     }
     
     
@@ -342,7 +345,7 @@ cEntity* cGame_Manager::create_screen_entity(int w, int h, int bpp){
     //If there was an error in setting up the screen
     if( screen_surface == NULL )
     {
-        n8::log_error("Problem setting up screen");
+        n8::log_error("cGame_Manager.create_screen_entity","Problem setting up screen");
         return NULL;    
     }
     

@@ -35,28 +35,28 @@ int main( int argc, char* argv[] )
     /* Create a base system */
     cSystem* baseSystem = game->create_system(BASE_SYSTEM);
     if( baseSystem == NULL){
-        n8::log_error("Game manager wasn't initialized");
+        n8::log_error("Main","Game manager wasn't initialized");
     }
     else{
-        n8::log_info("Game manager was initialized");
+        n8::log_info("Main","Game manager was initialized");
     }
     
     /* Create a render system */
     cRender_System* renderSystem = (cRender_System*)game->create_system(RENDER_SYSTEM);
     if (renderSystem == NULL) {
-        n8::log_error("Render system wasn't initialized");
+        n8::log_error("Main","Render system wasn't initialized");
     }
     else{
-        n8::log_info("Render system was initialized");
+        n8::log_info("Main","Render system was initialized");
     }
     
     /* Create a movement system */
     cMovement_System* movementSystem = (cMovement_System*)game->create_system(MOVEMENT_SYSTEM);
     if (movementSystem == NULL) {
-        n8::log_error("Movement system wasn't initialized");
+        n8::log_error("Main","Movement system wasn't initialized");
     }
     else{
-        n8::log_info("Movement system was initialized");
+        n8::log_info("Main","Movement system was initialized");
     }
     
 /*** Create the screen and register it ***/
@@ -97,7 +97,7 @@ int main( int argc, char* argv[] )
         
         
     /*** Update the game logic ***/
-        game->get_system(BASE_SYSTEM)->update();
+        //game->get_system(BASE_SYSTEM)->update();
         game->get_system(MOVEMENT_SYSTEM)->update();
         //game->get_system(COLLISION_SYSTEM)->update();
         //game->get_system(INTERACTION_SYSTEM)->update();

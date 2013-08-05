@@ -19,7 +19,8 @@
 #include <string>
 
 
-static const bool DEBUG_MODE = false;
+static const bool DEBUG_MODE = true;
+static const bool DEBUG_UPDATE = false;
 
 const int SCREEN = -1;
 
@@ -57,8 +58,9 @@ public:
     static cPosition_Component* get_position_component(cEntity* entity);
     static cDrawable_Component* get_drawable_component(cEntity* entity);
     
-    static void log_error(string msg);
-    static void log_info(string msg);
+    static void log_error(string tag,string msg);
+    static void log_info(string tag, string msg);
+    static void log_debug(string tag, string msg);
 
 };
 

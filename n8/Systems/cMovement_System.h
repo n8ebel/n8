@@ -24,10 +24,10 @@ public:
     
     void update();
     
-    void key_right();
-    void key_down();
-    void key_left();
-    void key_up();
+    void right();
+    void down();
+    void left();
+    void up();
 
 };
 

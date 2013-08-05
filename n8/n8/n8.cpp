@@ -81,12 +81,18 @@ cComponent* n8::get_component(cEntity* entity, string component){
     }
 }
 
-void n8::log_error(string msg){
-    cout << "(ERROR) " << msg << endl;
+void n8::log_error(string tag, string msg){
+    cout << "(ERROR) " << tag << ": " << msg << endl;
 }
 
-void n8::log_info(string msg){
-    cout << "(INFO) " << msg << endl;
+void n8::log_info(string tag, string msg){
+    cout << "(INFO) " << tag << ": " << msg << endl;
+}
+
+void n8::log_debug(string tag, string msg){
+    if (DEBUG_MODE) {
+        cout << "(DEBUG) " << tag << ": " << msg << endl;
+    }
 }
 
 

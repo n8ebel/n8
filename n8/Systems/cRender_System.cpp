@@ -68,7 +68,7 @@ void cRender_System::render(){
  *
  */
 void cRender_System::update(){
-    if (DEBUG_MODE) {
+    if (DEBUG_MODE && DEBUG_UPDATE) {
         cout << "    RENDER_SYSTEM.Update()" << registered_entities.size() << endl;
         for (int i = 0; i < registered_entities.size(); i++) {
             cName_Component* name = (cName_Component*)registered_entities[i]->get_component(NAME);

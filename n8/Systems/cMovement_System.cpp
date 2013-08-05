@@ -21,22 +21,27 @@ cMovement_System::cMovement_System(){
 }
 
 void cMovement_System::update(){
-    std::cout << "cMovement_System.update()"<<std::endl;
+    
 }
 
-void cMovement_System::key_right(){
-    std::cout << "cMovement_System.key_right()"<<std::endl;
+void cMovement_System::right(){
     
     for (int i = 0; i < registered_entities.size(); i++) {
         ((cPosition_Component*)registered_entities[i]->get_component(POSITION))->update_position(5, 0);
     }
 }
-void cMovement_System::key_down(){
-    
+void cMovement_System::down(){
+    for (int i = 0; i < registered_entities.size(); i++) {
+        ((cPosition_Component*)registered_entities[i]->get_component(POSITION))->update_position(0, 5);
+    }
 }
-void cMovement_System::key_left(){
-    
+void cMovement_System::left(){
+    for (int i = 0; i < registered_entities.size(); i++) {
+        ((cPosition_Component*)registered_entities[i]->get_component(POSITION))->update_position(-5, 0);
+    }
 }
-void cMovement_System::key_up(){
-    
+void cMovement_System::up(){
+    for (int i = 0; i < registered_entities.size(); i++) {
+        ((cPosition_Component*)registered_entities[i]->get_component(POSITION))->update_position(0, -5);
+    }
 }
