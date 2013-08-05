@@ -64,6 +64,9 @@ void cGame_Manager::initializeGameLoop(){
     start = 0;
     running = true;
     start = SDL_GetTicks();
+    for (int i = 0; i < 323; i++) {
+        keysHeld[i] = false;
+    }
 }
 
 bool cGame_Manager::is_running(){
@@ -71,23 +74,47 @@ bool cGame_Manager::is_running(){
 }
 
 void cGame_Manager::handle_input(){
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
+    if (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT)
+        {
             running = false;
         }
-        else if( event.type == SDL_KEYDOWN )
-        { 
-            cout << "key pressed" << endl;
-            switch( event.key.keysym.sym )
-            {
-                    
-            }
+        
+        if (event.type == SDL_KEYDOWN)
+        {
+            keysHeld[event.key.keysym.sym] = true;
+        } 
+        if (event.type == SDL_KEYUP)
+        {
+            keysHeld[event.key.keysym.sym] = false;
         }
-        else if( event.type == SDL_MOUSEBUTTONDOWN )
-        {}
-        else if( event.type == SDL_MOUSEBUTTONUP )
-        {}
     }
+    
+    if ( keysHeld[SDLK_ESCAPE] )
+    {
+        running = false;
+    }
+    
+    if ( keysHeld[SDLK_LEFT] )
+    {
+        cout << "moved left" << endl;
+    }
+    if ( keysHeld[SDLK_RIGHT] )
+    {
+        cout << "moved right" << endl;
+        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->key_right();
+    }
+    if ( keysHeld[SDLK_UP] )
+    {
+        cout << "moved up" << endl;
+    }
+    if (keysHeld[SDLK_DOWN])
+    {
+        cout << "moved down" << endl;
+    }
+    
+    
 }
 
 /** add_system
@@ -200,6 +227,16 @@ cSystem* cGame_Manager::create_system(string ID){
     }
     else if(ID == RENDER_SYSTEM){
         cRender_System* newSystem = new cRender_System();
+        newSystem->connect_message_handler(message_handler);
+        if( add_system(ID, newSystem) ){
+            return newSystem;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else if(ID == MOVEMENT_SYSTEM){
+        cMovement_System* newSystem = new cMovement_System();
         newSystem->connect_message_handler(message_handler);
         if( add_system(ID, newSystem) ){
             return newSystem;

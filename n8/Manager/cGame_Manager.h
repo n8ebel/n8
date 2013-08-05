@@ -14,6 +14,7 @@
 #include "cMessage_Handler.h"
 #include "cSystem.h"
 #include "cRender_System.h"
+#include "cMovement_System.h"
 #include "cResource_Handler.h"
 #include "cScreen.h"
 #include "cSprite.h"
@@ -33,6 +34,7 @@ private:
     Uint32 start;
     SDL_Event event;
     bool running;
+    bool keysHeld[323];
     
     cMessage_Handler* get_message_handler();
     cResource_Handler* get_resource_handler();

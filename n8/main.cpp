@@ -50,6 +50,15 @@ int main( int argc, char* argv[] )
         n8::log_info("Render system was initialized");
     }
     
+    /* Create a movement system */
+    cMovement_System* movementSystem = (cMovement_System*)game->create_system(MOVEMENT_SYSTEM);
+    if (movementSystem == NULL) {
+        n8::log_error("Movement system wasn't initialized");
+    }
+    else{
+        n8::log_info("Movement system was initialized");
+    }
+    
 /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
     /***  Set the window caption  ***/
@@ -80,12 +89,16 @@ int main( int argc, char* argv[] )
     
     game->initializeGameLoop();
    
+    
     while (game->is_running()) {
         game->handle_input();
         
         
+        
+        
     /*** Update the game logic ***/
         game->get_system(BASE_SYSTEM)->update();
+        game->get_system(MOVEMENT_SYSTEM)->update();
         //game->get_system(COLLISION_SYSTEM)->update();
         //game->get_system(INTERACTION_SYSTEM)->update();
         game->get_system(RENDER_SYSTEM)->update();

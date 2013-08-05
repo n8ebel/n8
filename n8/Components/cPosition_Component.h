@@ -24,6 +24,8 @@ public:
     cPosition_Component(string newID, cPoint* newPosition);
     cPosition_Component(string newID, int initX, int initY);
     cPoint* get_position();
+    
+    void update_position(int xOffset, int yOffset);
 };
 
 #endif

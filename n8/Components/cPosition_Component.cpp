@@ -28,3 +28,8 @@ cPosition_Component::cPosition_Component(string newID, int initX, int initY) : c
 cPoint* cPosition_Component::get_position(){
     return position;
 }
+
+void cPosition_Component::update_position(int xOffset, int yOffset){
+    position->add_x(xOffset);
+    position->add_y(yOffset);
+}
