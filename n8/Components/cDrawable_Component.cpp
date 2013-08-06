@@ -62,4 +62,5 @@ cSprite* cDrawable_Component::get_sprite(){
  */
 cSprite* cDrawable_Component::set_sprite(cSprite* newSprite){
     sprite = newSprite;
+    return sprite;
 }

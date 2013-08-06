@@ -21,7 +21,7 @@ cRender_System::~cRender_System(){
 cRender_System::cRender_System(){
     requirements[DRAWABLE] = 1;
     requirements[POSITION] = 1;
-    ID = BASE_SYSTEM;
+    ID = RENDER_SYSTEM;
 }
 
 void cRender_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface* destination )
@@ -51,7 +51,7 @@ void cRender_System::render(){
     /*** Draw images to the screen ***/
     for (int i = 0; i < registered_entities.size(); i++) {
         
-        draw_image( n8::get_position_component(screen)->get_x(), n8::get_position_component(screen)->get_y(), 
+        draw_image( n8::get_position_component(registered_entities[i])->get_x(), n8::get_position_component(registered_entities[i])->get_y(), 
                     n8::get_drawable_component(registered_entities[i])->get_image(), screen_surface);
          
     }

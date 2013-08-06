@@ -33,4 +33,4 @@ public:
 	int get_width();
 };
 
-#endif CSPRITE_H
+#endif 

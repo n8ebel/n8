@@ -16,13 +16,15 @@
 #include "cName_Component.h"
 #include "cPosition_Component.h"
 #include "cDrawable_Component.h"
+#include "cControllable_Coponent.h"
 #include <string>
 
 
-static const bool DEBUG_MODE = true;
+static const bool DEBUG_MODE = false;
 static const bool DEBUG_UPDATE = false;
 
 const int SCREEN = -1;
+const int CAMERA = -2;
 
 
 // Static constants for component identifiers
@@ -30,6 +32,7 @@ static const string NAME =                  "NAME";
 static const string DRAWABLE =              "DRAWABLE";
 static const string POSITION =              "POSITION";
 static const string INTERACTABLE =          "INTERACTABLE";
+static const string CONTROLLABLE =          "CONTROLLABLE";
 
 
 // Static constants for system identifiers
@@ -39,6 +42,7 @@ static const string MOVEMENT_SYSTEM =       "MOVEMENT_SYSTEM";
 static const string COLLISION_SYSTEM =      "COLLISION_SYSTEM";
 static const string INTERACTION_SYSTEM =    "INTERACTION_SYSTEM";
 static const string MESSAGE_SYSTEM =        "MESSAGE_SYSTEM";
+static const string CAMERA_SYSTEM = "CAMERA_SYSTEM";
 
 
 class n8{

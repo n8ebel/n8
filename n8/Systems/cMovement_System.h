@@ -16,6 +16,10 @@
 class cMovement_System : public cSystem{
    
 private:
+    int world_width;
+    int world_height;
+    
+    bool inside_world_bounds(cEntity* ent, int xOffset, int yOffset);
     
 public:
     
@@ -28,6 +32,8 @@ public:
     void down();
     void left();
     void up();
+    
+    void set_world_bounds(int w, int h);
 
 };
 

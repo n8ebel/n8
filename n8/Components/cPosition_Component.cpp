@@ -25,6 +25,18 @@ cPosition_Component::cPosition_Component(string newID, int initX, int initY) : c
     position = new cPoint(initX, initY);
 }
 
+cPosition_Component::cPosition_Component(string newID, cPoint* newPosition, int w, int h) : cComponent(newID){
+    position = newPosition;
+    width = w;
+    height = h;
+}
+
+cPosition_Component::cPosition_Component(string newID, int initX, int initY, int w, int h) : cComponent(newID){
+    position = new cPoint(initX, initY);
+    width = w;
+    height = h;
+}
+
 cPoint* cPosition_Component::get_position(){
     return position;
 }
@@ -35,6 +47,14 @@ int cPosition_Component::get_x(){
 
 int cPosition_Component::get_y(){
     return position->get_y();
+}
+
+int cPosition_Component::get_width(){
+    return width;
+}
+
+int cPosition_Component::get_height(){
+    return height;
 }
 
 void cPosition_Component::update_position(int xOffset, int yOffset){

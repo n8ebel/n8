@@ -79,6 +79,9 @@ cComponent* n8::get_component(cEntity* entity, string component){
     else if(component == POSITION){
         return (cPosition_Component*)entity->get_components()[POSITION];
     }
+    else{
+        return NULL;
+    }
 }
 
 void n8::log_error(string tag, string msg){

@@ -15,8 +15,8 @@
 #include "cSystem.h"
 #include "cRender_System.h"
 #include "cMovement_System.h"
+#include "cCamera_System.h"
 #include "cResource_Handler.h"
-#include "cScreen.h"
 #include "cSprite.h"
 
 #include <string>
@@ -29,7 +29,6 @@ private:
     map<string, cSystem*> registered_systems;
     map<int,cEntity*> registered_entities;
     cResource_Handler* resource_handler;
-    cScreen* screen;
     
     Uint32 start;
     SDL_Event event;
@@ -52,6 +51,7 @@ public:
     
     bool add_system(string ID, cSystem* newSystem);
     cEntity* create_screen_entity(int w, int h, int bpp);
+    cEntity* create_camera_entity(int x, int y, int w, int h);
     cSystem* create_system(string ID);
     cEntity* create_user_entity(int id, string initName, int initX, int initY, cSprite* sprite);
     cEntity* get_entity(int ID);

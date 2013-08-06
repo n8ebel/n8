@@ -57,12 +57,28 @@ int main( int argc, char* argv[] )
     }
     else{
         n8::log_info("Main","Movement system was initialized");
+        movementSystem->set_world_bounds(SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    
+    /* Create a movement system */
+    cCamera_System* cameraSystem = (cCamera_System*)game->create_system(CAMERA_SYSTEM);
+    if (cameraSystem == NULL) {
+        n8::log_error("Main","Camera system wasn't initialized");
+    }
+    else{
+        n8::log_info("Main","Camera system was initialized");
     }
     
 /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    cameraSystem->register_screen_entity(entScreen);
+    
     /***  Set the window caption  ***/
     SDL_WM_SetCaption( "Hello World", NULL );
+    
+/*** Create the camera entity ***/
+    cEntity* entCamera = game->create_camera_entity(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    cameraSystem->register_camera_entity(entCamera);
 
 /*** Load image resources ***/
     game->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");
@@ -81,7 +97,9 @@ int main( int argc, char* argv[] )
 
 /*** Create 2 user entities ***/
     cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
-    game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, message);
+    cameraSystem->register_entity_to_follow(nate);
+    
+    //game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, message);
   
     
 
@@ -101,6 +119,7 @@ int main( int argc, char* argv[] )
         game->get_system(MOVEMENT_SYSTEM)->update();
         //game->get_system(COLLISION_SYSTEM)->update();
         //game->get_system(INTERACTION_SYSTEM)->update();
+        game->get_system(CAMERA_SYSTEM)->update();
         game->get_system(RENDER_SYSTEM)->update();
         
     /*** Render the frame ***/

@@ -248,6 +248,16 @@ cSystem* cGame_Manager::create_system(string ID){
             return NULL;
         }
     }
+    else if(ID == CAMERA_SYSTEM){
+        cCamera_System* newSystem = new cCamera_System();
+        newSystem->connect_message_handler(message_handler);
+        if( add_system(ID, newSystem) ){
+            return newSystem;
+        }
+        else{
+            return NULL;
+        }
+    }
     
     return NULL;
 }
@@ -310,13 +320,15 @@ cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, i
     
     cEntity* foo = new cEntity(id);
     cName_Component* name = new cName_Component(NAME, initName);
-    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY);
+    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY, sprite->get_width(), sprite->get_height());
     
-    cDrawable_Component* drawable = new cDrawable_Component(DRAWABLE, sprite);    
+    cDrawable_Component* drawable = new cDrawable_Component(DRAWABLE, sprite);  
+    cControllable_Coponent* controllable = new cControllable_Coponent(CONTROLLABLE);
     
     foo->add_component(name);
     foo->add_component(position);
     foo->add_component(drawable);
+    foo->add_component(controllable);
     
     
     register_entity(foo);
@@ -358,5 +370,14 @@ cEntity* cGame_Manager::create_screen_entity(int w, int h, int bpp){
     
     return entScreen;
     
+}
+
+cEntity* cGame_Manager::create_camera_entity(int x, int y, int w, int h){
+    cEntity* camera = new cEntity(CAMERA);
+    camera->add_component(new cPosition_Component(POSITION, x,y,w,h));
+    
+    register_entity(camera);
+                          
+    return camera;
 }
 

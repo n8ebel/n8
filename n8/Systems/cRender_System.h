@@ -17,6 +17,10 @@
 class cRender_System : public cSystem {
 
 private:
+    //int camera_width;
+    //int camera_height;
+    
+    //SDL_Surface* screen;
     
 public:
     ~cRender_System();
