@@ -20,6 +20,9 @@ private:
     cEntity* camera;
     //cEntity* screen;
     
+    int world_width;
+    int world_height;
+    
 public:
     ~cCamera_System();
     cCamera_System();
@@ -27,6 +30,8 @@ public:
     bool register_entity_to_follow(cEntity* newEntity);
     bool register_camera_entity(cEntity* newEntity);
     //bool register_screen_entity(cEntity* newEntity);
+    
+    void set_world_bounds(int w, int h);
     
     void update();
     

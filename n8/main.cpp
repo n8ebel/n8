@@ -57,7 +57,7 @@ int main( int argc, char* argv[] )
     }
     else{
         n8::log_info("Main","Movement system was initialized");
-        movementSystem->set_world_bounds(SCREEN_WIDTH, SCREEN_HEIGHT);
+        //movementSystem->set_world_bounds(1000, 750);
     }
     
     /* Create a movement system */
@@ -68,6 +68,8 @@ int main( int argc, char* argv[] )
     else{
         n8::log_info("Main","Camera system was initialized");
     }
+    
+    game->set_world_bounds(1000, 750);
     
 /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
@@ -97,10 +99,14 @@ int main( int argc, char* argv[] )
     
 
 /*** Create 2 user entities ***/
+    cEntity* entBackground = new cEntity(n8::get_next_id());
+    entBackground->add_component(new cPosition_Component(POSITION, 0, 0));
+    entBackground->add_component(new cDrawable_Component(DRAWABLE, background));
+    game->register_entity(entBackground);
+    
     cEntity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
     cameraSystem->register_entity_to_follow(nate);
-    
-    //game->create_user_entity(n8::get_next_id(), "Megan", 0, 0, message);
+
   
     
 

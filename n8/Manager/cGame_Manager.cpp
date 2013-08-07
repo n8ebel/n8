@@ -387,3 +387,12 @@ cEntity* cGame_Manager::create_camera_entity(int x, int y, int w, int h){
     return camera;
 }
 
+
+void cGame_Manager::set_world_bounds(int w, int h){
+    if (get_system(MOVEMENT_SYSTEM) != NULL) {
+        ((cMovement_System*)registered_systems[MOVEMENT_SYSTEM])->set_world_bounds(w, h);
+    }
+    if(get_system(CAMERA_SYSTEM)){
+        ((cCamera_System*)registered_systems[CAMERA_SYSTEM])->set_world_bounds(w, h);
+    }
+}

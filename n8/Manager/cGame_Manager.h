@@ -64,6 +64,8 @@ public:
     void load_images(string filepath);
     cEntity* register_entity(cEntity* newEntity);
     
+    void set_world_bounds(int w, int h);
+    
     
 };
 

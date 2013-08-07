@@ -40,18 +40,31 @@ bool cCamera_System::register_camera_entity(cEntity* newEntity){
     return false;
 }
 
+void cCamera_System::set_world_bounds(int w, int h){
+    world_width = w;
+    world_height = h;
+}
+
 void cCamera_System::update(){
-    //int newX = n8::get_position_component(entity_to_follow)->get_position()->get_x() - n8::get_drawable_component(screen)->get_image()->w/2;
-    //int newY = n8::get_position_component(entity_to_follow)->get_position()->get_y() - n8::get_drawable_component(screen)->get_image()->h/2;
-    int newX = n8::get_position_component(entity_to_follow)->get_position()->get_x() - n8::get_size_component(camera)->get_width()/2;
-    int newY = n8::get_position_component(entity_to_follow)->get_position()->get_y() - n8::get_size_component(camera)->get_height()/2;
+    int entityX = n8::get_position_component(entity_to_follow)->get_position()->get_x();
+    int entityY = n8::get_position_component(entity_to_follow)->get_position()->get_y();
+    int entW = n8::get_size_component(entity_to_follow)->get_width();
+    int entH = n8::get_size_component(entity_to_follow)->get_height();
+    int newX = entityX + .5*entW - n8::get_size_component(camera)->get_width()/2;
+    int newY = entityY + .5*entH - n8::get_size_component(camera)->get_height()/2;
     
     if (newX < 0) {
         newX = 0;
     }
+    if (newX > world_width-n8::get_size_component(camera)->get_width()) {
+        newX = world_width-n8::get_size_component(camera)->get_width();
+    }
     
     if (newY < 0) {
         newY = 0;
+    }
+    if (newY > world_height-n8::get_size_component(camera)->get_height()) {
+        newY = world_height-n8::get_size_component(camera)->get_height();
     }
     
     n8::get_position_component(camera)->get_position()->set_x(newX);
