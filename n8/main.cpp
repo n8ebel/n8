@@ -72,6 +72,7 @@ int main( int argc, char* argv[] )
 /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
     cameraSystem->register_screen_entity(entScreen);
+    renderSystem->register_screen_entity(entScreen);
     
     /***  Set the window caption  ***/
     SDL_WM_SetCaption( "Hello World", NULL );

@@ -24,6 +24,16 @@ cRender_System::cRender_System(){
     ID = RENDER_SYSTEM;
 }
 
+
+bool cRender_System::register_screen_entity(cEntity* newEntity){
+    if (newEntity->get_component(POSITION) && newEntity->get_component(DRAWABLE)) {
+        screen = newEntity;
+        return true;
+    }
+    
+    return false;
+}
+
 void cRender_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface* destination )
 {
     //Make a temporary rectangle to hold the offsets
@@ -44,7 +54,7 @@ void cRender_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface*
  */
 void cRender_System::render(){
     
-    cEntity* screen = registered_entities[0];
+    
     SDL_Surface* screen_surface = n8::get_drawable_component(screen)->get_image();
     SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0, 0, 0));
     
