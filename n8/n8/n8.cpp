@@ -58,30 +58,23 @@ cPosition_Component* n8:: get_position_component(cEntity* entity){
 }
 
 /** get_drawable_component
+ *  Provides a static helper method for getting a position component from an entity
  *
- *  entity- the entity from which to retrieve the component
- *
- *  Use-    Provides a static helper method for getting a component from an entity
- *          Returns a cDrawable_Component* if the component exists, or NULL
- *
+ *  @param entity the entity from which to retrieve the component
+ *  @return the stored cDrawable_Component* or NULL
  */
 cDrawable_Component* n8:: get_drawable_component(cEntity* entity){
     return (cDrawable_Component*)entity->get_components()[DRAWABLE];
 }
 
-cComponent* n8::get_component(cEntity* entity, string component){
-    if (component == DRAWABLE) {
-        return (cDrawable_Component*)entity->get_components()[DRAWABLE];
-    }
-    else if(component == NAME){
-        return (cName_Component*)entity->get_components()[NAME];
-    }
-    else if(component == POSITION){
-        return (cPosition_Component*)entity->get_components()[POSITION];
-    }
-    else{
-        return NULL;
-    }
+/** get_size_component
+ *  Provides a static helper method for getting a size component from an entity
+ *
+ *  @param entity the entity from which to retrieve the component
+ *  @return the stored cSize_Component* or NULL
+ */
+cSize_Component* n8:: get_size_component(cEntity* entity){
+    return (cSize_Component*)entity->get_components()[SIZE];
 }
 
 void n8::log_error(string tag, string msg){

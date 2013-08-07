@@ -320,7 +320,11 @@ cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, i
     
     cEntity* foo = new cEntity(id);
     cName_Component* name = new cName_Component(NAME, initName);
-    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY, sprite->get_width(), sprite->get_height());
+    cPosition_Component* position = new cPosition_Component(POSITION, initX, initY);
+    
+    cout << "gooooo" << sprite->get_width() << "," << sprite->get_height() << endl;
+    
+    cSize_Component* size = new cSize_Component(SIZE,sprite->get_width(), sprite->get_height());
     
     cDrawable_Component* drawable = new cDrawable_Component(DRAWABLE, sprite);  
     cControllable_Coponent* controllable = new cControllable_Coponent(CONTROLLABLE);
@@ -329,6 +333,7 @@ cEntity* cGame_Manager::create_user_entity(int id, string initName, int initX, i
     foo->add_component(position);
     foo->add_component(drawable);
     foo->add_component(controllable);
+    foo->add_component(size);
     
     
     register_entity(foo);
@@ -374,7 +379,8 @@ cEntity* cGame_Manager::create_screen_entity(int w, int h, int bpp){
 
 cEntity* cGame_Manager::create_camera_entity(int x, int y, int w, int h){
     cEntity* camera = new cEntity(CAMERA);
-    camera->add_component(new cPosition_Component(POSITION, x,y,w,h));
+    camera->add_component(new cPosition_Component(POSITION, x,y));
+    camera->add_component(new cSize_Component(SIZE, w,h));
     
     register_entity(camera);
                           

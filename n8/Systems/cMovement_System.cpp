@@ -29,10 +29,10 @@ void cMovement_System::set_world_bounds(int w, int h){
 }
 
 bool cMovement_System::inside_world_bounds(cEntity* ent, int xOffset, int yOffset){
-    int curX = ((cPosition_Component*)ent->get_component(POSITION))->get_x();
-    int curY = ((cPosition_Component*)ent->get_component(POSITION))->get_y();
-    int width = ((cPosition_Component*)ent->get_component(POSITION))->get_width();
-    int height = ((cPosition_Component*)ent->get_component(POSITION))->get_height();
+    int curX = n8::get_position_component(ent)->get_x();
+    int curY = n8::get_position_component(ent)->get_y();
+    int width = n8::get_size_component(ent)->get_width();
+    int height = n8::get_size_component(ent)->get_height();
     
     cout << "world width: " << world_width << endl;
     cout << "id: " << ent->get_id() << endl;

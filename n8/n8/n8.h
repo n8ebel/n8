@@ -17,6 +17,7 @@
 #include "cPosition_Component.h"
 #include "cDrawable_Component.h"
 #include "cControllable_Coponent.h"
+#include "cSize_Component.h"
 #include <string>
 
 
@@ -33,6 +34,7 @@ static const string DRAWABLE =              "DRAWABLE";
 static const string POSITION =              "POSITION";
 static const string INTERACTABLE =          "INTERACTABLE";
 static const string CONTROLLABLE =          "CONTROLLABLE";
+static const string SIZE =                  "SIZE";
 
 
 // Static constants for system identifiers
@@ -57,10 +59,10 @@ public:
         
         
    // static cEntity* create_user_entity(int id, string initName, int initX, int initY);
-    static cComponent* get_component(cEntity* entity, string component);
     static cName_Component* get_name_component(cEntity* entity);
     static cPosition_Component* get_position_component(cEntity* entity);
     static cDrawable_Component* get_drawable_component(cEntity* entity);
+    static cSize_Component* get_size_component(cEntity* entity);
     
     static void log_error(string tag,string msg);
     static void log_info(string tag, string msg);
