@@ -22,12 +22,23 @@ cRender_System::cRender_System(){
     requirements[DRAWABLE] = 1;
     requirements[POSITION] = 1;
     ID = RENDER_SYSTEM;
+    camera = NULL;
+    screen = NULL;
 }
 
 
 bool cRender_System::register_screen_entity(cEntity* newEntity){
     if (newEntity->get_component(POSITION) && newEntity->get_component(DRAWABLE)) {
         screen = newEntity;
+        return true;
+    }
+    
+    return false;
+}
+
+bool cRender_System::register_camera_entity(cEntity* newEntity){
+    if (newEntity->get_component(POSITION) ) {
+        camera = newEntity;
         return true;
     }
     
@@ -58,10 +69,13 @@ void cRender_System::render(){
     SDL_Surface* screen_surface = n8::get_drawable_component(screen)->get_image();
     SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0, 0, 0));
     
+    int xOffset = n8::get_position_component(camera)->get_x();
+    int yOffset = n8::get_position_component(camera)->get_y();
+    
     /*** Draw images to the screen ***/
     for (int i = 0; i < registered_entities.size(); i++) {
         
-        draw_image( n8::get_position_component(registered_entities[i])->get_x(), n8::get_position_component(registered_entities[i])->get_y(), 
+        draw_image( n8::get_position_component(registered_entities[i])->get_x() - xOffset, n8::get_position_component(registered_entities[i])->get_y() - yOffset, 
                     n8::get_drawable_component(registered_entities[i])->get_image(), screen_surface);
          
     }

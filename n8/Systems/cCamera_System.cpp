@@ -40,18 +40,11 @@ bool cCamera_System::register_camera_entity(cEntity* newEntity){
     return false;
 }
 
-bool cCamera_System::register_screen_entity(cEntity* newEntity){
-    if (newEntity->get_component(POSITION) && newEntity->get_component(DRAWABLE)) {
-        screen = newEntity;
-        return true;
-    }
-    
-    return false;
-}
-
 void cCamera_System::update(){
-    int newX = n8::get_position_component(entity_to_follow)->get_position()->get_x() - n8::get_drawable_component(screen)->get_image()->w/2;
-    int newY = n8::get_position_component(entity_to_follow)->get_position()->get_y() - n8::get_drawable_component(screen)->get_image()->h/2;
+    //int newX = n8::get_position_component(entity_to_follow)->get_position()->get_x() - n8::get_drawable_component(screen)->get_image()->w/2;
+    //int newY = n8::get_position_component(entity_to_follow)->get_position()->get_y() - n8::get_drawable_component(screen)->get_image()->h/2;
+    int newX = n8::get_position_component(entity_to_follow)->get_position()->get_x() - n8::get_size_component(camera)->get_width()/2;
+    int newY = n8::get_position_component(entity_to_follow)->get_position()->get_y() - n8::get_size_component(camera)->get_height()/2;
     
     if (newX < 0) {
         newX = 0;

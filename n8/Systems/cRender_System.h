@@ -18,6 +18,7 @@ class cRender_System : public cSystem {
 
 private:
     cEntity* screen;
+    cEntity* camera;
     
 public:
     ~cRender_System();
@@ -27,6 +28,7 @@ public:
     void render();
     
     bool register_screen_entity(cEntity* newEntity);
+    bool register_camera_entity(cEntity* newEntity);
     
     void draw_image( int x, int y, SDL_Surface* source, SDL_Surface* destination );
     

@@ -71,7 +71,6 @@ int main( int argc, char* argv[] )
     
 /*** Create the screen and register it ***/
     cEntity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
-    cameraSystem->register_screen_entity(entScreen);
     renderSystem->register_screen_entity(entScreen);
     
     /***  Set the window caption  ***/
@@ -80,6 +79,7 @@ int main( int argc, char* argv[] )
 /*** Create the camera entity ***/
     cEntity* entCamera = game->create_camera_entity(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     cameraSystem->register_camera_entity(entCamera);
+    renderSystem->register_camera_entity(entCamera);
 
 /*** Load image resources ***/
     game->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");

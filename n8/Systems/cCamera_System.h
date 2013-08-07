@@ -18,7 +18,7 @@ class cCamera_System : public cSystem{
 private:
     cEntity* entity_to_follow;
     cEntity* camera;
-    cEntity* screen;
+    //cEntity* screen;
     
 public:
     ~cCamera_System();
@@ -26,7 +26,7 @@ public:
     
     bool register_entity_to_follow(cEntity* newEntity);
     bool register_camera_entity(cEntity* newEntity);
-    bool register_screen_entity(cEntity* newEntity);
+    //bool register_screen_entity(cEntity* newEntity);
     
     void update();
     
