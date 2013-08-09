@@ -11,13 +11,14 @@
 #ifndef N8_H
 #define N8_H
 
-//#include "cGame_Manager.h"
-#include "cEntity.h"
-#include "cName_Component.h"
-#include "cPosition_Component.h"
-#include "cDrawable_Component.h"
-#include "cControllable_Coponent.h"
-#include "cSize_Component.h"
+//#include "Game_Manager.h"
+#include "Game_Manager.h"
+#include "Entity.h"
+#include "Name_Component.h"
+#include "Position_Component.h"
+#include "Drawable_Component.h"
+#include "Controllable_Coponent.h"
+#include "Size_Component.h"
 #include <string>
 
 
@@ -50,7 +51,7 @@ static const string CAMERA_SYSTEM = "CAMERA_SYSTEM";
 class n8{
 
 private:
-    static int nextID;
+    static int nextid_;
 public:
     
     n8();
@@ -58,11 +59,13 @@ public:
     static int get_next_id();
         
         
-   // static cEntity* create_user_entity(int id, string initName, int initX, int initY);
-    static cName_Component* get_name_component(cEntity* entity);
-    static cPosition_Component* get_position_component(cEntity* entity);
-    static cDrawable_Component* get_drawable_component(cEntity* entity);
-    static cSize_Component* get_size_component(cEntity* entity);
+   // static Entity* create_user_entity(int id, string initName, int initX, int initY);
+    static Name_Component* get_name_component(Entity* entity);
+    static Position_Component* get_position_component(Entity* entity);
+    static Drawable_Component* get_drawable_component(Entity* entity);
+    static Size_Component* get_size_component(Entity* entity);
+    
+    static Render_System* get_render_system(Game_Manager* game);
     
     static void log_error(string tag,string msg);
     static void log_info(string tag, string msg);

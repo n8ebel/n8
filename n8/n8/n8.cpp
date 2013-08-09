@@ -18,7 +18,7 @@ using namespace std;
 
 
 // Static counter for unique entity ID's
-int n8::nextID = 0;
+int n8::nextid_ = 0;
 
 /* default constructor 
  * 
@@ -28,8 +28,8 @@ n8::n8(){
 }
 
 int n8::get_next_id(){
-    nextID++;
-    return nextID;
+    nextid_++;
+    return nextid_;
 }
 
 /** get_name_component
@@ -37,12 +37,12 @@ int n8::get_next_id(){
  *  entity- the entity from which to retrieve the component
  *
  *  Use-    Provides a static helper method for getting a component from an entity
- *          Returns a cName_Component* if the component exists, or NULL
+ *          Returns a Name_Component* if the component exists, or NULL
  *
  */
-cName_Component* n8:: get_name_component(cEntity* entity){
+Name_Component* n8:: get_name_component(Entity* entity){
     cout << entity->get_components().size() << endl;
-    return (cName_Component*)entity->get_components()[NAME];
+    return (Name_Component*)entity->get_components()[NAME];
 }
 
 /** get_position_component
@@ -50,31 +50,31 @@ cName_Component* n8:: get_name_component(cEntity* entity){
  *  entity- the entity from which to retrieve the component
  *
  *  Use-    Provides a static helper method for getting a component from an entity
- *          Returns a cPosition_Component* if the component exists, or NULL
+ *          Returns a Position_Component* if the component exists, or NULL
  *
  */
-cPosition_Component* n8:: get_position_component(cEntity* entity){
-    return (cPosition_Component*)entity->get_components()[POSITION];
+Position_Component* n8:: get_position_component(Entity* entity){
+    return (Position_Component*)entity->get_components()[POSITION];
 }
 
 /** get_drawable_component
  *  Provides a static helper method for getting a position component from an entity
  *
  *  @param entity the entity from which to retrieve the component
- *  @return the stored cDrawable_Component* or NULL
+ *  @return the stored Drawable_Component* or NULL
  */
-cDrawable_Component* n8:: get_drawable_component(cEntity* entity){
-    return (cDrawable_Component*)entity->get_components()[DRAWABLE];
+Drawable_Component* n8:: get_drawable_component(Entity* entity){
+    return (Drawable_Component*)entity->get_components()[DRAWABLE];
 }
 
 /** get_size_component
  *  Provides a static helper method for getting a size component from an entity
  *
  *  @param entity the entity from which to retrieve the component
- *  @return the stored cSize_Component* or NULL
+ *  @return the stored Size_Component* or NULL
  */
-cSize_Component* n8:: get_size_component(cEntity* entity){
-    return (cSize_Component*)entity->get_components()[SIZE];
+Size_Component* n8:: get_size_component(Entity* entity){
+    return (Size_Component*)entity->get_components()[SIZE];
 }
 
 void n8::log_error(string tag, string msg){
@@ -88,6 +88,15 @@ void n8::log_info(string tag, string msg){
 void n8::log_debug(string tag, string msg){
     if (DEBUG_MODE) {
         cout << "(DEBUG) " << tag << ": " << msg << endl;
+    }
+}
+
+Render_System* n8::get_render_system(Game_Manager* game){
+    if (game != NULL) {
+        return ((Render_System*)game->get_system(RENDER_SYSTEM));
+    }
+    else{
+        return NULL;
     }
 }
 
