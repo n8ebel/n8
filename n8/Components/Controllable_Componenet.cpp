@@ -12,7 +12,7 @@
 
 #include "Controllable_Coponent.h"
 
-
+/** Constructor */
 Controllable_Coponent::Controllable_Coponent(string newID) : Component(newID){
     
 }

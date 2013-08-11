@@ -16,12 +16,13 @@
 class Camera_System : public System{
 
 private:
-    Entity* entity_to_follow_;
-    Entity* camera_;
-    //Entity* screen;
+    Entity* entity_to_follow_;  /** < A pointer to an entity that the camera will follow **/
+    Entity* camera_;            /** < A pointer to a camera entity that will update based on the position of entity_to_follow_. **/
     
-    int world_width_;
-    int world_height_;
+    
+    int world_width_;   /** < The pixel width of the current game world.  Used to determine the bounds in which an entity can move  **/ 
+    
+    int world_height_;  /** < The pixel height of the current game world.  Used to determine the bounds in which an entity can move  **/
     
 public:
     ~Camera_System();
@@ -29,11 +30,14 @@ public:
     
     bool register_entity_to_follow(Entity* newEntity);
     bool register_camera_entity(Entity* newEntity);
-    //bool register_screen_entity(Entity* newEntity);
-    
-    void set_world_bounds(int w, int h);
-    
     void update();
+    
+    /** Sets the height and width of the current game world
+     *
+     *  @param w The width of the current game world
+     *  @param h The height of the current game world
+     */
+    void set_world_bounds(int w, int h) { world_width_ = w; world_height_ = h; }
     
 };
 

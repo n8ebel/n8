@@ -14,10 +14,15 @@
 
 using namespace std;
 
+/** Default Destructor
+ */
 Render_System::~Render_System(){
     
 }
 
+/** Default Constructor <p>
+ *  Defines the system requirements of DRAWABLE, and POSITION and sets id_ to RENDER_SYSTEM.  Initializes the camera_ and screen_ pointers to NULL.
+ */
 Render_System::Render_System(){
     requirements_[DRAWABLE] = 1;
     requirements_[POSITION] = 1;
@@ -26,7 +31,14 @@ Render_System::Render_System(){
     screen_ = NULL;
 }
 
-
+/** Used to store a pointer to the screen entity that will be used as the canvas for all drawing operations.
+ *  Checks that the passed entity has a POSITION and DRAWABLE component which are needed to act as the screen.
+ *  @param newEntity The pointer to the screen entity
+ *
+ *  @see Position_Component
+ *  @see Drawable_Component
+ *  @see Entity
+ */
 bool Render_System::register_screen_entity(Entity* newEntity){
     if (newEntity->get_component(POSITION) && newEntity->get_component(DRAWABLE)) {
         screen_ = newEntity;
@@ -36,6 +48,13 @@ bool Render_System::register_screen_entity(Entity* newEntity){
     return false;
 }
 
+/** Used to store a pointer to the camera entity that will be used for all drawing operations.
+ *  Checks that the passed entity has a POSITION component which is needed to act as the camera.
+ *  @param newEntity The pointer to the screen entity
+ *
+ *  @see Position_Component
+ *  @see Entity
+ */
 bool Render_System::register_camera_entity(Entity* newEntity){
     if (newEntity->get_component(POSITION) ) {
         camera_ = newEntity;
@@ -45,6 +64,13 @@ bool Render_System::register_camera_entity(Entity* newEntity){
     return false;
 }
 
+/** Draws a source SDL_Surface to a destination SDL_Surface.  Used to draw sprite images to the SDL_Surface stored by screen_.
+ *
+ *  @param x The x location where the source SDL_Surface should be drawn
+ *  @param y The y location where the source SDL_Surface should be drawn
+ *  @param source The image to be drawn to the screen
+ *  @param destination The canvas SDL_Surface that images are drawn to
+ */
 void Render_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface* destination )
 {
     //Make a temporary rectangle to hold the offsets
@@ -58,10 +84,7 @@ void Render_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface* 
     SDL_BlitSurface( source, NULL, destination, &offset );
 }
 
-/** render
- *
- *  Use-    Renders the game frames
- *
+/** Used to render all registered entities to the screen.  This is what renders each game scene.
  */
 void Render_System::render(){
     
@@ -85,11 +108,7 @@ void Render_System::render(){
 
 }
 
-/** update
- *
- *  Use-    Overrides the base system update method
- *          Used to update any render specific component data
- *
+/** Updates all registered components. Currently, does nothing unless DEBUG_MODE and DEBUG_UPDATE are both true in which case the id of each registered entity is output to the console.
  */
 void Render_System::update(){
     if (DEBUG_MODE && DEBUG_UPDATE) {

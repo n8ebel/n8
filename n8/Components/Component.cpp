@@ -10,19 +10,8 @@
 
 #include "Component.h"
 
+/** Default Destructor **/
 Component::~Component(){
 
-}
-
-Component::Component(){
-
-}
-
-Component::Component(string newID){
-  id_ = newID;
-}
-
-string Component::get_id(){
-  return id_;
 }
 

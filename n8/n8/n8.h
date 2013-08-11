@@ -51,7 +51,7 @@ static const string CAMERA_SYSTEM = "CAMERA_SYSTEM";
 class n8{
 
 private:
-    static int nextid_;
+    static int nextid_; /** < Static counter to get available id values for created entities **/
 public:
     
     n8();

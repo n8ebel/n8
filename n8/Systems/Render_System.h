@@ -17,8 +17,8 @@
 class Render_System : public System {
 
 private:
-    Entity* screen_;
-    Entity* camera_;
+    Entity* screen_;    /** < Pointer to the screen entity **/
+    Entity* camera_;    /** < Pointer to the camera entity **/
     
 public:
     ~Render_System();

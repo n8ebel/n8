@@ -11,26 +11,15 @@
 #include "Size_Component.h"
 #include <iostream>
 
-
+/** Default Destructor **/
 Size_Component::~Size_Component(){
     
 }
 
-Size_Component::Size_Component(){
-    width_ = 0;
-    height_ = 0;
-}
-
+/** Constructor <p>
+ *  Sets the height and width to be stored by the component 
+ */
 Size_Component::Size_Component(string id, int w, int h) : Component(id){
     width_ = w;
     height_ = h;
-}
-
-
-int Size_Component::get_width(){
-    return width_;
-}
-
-int Size_Component::get_height(){
-    return height_;
 }

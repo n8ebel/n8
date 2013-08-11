@@ -18,14 +18,18 @@ using namespace std;
 
 class Name_Component : public Component {
 private:
-    string name_;
+    string name_;   /** < A name for an entity **/
     
 public:
     
     ~Name_Component();
-    Name_Component();
     Name_Component(string newID,string newName);
-    string get_name();
+    
+    /** Used to get the name stored by the component
+     *
+     *  @return The name stored by the component 
+     */
+    string get_name() { return name_; }
 };
 
 #endif

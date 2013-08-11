@@ -10,41 +10,23 @@
 
 #include "Sprite.h"
 
-Sprite::Sprite() {
-	id_ = "NO_ID";
-	image_ = NULL;
-	
-}
 
+/** Default Destructor <p>
+ *  Frees the loaded SDL_Surface which is pointed to by image_
+ */
 Sprite::~Sprite() {
 	SDL_FreeSurface( image_ );
     
 }
 
+/** Constructor <p>
+ *  Initializes id_ and image_ to passed values
+ *
+ *  @param id The unique identifier for the sprite.
+ *  @param img The SDL_Surface to store in the sprite object
+ */
 Sprite::Sprite(string id, SDL_Surface* img){
 	id_ = id;
 	image_ = img;
 	
-}
-
-/** get_id
- *
- *  Use-    returns the string specifier for the image
- *
- */
-string Sprite::get_id(){
-	return id_;
-}
-
-
-SDL_Surface* Sprite::get_image(){
-	return image_;
-}
-
-int Sprite::get_height(){
-	return image_->h;
-}
-
-int Sprite::get_width(){
-	return image_->w;
 }

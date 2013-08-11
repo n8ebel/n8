@@ -17,15 +17,21 @@ using namespace std;
 
 class Component {
  private:
-  string id_;
+  string id_;   /** < The identifier for the component **/
 
  public:
 
     ~Component();
-    Component();
-    Component(string newID);
+    
+    /** Constructor <p>
+     */
+    Component(string newID) { id_ = newID; }
 
-    string get_id();
+    /** Used to get the identifier of the component
+     *
+     *  @return The identifier of the component
+     */
+    string get_id() { return id_; }
 
 };
 

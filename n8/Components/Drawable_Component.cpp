@@ -13,54 +13,19 @@
 
 #include <iostream>
 
-/** default constructor
- *
- */
-Drawable_Component::Drawable_Component(){
-    sprite_ = NULL;
-}
 
-/** default destructor
+/** Default Constructor
  *
  */
 Drawable_Component::~Drawable_Component(){
     
 }
 
-/** additional constructor that will be used most often
+/** Constructor
  *
+ *  @param newID The identifier of the component
+ *  @param newSprite The sprite to use to draw with
  */
 Drawable_Component::Drawable_Component(string newID, Sprite* newSprite) : Component(newID){
     sprite_ = newSprite;
-}
-
-
-/** get_image
- *
- *  Use- returns the actual SDL_surface stored by the sprite object
- *
- */
-SDL_Surface* Drawable_Component::get_image(){
-    return sprite_->get_image();
-}
-
-/** get_sprite
- *
- *  Use-    returns the component's sprite
- *
- */
-Sprite* Drawable_Component::get_sprite(){
-    return sprite_;
-}
-
-/** set_sprite
- *
- *  newSprite-  the new sprite for the component
- *
- *  Use-    allows the user to change the sprite for a drawable component
- *
- */
-Sprite* Drawable_Component::set_sprite(Sprite* newSprite){
-    sprite_ = newSprite;
-    return sprite_;
 }

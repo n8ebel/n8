@@ -12,10 +12,14 @@
 #include "n8.h"
 #include "Movement_System.h"
 
-
+/** Default Destructor **/
 Movement_System::~Movement_System(){
     
 }
+
+/** Default Constructor <p>
+ *  Defines the system requirements of DRAWABLE, CONTROLLABLE, and POSITION and sets id_ to MOVEMENT_SYSTEM.  
+ */
 Movement_System::Movement_System(){
     requirements_[DRAWABLE] = 1;
     requirements_[POSITION] = 1;
@@ -23,11 +27,17 @@ Movement_System::Movement_System(){
     id_ = MOVEMENT_SYSTEM;
 }
 
-void Movement_System::set_world_bounds(int w, int h){
-    world_width_ = w;
-    world_height_ = h;
-}
-
+/** Determines if an entity can safely move in a direction without extending outside the bounds of the current game world.  Used to verify whether an entity can move in a direction when told to.  The passed x and y offset are added to the entity's current position to determine whether that move will move the entity outside the world bound.
+ *
+ *  @param ent The entity that is being moved
+ *  @param xOffset An amount that the entity is trying to move in the x direction
+ *  @param yOffset An amount that the entity is trying to move in the y direction
+ *  @return True if offsets don't move the entity outside the world bounds.  False otherwise.
+ *
+ *  @see Entity
+ *  @see Position_Component
+ *  @see Size_Component
+ */
 bool Movement_System::inside_world_bounds(Entity* ent, int xOffset, int yOffset){
     int curX = n8::get_position_component(ent)->get_x();
     int curY = n8::get_position_component(ent)->get_y();

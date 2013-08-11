@@ -14,19 +14,13 @@
 
 using namespace std;
 
+/** Default Destructor **/
 Name_Component::~Name_Component(){
 
 }
 
-Name_Component::Name_Component(){
-    
-}
-
+/** Constructor.  Sets the name stored by the component */
 Name_Component::Name_Component(string newID, string newName) : Component(newID){
     
     name_ = newName;
-}
-
-string Name_Component::get_name(){
-    return name_;
 }

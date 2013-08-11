@@ -16,17 +16,24 @@
 class Size_Component : public Component{
 
 private:
-    int width_;
-    int height_;
+    int width_;     /** < The width of an entity **/
+    int height_;    /** < The height of an entity **/
     
 public:
     ~Size_Component();
-    Size_Component();
     Size_Component(string newID, int w, int h);
     
+    /** Used to get the width stored by the component
+     *
+     *  @return The width of the component
+     */
+    int get_width() { return width_; }
     
-    int get_width();
-    int get_height();
+    /** Used to get the height stored by the component
+     *
+     *  @return The height of the component
+     */
+    int get_height() { return height_; }
     
 };
 

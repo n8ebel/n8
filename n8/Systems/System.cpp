@@ -17,34 +17,28 @@
 using namespace std;
 
 
-
+/** Default Destructor
+ */
 System::~System(){
     
 }
 
+/** Default Constructor <p>
+ *  Sets id_ to a default 'BASE_SYSTEM' value
+ */
 System::System(){
-    //requirements[NAME] = 1;
     id_ = BASE_SYSTEM;
 }
 
-/** connect_message_handler_
+/** Used to check if an entity contains all the neccessary components to be operated on
+ *  by the system. <p>
+ *  Called from register_entity
  *
- *  msgr-   the message handler pointer from the game manager to store a reference to
+ *  @param entity The entity object thats components are being checked
+ *  @return True if the entity contains all the required components, False otherwise
  *
- *  Use-    Using this allows the system to use the same message_handler_ as everything else
- *
- */
-void System::connect_message_handler_(Message_Handler* msgr){
-    message_system_ = msgr;
-}
-
-/** check_requirements
- *
- *  entity- the entity to check if it has the requirements to register to the system
- *
- *  Use-    If the passed entity contains all the required components the method returns true
- *          Required components are specified in the 'requirements' map
- *
+ *  @see Entity
+ *  @see Component
  */
 bool System::check_requirements(Entity* entity){
     cout << "Checking requirements for " << id_ << endl;
@@ -59,14 +53,14 @@ bool System::check_requirements(Entity* entity){
     return true;
 }
 
-/** register_entity
+/** Registers an entity with the system.  If the entity contains all the required components
+ *  the pointer to the entity is stored so it can later be operated on by the system.
  *
- *  newEntity-  the new entity to attempt to register with the system
+ *  @param newEntity A pointer to the entity to be registered
+ *  @return True if the entity contains the needed components and was added to registered_entities_. False otherwise.
  *
- *  Use-    The entity is checked to see if it has the required components
- *          If the components are all their, the entity is added to the 
- *            registered entities vector
- *
+ *  @see Entity
+ *  @see Componenet
  */
 bool System::register_entity(Entity* newEntity){
     cout << "System.register_entity" << endl;
@@ -82,11 +76,8 @@ bool System::register_entity(Entity* newEntity){
     
 }
 
-/** update
- *
- *  Use-    This is the base update method for all systems
- *          Can be used to update game logic on any component data
- *
+/** Updates all registered entities when called.
+ *  Should be overridden for derived classes
  */
 void System::update(){
     if (DEBUG_MODE && DEBUG_UPDATE) {

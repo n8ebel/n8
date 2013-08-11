@@ -13,6 +13,7 @@
 
 #include "Component.h"
 
+/** Used to indicate that an entity can be controlled be a user */
 class Controllable_Coponent : public Component{
     
 private:

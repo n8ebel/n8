@@ -16,8 +16,8 @@
 class Movement_System : public System{
    
 private:
-    int world_width_;
-    int world_height_;
+    int world_width_;       /** < The pixel width of the current game world.  Used to determine the bounds in which an entity can move  **/
+    int world_height_;      /** < The pixel height of the current game world.  Used to determine the bounds in which an entity can move  **/
     
     bool inside_world_bounds(Entity* ent, int xOffset, int yOffset);
     
@@ -33,7 +33,8 @@ public:
     void left();
     void up();
     
-    void set_world_bounds(int w, int h);
+    void set_world_bounds(int w, int h) { world_width_ = w; world_height_ = h; }
+
 
 };
 

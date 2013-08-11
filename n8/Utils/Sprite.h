@@ -19,18 +19,36 @@ using namespace std;
 class Sprite {
 
 private:
-	string id_;
-	SDL_Surface* image_;
+	string id_;     /** < A unique identifier for the object.  It could be the file name or the filepath **/
+	SDL_Surface* image_;  /** < The image that can be drawn to a canvas  **/
 
 public:
 	~Sprite();
-	Sprite();
 	Sprite(string id, SDL_Surface* img);
 
-	string get_id();
-	SDL_Surface* get_image();
-	int get_height();
-	int get_width();
+    /** Used to get the unique specifier for the sprite object 
+     *
+     *  @return The unique specifier
+     */
+	string get_id() { return id_; }
+    
+    /** Used to get the image stored in the sprite so it can be drawn to the screen
+     *
+     *  @return The SDL_Surface stored with image_
+     */
+	SDL_Surface* get_image() {return image_;}
+    
+    /** Used to get the height of the sprite image
+     *
+     *  @return The height of the SDL_Surface referenced by image_
+     */
+	int get_height() { return image_->h; }
+    
+    /** Used to get the width of the sprite image
+     *
+     *  @return The width of the SDL_Surface referenced by image_
+     */
+	int get_width() { return image_->w; }
 };
 
 #endif 
