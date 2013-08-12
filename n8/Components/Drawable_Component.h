@@ -48,7 +48,7 @@ public:
      *
      *  @see Sprite
      */
-    Sprite* set_sprite(Sprite* newSprite) { sprite_ = newSprite; }
+    Sprite* set_sprite(Sprite* newSprite) { sprite_ = newSprite; return sprite_; }
     
     
 };
