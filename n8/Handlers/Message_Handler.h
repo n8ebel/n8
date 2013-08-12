@@ -16,6 +16,8 @@
 
 using namespace std;
 
+/** Handles the passing of messages between systems registered with the Game_Manager
+ */
 class Message_Handler{
 
 private:
