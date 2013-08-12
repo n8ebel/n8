@@ -8,120 +8,117 @@
 
 #include "SDL/SDL.h"
 #include "n8.h"
+#include "Game_Manager.h"
 #include "constants.h"
 #include <iostream>
 
 using namespace std;
+
+//The attributes of the screen
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+const int SCREEN_BPP = 32;
 
 SDL_Surface* load_image(string);
 void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 
 int main( int argc, char* argv[] )
 {   
-    cGame_Manager* game = new cGame_Manager();
-    cSystem* baseSystem = game->create_system(BASE_SYSTEM);
     
+/*** Create the game manager ****/
+    Game_Manager* game = new Game_Manager();
+    if(game->initializeSDL()){ cout << "SDL initialized" << endl; }
+    else{ cout << "SDL not initialized" << endl; }  
+
+/***  Set the window caption  ***/
+    SDL_WM_SetCaption( "n8", NULL );
+    
+/*** Set up the game systems ***/
+    
+    /* Create a base system */
+    System* baseSystem = game->create_system(BASE_SYSTEM);
     if( baseSystem == NULL){
-        n8::log_error("Game manager wasn't initialized");
+        n8::log_error("Main","Game manager wasn't initialized");
     }
     else{
-        n8::log_info("Game manager was initialized");
+        n8::log_info("Main","Game manager was initialized");
     }
     
-    cEntity* nate = game->register_entity(n8::create_user_entity(n8::nextID, "Nate", 0, 0));
-    game->register_entity(n8::create_user_entity(n8::nextID, "Megan", 0, 0));
-        
-    cEntity* test = new cEntity(n8::nextID);
-    test->add_component(new cPosition_Component(POSITION, 0, 0));
-    game->register_entity(test);
-    
-    
-    
-    //The attributes of the screen
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
-    const int SCREEN_BPP = 32;
-    
-    //The surfaces that will be used
-    SDL_Surface *message = NULL;
-    SDL_Surface *background = NULL;
-    SDL_Surface *screen = NULL;
-    
-    //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-    {
-        return 1;    
+    /* Create a render system */
+    Render_System* renderSystem = (Render_System*)game->create_system(RENDER_SYSTEM);
+    if (renderSystem == NULL) {
+        n8::log_error("Main","Render system wasn't initialized");
+    }
+    else{
+        n8::log_info("Main","Render system was initialized");
     }
     
-    //Set up the screen
-    screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE );
-    
-    //If there was an error in setting up the screen
-    if( screen == NULL )
-    {
-        return 1;    
+    /* Create a movement system */
+    Movement_System* movementSystem = (Movement_System*)game->create_system(MOVEMENT_SYSTEM);
+    if (movementSystem == NULL) {
+        n8::log_error("Main","Movement system wasn't initialized");
+    }
+    else{
+        n8::log_info("Main","Movement system was initialized");
+        //movementSystem->set_world_bounds(1000, 750);
     }
     
-    //Set the window caption
-    SDL_WM_SetCaption( "Hello World", NULL );
-    
-    //Load the images
-    message = load_image("/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/hello.bmp");
-    background = load_image( "/Users/lcballa44/Projects/SDL_Test/SDL_Test/Assets/gfx/background.bmp" );
-    
-    //Apply the background to the screen
-    apply_surface( 0, 0, background, screen );
-    apply_surface( 320, 0, background, screen );
-    apply_surface( 0, 240, background, screen );
-    apply_surface( 320, 240, background, screen );
-    
-    
-    //Apply the message to the screen
-    apply_surface( 180, 140, message, screen );
-    
-    //Update the screen
-    if( SDL_Flip( screen ) == -1 )
-    {
-        return 1;    
+    /* Create a movement system */
+    Camera_System* cameraSystem = (Camera_System*)game->create_system(CAMERA_SYSTEM);
+    if (cameraSystem == NULL) {
+        n8::log_error("Main","Camera system wasn't initialized");
+    }
+    else{
+        n8::log_info("Main","Camera system was initialized");
     }
     
-    //Show window until the user clicks 'exit'
-    bool running = true;
-    //The timer starting time
-    Uint32 start = 0;
+    game->set_world_bounds(1000, 750);
     
-    SDL_Event event;
-    while (running) {
+/*** Create the screen and register it ***/
+    Entity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    renderSystem->register_screen_entity(entScreen);
+    
+/*** Create the camera entity ***/
+    Entity* entCamera = game->create_camera_entity(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    cameraSystem->register_camera_entity(entCamera);
+    renderSystem->register_camera_entity(entCamera);
+
+/*** Load image resources ***/
+    game->load_images("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/images.txt");
+    Sprite* message = game->get_sprite("/Users/lcballa44/Desktop/n8/n8/Assets/gfx/hello.bmp");
+    Sprite* background = game->get_sprite( "/Users/lcballa44/Desktop/n8/n8/Assets/gfx/background.bmp" );
+    
+
+/*** Create background entity ***/
+    Entity* entBackground = new Entity(n8::get_next_id());
+    entBackground->add_component(new Position_Component(POSITION, 0, 0));
+    entBackground->add_component(new Drawable_Component(DRAWABLE, background));
+    game->register_entity(entBackground);
+    
+/*** Create user controlled entity ***/
+    Entity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
+    cameraSystem->register_entity_to_follow(nate);
+
+  
+/*** GAME LOOP ***/
+    game->initializeGameLoop();
+    
+    while (game->is_running()) {
+        game->handle_input();
         
-        start = SDL_GetTicks();
+        /*** Update the game logic ***/
+        game->get_system(MOVEMENT_SYSTEM)->update();
+        game->get_system(CAMERA_SYSTEM)->update();
+        game->get_system(RENDER_SYSTEM)->update();
         
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
-            }
-            else if( event.type == SDL_KEYDOWN )
-            { 
-                switch( event.key.keysym.sym )
-                {}
-            }
-            else if( event.type == SDL_MOUSEBUTTONDOWN )
-            {}
-            else if( event.type == SDL_MOUSEBUTTONUP )
-            {}
-        }
+        /*** Render the frame ***/
+        //n8::get_render_system(game)->render();  
+        renderSystem->render();
         
-        cout << "Game Logic" << endl;
-        game->get_system(BASE_SYSTEM)->update();
-        //game->get_system(COLLISION_SYSTEM)->update();
-        //game->get_system(INTERACTION_SYSTEM)->update();
-        //game->get_system(RENDER_SYSTEM)->update();
-        
-        cout << endl;
     }
     
-    //Free the surfaces
-    SDL_FreeSurface( message );
-    SDL_FreeSurface( background );
+    
+    delete game;
     
     //Quit SDL
     SDL_Quit();
@@ -130,40 +127,6 @@ int main( int argc, char* argv[] )
     return 0;
 }
 
-SDL_Surface *load_image( std::string filename ) 
-{
-    //Temporary storage for the image that's loaded
-    SDL_Surface* loadedImage = NULL;
-    
-    //The optimized image that will be used
-    SDL_Surface* optimizedImage = NULL;
-    
-    //Load the image
-    loadedImage = SDL_LoadBMP( filename.c_str() );
-    
-    //If nothing went wrong in loading the image
-    if( loadedImage != NULL )
-    {
-        //Create an optimized image
-        optimizedImage = SDL_DisplayFormat( loadedImage );
-        
-        //Free the old image
-        SDL_FreeSurface( loadedImage );
-    }
-    
-    //Return the optimized image
-    return optimizedImage;
-}
 
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination )
-{
-    //Make a temporary rectangle to hold the offsets
-    SDL_Rect offset;
-    
-    //Give the offsets to the rectangle
-    offset.x = x;
-    offset.y = y;
-    
-    //Blit the surface
-    SDL_BlitSurface( source, NULL, destination, &offset );
-}
+
+

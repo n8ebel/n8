@@ -223,7 +223,7 @@ static void CustomApplicationMain (int argc, char **argv)
     sdlMain = [[SDLMain alloc] init];
     [NSApp setDelegate:sdlMain];
     
-    /* Start the main event loop */
+    /* start_ the main event loop */
     [NSApp run];
     
     [sdlMain release];
@@ -258,7 +258,7 @@ static void CustomApplicationMain (int argc, char **argv)
     if (!gFinderLaunch)  /* MacOS is passing command line args. */
         return FALSE;
 
-    if (gCalledAppMainline)  /* app has started, ignore this document. */
+    if (gCalledAppMainline)  /* app has start_ed, ignore this document. */
         return FALSE;
 
     temparg = [filename UTF8String];
@@ -282,7 +282,7 @@ static void CustomApplicationMain (int argc, char **argv)
 }
 
 
-/* Called when the internal event loop has just started running */
+/* Called when the internal event loop has just start_ed running */
 - (void) applicationDidFinishLaunching: (NSNotification *) note
 {
     int status;
