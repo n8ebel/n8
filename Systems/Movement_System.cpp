@@ -68,37 +68,67 @@ bool Movement_System::inside_world_bounds(Entity* ent, int xOffset, int yOffset)
     
 }
 
+/** Registers a user controlled entity with the movement system so it can be controlled by the keyboard
+ *
+ *  @param userEntity The entity that the user will be controlling with the keyboard
+ */
+void Movement_System::register_user_entity(Entity* userEntity){
+    user_entity_ = userEntity;
+}
 void Movement_System::update(){
     
 }
 
 void Movement_System::right(){
-    
+    if( inside_world_bounds(user_entity_, 5, 0)){
+        ((Position_Component*)user_entity_->get_component(POSITION))->update_position(5, 0);
+        
+    }
+    /*
     for (int i = 0; i < registered_entities_.size(); i++) {
         if( inside_world_bounds(registered_entities_[i], 5, 0)){
             ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(5, 0);
-            ((Interaction_System*)game_->get_system(INTERACTION_SYSTEM))->handle_interaction(PROJECTILE_SYSTEM, registered_entities_[0], registered_entities_[0]);
+            
         }
     }
+     */
 }
 void Movement_System::down(){
+    if( inside_world_bounds(user_entity_, 0, 5)){
+        ((Position_Component*)user_entity_->get_component(POSITION))->update_position(0, 5);
+        
+    }
+    /*
     for (int i = 0; i < registered_entities_.size(); i++) {
         if( inside_world_bounds(registered_entities_[i], 0, 5)){
             ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(0, 5);
         }
     }
+     */
 }
 void Movement_System::left(){
+    if( inside_world_bounds(user_entity_, -5, 0)){
+        ((Position_Component*)user_entity_->get_component(POSITION))->update_position(-5, 0);
+        
+    }
+    /*
     for (int i = 0; i < registered_entities_.size(); i++) {
         if( inside_world_bounds(registered_entities_[i], -5, 0)){
             ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(-5, 0);
         }
     }
+     */
 }
 void Movement_System::up(){
+    if( inside_world_bounds(user_entity_, 0, -5)){
+        ((Position_Component*)user_entity_->get_component(POSITION))->update_position(0, -5);
+        
+    }
+    /*
     for (int i = 0; i < registered_entities_.size(); i++) {
         if( inside_world_bounds(registered_entities_[i], 0, -5)){
             ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(0, -5);
         }
     }
+     */
 }

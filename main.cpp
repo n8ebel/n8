@@ -101,7 +101,7 @@ int main( int argc, char* argv[] )
     
 
 /*** Create background entity ***/
-    Entity* entBackground = new Entity(n8::get_next_id());
+    Entity* entBackground = new Entity(BACKGROUND);
     entBackground->add_component(new Position_Component(POSITION, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
     entBackground->add_component(new Drawable_Component(DRAWABLE, background));
     game->register_entity(entBackground);
@@ -109,6 +109,11 @@ int main( int argc, char* argv[] )
 /*** Create user controlled entity ***/
     Entity* nate = game->create_user_entity(n8::get_next_id(), "Nate", 0, 0, message);
     cameraSystem->register_entity_to_follow(nate);
+    movementSystem->register_user_entity(nate);
+    
+/*** Create entity ***/
+    Entity* megan = game->create_user_entity(n8::get_next_id(), "Megan", 450, 200, message);
+    
 
   
 /*** GAME LOOP ***/
@@ -119,6 +124,7 @@ int main( int argc, char* argv[] )
         
         /*** Update the game logic ***/
         game->get_system(MOVEMENT_SYSTEM)->update();
+        game->get_system(INTERACTION_SYSTEM)->update();
         game->get_system(CAMERA_SYSTEM)->update();
         game->get_system(RENDER_SYSTEM)->update();
         
@@ -140,6 +146,7 @@ int main( int argc, char* argv[] )
 
 void projectileInteraction(Game_Manager* game, Entity* ent1, Entity* ent2){
     cout << "GOOOOOOOOOOOOO FOOOOOOOOOOOOOOOOO" << endl;
+    SDL_WM_SetCaption( "GOOOO", NULL );
 }
 
 void registerInteractions(Game_Manager* game){

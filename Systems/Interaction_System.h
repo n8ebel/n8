@@ -35,8 +35,6 @@ class Interaction_System : public System {
 	~Interaction_System();
     Interaction_System(Game_Manager* gameManager);
 
-    bool do_collide(Entity* ent1, Entity* ent2);
-    void handle_interaction(string interactionType, Entity* ent1, Entity* ent2);
     bool register_interaction(string interactionType, void (*func)(Game_Manager* game, Entity* ent1, Entity* ent2));
 
     void update();
@@ -44,6 +42,10 @@ class Interaction_System : public System {
 
     Game_Manager* game_;	/** < A pointer to the game manager.  Used to gain access to other systems and required data **/
     map <string, interactionFunction > registered_interactions_;
+    
+    bool do_collide(Entity* ent1, Entity* ent2);
+    void pick_interaction(Entity* ent1, Entity* ent2);
+    void handle_interaction(string interactionType, Entity* ent1, Entity* ent2);
 };
 
 #endif /* INTERACTION_SYSTEM_H_ */

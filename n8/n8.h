@@ -27,7 +27,7 @@ static const bool DEBUG_UPDATE = false;
 
 const int SCREEN = -1;
 const int CAMERA = -2;
-
+const int BACKGROUND = -3;
 
 // Static constants for component identifiers
 static const string NAME =                  "NAME";

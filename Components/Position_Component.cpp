@@ -75,4 +75,6 @@ void Position_Component::update_location(int x, int y, int w, int h){
 void Position_Component::update_position(int xOffset, int yOffset){
     position_->add_x(xOffset);
     position_->add_y(yOffset);
+    
+    update_location(position_->get_x(), position_->get_y(), width_, height_);
 }

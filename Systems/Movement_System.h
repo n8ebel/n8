@@ -26,6 +26,8 @@ private:
     
     bool inside_world_bounds(Entity* ent, int xOffset, int yOffset);
     
+    Entity* user_entity_;
+    
 public:
     
     ~Movement_System();
@@ -39,7 +41,7 @@ public:
     void up();
     
     void set_world_bounds(int w, int h) { world_width_ = w; world_height_ = h; }
-
+    void register_user_entity(Entity* userEntity);
 
 };
 
