@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <map>
+#include <string>
 #include "Component.h"
 
 using namespace std;
@@ -24,6 +25,7 @@ using namespace std;
 class Entity{
  private:
     int id_; /** < a unique specifier for the entity **/
+    string type_;  /** < an identifier so entities can be grouped together.  ex: NPC, Enemy, User **/
     map<string, Component*> component_map_;  /** < Stores all components added to the entity **/
 
  public:
@@ -34,8 +36,9 @@ class Entity{
      *  Creates a new entity and sets its id value
      *
      *  @param newId the unique id specifier for the new entity
+     *  @param newType the type specifier for the new entity
      */
-    explicit Entity(int newId) { id_ = newId;}
+    explicit Entity(int newId, string newType) { id_ = newId; type_ = newType; }
   
     void add_component(Component* newComponent);
     void remove_component(string componentID);

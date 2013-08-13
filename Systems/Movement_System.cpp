@@ -26,6 +26,9 @@ Movement_System::Movement_System(Game_Manager* gameManager){
     requirements_[CONTROLLABLE] = 1;
     id_ = MOVEMENT_SYSTEM;
     game_ = gameManager;
+    user_entity_ = NULL;
+    world_width_= 1;
+    world_height_=1;
 }
 
 /** Determines if an entity can safely move in a direction without extending outside the bounds of the current game world.  Used to verify whether an entity can move in a direction when told to.  The passed x and y offset are added to the entity's current position to determine whether that move will move the entity outside the world bound.
@@ -79,6 +82,17 @@ void Movement_System::update(){
     
 }
 
+/** Moves the registered entity by the specified offsets
+ *
+ * 	@param x The horizontal amount to move the registered entity
+ * 	@param y The vertical amount to move the registered entity
+ */
+void Movement_System::move(int x, int y){
+	if( inside_world_bounds(user_entity_, x, y)){
+		((Position_Component*)user_entity_->get_component(POSITION))->update_position(x, y);
+
+	}
+}
 void Movement_System::right(){
     if( inside_world_bounds(user_entity_, 5, 0)){
         ((Position_Component*)user_entity_->get_component(POSITION))->update_position(5, 0);

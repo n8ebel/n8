@@ -26,8 +26,9 @@ System::~System(){
 /** Default Constructor <p>
  *  Sets id_ to a default 'BASE_SYSTEM' value
  */
-System::System(){
+System::System(Game_Manager* gameManager){
     id_ = BASE_SYSTEM;
+    game_ = gameManager;
 }
 
 /** Used to check if an entity contains all the neccessary components to be operated on

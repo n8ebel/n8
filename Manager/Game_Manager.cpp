@@ -48,6 +48,8 @@ Game_Manager::Game_Manager(){
     resource_handler_ = new Resource_Handler();
     running_ = false;
     initializeSDL();
+
+
 }
 
 /** Constructor<p>
@@ -74,6 +76,41 @@ bool Game_Manager::initializeSDL(){
     else{
         return true;
     }
+}
+
+/** Initializes the essential game systems that are required by the game to
+ *  run with minimal functionality.  These include Render_System, Movement_System,
+ *  Camera_System
+ */
+bool Game_Manager::initializeGame(){
+/*** Set up the game systems ***/
+
+	/* Create a base system */
+	System* baseSystem = create_system(BASE_SYSTEM);
+	if( baseSystem == NULL){
+		n8::log_error("Main","Game manager wasn't initialized");
+	}
+	else{
+		n8::log_info("Main","Game manager was initialized");
+	}
+
+	/* Create a render system */
+	Render_System* renderSystem = (Render_System*)create_system(RENDER_SYSTEM);
+	if (renderSystem == NULL) {
+		n8::log_error("Main","Render system wasn't initialized");
+	}
+	else{
+		n8::log_info("Main","Render system was initialized");
+	}
+
+	/* Create a camera system */
+	Camera_System* cameraSystem = (Camera_System*)create_system(CAMERA_SYSTEM);
+	if (cameraSystem == NULL) {
+		n8::log_error("Main","Camera system wasn't initialized");
+	}
+	else{
+		n8::log_info("Main","Camera system was initialized");
+	}
 }
 
 /** Used to initialize the SDL driven game loop.
@@ -110,6 +147,13 @@ void Game_Manager::handle_input(){
         }
     }
     
+    map<int, keyActionFunction>::iterator ii;
+    for(ii = keyActions_.begin(); ii != keyActions_.end(); ii++){
+    	if(keysHeld_[ii->first]){
+    		ii->second(this);
+    	}
+    }
+    /*
     if ( keysHeld_[SDLK_ESCAPE] )
     {
         running_ = false;
@@ -118,24 +162,25 @@ void Game_Manager::handle_input(){
     if ( keysHeld_[SDLK_LEFT] )
     {
         n8::log_debug("Game_Manager","Moved left");
-        ((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->left();
+
+        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->left();
     }
     if ( keysHeld_[SDLK_RIGHT] )
     {
         n8::log_debug("Game_Manager","Moved right");
-        ((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->right();
+        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->right();
     }
     if ( keysHeld_[SDLK_UP] )
     {
         n8::log_debug("Game_Manager","Moved up");
-        ((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->up();
+        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->up();
     }
     if (keysHeld_[SDLK_DOWN])
     {
         n8::log_debug("Game_Manager","Moved down");
-        ((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->down();
+        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->down();
     }
-    
+    */
     
 }
 
@@ -224,6 +269,11 @@ bool Game_Manager::register_interaction(string type, interactionFunction func){
 }
 
 
+bool Game_Manager::register_key_action(int keyID, keyActionFunction func){
+	keyActions_[keyID] = func;
+}
+
+
 /** Used to access a specific registered entity
  *
  *  @param ID the unique, int specifier of the desired entity
@@ -254,7 +304,7 @@ Entity* Game_Manager::get_entity(int ID){
  */
 System* Game_Manager::create_system(string ID){
     if (ID == BASE_SYSTEM) {
-        System* newSystem = new System();
+        System* newSystem = new System(this);
         newSystem->connect_message_handler_(message_handler_);
         if( add_system(ID, newSystem) ){
             return newSystem;
@@ -308,31 +358,67 @@ System* Game_Manager::create_system(string ID){
     return NULL;
 }
 
-
-/** Creates a new user entity.
- *  Using this method ensures the proper components are added to the user entity. <p>
- *  Added components include: Name, Position, Drawable
+/** Creates a new drawable entity.
+ *  Using this method ensures the proper components are added to the entity so it can be drawn to the screen. <p>
+ *  Added components include: Position, Drawable
  *
  *  @param id the id for the new user entity
- *  @param initName the name of the new user entity
  *  @param initX the initial x position
  *  @param intiY the initial y position
  *  @param sprite the sprite to use to draw the entity
  *  @return a pointer to the created entity
  *
  *  @see Entity
- *  @see Name_Component
  *  @see Position_Component
  *  @see Drawable_Component
  *  @see Component
  */
-Entity* Game_Manager::create_user_entity(int id, string initName, int initX, int initY, Sprite* sprite){
+Entity* Game_Manager::create_drawable_entity(int id, string tp, int initX, int initY, Sprite* sprite){
+
+    if (sprite != NULL) {
+
+
+        Entity* foo = new Entity(id, tp);
+        Position_Component* position = new Position_Component(POSITION, initX, initY, sprite->get_width(), sprite->get_height());
+        Drawable_Component* drawable = new Drawable_Component(DRAWABLE, sprite);
+        Controllable_Coponent* controllable = new Controllable_Coponent(CONTROLLABLE);
+
+        foo->add_component(position);
+        foo->add_component(drawable);
+        foo->add_component(controllable);
+
+        register_entity(foo);
+        return foo;
+    }
+    else{
+        n8::log_error("Game_Manager.create_user_entity", "Failed to create drawable entity. Sprite was NULL" );
+        return NULL;
+    }
+
+}
+
+/** Creates a new user controllable entity.
+ *  Using this method ensures the proper components are added to the entity so it can be controlled by a user. <p>
+ *  Added components include: Position, Drawable
+ *
+ *  @param id the id for the new user entity
+ *  @param initX the initial x position
+ *  @param intiY the initial y position
+ *  @param sprite the sprite to use to draw the entity
+ *  @return a pointer to the created entity
+ *
+ *  @see Entity
+ *  @see Position_Component
+ *  @see Drawable_Component
+ *  @see Component
+ */
+Entity* Game_Manager::create_controllable_entity(int id, string tp, int initX, int initY, Sprite* sprite){
     
     if (sprite != NULL) {
         
     
-        Entity* foo = new Entity(id);
-        Name_Component* name = new Name_Component(NAME, initName);
+        Entity* foo = new Entity(id, tp);
+        //Name_Component* name = new Name_Component(NAME, initName);
        
         
         Position_Component* position = new Position_Component(POSITION, initX, initY, sprite->get_width(), sprite->get_height());
@@ -342,7 +428,7 @@ Entity* Game_Manager::create_user_entity(int id, string initName, int initX, int
         Drawable_Component* drawable = new Drawable_Component(DRAWABLE, sprite);  
         Controllable_Coponent* controllable = new Controllable_Coponent(CONTROLLABLE);
         
-        foo->add_component(name);
+        //foo->add_component(name);
         foo->add_component(position);
         foo->add_component(drawable);
         foo->add_component(controllable);
@@ -353,7 +439,7 @@ Entity* Game_Manager::create_user_entity(int id, string initName, int initX, int
         return foo;
     }
     else{
-        n8::log_error("Game_Manager.create_user_entity", "Failed to create entity " + initName + ". Sprite was NULL" );
+        n8::log_error("Game_Manager.create_user_entity", "Failed to create entity" );
         return NULL;
     }
     
@@ -387,18 +473,22 @@ Entity* Game_Manager::create_screen_entity(int w, int h, int bpp){
         return NULL;    
     }
     
-    Entity* entScreen = new Entity(SCREEN);  // uses 'SCREEN' const value of -1
+    Entity* entScreen = new Entity(SCREEN, SCREEN_TYPE);  // uses 'SCREEN' const value of -1
     Sprite* screenSprite = new Sprite("SCREEN", screen_surface);
     entScreen->add_component(new Drawable_Component(DRAWABLE, screenSprite));
     entScreen->add_component(new Position_Component(POSITION, 0, 0, screenSprite->get_width(), screenSprite->get_height()));
     
     register_entity(entScreen);
     
+    Render_System* renderSystem = static_cast<Render_System*>(get_system(RENDER_SYSTEM));
+    renderSystem->register_screen_entity(entScreen);
+
     return entScreen;
     
 }
 
-/** Used to create a camera entity that is used to control what is drawn to the screen
+/** Used to create a camera entity that is used to control what is drawn to the screen.
+ *  Once the entity is created, it is registered to the camera and render systems
  *
  *  @param x the x position of the camera
  *  @param y the y position of the camera
@@ -413,11 +503,14 @@ Entity* Game_Manager::create_screen_entity(int w, int h, int bpp){
  *  @see n8
  */
 Entity* Game_Manager::create_camera_entity(int x, int y, int w, int h){
-    Entity* camera = new Entity(CAMERA);
+    Entity* camera = new Entity(CAMERA, CAMERA_TYPE);
     camera->add_component(new Position_Component(POSITION, x,y, w, h));
     //camera->add_component(new Size_Component(SIZE, w,h));
     
     register_entity(camera);
+
+    static_cast<Camera_System*>(get_system(CAMERA_SYSTEM))->register_camera_entity(camera);
+    static_cast<Render_System*>(get_system(RENDER_SYSTEM))->register_camera_entity(camera);
                           
     return camera;
 }

@@ -23,6 +23,9 @@ Camera_System::~Camera_System(){
 Camera_System::Camera_System(Game_Manager* gameManager){
     entity_to_follow_ = NULL;
     camera_ = NULL;
+    game_ = gameManager;
+    world_width_ = 1;
+    world_height_ =1;
 }
 
 /** Stores a pointer to an entity that the camera should follow.  If the passed entity has a POSITION and DRAWABLE component a pointer to the entity is stored in entity_to_follow_.  This allows the system to update the camera position based on that entity's position.

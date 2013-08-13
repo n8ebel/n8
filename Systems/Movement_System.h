@@ -39,6 +39,7 @@ public:
     void down();
     void left();
     void up();
+    void move(int x, int y);
     
     void set_world_bounds(int w, int h) { world_width_ = w; world_height_ = h; }
     void register_user_entity(Entity* userEntity);

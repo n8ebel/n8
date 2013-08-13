@@ -49,6 +49,14 @@ static const string CAMERA_SYSTEM = 		"CAMERA_SYSTEM";
 
 static const string PROJECTILE_SYSTEM =     "PROJECTILE_SYSTEM";
 
+// Static entity types
+static const string USER_TYPE =					"USER";
+static const string ENEMY_TYPE =				"ENEMY";
+static const string PROJECTILE_TYPE =			"PROJECTILE";
+static const string SCREEN_TYPE =				"SCREEN";
+static const string CAMERA_TYPE =				"CAMERA";
+static const string BACKGROUND_TYPE =			"BACKGROUND";
+
 
 class n8{
 

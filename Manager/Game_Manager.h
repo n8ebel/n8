@@ -35,6 +35,7 @@ public:
     static const int WORLD_VIEW;
     
     typedef void (*interactionFunction)(Game_Manager*,Entity*,Entity*);
+    typedef void (*keyActionFunction)(Game_Manager*);
     
     
     ~Game_Manager();
@@ -44,11 +45,14 @@ public:
     bool add_system(string ID, System* newSystem);
     Entity* register_entity(Entity* newEntity);
     bool register_interaction(string type, interactionFunction func);
+    bool register_key_action(int keyID, keyActionFunction);
     
     Entity* create_screen_entity(int w, int h, int bpp);
     Entity* create_camera_entity(int x, int y, int w, int h);
     System* create_system(string ID);
-    Entity* create_user_entity(int id, string initName, int initX, int initY, Sprite* sprite);
+
+    Entity* create_drawable_entity(int id, string tp, int initX, int initY, Sprite* sprite);
+    Entity* create_controllable_entity(int id, string tp, int initX, int initY, Sprite* sprite);
     
     Entity* get_entity(int ID);
     
@@ -64,6 +68,7 @@ public:
     
     void handle_input();
     bool initializeSDL();
+    bool initializeGame();
     void initializeGameLoop();
     
     /** Used to check whether the game loop is running or not
@@ -72,6 +77,12 @@ public:
      */
     bool is_running() { return running_; }
     
+    /** Used to change whether the game is running or not
+     *
+     *  @param val The True of False value of whether the game should be running or not
+     */
+    void set_running(bool val) { running_ = val; };
+
     /** 
      *  Loads image assets defined in a specified file
      *
@@ -94,6 +105,7 @@ private:
     SDL_Event event_;  /** < Used for handling game event loop **/
     bool running_;  /** Flag for tracking whether the game loop is currently running **/
     bool keysHeld_[323];  /** < Array to store whether or not a key is being held down **/
+    map<int, keyActionFunction> keyActions_;  /** < Array to hold function pointers for actions associated with a key press **/
     
     /** 
      *  Used to gain access to the message handler

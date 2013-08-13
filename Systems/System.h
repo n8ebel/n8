@@ -28,7 +28,8 @@ class Game_Manager;
 class System {
   public:
     ~System();
-    System();
+    System(){}
+    System(Game_Manager* gameManager);
     
     /** Used to store a pointer to a message handler so it can be used to pass messages
      *  to other game systems and to the game manager
