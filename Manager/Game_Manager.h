@@ -44,6 +44,9 @@ public:
     
     bool add_system(string ID, System* newSystem);
     Entity* register_entity(Entity* newEntity);
+    void remove_entities();
+    void flag_to_remove_entity(Entity* entity);
+    void remove_entity(Entity* entity);
     bool register_interaction(string type, interactionFunction func);
     bool register_key_action(int keyID, keyActionFunction);
     
@@ -122,6 +125,7 @@ private:
      */
      Resource_Handler* get_resource_handler_() { return resource_handler_;}   
     
+    vector<Entity*> entities_to_remove_; /** < vector storing the entities that need to be removed **/
 };
 
 

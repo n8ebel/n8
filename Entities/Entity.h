@@ -49,6 +49,12 @@ class Entity{
      */
     int get_id() { return id_;}
     
+    /** Gets the type of the entity
+     *
+     *  @return The string type identifier
+     */
+    string get_type() { return type_; }
+
     Component* get_component(string componentID);
     map<string,Component*> get_components();
 };

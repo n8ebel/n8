@@ -251,6 +251,43 @@ Entity* Game_Manager::register_entity(Entity* newEntity){
     return newEntity;
 }
 
+/** Removes all flagged entities from the game
+ */
+void Game_Manager::remove_entities(){
+    for (int i = 0; i < entities_to_remove_.size(); i++) {
+        remove_entity(entities_to_remove_[i]);
+    }
+    
+    entities_to_remove_.clear();
+}
+
+/** Adds the specified entity to the vector of entities that need to be removed
+ *  from the game.  
+ *
+ *  @param entity The entity to mark as needing removed
+ */
+void Game_Manager::flag_to_remove_entity(Entity* entity){
+    entities_to_remove_.push_back(entity);
+}
+
+/** Removes the specified entity from the game.  This includes removing
+ *  references to the entity from all game systesm.
+ *
+ *  @param entity The entity to remove from the game
+ */
+void Game_Manager::remove_entity(Entity* entity){
+	int ID = entity->get_id();
+
+	map<string,System*>::iterator ii;
+	for( ii=registered_systems_.begin(); ii != registered_systems_.end(); ii++){
+		ii->second->remove_entity(ID);
+	}
+
+	registered_entities_.erase(ID);
+	delete entity;
+}
+
+
 /** Registers an interaction function with the interaction system if it exists
  *
  * 	@param type The identifier for the interaciton
@@ -381,11 +418,9 @@ Entity* Game_Manager::create_drawable_entity(int id, string tp, int initX, int i
         Entity* foo = new Entity(id, tp);
         Position_Component* position = new Position_Component(POSITION, initX, initY, sprite->get_width(), sprite->get_height());
         Drawable_Component* drawable = new Drawable_Component(DRAWABLE, sprite);
-        Controllable_Coponent* controllable = new Controllable_Coponent(CONTROLLABLE);
 
         foo->add_component(position);
         foo->add_component(drawable);
-        foo->add_component(controllable);
 
         register_entity(foo);
         return foo;
@@ -439,7 +474,7 @@ Entity* Game_Manager::create_controllable_entity(int id, string tp, int initX, i
         return foo;
     }
     else{
-        n8::log_error("Game_Manager.create_user_entity", "Failed to create entity" );
+        n8::log_error("Game_Manager.create_controllable_entity", "Failed to create entity" );
         return NULL;
     }
     

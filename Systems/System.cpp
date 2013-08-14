@@ -77,6 +77,23 @@ bool System::register_entity(Entity* newEntity){
     
 }
 
+/** Removes the specified entity from registered_entities_ vector.
+ *
+ *  @param ID The identifier of the entity to remove
+ */
+void System::remove_entity(int ID){
+	int index = registered_entities_.size() -1 ;
+	for(index; index >= 0; index--){
+		if(registered_entities_[index]->get_id() == ID){
+            cout << registered_entities_[index]->get_id() << endl;
+            registered_entities_.erase(registered_entities_.begin()+index);
+        }
+	}
+
+	
+
+}
+
 /** Updates all registered entities when called.
  *  Should be overridden for derived classes
  */

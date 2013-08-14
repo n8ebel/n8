@@ -41,6 +41,7 @@ Interaction_System::Interaction_System(Game_Manager* gameManager) {
  * 	@see Entity
  */
 bool Interaction_System::do_collide(Entity* ent1, Entity* ent2){
+    /*
     cout << "do_collide: " << ent1->get_id() << " , " << ent2->get_id() << endl;
     cout << "left1: " << n8::get_position_component(ent1)->get_left() << endl;
     cout << "right1: " << n8::get_position_component(ent1)->get_right() << endl;
@@ -51,6 +52,7 @@ bool Interaction_System::do_collide(Entity* ent1, Entity* ent2){
     cout << "right3: " << n8::get_position_component(ent2)->get_right() << endl;
     cout << "top3: " << n8::get_position_component(ent2)->get_top() << endl;
     cout << "bottom3: " << n8::get_position_component(ent2)->get_bottom() << endl;
+     */
     
     if (ent1->get_id() == SCREEN || ent2->get_id() == SCREEN) {
         return false;
@@ -76,7 +78,7 @@ bool Interaction_System::do_collide(Entity* ent1, Entity* ent2){
 	else{
         return true;
 	}
-    cout << "not good" << endl;
+    //cout << "not good" << endl;
     return false;
 }
 
@@ -86,8 +88,12 @@ bool Interaction_System::do_collide(Entity* ent1, Entity* ent2){
  *  @param ent2 The second entity that is interacting
  */
 void Interaction_System::pick_interaction(Entity* ent1, Entity* ent2){
-    
-    handle_interaction(PROJECTILE_SYSTEM, ent1, ent2);
+    if( ent1->get_type() == PROJECTILE_TYPE || ent2->get_type() == PROJECTILE_TYPE ){
+    	handle_interaction(PROJECTILE_INTERACTION, ent1, ent2);
+    }
+    else{
+    	handle_interaction(GENERIC_INTERACTION, ent1, ent2);
+    }
     
 }
 
@@ -128,7 +134,7 @@ bool Interaction_System::register_interaction(string interactionType, void (*fun
 }
 
 void Interaction_System::update(){
-    cout << "updating " << endl;
+    //cout << "updating " << endl;
     for (int i = 0; i < registered_entities_.size(); i++) {
         for (int j = i+1; j < registered_entities_.size(); j++) {
             if ( do_collide(registered_entities_[i], registered_entities_[j])) {

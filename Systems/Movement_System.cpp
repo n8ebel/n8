@@ -23,7 +23,7 @@ Movement_System::~Movement_System(){
 Movement_System::Movement_System(Game_Manager* gameManager){
     requirements_[DRAWABLE] = 1;
     requirements_[POSITION] = 1;
-    requirements_[CONTROLLABLE] = 1;
+    requirements_[MOVEMENT] = 1;
     id_ = MOVEMENT_SYSTEM;
     game_ = gameManager;
     user_entity_ = NULL;
@@ -48,11 +48,12 @@ bool Movement_System::inside_world_bounds(Entity* ent, int xOffset, int yOffset)
     int width = n8::get_position_component(ent)->get_width();
     int height = n8::get_position_component(ent)->get_height();
     
+    /*
     cout << "world width: " << world_width_ << endl;
     cout << "id: " << ent->get_id() << endl;
     cout << "left: " << curX << endl;
     cout << "right: " << curX+width << endl;
-    
+    */
     
     
     if ( (curX+xOffset) >= 0 && (curX + width+xOffset) <= world_width_){
@@ -78,8 +79,25 @@ bool Movement_System::inside_world_bounds(Entity* ent, int xOffset, int yOffset)
 void Movement_System::register_user_entity(Entity* userEntity){
     user_entity_ = userEntity;
 }
+
+/** Updates the position of all registered entities.  Using the speed and direction stored in the
+ *  Movement_Component, each entity's position is updated.
+ */
 void Movement_System::update(){
-    
+    cout << "movesystem size" << registered_entities_.size() << endl;
+	for (int i = 0; i < registered_entities_.size(); i++) {
+		if (registered_entities_[i]->get_component(MOVEMENT) != NULL){
+			Movement_Component* moveComp = static_cast<Movement_Component*>(registered_entities_[i]->get_component(MOVEMENT));
+			if( inside_world_bounds(registered_entities_[i], moveComp->get_x_offset(), moveComp->get_y_offset())){
+				static_cast<Position_Component*>(registered_entities_[i]->get_component(POSITION))->update_position(moveComp->get_x_offset(), moveComp->get_y_offset());
+			}
+            else{
+                cout << "need to remove an entity" << endl;
+                game_->flag_to_remove_entity(registered_entities_[i]);
+            }
+            
+		}
+	}
 }
 
 /** Moves the registered entity by the specified offsets

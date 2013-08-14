@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef SDL_Test_Position_Component_h
-#define SDL_Test_Position_Component_h
+#ifndef Position_Component_h
+#define Position_Component_h
 
 #include "Point.h"
 

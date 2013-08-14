@@ -22,7 +22,7 @@ const int SCREEN_BPP = 32;
 //void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 void RegisterInteractions(Game_Manager* game);
 Entity* CreateUserEntity(Game_Manager* game, string name, int x, int y, Sprite* sprite);
-Entity* CreateEnemyEntity(Game_Manager* game, int x, int y, Sprite* sprite);
+Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite* sprite, double xHeading, double yHeading, double magnitude);
 bool SetupGameSystems(Game_Manager* game);
 void SetupKeyInput(Game_Manager* game);
 
@@ -45,38 +45,31 @@ int main( int argc, char* argv[] )
     
 /*** Create the screen and register it ***/
     Entity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
-    //renderSystem->register_screen_entity(entScreen);
     
 /*** Create the camera entity ***/
     Entity* entCamera = game->create_camera_entity(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    //cameraSystem->register_camera_entity(entCamera);
-    //renderSystem->register_camera_entity(entCamera);
 
 /*** Load image resources ***/
     game->load_images("/Users/lcballa44/Desktop/n8/Assets/gfx/images.txt");
     
     Sprite* message = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/hello.bmp");
     Sprite* background = game->get_sprite( "/Users/lcballa44/Desktop/n8/Assets/gfx/background.bmp" );
+    Sprite* shipSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/user_ship.bmp");
+    Sprite* enemySprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/enemy_ship.bmp");
+    Sprite* missileSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp");
     
 
 /*** Create background entity ***/
     Entity* entBackground = game->create_drawable_entity(BACKGROUND, BACKGROUND_TYPE, 0, 0, background);
-    //Entity* entBackground = new Entity(BACKGROUND);
-    //entBackground->add_component(new Position_Component(POSITION, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-    //entBackground->add_component(new Drawable_Component(DRAWABLE, background));
-    //game->register_entity(entBackground);
     
 /*** Create user controlled entity ***/
-    Entity* nate = CreateUserEntity(game, "Nate", 0,0, message);
+    Entity* nate = CreateUserEntity(game, "Nate", 0,0, shipSprite);
     
 
-/*** Create entity ***/
-    Entity* megan = CreateEnemyEntity(game, 400,400, message);
-    Entity* vader = CreateEnemyEntity(game, 350,700, message);
-    //game->create_user_entity(n8::get_next_id(), "Megan", 450, 200, message);
-    
+/*** Create enemy entities ***/
+    Entity* megan = CreateEnemyEntity(game, ENEMY_TYPE, 400,400, enemySprite, 1,1,3);
+    Entity* vader = CreateEnemyEntity(game, ENEMY_TYPE, 350,700, enemySprite, -1,-1,1);
 
-  
 /*** GAME LOOP ***/
     game->initializeGameLoop();
     
@@ -86,13 +79,15 @@ int main( int argc, char* argv[] )
         /*** Update the game logic ***/
         game->get_system(MOVEMENT_SYSTEM)->update();
         game->get_system(INTERACTION_SYSTEM)->update();
+        game->remove_entities();
+        
         game->get_system(CAMERA_SYSTEM)->update();
         game->get_system(RENDER_SYSTEM)->update();
         
         /*** Render the frame ***/
         n8::get_render_system(game)->render();
-        //renderSystem->render();
         
+
     }
     
     
@@ -125,12 +120,21 @@ void Down(Game_Manager* game){
 	n8::log_debug("Game_Manager","Moved Down");
 	static_cast<Movement_System*>(game->get_system(MOVEMENT_SYSTEM))->move(0,5);
 }
+void Space(Game_Manager* game){
+	n8::log_debug("Game_Manager", "Pressed Space");
+	Entity* userEntity = static_cast<Movement_System*>(game->get_system(MOVEMENT_SYSTEM))->get_user_entity();
+	Position_Component* userPosition = static_cast<Position_Component*>(userEntity->get_component(POSITION));
+	CreateEnemyEntity(game, PROJECTILE_TYPE,  userPosition->get_x(), userPosition->get_y(),
+						game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp"),
+						0, -1, 2);
+}
 void SetupKeyInput(Game_Manager* game){
 	game->register_key_action(SDLK_ESCAPE, StopGame);
 	game->register_key_action(SDLK_LEFT, Left);
 	game->register_key_action(SDLK_RIGHT, Right);
 	game->register_key_action(SDLK_UP, Up);
 	game->register_key_action(SDLK_DOWN, Down);
+	game->register_key_action(SDLK_SPACE, Space);
 
 }
 
@@ -143,7 +147,6 @@ bool SetupGameSystems(Game_Manager* game){
 	}
 	else{
 		n8::log_info("Main","Movement system was initialized");
-		//movementSystem->set_world_bounds(1000, 750);
 	}
 
 	/* Create an interaction system */
@@ -163,7 +166,9 @@ bool SetupGameSystems(Game_Manager* game){
 
 Entity* CreateUserEntity(Game_Manager* game, string name, int x, int y, Sprite* sprite){
 	Entity* newEntity = game->create_controllable_entity(n8::get_next_id(), USER_TYPE, x, y, sprite);
-	newEntity->add_component(new Name_Component(NAME,name));
+    Name_Component* nameComp = new Name_Component(NAME,name);
+	newEntity->add_component(nameComp);
+
 	game->register_entity(newEntity);
 
 	static_cast<Camera_System*>(game->get_system(CAMERA_SYSTEM))->register_entity_to_follow(newEntity);
@@ -172,19 +177,38 @@ Entity* CreateUserEntity(Game_Manager* game, string name, int x, int y, Sprite* 
 	return newEntity;
 }
 
-Entity* CreateEnemyEntity(Game_Manager* game, int x, int y, Sprite* sprite){
-	Entity* newEntity = game->create_drawable_entity(n8::get_next_id(), ENEMY_TYPE, x, y, sprite);
-
+Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite* sprite, double xHeading, double yHeading, double magnitude){
+	Entity* newEntity = game->create_drawable_entity(n8::get_next_id(), type, x, y, sprite);
+	newEntity->add_component(new Movement_Component(MOVEMENT, xHeading, yHeading, magnitude));
+    
+    game->register_entity(newEntity);
+    
 	return newEntity;
 }
 
 void ProjectileInteraction(Game_Manager* game, Entity* ent1, Entity* ent2){
-    cout << "GOOOOOOOOOOOOO FOOOOOOOOOOOOOOOOO" << endl;
-    SDL_WM_SetCaption( "GOOOO", NULL );
+    
+    //n8::log_info("PROJECTILE_INTERACTION", "Entity 1: " + ent1->get_id() + "  Entity 2: " + ent2->get_id());
+	if ( ent1->get_type() == PROJECTILE_TYPE){
+		//game->flag_to_remove_entity(ent2);
+	}
+	else{
+		//game->flag_to_remove_entity(ent1);
+	}
+}
+
+void GenericInteraction(Game_Manager* game, Entity* ent1, Entity* ent2){
+	//n8::log_info("GENERIC_INTERACTION", "Entity 1: " + ent1->get_id() + "  Entity 2: " + ent2->get_id());
 }
 
 void RegisterInteractions(Game_Manager* game){
-	if ( game->register_interaction(PROJECTILE_SYSTEM, ProjectileInteraction) ){
+	if ( game->register_interaction(GENERIC_INTERACTION, GenericInteraction) ){
+		n8::log_info("Main", "GENERIC_INTERACTION was registered");
+	}
+	else{
+		n8::log_error("Main", "GENERIC_INTERACTION could not be registered");
+	}
+	if ( game->register_interaction(PROJECTILE_INTERACTION, ProjectileInteraction) ){
 		n8::log_info("Main", "PROJECTILE_INTERACTION was registered");
 	}
 	else{

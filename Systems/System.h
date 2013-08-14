@@ -39,6 +39,7 @@ class System {
     void connect_message_handler_(Message_Handler* msgr) { message_system_ = msgr; }
 
     bool register_entity(Entity* newEntity);
+    void remove_entity(int ID);
     virtual void update();
     
   protected:

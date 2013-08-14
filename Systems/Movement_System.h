@@ -44,6 +44,12 @@ public:
     void set_world_bounds(int w, int h) { world_width_ = w; world_height_ = h; }
     void register_user_entity(Entity* userEntity);
 
+    /** Gets a pointer to the entity being controlled by the user
+     *
+     * 	@return A pointer to an entity
+     */
+    Entity* get_user_entity() { return user_entity_; }
+
 };
 
 #endif

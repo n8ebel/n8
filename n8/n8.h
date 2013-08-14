@@ -19,6 +19,7 @@
 #include "Drawable_Component.h"
 #include "Controllable_Coponent.h"
 #include "Size_Component.h"
+#include "Movement_Component.h"
 #include <string>
 
 
@@ -36,6 +37,7 @@ static const string POSITION =              "POSITION";
 static const string INTERACTABLE =          "INTERACTABLE";
 static const string CONTROLLABLE =          "CONTROLLABLE";
 static const string SIZE =                  "SIZE";
+static const string MOVEMENT =				"MOVEMENT";
 
 
 // Static constants for system identifiers
@@ -47,7 +49,8 @@ static const string INTERACTION_SYSTEM =    "INTERACTION_SYSTEM";
 static const string MESSAGE_SYSTEM =        "MESSAGE_SYSTEM";
 static const string CAMERA_SYSTEM = 		"CAMERA_SYSTEM";
 
-static const string PROJECTILE_SYSTEM =     "PROJECTILE_SYSTEM";
+static const string PROJECTILE_INTERACTION =     "PROJECTILE_INTERACTION";
+static const string GENERIC_INTERACTION =     	 "GENERIC_INTERACTION";
 
 // Static entity types
 static const string USER_TYPE =					"USER";
