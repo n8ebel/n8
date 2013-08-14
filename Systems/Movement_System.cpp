@@ -57,9 +57,9 @@ bool Movement_System::inside_world_bounds(Entity* ent, int xOffset, int yOffset)
     
     
     if ( (curX+xOffset) >= 0 && (curX + width+xOffset) <= world_width_){
-        cout << "x okay" << endl;
+        
         if( (curY+yOffset) >= 0 && (curY + height+yOffset) <= world_height_){
-            cout << "y okay" << endl;
+            
             return true;
         }
         else{
@@ -84,7 +84,7 @@ void Movement_System::register_user_entity(Entity* userEntity){
  *  Movement_Component, each entity's position is updated.
  */
 void Movement_System::update(){
-    cout << "movesystem size" << registered_entities_.size() << endl;
+    
 	for (int i = 0; i < registered_entities_.size(); i++) {
 		if (registered_entities_[i]->get_component(MOVEMENT) != NULL){
 			Movement_Component* moveComp = static_cast<Movement_Component*>(registered_entities_[i]->get_component(MOVEMENT));

@@ -48,7 +48,7 @@ public:
     void flag_to_remove_entity(Entity* entity);
     void remove_entity(Entity* entity);
     bool register_interaction(string type, interactionFunction func);
-    bool register_key_action(int keyID, keyActionFunction);
+    bool register_key_action(int keyID, keyActionFunction,int state);
     
     Entity* create_screen_entity(int w, int h, int bpp);
     Entity* create_camera_entity(int x, int y, int w, int h);
@@ -105,11 +105,12 @@ private:
     Resource_Handler* resource_handler_;   /** < Stores a pointer to a resource handler object **/
     
     Uint32 start_; /** < Used for controlling game timing **/
+    Uint32 current_;
     SDL_Event event_;  /** < Used for handling game event loop **/
     bool running_;  /** Flag for tracking whether the game loop is currently running **/
     bool keysHeld_[323];  /** < Array to store whether or not a key is being held down **/
-    map<int, keyActionFunction> keyActions_;  /** < Array to hold function pointers for actions associated with a key press **/
-    
+    map<int, keyActionFunction> keyDownActions_;  /** < Array to hold function pointers for actions associated with a key press **/
+    map<int, keyActionFunction> keyUpActions_;
     /** 
      *  Used to gain access to the message handler
      *

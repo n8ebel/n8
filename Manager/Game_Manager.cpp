@@ -132,27 +132,39 @@ void Game_Manager::initializeGameLoop(){
 void Game_Manager::handle_input(){
     if (SDL_PollEvent(&event_))
     {
-        if (event_.type == SDL_QUIT)
-        {
-            running_ = false;
-        }
         
-        if (event_.type == SDL_KEYDOWN)
-        {
-            keysHeld_[event_.key.keysym.sym] = true;
-        } 
-        if (event_.type == SDL_KEYUP)
-        {
-            keysHeld_[event_.key.keysym.sym] = false;
-        }
+            if (event_.type == SDL_QUIT)
+            {
+                running_ = false;
+            }
+            
+            if (event_.type == SDL_KEYDOWN)
+            {
+                keysHeld_[event_.key.keysym.sym] = true;
+            } 
+            if (event_.type == SDL_KEYUP)
+            {
+                keysHeld_[event_.key.keysym.sym] = false;
+                map<int, keyActionFunction>::iterator ii;
+                for(ii = keyUpActions_.begin(); ii != keyUpActions_.end(); ii++){
+                    if (event_.key.keysym.sym == ii->first) {
+                        ii->second(this);
+                    }
+                }
+            }
+        
+        
+        
     }
     
-    map<int, keyActionFunction>::iterator ii;
-    for(ii = keyActions_.begin(); ii != keyActions_.end(); ii++){
-    	if(keysHeld_[ii->first]){
-    		ii->second(this);
-    	}
-    }
+        map<int, keyActionFunction>::iterator ii;
+        for(ii = keyDownActions_.begin(); ii != keyDownActions_.end(); ii++){
+            if(keysHeld_[ii->first]){
+                ii->second(this);
+            }
+        }
+    
+    
     /*
     if ( keysHeld_[SDLK_ESCAPE] )
     {
@@ -306,8 +318,13 @@ bool Game_Manager::register_interaction(string type, interactionFunction func){
 }
 
 
-bool Game_Manager::register_key_action(int keyID, keyActionFunction func){
-	keyActions_[keyID] = func;
+bool Game_Manager::register_key_action(int keyID, keyActionFunction func, int state){
+    if (state == 0) {
+        keyDownActions_[keyID] = func;
+    }
+    else{
+        keyUpActions_[keyID] = func;
+    }
 }
 
 

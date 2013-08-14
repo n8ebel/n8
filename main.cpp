@@ -73,7 +73,14 @@ int main( int argc, char* argv[] )
 /*** GAME LOOP ***/
     game->initializeGameLoop();
     
+    int i = 0;
     while (game->is_running()) {
+        
+        cout << i << endl;
+        if (i % 100 == 0) {
+            
+            cout << "foobar " << endl;
+        
         game->handle_input();
         
         /*** Update the game logic ***/
@@ -86,6 +93,9 @@ int main( int argc, char* argv[] )
         
         /*** Render the frame ***/
         n8::get_render_system(game)->render();
+        }
+        
+        i++;
         
 
     }
@@ -129,12 +139,12 @@ void Space(Game_Manager* game){
 						0, -1, 2);
 }
 void SetupKeyInput(Game_Manager* game){
-	game->register_key_action(SDLK_ESCAPE, StopGame);
-	game->register_key_action(SDLK_LEFT, Left);
-	game->register_key_action(SDLK_RIGHT, Right);
-	game->register_key_action(SDLK_UP, Up);
-	game->register_key_action(SDLK_DOWN, Down);
-	game->register_key_action(SDLK_SPACE, Space);
+	game->register_key_action(SDLK_ESCAPE, StopGame,0);
+	game->register_key_action(SDLK_LEFT, Left,0);
+	game->register_key_action(SDLK_RIGHT, Right,0);
+	game->register_key_action(SDLK_UP, Up,0);
+	game->register_key_action(SDLK_DOWN, Down,0);
+	game->register_key_action(SDLK_SPACE, Space,1);
 
 }
 
