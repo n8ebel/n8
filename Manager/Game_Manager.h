@@ -80,6 +80,12 @@ public:
      */
     bool is_running() { return running_; }
     
+    /** Gets the number of milliseconds since the timer was started
+     *
+     *  @return The milliseconds since the timer was started
+     */
+    Uint32 get_elapsed_time() { return SDL_GetTicks() - start_ ; }
+    
     /** Used to change whether the game is running or not
      *
      *  @param val The True of False value of whether the game should be running or not

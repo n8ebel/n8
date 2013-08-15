@@ -96,18 +96,18 @@ void Render_System::render(){
     int xOffset = n8::get_position_component(camera_)->get_x();
     int yOffset = n8::get_position_component(camera_)->get_y();
     
-    cout << "render" << endl;
+    
     /*** Draw images to the screen ***/
     for (int i = 0; i < registered_entities_.size(); i++) {
-        cout << registered_entities_[i]->get_id() << endl;
-        
-        draw_image( n8::get_position_component(registered_entities_[i])->get_x() - xOffset, n8::get_position_component(registered_entities_[i])->get_y() - yOffset, 
-                    n8::get_drawable_component(registered_entities_[i])->get_image(), screen_surface);
+        draw_image( n8::get_position_component(registered_entities_[i])->get_x() - xOffset, 
+                    n8::get_position_component(registered_entities_[i])->get_y() - yOffset, 
+                    n8::get_drawable_component(registered_entities_[i])->get_image(), 
+                    screen_surface);
          
     }
     
     //Update the screen
-    SDL_Flip( n8::get_drawable_component(screen_)->get_image() );
+    SDL_Flip( screen_surface );
 
 }
 

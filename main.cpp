@@ -18,6 +18,8 @@ const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 800;
 const int SCREEN_BPP = 32;
 
+const int FPS = 100;
+
 //SDL_Surface* load_image(string);
 //void apply_surface(int,int, SDL_Surface*, SDL_Surface*);
 void RegisterInteractions(Game_Manager* game);
@@ -74,29 +76,27 @@ int main( int argc, char* argv[] )
     game->initializeGameLoop();
     
     int i = 0;
+    Uint32 time;
     while (game->is_running()) {
         
-        cout << i << endl;
-        if (i % 100 == 0) {
+        time = SDL_GetTicks();
+                
+            game->handle_input();
             
-            cout << "foobar " << endl;
+            /*** Update the game logic ***/
+            game->get_system(MOVEMENT_SYSTEM)->update();
+            game->get_system(INTERACTION_SYSTEM)->update();
+            game->remove_entities();
+            
+            game->get_system(CAMERA_SYSTEM)->update();
+            game->get_system(RENDER_SYSTEM)->update();
+            
+            /*** Render the frame ***/
+            n8::get_render_system(game)->render();
         
-        game->handle_input();
-        
-        /*** Update the game logic ***/
-        game->get_system(MOVEMENT_SYSTEM)->update();
-        game->get_system(INTERACTION_SYSTEM)->update();
-        game->remove_entities();
-        
-        game->get_system(CAMERA_SYSTEM)->update();
-        game->get_system(RENDER_SYSTEM)->update();
-        
-        /*** Render the frame ***/
-        n8::get_render_system(game)->render();
+        if ( 1000/FPS > SDL_GetTicks() - time) {
+            SDL_Delay(1000/FPS - (SDL_GetTicks() - time));
         }
-        
-        i++;
-        
 
     }
     
