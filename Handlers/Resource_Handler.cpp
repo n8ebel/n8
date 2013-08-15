@@ -51,7 +51,9 @@ SDL_Surface* Resource_Handler::load_image( string filename )
     SDL_Surface* optimizedImage = NULL;
     
     //Load the image
+    
     loadedImage = SDL_LoadBMP( filename.c_str() );
+    
     
     
     //If nothing went wrong in loading the image
