@@ -135,10 +135,23 @@ bool Interaction_System::register_interaction(string interactionType, void (*fun
 
 void Interaction_System::update(){
     //cout << "updating " << endl;
+    /*
     for (int i = 0; i < registered_entities_.size(); i++) {
         for (int j = i+1; j < registered_entities_.size(); j++) {
             if ( do_collide(registered_entities_[i], registered_entities_[j])) {
                 pick_interaction(registered_entities_[i], registered_entities_[j]);
+            }
+        }
+    }
+     */
+    map<int, Entity*>::iterator ii;
+    map<int, Entity*>::iterator jj;
+    for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
+        jj = ii;
+        advance(jj, 1);
+        for (jj; jj != registered_entities_map_.end(); jj++) {
+            if ( do_collide(ii->second, jj->second)) {
+                pick_interaction(ii->second, jj->second);
             }
         }
     }

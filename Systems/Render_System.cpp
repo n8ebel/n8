@@ -98,12 +98,22 @@ void Render_System::render(){
     
     
     /*** Draw images to the screen ***/
+    /*
     for (int i = 0; i < registered_entities_.size(); i++) {
         draw_image( n8::get_position_component(registered_entities_[i])->get_x() - xOffset, 
                     n8::get_position_component(registered_entities_[i])->get_y() - yOffset, 
                     n8::get_drawable_component(registered_entities_[i])->get_image(), 
                     screen_surface);
          
+    }
+     */
+    map<int, Entity*>::iterator ii;
+    for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
+        draw_image( n8::get_position_component(ii->second)->get_x() - xOffset, 
+                   n8::get_position_component(ii->second)->get_y() - yOffset, 
+                   n8::get_drawable_component(ii->second)->get_image(), 
+                   screen_surface);
+        
     }
     
     //Update the screen
@@ -114,12 +124,27 @@ void Render_System::render(){
 /** Updates all registered components. Currently, does nothing unless DEBUG_MODE and DEBUG_UPDATE are both true in which case the id of each registered entity is output to the console.
  */
 void Render_System::update(){
+    /*
     if (DEBUG_MODE && DEBUG_UPDATE) {
         cout << "    RENDER_SYSTEM.Update()" << registered_entities_.size() << endl;
         for (int i = 0; i < registered_entities_.size(); i++) {
             Name_Component* name = (Name_Component*)registered_entities_[i]->get_component(NAME);
             if (name == NULL) {
                 cout << "      " << registered_entities_[i]->get_id() << endl;
+            }
+            else{
+                cout << "      " << name->get_name() << endl;   
+            }
+        }
+    }
+    */
+    if (DEBUG_MODE && DEBUG_UPDATE) {
+        cout << "    RENDER_SYSTEM.Update()" << registered_entities_map_.size() << endl;
+        map<int, Entity*>::iterator ii;
+        for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {            
+            Name_Component* name = (Name_Component*)ii->second->get_component(NAME);
+            if (name == NULL) {
+                cout << "      " << ii->second->get_id() << endl;
             }
             else{
                 cout << "      " << name->get_name() << endl;   

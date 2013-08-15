@@ -11,6 +11,7 @@
 #include "n8.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 
 using namespace std;
@@ -113,6 +114,35 @@ void n8::log_debug(string tag, string msg){
         cout << "(DEBUG) " << tag << ": " << msg << endl;
     }
 }
+
+/** Converts an integer to a string
+ *
+ *  @param num The number to convert
+ *  @return A string representation of the passed value
+ */
+string n8::num_to_string(int num){
+    string result;          
+    ostringstream convert;
+    convert << num;      
+    result = convert.str(); 
+    
+    return result;
+}
+
+/** Converts a double to a string
+ *
+ *  @param num The number to convert
+ *  @return A string representation of the passed value
+ */
+string n8::num_to_string(double num){
+    string result;          
+    ostringstream convert;
+    convert << num;      
+    result = convert.str(); 
+    
+    return result;
+}
+
 
 /** Used to get a pointer to a Game_Manager object's render system
  *

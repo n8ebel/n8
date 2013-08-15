@@ -67,7 +67,8 @@ bool System::register_entity(Entity* newEntity){
     cout << "System.register_entity" << endl;
     if (check_requirements(newEntity)) {
         cout << "  entity passed check " << endl;
-        registered_entities_.push_back(newEntity);
+        //registered_entities_.push_back(newEntity);
+        registered_entities_map_[newEntity->get_id()]= newEntity;
         return true;
     }
     else{
@@ -82,6 +83,7 @@ bool System::register_entity(Entity* newEntity){
  *  @param ID The identifier of the entity to remove
  */
 void System::remove_entity(int ID){
+    /*
 	int index = registered_entities_.size() -1 ;
 	for(index; index >= 0; index--){
 		if(registered_entities_[index]->get_id() == ID){
@@ -89,6 +91,8 @@ void System::remove_entity(int ID){
             registered_entities_.erase(registered_entities_.begin()+index);
         }
 	}
+    */
+    registered_entities_map_.erase(ID);
 
 	
 
@@ -98,10 +102,19 @@ void System::remove_entity(int ID){
  *  Should be overridden for derived classes
  */
 void System::update(){
+    /*
     if (DEBUG_MODE && DEBUG_UPDATE) {
         cout << "    BASE_SYSTEM.Update()" << registered_entities_.size() << endl;
         for (int i = 0; i < registered_entities_.size(); i++) {
             cout << "      " << registered_entities_[i]->get_id() << endl;
+        }
+    }
+     */
+    if (DEBUG_MODE && DEBUG_UPDATE) {
+        cout << "    BASE_SYSTEM.Update()" << registered_entities_map_.size() << endl;
+        map<int, Entity*>::iterator ii;
+        for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
+            cout << "      " << ii->second->get_id() << endl;
         }
     }
 }

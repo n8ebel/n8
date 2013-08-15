@@ -69,8 +69,8 @@ int main( int argc, char* argv[] )
     
 
 /*** Create enemy entities ***/
-    Entity* megan = CreateEnemyEntity(game, ENEMY_TYPE, 400,400, enemySprite, 1,1,3);
-    Entity* vader = CreateEnemyEntity(game, ENEMY_TYPE, 350,700, enemySprite, -1,-1,1);
+    Entity* megan = CreateEnemyEntity(game, ENEMY_TYPE, 400,400, enemySprite, 1,1,0);
+    Entity* vader = CreateEnemyEntity(game, ENEMY_TYPE, 350,700, enemySprite, -1,-1,0);
 
 /*** GAME LOOP ***/
     game->initializeGameLoop();
@@ -134,8 +134,10 @@ void Space(Game_Manager* game){
 	n8::log_debug("Game_Manager", "Pressed Space");
 	Entity* userEntity = static_cast<Movement_System*>(game->get_system(MOVEMENT_SYSTEM))->get_user_entity();
 	Position_Component* userPosition = static_cast<Position_Component*>(userEntity->get_component(POSITION));
-	CreateEnemyEntity(game, PROJECTILE_TYPE,  userPosition->get_x(), userPosition->get_y(),
-						game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp"),
+    Sprite* projectileSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp");
+    
+	CreateEnemyEntity(game, PROJECTILE_TYPE,  userPosition->get_x(), userPosition->get_y() - projectileSprite->get_height() ,
+						projectileSprite,
 						0, -1, 2);
 }
 void SetupKeyInput(Game_Manager* game){
@@ -198,12 +200,13 @@ Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite*
 
 void ProjectileInteraction(Game_Manager* game, Entity* ent1, Entity* ent2){
     
-    //n8::log_info("PROJECTILE_INTERACTION", "Entity 1: " + ent1->get_id() + "  Entity 2: " + ent2->get_id());
+    n8::log_info("PROJECTILE_INTERACTION", n8::num_to_string(ent1->get_id()) );
+    n8::log_info("PROJECTILE_INTERACTION", n8::num_to_string(ent2->get_id()) );
 	if ( ent1->get_type() == PROJECTILE_TYPE){
-		//game->flag_to_remove_entity(ent2);
+		game->flag_to_remove_entity(ent2);
 	}
 	else{
-		//game->flag_to_remove_entity(ent1);
+		game->flag_to_remove_entity(ent1);
 	}
 }
 

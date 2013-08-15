@@ -84,7 +84,7 @@ void Movement_System::register_user_entity(Entity* userEntity){
  *  Movement_Component, each entity's position is updated.
  */
 void Movement_System::update(){
-    
+    /*
 	for (int i = 0; i < registered_entities_.size(); i++) {
 		if (registered_entities_[i]->get_component(MOVEMENT) != NULL){
 			Movement_Component* moveComp = static_cast<Movement_Component*>(registered_entities_[i]->get_component(MOVEMENT));
@@ -94,6 +94,21 @@ void Movement_System::update(){
             else{
                 cout << "need to remove an entity" << endl;
                 game_->flag_to_remove_entity(registered_entities_[i]);
+            }
+            
+		}
+	}
+     */
+    map<int, Entity*>::iterator ii;
+    for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
+		if (ii->second->get_component(MOVEMENT) != NULL){
+			Movement_Component* moveComp = static_cast<Movement_Component*>(ii->second->get_component(MOVEMENT));
+			if( inside_world_bounds(ii->second, moveComp->get_x_offset(), moveComp->get_y_offset())){
+				static_cast<Position_Component*>(ii->second->get_component(POSITION))->update_position(moveComp->get_x_offset(), moveComp->get_y_offset());
+			}
+            else{
+                cout << "need to remove an entity" << endl;
+                game_->flag_to_remove_entity(ii->second);
             }
             
 		}

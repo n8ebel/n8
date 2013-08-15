@@ -80,6 +80,9 @@ public:
     static void log_error(string tag,string msg);
     static void log_info(string tag, string msg);
     static void log_debug(string tag, string msg);
+    
+    static string num_to_string(int num);
+    static string num_to_string(double num);
 
 };
 
