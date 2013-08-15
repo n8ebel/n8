@@ -41,19 +41,6 @@ Interaction_System::Interaction_System(Game_Manager* gameManager) {
  * 	@see Entity
  */
 bool Interaction_System::do_collide(Entity* ent1, Entity* ent2){
-    /*
-    cout << "do_collide: " << ent1->get_id() << " , " << ent2->get_id() << endl;
-    cout << "left1: " << n8::get_position_component(ent1)->get_left() << endl;
-    cout << "right1: " << n8::get_position_component(ent1)->get_right() << endl;
-    cout << "top1: " << n8::get_position_component(ent1)->get_top() << endl;
-    cout << "bottom1: " << n8::get_position_component(ent1)->get_bottom() << endl;
-    
-    cout << "left2: " << n8::get_position_component(ent2)->get_left() << endl;
-    cout << "right3: " << n8::get_position_component(ent2)->get_right() << endl;
-    cout << "top3: " << n8::get_position_component(ent2)->get_top() << endl;
-    cout << "bottom3: " << n8::get_position_component(ent2)->get_bottom() << endl;
-     */
-    
     if (ent1->get_id() == SCREEN || ent2->get_id() == SCREEN) {
         return false;
     }
@@ -134,16 +121,6 @@ bool Interaction_System::register_interaction(string interactionType, void (*fun
 }
 
 void Interaction_System::update(){
-    //cout << "updating " << endl;
-    /*
-    for (int i = 0; i < registered_entities_.size(); i++) {
-        for (int j = i+1; j < registered_entities_.size(); j++) {
-            if ( do_collide(registered_entities_[i], registered_entities_[j])) {
-                pick_interaction(registered_entities_[i], registered_entities_[j]);
-            }
-        }
-    }
-     */
     map<int, Entity*>::iterator ii;
     map<int, Entity*>::iterator jj;
     for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {

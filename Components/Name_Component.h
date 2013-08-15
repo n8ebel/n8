@@ -20,9 +20,7 @@ using namespace std;
  *  differentiation and story elements to the game.
  */
 class Name_Component : public Component {
-private:
-    string name_;   /** < A name for an entity **/
-    
+
 public:
     
     ~Name_Component();
@@ -33,6 +31,9 @@ public:
      *  @return The name stored by the component 
      */
     string get_name() { return name_; }
+    
+private:
+    string name_;   /** < A name for an entity **/
 };
 
 #endif

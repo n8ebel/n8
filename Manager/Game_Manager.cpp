@@ -48,7 +48,8 @@ Game_Manager::Game_Manager(){
     resource_handler_ = new Resource_Handler();
     running_ = false;
     initializeSDL();
-
+    screen_ = NULL;
+    camera_ = NULL;
 
 }
 
@@ -64,6 +65,8 @@ Game_Manager::Game_Manager(string resource_config, int screenW, int screenH){
     resource_handler_ = new Resource_Handler();
     initializeSDL();
     running_ = false;
+    screen_ = NULL;
+    camera_ = NULL;
     
 }
 
@@ -111,6 +114,11 @@ bool Game_Manager::initializeGame(){
 	else{
 		n8::log_info("Main","Camera system was initialized");
 	}
+    
+    initialize_screen(100, 100, 32);
+    
+    return true;
+    
 }
 
 /** Used to initialize the SDL driven game loop.
@@ -165,34 +173,6 @@ void Game_Manager::handle_input(){
         }
     
     
-    /*
-    if ( keysHeld_[SDLK_ESCAPE] )
-    {
-        running_ = false;
-    }
-    
-    if ( keysHeld_[SDLK_LEFT] )
-    {
-        n8::log_debug("Game_Manager","Moved left");
-
-        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->left();
-    }
-    if ( keysHeld_[SDLK_RIGHT] )
-    {
-        n8::log_debug("Game_Manager","Moved right");
-        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->right();
-    }
-    if ( keysHeld_[SDLK_UP] )
-    {
-        n8::log_debug("Game_Manager","Moved up");
-        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->up();
-    }
-    if (keysHeld_[SDLK_DOWN])
-    {
-        n8::log_debug("Game_Manager","Moved down");
-        //((Movement_System*)registered_systems_[MOVEMENT_SYSTEM])->down();
-    }
-    */
     
 }
 
@@ -510,12 +490,14 @@ Entity* Game_Manager::create_controllable_entity(int id, string tp, int initX, i
  *  @see Component
  *  @see n8
  */
-Entity* Game_Manager::create_screen_entity(int w, int h, int bpp){
+bool Game_Manager::initialize_screen(int w, int h, int bpp){
+    
+    if (screen_ != NULL) {
+        remove_entity(screen_);
+        screen_ = NULL;
+    }
+    
     SDL_Surface *screen_surface = NULL;
-    
-    
-    
-    //Set up the screen
     screen_surface = SDL_SetVideoMode(w, h, bpp, SDL_SWSURFACE);
     
     //If there was an error in setting up the screen
@@ -525,17 +507,30 @@ Entity* Game_Manager::create_screen_entity(int w, int h, int bpp){
         return NULL;    
     }
     
-    Entity* entScreen = new Entity(SCREEN, SCREEN_TYPE);  // uses 'SCREEN' const value of -1
-    Sprite* screenSprite = new Sprite("SCREEN", screen_surface);
-    entScreen->add_component(new Drawable_Component(DRAWABLE, screenSprite));
-    entScreen->add_component(new Position_Component(POSITION, 0, 0, screenSprite->get_width(), screenSprite->get_height()));
+    screen_ = new Entity(SCREEN, SCREEN_TYPE);  // uses 'SCREEN' const value of -1
+    if (screen_ != NULL) {
+        
+        Sprite* screenSprite = new Sprite("SCREEN", screen_surface);
+        if (screenSprite == NULL) {
+            delete screen_;
+            screen_ = NULL;
+            return false;
+        }
+        screen_->add_component(new Drawable_Component(DRAWABLE, screenSprite));
+        screen_->add_component(new Position_Component(POSITION, 0, 0, screenSprite->get_width(), screenSprite->get_height()));
+        
+        register_entity(screen_);
+        
+        Render_System* renderSystem = static_cast<Render_System*>(get_system(RENDER_SYSTEM));
+        renderSystem->register_screen_entity(screen_);
+    }
+    else{
+        return false;
+    }
     
-    register_entity(entScreen);
-    
-    Render_System* renderSystem = static_cast<Render_System*>(get_system(RENDER_SYSTEM));
-    renderSystem->register_screen_entity(entScreen);
 
-    return entScreen;
+    return true;
+    
     
 }
 
@@ -554,17 +549,23 @@ Entity* Game_Manager::create_screen_entity(int w, int h, int bpp){
  *  @see Component
  *  @see n8
  */
-Entity* Game_Manager::create_camera_entity(int x, int y, int w, int h){
-    Entity* camera = new Entity(CAMERA, CAMERA_TYPE);
-    camera->add_component(new Position_Component(POSITION, x,y, w, h));
-    //camera->add_component(new Size_Component(SIZE, w,h));
-    
-    register_entity(camera);
+bool Game_Manager::initialize_camera(int x, int y){//, int w, int h){
+    camera_ = new Entity(CAMERA, CAMERA_TYPE);
+    if( camera_ != NULL){
+        camera_->add_component(new Position_Component(POSITION, x,y, 
+                                                      n8::get_position_component(screen_)->get_width(), 
+                                                      n8::get_position_component(screen_)->get_height()));
+        
+        register_entity(camera_);
 
-    static_cast<Camera_System*>(get_system(CAMERA_SYSTEM))->register_camera_entity(camera);
-    static_cast<Render_System*>(get_system(RENDER_SYSTEM))->register_camera_entity(camera);
+        static_cast<Camera_System*>(get_system(CAMERA_SYSTEM))->register_camera_entity(camera_);
+        static_cast<Render_System*>(get_system(RENDER_SYSTEM))->register_camera_entity(camera_);
+    }
+    else{
+        return false;
+    }
                           
-    return camera;
+    return true;
 }
 
 /** Used to set the dimensions of the current game world.

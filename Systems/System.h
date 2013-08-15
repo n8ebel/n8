@@ -45,8 +45,7 @@ class System {
   protected:
     map<string,int> requirements_;          /** < A map of the required components to be registered with
                                              and be operated on by this system **/
-    map<int, Entity*> registered_entities_map_;
-    //vector<Entity*> registered_entities_;   /** < Stores pointers to all entities that meet the system  requirements and have been registered with the system **/
+    map<int, Entity*> registered_entities_map_;   /** < Stores pointers to all entities that meet the system  requirements and have been registered with the system **/
     
     Message_Handler* message_system_;       /** < Pointer to a Message_Handler so messages can be passed to game systems **/
     

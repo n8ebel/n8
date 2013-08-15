@@ -67,29 +67,40 @@ bool Camera_System::register_camera_entity(Entity* newEntity){
  *
  */
 void Camera_System::update(){
-    int entityX = n8::get_position_component(entity_to_follow_)->get_position()->get_x();
-    int entityY = n8::get_position_component(entity_to_follow_)->get_position()->get_y();
-    int entW = n8::get_position_component(entity_to_follow_)->get_width();
-    int entH = n8::get_position_component(entity_to_follow_)->get_height();
-    int newX = entityX + .5*entW - n8::get_position_component(camera_)->get_width()/2;
-    int newY = entityY + .5*entH - n8::get_position_component(camera_)->get_height()/2;
+    if (entity_to_follow_ != NULL && camera_ != NULL) {
+        
+        Position_Component* entityPosition = n8::get_position_component(entity_to_follow_);
+        Position_Component* cameraPosition = n8::get_position_component(camera_);
+        
+        if (entityPosition != NULL && cameraPosition != NULL) {
+            
+            int entityX = entityPosition->get_position()->get_x();
+            int entityY = entityPosition->get_position()->get_y();
+            int entW = entityPosition->get_width();
+            int entH = entityPosition->get_height();
+            int newX = entityX + .5*entW - cameraPosition->get_width()/2;
+            int newY = entityY + .5*entH - cameraPosition->get_height()/2;
+            
+            if (newX < 0) {
+                newX = 0;
+            }
+            if (newX > world_width_ - cameraPosition->get_width()) {
+                newX = world_width_ - cameraPosition->get_width();
+            }
+            
+            if (newY < 0) {
+                newY = 0;
+            }
+            if (newY > world_height_ - cameraPosition->get_height()) {
+                newY = world_height_ - cameraPosition->get_height();
+            }
+            
+            cameraPosition->get_position()->set_x(newX);
+            cameraPosition->get_position()->set_y(newY);
+        }
     
-    if (newX < 0) {
-        newX = 0;
+        
     }
-    if (newX > world_width_ -n8::get_position_component(camera_)->get_width()) {
-        newX = world_width_ - n8::get_position_component(camera_)->get_width();
-    }
-    
-    if (newY < 0) {
-        newY = 0;
-    }
-    if (newY > world_height_ -n8::get_position_component(camera_)->get_height()) {
-        newY = world_height_ -n8::get_position_component(camera_)->get_height();
-    }
-    
-    n8::get_position_component(camera_)->get_position()->set_x(newX);
-    n8::get_position_component(camera_)->get_position()->set_y(newY);
 }
 
 

@@ -23,11 +23,6 @@ using namespace std;
  *  Everything from an in-game item to the game's screen is represented by an entity.
  */
 class Entity{
- private:
-    int id_; /** < a unique specifier for the entity **/
-    string type_;  /** < an identifier so entities can be grouped together.  ex: NPC, Enemy, User **/
-    map<string, Component*> component_map_;  /** < Stores all components added to the entity **/
-
  public:
     ~Entity();
     
@@ -57,6 +52,12 @@ class Entity{
 
     Component* get_component(string componentID);
     map<string,Component*> get_components();
+    
+  private:
+    int id_; /** < a unique specifier for the entity **/
+    string type_;  /** < an identifier so entities can be grouped together.  ex: NPC, Enemy, User **/
+    map<string, Component*> component_map_;  /** < Stores all components added to the entity **/
+
 };
 
 #endif 

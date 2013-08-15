@@ -20,14 +20,6 @@ using namespace std;
  *  be used for drawing, collison, and interaction operations.
  */
 class Position_Component : public Component {
-private:
-    Point* position_;   /** < Stores the x&y coordinates of the component */
-    int left_;
-    int right_;
-    int top_;
-    int bottom_;
-    int width_;
-    int height_;
     
 public:
     ~Position_Component();
@@ -94,6 +86,15 @@ public:
     int get_height() { return height_; }
 
     void update_position(int xOffset, int yOffset);
+    
+private:
+    Point* position_;   /** < Stores the x&y coordinates of the component */
+    int left_;
+    int right_;
+    int top_;
+    int bottom_;
+    int width_;
+    int height_;
 };
 
 #endif

@@ -18,7 +18,7 @@
  *
  */
 Drawable_Component::~Drawable_Component(){
-    
+    //delete sprite_;
 }
 
 /** Constructor

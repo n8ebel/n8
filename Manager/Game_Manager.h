@@ -50,8 +50,21 @@ public:
     bool register_interaction(string type, interactionFunction func);
     bool register_key_action(int keyID, keyActionFunction,int state);
     
-    Entity* create_screen_entity(int w, int h, int bpp);
-    Entity* create_camera_entity(int x, int y, int w, int h);
+    bool initialize_screen(int w, int h, int bpp);
+    bool initialize_camera(int x, int y);//, int w, int h);
+    
+    /** Gets a pointer to the game's screen entity
+     *
+     *  @return A pointer to the entity used to represent the screen
+     */
+    Entity* get_screen() { return screen_; }
+    
+    /** Gets a pointer to the game's camera entity
+     *
+     *  @return A pointer to the entity used to represent the camera
+     */
+    Entity* get_camera() { return camera_; }
+    
     System* create_system(string ID);
 
     Entity* create_drawable_entity(int id, string tp, int initX, int initY, Sprite* sprite);
@@ -109,6 +122,9 @@ private:
     map<string, System*> registered_systems_;  /** < Stores registered system objects **/
     map<int,Entity*> registered_entities_;  /** < Stores all registered game entities using an int as a unique id which is used to access an entity **/
     Resource_Handler* resource_handler_;   /** < Stores a pointer to a resource handler object **/
+    
+    Entity* screen_;
+    Entity* camera_;
     
     Uint32 start_; /** < Used for controlling game timing **/
     Uint32 current_;

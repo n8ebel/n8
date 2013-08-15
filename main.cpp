@@ -43,13 +43,13 @@ int main( int argc, char* argv[] )
     SetupGameSystems(game);
     SetupKeyInput(game);
 
-    game->set_world_bounds(SCREEN_WIDTH, SCREEN_HEIGHT);
+    game->set_world_bounds(SCREEN_WIDTH*2, SCREEN_HEIGHT*2);
     
 /*** Create the screen and register it ***/
-    Entity* entScreen = game->create_screen_entity(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    game->initialize_screen(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
     
 /*** Create the camera entity ***/
-    Entity* entCamera = game->create_camera_entity(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    game->initialize_camera(0, 0);//, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 /*** Load image resources ***/
     game->load_images("/Users/lcballa44/Desktop/n8/Assets/gfx/images.txt");

@@ -18,7 +18,7 @@ using namespace std;
 
 Entity::~Entity(){
     map<string, Component*>::iterator ii;
-    
+    cout << "Deleting Entity " << id_ << endl;
     for (ii = component_map_.begin(); ii != component_map_.end(); ii++) {
         delete ii->second;
     }

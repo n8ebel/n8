@@ -48,14 +48,6 @@ bool Movement_System::inside_world_bounds(Entity* ent, int xOffset, int yOffset)
     int width = n8::get_position_component(ent)->get_width();
     int height = n8::get_position_component(ent)->get_height();
     
-    /*
-    cout << "world width: " << world_width_ << endl;
-    cout << "id: " << ent->get_id() << endl;
-    cout << "left: " << curX << endl;
-    cout << "right: " << curX+width << endl;
-    */
-    
-    
     if ( (curX+xOffset) >= 0 && (curX + width+xOffset) <= world_width_){
         
         if( (curY+yOffset) >= 0 && (curY + height+yOffset) <= world_height_){
@@ -84,21 +76,6 @@ void Movement_System::register_user_entity(Entity* userEntity){
  *  Movement_Component, each entity's position is updated.
  */
 void Movement_System::update(){
-    /*
-	for (int i = 0; i < registered_entities_.size(); i++) {
-		if (registered_entities_[i]->get_component(MOVEMENT) != NULL){
-			Movement_Component* moveComp = static_cast<Movement_Component*>(registered_entities_[i]->get_component(MOVEMENT));
-			if( inside_world_bounds(registered_entities_[i], moveComp->get_x_offset(), moveComp->get_y_offset())){
-				static_cast<Position_Component*>(registered_entities_[i]->get_component(POSITION))->update_position(moveComp->get_x_offset(), moveComp->get_y_offset());
-			}
-            else{
-                cout << "need to remove an entity" << endl;
-                game_->flag_to_remove_entity(registered_entities_[i]);
-            }
-            
-		}
-	}
-     */
     map<int, Entity*>::iterator ii;
     for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
 		if (ii->second->get_component(MOVEMENT) != NULL){
@@ -131,51 +108,22 @@ void Movement_System::right(){
         ((Position_Component*)user_entity_->get_component(POSITION))->update_position(5, 0);
         
     }
-    /*
-    for (int i = 0; i < registered_entities_.size(); i++) {
-        if( inside_world_bounds(registered_entities_[i], 5, 0)){
-            ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(5, 0);
-            
-        }
-    }
-     */
 }
 void Movement_System::down(){
     if( inside_world_bounds(user_entity_, 0, 5)){
         ((Position_Component*)user_entity_->get_component(POSITION))->update_position(0, 5);
         
     }
-    /*
-    for (int i = 0; i < registered_entities_.size(); i++) {
-        if( inside_world_bounds(registered_entities_[i], 0, 5)){
-            ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(0, 5);
-        }
-    }
-     */
 }
 void Movement_System::left(){
     if( inside_world_bounds(user_entity_, -5, 0)){
         ((Position_Component*)user_entity_->get_component(POSITION))->update_position(-5, 0);
         
     }
-    /*
-    for (int i = 0; i < registered_entities_.size(); i++) {
-        if( inside_world_bounds(registered_entities_[i], -5, 0)){
-            ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(-5, 0);
-        }
-    }
-     */
 }
 void Movement_System::up(){
     if( inside_world_bounds(user_entity_, 0, -5)){
         ((Position_Component*)user_entity_->get_component(POSITION))->update_position(0, -5);
         
     }
-    /*
-    for (int i = 0; i < registered_entities_.size(); i++) {
-        if( inside_world_bounds(registered_entities_[i], 0, -5)){
-            ((Position_Component*)registered_entities_[i]->get_component(POSITION))->update_position(0, -5);
-        }
-    }
-     */
 }

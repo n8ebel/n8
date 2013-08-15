@@ -20,9 +20,7 @@ using namespace std;
  */
 class Message_Handler{
 
-private:
-    
-public:
+  public:
     
     ~Message_Handler();
     Message_Handler();

@@ -89,55 +89,38 @@ void Render_System::draw_image( int x, int y, SDL_Surface* source, SDL_Surface* 
  */
 void Render_System::render(){
     
-    
-    SDL_Surface* screen_surface = n8::get_drawable_component(screen_)->get_image();
-    SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0, 0, 0));
-    
-    int xOffset = n8::get_position_component(camera_)->get_x();
-    int yOffset = n8::get_position_component(camera_)->get_y();
-    
-    
-    /*** Draw images to the screen ***/
-    /*
-    for (int i = 0; i < registered_entities_.size(); i++) {
-        draw_image( n8::get_position_component(registered_entities_[i])->get_x() - xOffset, 
-                    n8::get_position_component(registered_entities_[i])->get_y() - yOffset, 
-                    n8::get_drawable_component(registered_entities_[i])->get_image(), 
-                    screen_surface);
-         
-    }
-     */
-    map<int, Entity*>::iterator ii;
-    for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
-        draw_image( n8::get_position_component(ii->second)->get_x() - xOffset, 
-                   n8::get_position_component(ii->second)->get_y() - yOffset, 
-                   n8::get_drawable_component(ii->second)->get_image(), 
-                   screen_surface);
+    if (screen_ != NULL) {
+        
+        if (n8::get_drawable_component(screen_) != NULL) {
+            SDL_Surface* screen_surface = n8::get_drawable_component(screen_)->get_image();
+            SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0, 0, 0));
+            int xOffset = 0;
+            int yOffset = 0;
+            if (camera_ != NULL && n8::get_position_component(camera_) != NULL) {
+                xOffset = n8::get_position_component(camera_)->get_x();
+                yOffset = n8::get_position_component(camera_)->get_y();
+            }
+            cout << "x offset: " << xOffset << endl;
+            
+            map<int, Entity*>::iterator ii;
+            for (ii = registered_entities_map_.begin(); ii != registered_entities_map_.end(); ii++) {
+                draw_image( n8::get_position_component(ii->second)->get_x() - xOffset, 
+                           n8::get_position_component(ii->second)->get_y() - yOffset, 
+                           n8::get_drawable_component(ii->second)->get_image(), 
+                           screen_surface);
+                
+            }
+            
+            SDL_Flip( screen_surface );
+        }
         
     }
-    
-    //Update the screen
-    SDL_Flip( screen_surface );
 
 }
 
 /** Updates all registered components. Currently, does nothing unless DEBUG_MODE and DEBUG_UPDATE are both true in which case the id of each registered entity is output to the console.
  */
 void Render_System::update(){
-    /*
-    if (DEBUG_MODE && DEBUG_UPDATE) {
-        cout << "    RENDER_SYSTEM.Update()" << registered_entities_.size() << endl;
-        for (int i = 0; i < registered_entities_.size(); i++) {
-            Name_Component* name = (Name_Component*)registered_entities_[i]->get_component(NAME);
-            if (name == NULL) {
-                cout << "      " << registered_entities_[i]->get_id() << endl;
-            }
-            else{
-                cout << "      " << name->get_name() << endl;   
-            }
-        }
-    }
-    */
     if (DEBUG_MODE && DEBUG_UPDATE) {
         cout << "    RENDER_SYSTEM.Update()" << registered_entities_map_.size() << endl;
         map<int, Entity*>::iterator ii;
