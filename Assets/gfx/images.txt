@@ -1,0 +1,6 @@
+/Users/lcballa44/Desktop/n8/Assets/gfx/hello.bmp
+/Users/lcballa44/Desktop/n8/Assets/gfx/background.bmp
+/Users/lcballa44/Desktop/goo.png
+/Users/lcballa44/Desktop/n8/Assets/gfx/user_ship.bmp
+/Users/lcballa44/Desktop/n8/Assets/gfx/enemy_ship.bmp
+/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp
