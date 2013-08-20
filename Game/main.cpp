@@ -48,6 +48,7 @@ int main( int argc, char* argv[] )
     
 /*** Create the screen and register it ***/
     game->initialize_screen(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+    game->set_screen_color(100, 100, 100);
     
 /*** Create the camera entity ***/
     game->initialize_camera(0, 0);//, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -63,7 +64,12 @@ int main( int argc, char* argv[] )
     
 
 /*** Create background entity ***/
-    Entity* entBackground = game->create_drawable_entity(BACKGROUND, BACKGROUND_TYPE, 0, 0, background);
+    //Entity* entBackground = game->create_drawable_entity(BACKGROUND, BACKGROUND_TYPE, 0, 0, background);
+	Entity* entBackground = new Entity(n8::get_next_id(), BACKGROUND_TYPE);
+    entBackground->add_component(new Drawable_Component(DRAWABLE, background));
+	entBackground->add_component(new Position_Component(POSITION, 200, 200, background->get_width(), background->get_height()));
+    game->register_entity(entBackground);
+    //static_cast<Render_System*>(game->get_system(RENDER_SYSTEM))->add_base_layer(entBackground);
     
 /*** Create user controlled entity ***/
     Entity* nate = CreateUserEntity(game, "Nate", 0,0, shipSprite);

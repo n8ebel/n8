@@ -52,6 +52,8 @@ public:
     void register_key_action(int keyID, Input_Handler::keyActionFunction,int state);
     
     bool initialize_screen(int w, int h, int bpp);
+	void set_screen_color(int r, int g, int b);
+	void set_screen_color(int a ,int r, int g, int b);
     bool initialize_camera(int x, int y);//, int w, int h);
     
     /** Gets a pointer to the game's screen entity

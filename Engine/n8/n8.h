@@ -1,5 +1,5 @@
 /*
- * n8.h
+ * Sprite_Manager.h
  * n8
  *
  * Author:          Nate Ebel
@@ -20,6 +20,7 @@
 #include "Controllable_Coponent.h"
 #include "Size_Component.h"
 #include "Movement_Component.h"
+#include "Color_Component.h"
 #include <string>
 
 
@@ -35,6 +36,7 @@ static const string INTERACTABLE =          "INTERACTABLE";
 static const string CONTROLLABLE =          "CONTROLLABLE";
 static const string SIZE =                  "SIZE";
 static const string MOVEMENT =				"MOVEMENT";
+static const string COLOR =                 "COLOR";
 
 
 // Static constants for system identifiers

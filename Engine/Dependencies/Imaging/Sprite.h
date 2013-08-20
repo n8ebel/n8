@@ -50,6 +50,9 @@ public:
      *  @return The width of the SDL_Surface referenced by image_
      */
 	int get_width() { return image_->w; }
+	
+	bool draw( int x, int y, SDL_Surface* destination );
+	bool draw( int x, int y, int x2, int y2, int width, int height, SDL_Surface* dest);
 };
 
 #endif 

@@ -195,9 +195,17 @@ System* Game_Manager::get_system(string ID){
 Entity* Game_Manager::register_entity(Entity* newEntity){
     registered_entities_[newEntity->get_id()] = newEntity;
     
-    map<string,System*>::iterator ii;
-    for( ii=registered_systems_.begin(); ii != registered_systems_.end(); ii++){
-        ii->second->register_entity(newEntity);
+    if (newEntity->get_type() == BACKGROUND_TYPE) {
+        static_cast<Render_System*>(registered_systems_[RENDER_SYSTEM])->add_base_layer(newEntity);
+    }
+    else if (newEntity->get_type() == SCREEN_TYPE ){
+        
+    }
+    else{
+        map<string,System*>::iterator ii;
+        for( ii=registered_systems_.begin(); ii != registered_systems_.end(); ii++){
+            ii->second->register_entity(newEntity);
+        }
     }
     
     return newEntity;
@@ -473,6 +481,7 @@ bool Game_Manager::initialize_screen(int w, int h, int bpp){
         }
         screen_->add_component(new Drawable_Component(DRAWABLE, screenSprite));
         screen_->add_component(new Position_Component(POSITION, 0, 0, screenSprite->get_width(), screenSprite->get_height()));
+		screen_->add_component(new Color_Component(COLOR, 0,0,0));
         
         register_entity(screen_);
         
@@ -487,6 +496,24 @@ bool Game_Manager::initialize_screen(int w, int h, int bpp){
     return true;
     
     
+}
+
+void Game_Manager::set_screen_color(int r, int g, int b){
+	if(screen_ != NULL && screen_->get_component(COLOR) != NULL){
+		static_cast<Color_Component*>(screen_->get_component(COLOR))->set_color(r,g,b);
+	}
+	else{
+		Log::error("Game_Manager.set_screen_color(r,g,b)","Could not set screen color.  Either screen was null or it does not have a Color_Component");
+	}
+
+}
+void Game_Manager::set_screen_color(int a ,int r, int g, int b){
+	if(screen_ != NULL && screen_->get_component(COLOR) != NULL){
+		static_cast<Color_Component*>(screen_->get_component(COLOR))->set_color(a,r,g,b);
+	}
+	else{
+		Log::error("Game_Manager.set_screen_color(a,r,g,b)","Could not set screen color.  Either screen was null or it does not have a Color_Component");
+	}
 }
 
 /** Used to create a camera entity that is used to control what is drawn to the screen.
