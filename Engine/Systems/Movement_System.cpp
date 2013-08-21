@@ -90,11 +90,17 @@ void Movement_System::update(){
 				static_cast<Position_Component*>(ii->second->get_component(POSITION))->update_position(moveComp->get_x_offset(), moveComp->get_y_offset());
 			}
             else{
-            	if(DEBUG_UPDATE_){
-            		Log::debug(id_ + ".update", "Entity " + Numerical_Utilities::num_to_string(ii->second->get_id()) + " is outside the world as is being removed");
-				}
+                if( moveComp->is_world_bound()){
+                    
+                }
+                else{
+                    if(DEBUG_UPDATE_){
+                        Log::debug(id_ + ".update", "Entity " + Numerical_Utilities::num_to_string(ii->second->get_id()) + " is outside the world as is being removed");
+                    }
+                    
+                    game_->flag_to_remove_entity(ii->second);
 
-                game_->flag_to_remove_entity(ii->second);
+                }
             }
             
 		}

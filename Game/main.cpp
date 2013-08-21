@@ -14,8 +14,11 @@
 using namespace std;
 
 //The attributes of the screen
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 800;
+const int SCREEN_WIDTH = 700;
+const int SCREEN_HEIGHT = 850;
+const int WORLD_WIDTH = SCREEN_WIDTH;
+const int WORLD_HEIGHT = 2 * SCREEN_HEIGHT;
+
 const int SCREEN_BPP = 32;
 
 const int FPS = 100;
@@ -24,7 +27,7 @@ void RegisterInteractions(Game_Manager* game);
 void PickInteraction(Interaction_System* sys, Entity* ent1, Entity* ent2);
 
 Entity* CreateUserEntity(Game_Manager* game, string name, int x, int y, Sprite* sprite);
-Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite* sprite, double xHeading, double yHeading, double magnitude);
+Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite* sprite, double xHeading, double yHeading, double magnitude, bool worldBound);
 
 bool SetupGameSystems(Game_Manager* game);
 void SetupKeyInput(Game_Manager* game);
@@ -44,7 +47,7 @@ int main( int argc, char* argv[] )
     SetupGameSystems(game);
     SetupKeyInput(game);
 
-    game->set_world_bounds(SCREEN_WIDTH*2, SCREEN_HEIGHT*2);
+    game->set_world_bounds(SCREEN_WIDTH, SCREEN_HEIGHT*2);
     
 /*** Create the screen and register it ***/
     game->initialize_screen(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
@@ -56,11 +59,11 @@ int main( int argc, char* argv[] )
 /*** Load image resources ***/
     game->load_images("/Users/lcballa44/Desktop/n8/Assets/gfx/images.txt");
     
-    Sprite* message = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/hello.bmp");
+    //Sprite* message = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/hello.bmp");
     Sprite* background = game->get_sprite( "/Users/lcballa44/Desktop/n8/Assets/gfx/background.bmp" );
     Sprite* shipSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/user_ship.bmp");
     Sprite* enemySprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/enemy_ship.bmp");
-    Sprite* missileSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp");
+    //Sprite* missileSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp");
     
 
 /*** Create background entity ***/
@@ -72,17 +75,17 @@ int main( int argc, char* argv[] )
     //static_cast<Render_System*>(game->get_system(RENDER_SYSTEM))->add_base_layer(entBackground);
     
 /*** Create user controlled entity ***/
-    Entity* nate = CreateUserEntity(game, "Nate", 0,0, shipSprite);
+    CreateUserEntity(game, "Nate", WORLD_WIDTH/2, WORLD_HEIGHT - 2*shipSprite->get_height(), shipSprite);
     
 
 /*** Create enemy entities ***/
-    Entity* megan = CreateEnemyEntity(game, ENEMY_TYPE, 400,400, enemySprite, 1,1,0);
-    Entity* vader = CreateEnemyEntity(game, ENEMY_TYPE, 350,700, enemySprite, -1,-1,0);
+    CreateEnemyEntity(game, ENEMY_TYPE, 400,400, enemySprite, 1,1,2, true);
+    CreateEnemyEntity(game, ENEMY_TYPE, 350,700, enemySprite, -1,-1,1, true);
 
 /*** GAME LOOP ***/
     game->initializeGameLoop();
     
-    int i = 0;
+    
     Uint32 time;
     while (game->is_running()) {
         
@@ -152,7 +155,7 @@ void Space(Object* obj){
     
 	CreateEnemyEntity(game, PROJECTILE_TYPE,  userPosition->get_x(), userPosition->get_y() - projectileSprite->get_height() ,
 						projectileSprite,
-						0, -1, 2);
+						0, -1, 2, false);
 }
 void SetupKeyInput(Game_Manager* game){
 	game->register_key_action(SDLK_ESCAPE, StopGame, Input_Handler::DOWN);
@@ -206,9 +209,9 @@ Entity* CreateUserEntity(Game_Manager* game, string name, int x, int y, Sprite* 
 	return newEntity;
 }
 
-Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite* sprite, double xHeading, double yHeading, double magnitude){
+Entity* CreateEnemyEntity(Game_Manager* game, string type, int x, int y, Sprite* sprite, double xHeading, double yHeading, double magnitude, bool worldBound){
 	Entity* newEntity = game->create_drawable_entity(n8::get_next_id(), type, x, y, sprite);
-	newEntity->add_component(new Movement_Component(MOVEMENT, xHeading, yHeading, magnitude));
+	newEntity->add_component(new Movement_Component(MOVEMENT, xHeading, yHeading, magnitude, worldBound));
     
     game->register_entity(newEntity);
     

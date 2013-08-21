@@ -17,10 +17,11 @@
  *  @param y The amount to move in the y direction
  *  @param mag The magnitude of the movement.  The magnitude is applied to the x and y values to get the overal movement
  */
-Movement_Component::Movement_Component(string newID, double x, double y, double mag) : Component(newID){
+Movement_Component::Movement_Component(string newID, double x, double y, double mag, bool worldBound) : Component(newID){
 	x_direction_ = x;
 	y_direction_ = y;
 	magnitude_ = mag;
+    world_bound_ = worldBound;
 
 }
 
