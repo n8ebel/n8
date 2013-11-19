@@ -57,12 +57,12 @@ int main( int argc, char* argv[] )
     game->initialize_camera(0, 0);//, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 /*** Load image resources ***/
-    game->load_images("/Users/lcballa44/Desktop/n8/Assets/gfx/images.txt");
+    game->load_images("/Users/lcballa44/Projects/n8/Assets/gfx/images.txt");
     
-    //Sprite* message = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/hello.bmp");
-    Sprite* background = game->get_sprite( "/Users/lcballa44/Desktop/n8/Assets/gfx/background.bmp" );
-    Sprite* shipSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/user_ship.bmp");
-    Sprite* enemySprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/enemy_ship.bmp");
+    //Sprite* message = game->get_sprite("/Users/lcballa44/Projects/n8/Assets/gfx/hello.bmp");
+    Sprite* background = game->get_sprite( "/Users/lcballa44/Projects/n8/Assets/gfx/background.bmp" );
+    Sprite* shipSprite = game->get_sprite("/Users/lcballa44/Projects/n8/Assets/gfx/user_ship.bmp");
+    Sprite* enemySprite = game->get_sprite("/Users/lcballa44/Projects/n8/Assets/gfx/enemy_ship.bmp");
     //Sprite* missileSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp");
     
 
@@ -151,7 +151,7 @@ void Space(Object* obj){
 	Log::debug("Game_Manager", "Pressed Space");
 	Entity* userEntity = static_cast<Movement_System*>(game->get_system(MOVEMENT_SYSTEM))->get_user_entity();
 	Position_Component* userPosition = static_cast<Position_Component*>(userEntity->get_component(POSITION));
-    Sprite* projectileSprite = game->get_sprite("/Users/lcballa44/Desktop/n8/Assets/gfx/missile.bmp");
+    Sprite* projectileSprite = game->get_sprite("/Users/lcballa44/Projects/n8/Assets/gfx/missile.bmp");
     
 	CreateEnemyEntity(game, PROJECTILE_TYPE,  userPosition->get_x(), userPosition->get_y() - projectileSprite->get_height() ,
 						projectileSprite,
