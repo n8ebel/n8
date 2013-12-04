@@ -169,6 +169,8 @@ void SetupKeyInput(Game_Manager* game){
 
 }
 
+
+
 bool SetupGameSystems(Game_Manager* game){
 /* Create a movement system */
 	Movement_System* movementSystem = (Movement_System*)game->create_system(MOVEMENT_SYSTEM);
