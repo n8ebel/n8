@@ -65,6 +65,7 @@ bool System::check_requirements(Entity* entity){
     return true;
 }
 
+
 /** Registers an entity with the system.  If the entity contains all the required components
  *  the pointer to the entity is stored so it can later be operated on by the system.
  *

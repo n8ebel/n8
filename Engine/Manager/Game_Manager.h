@@ -44,10 +44,12 @@ public:
     Game_Manager(string resource_config, int screenW, int screenH);
     
     bool add_system(string ID, System* newSystem);
+    
     Entity* register_entity(Entity* newEntity);
     void remove_entities();
     void flag_to_remove_entity(Entity* entity);
     void remove_entity(Entity* entity);
+    
     bool register_interaction(string type, interactionFunction func);
     void register_key_action(int keyID, Input_Handler::keyActionFunction,int state);
     

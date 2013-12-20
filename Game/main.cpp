@@ -8,7 +8,7 @@
 
 #include "SDL/SDL.h"
 #include "n8.h"
-#include "Game_Manager.h"
+//#include "Game_Manager.h"
 #include <iostream>
 
 using namespace std;
