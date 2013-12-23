@@ -9,15 +9,22 @@
 #ifndef STATE_MANAGER_H
 #define STATE_MANAGER_H
 
+#include "State.h":
+
 class State_Manager{
 
 public:
     virtual ~State_Manager();
+    State_Manager(State* state1, State* state2);
     
-    State_Manager* getInstance();
+    int currentState;
+    
+    State* states[2];
+    
+    //State_Manager* getInstance();
     
 private:
-    State_Manager();
+   
     
 };
 
