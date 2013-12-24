@@ -1,10 +1,12 @@
-//
-//  GameState.h
-//  goobar
-//
-//  Created by Nate Ebel on 12/23/13.
-//  Copyright (c) 2013 n8Tech. All rights reserved.
-//
+/*
+ * GameState.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
 
 #ifndef __goobar__GameState__
 #define __goobar__GameState__

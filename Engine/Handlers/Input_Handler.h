@@ -16,7 +16,7 @@
 #include "SDL/SDL.h"
 #include "Object.h"
 
-#include "goo.h"
+
 
 using namespace std;
 

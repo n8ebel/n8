@@ -43,10 +43,12 @@ int n8::get_next_id(){
  *  @see Name_Component
  *  @see Entity
  */
+/*
 Name_Component* n8:: get_name_component(Entity* entity){
     //return (Name_Component*)entity->get_components()[NAME];
     return static_cast<Name_Component*>(entity->get_component(NAME));
 }
+ */
 
 /** A convienience method for getting a pointer to an entity's Position_Component
  *
@@ -56,10 +58,12 @@ Name_Component* n8:: get_name_component(Entity* entity){
  *  @see Position_Component
  *  @see Entity
  */
+/*
 Position_Component* n8:: get_position_component(Entity* entity){
     //return (Position_Component*)entity->get_components()[POSITION];
 	return static_cast<Position_Component*>(entity->get_component(POSITION));
 }
+ */
 
 /** A convienience method for getting a pointer to an entity's Drawable_Component
  *
@@ -69,10 +73,12 @@ Position_Component* n8:: get_position_component(Entity* entity){
  *  @see Drawable_Component
  *  @see Entity
  */
+/*
 Drawable_Component* n8:: get_drawable_component(Entity* entity){
     //return (Drawable_Component*)entity->get_components()[DRAWABLE];
 	return static_cast<Drawable_Component*>(entity->get_component(DRAWABLE));
 }
+ */
 
 /** A convienience method for getting a pointer to an entity's Size_Component
  *

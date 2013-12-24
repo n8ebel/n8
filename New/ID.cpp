@@ -1,10 +1,12 @@
-//
-//  ID.cpp
-//  goobar
-//
-//  Created by Nate Ebel on 12/23/13.
-//  Copyright (c) 2013 n8Tech. All rights reserved.
-//
+/*
+ * ID.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
 
 #include "ID.h"
 

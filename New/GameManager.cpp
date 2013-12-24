@@ -1,13 +1,22 @@
-//
-//  GamaManager.cpp
-//  goobar
-//
-//  Created by Nate Ebel on 12/22/13.
-//  Copyright (c) 2013 n8Tech. All rights reserved.
-//
+/*
+ * GameManager.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
+#include <iostream>
 
 #include "GameManager.h"
 #include "InputManager.h"
+#include "Log.h"
+#include "n8.h"
+
+using namespace std;
+
+
 
 GameManager* GameManager::GameManager_Instance_ = NULL;
 
@@ -21,6 +30,7 @@ GameManager* GameManager::getGameManager(){
 
 GameManager::GameManager(){
     fps_ = DEFAULT_FPS;
+    quit_ = false;
     background_ = NULL;
     resizeScreenSurface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
     
@@ -33,13 +43,12 @@ GameManager::~GameManager(){
 }
 
 void GameManager::startGame(){
-    bool quit = false;
     
     stateManager_->processState(currentTime_, background_);
     
     
     
-    while (quit == false) {
+    while (quit_ == false) {
         
                 
         currentTime_ = SDL_GetTicks();
@@ -47,6 +56,9 @@ void GameManager::startGame(){
        // InputManager::getInstance()->handle_input();
         stateManager_->processState(currentTime_, background_);
         
+        if (State_Manager::getInstance()->getStackSize() == 0) {
+            endGame();
+        }
         
         if ( 1000/fps_ > SDL_GetTicks() - currentTime_) {
             SDL_Delay(1000/fps_ - (SDL_GetTicks() - currentTime_));
@@ -54,20 +66,19 @@ void GameManager::startGame(){
         
         
         
-        }
+    }
     
     
 }
 
 
 void GameManager::endGame(){
+    quit_ = true;
     
+    Log::info(GAME_MANAGER, "Ending Game");
 }
 
-bool GameManager::registerState(int identifier, State* state){
-    return stateManager_->registerState(identifier, state);
-    
-}
+
 
 int GameManager::setFPS(int newFPS){
     if(newFPS > 0){

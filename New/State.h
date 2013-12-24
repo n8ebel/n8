@@ -1,3 +1,13 @@
+/*
+ * State.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
+
 #ifndef STATE_H
 #define STATE_H
 
@@ -6,7 +16,10 @@
 #include "Object.h"
 #include "ID.h"
 
-
+/**
+ *  Base class for game states
+ *
+ */
 class State{
 public:
     

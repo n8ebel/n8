@@ -1,10 +1,12 @@
-//
-//  GameManager.h
-//  goobar
-//
-//  Created by Nate Ebel on 12/22/13.
-//  Copyright (c) 2013 n8Tech. All rights reserved.
-//
+/*
+ * GameManager.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
 
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
@@ -28,7 +30,7 @@ public:
     void startGame();
     void endGame();
     
-    bool registerState(int identifier, State* state);
+    
     
     int setFPS(int newFPS);
     
@@ -49,10 +51,13 @@ private:
     
     int fps_;
     Uint32 currentTime_;
+    bool quit_;
     
     int screenWidth_;
     int screenHeight_;
     SDL_Surface* background_;
+    
+    
     
     
 };

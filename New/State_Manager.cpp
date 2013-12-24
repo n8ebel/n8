@@ -1,10 +1,12 @@
-//
-//  StateManager.cpp
-//  goobar
-//
-//  Created by Nate Ebel on 12/20/13.
-//  Copyright (c) 2013 n8Tech. All rights reserved.
-//
+/*
+ * State_Manager.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
 
 #include "State_Manager.h"
 
@@ -36,7 +38,7 @@ bool State_Manager::registerState(int identifier, State* state){
         
         if(registeredStates_.size() == 1){
             
-            currentState_ = state;
+            stateStack.push(state);
         }
         return true;
     }
@@ -55,7 +57,7 @@ bool State_Manager::changeState(int identifier){
     
     if(ii != registeredStates_.end()){
         
-        currentState_ = ii->second;
+        stateStack.push( ii->second);
         
         return true;
     }
@@ -66,9 +68,23 @@ bool State_Manager::changeState(int identifier){
 
 }
 
+bool State_Manager::popState(){
+    if (stateStack.size() == 0) {
+        return false;
+    }
+    else{
+        stateStack.pop();
+        return true;
+    }
+}
+
+int State_Manager::getStackSize(){
+    return stateStack.size();
+}
+
 void State_Manager::processState(Uint32 time, SDL_Surface* screen){
     
-    currentState_->processInput();
-    currentState_->update(time);
-    currentState_->render(screen);
+    stateStack.top()->processInput();
+    stateStack.top()->update(time);
+    stateStack.top()->render(screen);
 }

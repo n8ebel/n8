@@ -1,10 +1,12 @@
-//
-//  InputManager.h
-//  goobar
-//
-//  Created by Nate Ebel on 12/23/13.
-//  Copyright (c) 2013 n8Tech. All rights reserved.
-//
+/*
+ * InputManager.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            12/22/13
+ * Organization:    n8Tech
+ *
+ */
 
 #ifndef INPUT_MANAGER_H
 #define INPUT_MANAGER_H
@@ -24,6 +26,8 @@ public:
     bool key_is_down(int key);
     bool key_is_up(int key);
     
+    SDL_Event *event_;
+    
 private:
     
     static InputManager* instance_;
@@ -33,7 +37,7 @@ private:
     
     
   	
-    SDL_Event event_;
+    
     
 };
 

@@ -11,6 +11,7 @@
 #ifndef N8_H
 #define N8_H
 
+/*
 //#include "Game_Manager.h"
 #include "Game_Manager.h"
 #include "Entity.h"
@@ -22,11 +23,15 @@
 #include "Movement_Component.h"
 #include "Color_Component.h"
 #include <string>
+ */
 
 
 const int SCREEN = -1;
 const int CAMERA = -2;
 const int BACKGROUND = -3;
+
+static const string GAME_MANAGER = "GAME_MANAGER";
+
 
 // Static constants for component identifiers
 static const string NAME =                  "NAME";
@@ -70,13 +75,14 @@ public:
     
     static int get_next_id();
 
+    /*
     static Name_Component* get_name_component(Entity* entity);
     static Position_Component* get_position_component(Entity* entity);
     static Drawable_Component* get_drawable_component(Entity* entity);
 
-    //static Size_Component* get_size_component(Entity* entity);
-    //static Render_System* get_render_system(Game_Manager* game);
-
+    static Size_Component* get_size_component(Entity* entity);
+    static Render_System* get_render_system(Game_Manager* game);
+     */
 };
 
 #endif 
