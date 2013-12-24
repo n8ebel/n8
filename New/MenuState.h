@@ -12,14 +12,27 @@
 #include <iostream> 
 
 #include "State.h"
+#include "InputManager.h"
+
 
 class MenuState : public State {
 public:
     MenuState();
     ~MenuState();
     
-    virtual void update(Uint32 currentTime);
-    virtual void render(SDL_Surface* img);
+    ID* getID() ;
+    
+    void start() ;
+    
+    void processInput();
+    void update(Uint32 currentTime);
+    void render(SDL_Surface* img);
+    
+    
+    
+    
+    
+    
     
 protected:
     

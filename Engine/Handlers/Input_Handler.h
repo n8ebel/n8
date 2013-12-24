@@ -16,6 +16,8 @@
 #include "SDL/SDL.h"
 #include "Object.h"
 
+#include "goo.h"
+
 using namespace std;
 
 
@@ -23,9 +25,11 @@ using namespace std;
 class Input_Handler {
   public:
     typedef void (*keyActionFunction)(Object*);
+    
     static const int UP = 1;
     static const int DOWN = 0;
 
+   
 	Input_Handler();
 	virtual ~Input_Handler();
 
@@ -36,6 +40,7 @@ class Input_Handler {
      */
     void register_action_object(Object* obj) { action_object_ = obj; }
 	void register_key_action(int keyID, keyActionFunction,int state);
+    //void register_key_action(int keyID, MethodPointer,int state);
     
     /** Registers a function as the action to take when the exit button is clicked.
      *

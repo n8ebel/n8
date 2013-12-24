@@ -7,51 +7,91 @@
 //
 
 #include "GameManager.h"
-#include "MenuState.h"
+#include "InputManager.h"
+
+GameManager* GameManager::GameManager_Instance_ = NULL;
+
+GameManager* GameManager::getGameManager(){
+    if(GameManager_Instance_ == NULL) {
+        GameManager_Instance_ = new GameManager();
+    }
+    
+    return GameManager_Instance_;
+}
 
 GameManager::GameManager(){
-    fps = 60;
-    background = SDL_SetVideoMode(400, 400, 32, SDL_SWSURFACE);
-    SDL_WM_SetCaption( "n8", NULL );
+    fps_ = DEFAULT_FPS;
+    background_ = NULL;
+    resizeScreenSurface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
     
-    stateManager = new State_Manager(new State(), new MenuState());
+    stateManager_ = new State_Manager();
 }
 
 GameManager::~GameManager(){
-    
+    SDL_FreeSurface(background_);
+    delete stateManager_;
 }
 
-void GameManager::start(){
+void GameManager::startGame(){
     bool quit = false;
-    SDL_Event event;
+    
+    stateManager_->processState(currentTime_, background_);
+    
+    
     
     while (quit == false) {
-        while( SDL_PollEvent( &event ) )
-        {
-            if( event.type == SDL_QUIT )
-            {
-                //Quit the program
-                quit = true;
-            }
-            else if (event.type == SDL_KEYDOWN)
-            {
-                stateManager->currentState++;
-            }
-            else{
+        
                 
-                currentTime = SDL_GetTicks();
-                
-                stateManager->states[stateManager->currentState%2]->update(currentTime);
-                stateManager->states[stateManager->currentState%2]->render(background);
-                
-                
-                if ( 1000/fps > SDL_GetTicks() - currentTime) {
-                    SDL_Delay(1000/fps - (SDL_GetTicks() - currentTime));
-                }
-            }
+        currentTime_ = SDL_GetTicks();
+        
+       // InputManager::getInstance()->handle_input();
+        stateManager_->processState(currentTime_, background_);
+        
+        
+        if ( 1000/fps_ > SDL_GetTicks() - currentTime_) {
+            SDL_Delay(1000/fps_ - (SDL_GetTicks() - currentTime_));
+        }
+        
         
         
         }
+    
+    
+}
+
+
+void GameManager::endGame(){
+    
+}
+
+bool GameManager::registerState(int identifier, State* state){
+    return stateManager_->registerState(identifier, state);
+    
+}
+
+int GameManager::setFPS(int newFPS){
+    if(newFPS > 0){
+        fps_ = newFPS;
     }
     
+    return fps_;
+}
+
+void GameManager::resizeScreenSurface(int w, int h, int bpp){
+    screenWidth_ = w;
+    screenHeight_ = h;
+    
+    if(background_ != NULL){
+        SDL_FreeSurface(background_);
+    }
+    
+    background_ = SDL_SetVideoMode(screenWidth_, screenHeight_, bpp, SDL_SWSURFACE);
+}
+
+SDL_Surface* GameManager::getScreenSurface(){
+    return background_;
+}
+
+void GameManager::setCaption(char* caption){
+    SDL_WM_SetCaption( caption, NULL );
 }

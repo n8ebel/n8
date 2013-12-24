@@ -7,21 +7,41 @@
 //
 
 #include "StateManager.h"
-#include <iostream>
 
 State_Manager::~State_Manager(){
     
 }
-/*
-State_Manager* State_Manager::getInstance(){
-    
-    return NULL;
-}
-*/
 
-State_Manager::State_Manager(State* state1, State* state2){
-    currentState = 0;
+
+State_Manager::State_Manager(){
+    currentState_ = NULL;
+}
+
+bool State_Manager::registerState(int identifier, State* state){
+    map<int, State*>::iterator ii = registeredStates_.find(identifier);
     
-    states[0] = state1;
-    states[1] = state2;
+    if(ii == registeredStates_.end()){
+        registeredStates_[identifier] = state;
+        
+        if(registeredStates_.size() == 1){
+            
+            currentState_ = state;
+        }
+        return true;
+    }
+    else{
+        
+        
+        return false;
+    }
+    
+    
+    
+}
+
+void State_Manager::processState(Uint32 time, SDL_Surface* screen){
+    
+    currentState_->processInput();
+    currentState_->update(time);
+    currentState_->render(screen);
 }

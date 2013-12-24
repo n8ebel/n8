@@ -9,22 +9,28 @@
 #ifndef STATE_MANAGER_H
 #define STATE_MANAGER_H
 
-#include "State.h":
+#include "State.h";
+
+
+#include <map>
+
+using namespace std;
+
 
 class State_Manager{
 
 public:
     virtual ~State_Manager();
-    State_Manager(State* state1, State* state2);
+    State_Manager();
     
-    int currentState;
+    bool registerState(int identifier, State* state);
     
-    State* states[2];
+    void processState(Uint32 time, SDL_Surface* screen);
     
-    //State_Manager* getInstance();
     
 private:
-   
+    map<int, State*> registeredStates_;
+    State* currentState_;
     
 };
 

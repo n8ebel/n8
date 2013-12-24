@@ -15,6 +15,8 @@ Input_Handler::Input_Handler() {
 	for (int i = 0; i < 323; i++) {
 		keysHeld_[i] = false;
 	}
+    
+    action_object_ = NULL;
 
 }
 

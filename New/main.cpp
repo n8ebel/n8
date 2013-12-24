@@ -9,20 +9,26 @@
 #include "SDL/SDL.h"
 
 #include "GameManager.h"
-#include "State.h"
+#include "MenuState.h"
 
 #include <iostream>
 
 using namespace std;
 
+
+
 int main(int argc, char* argv[]){
     SDL_Init( SDL_INIT_EVERYTHING );
     
-    GameManager* game = new GameManager();
+    GameManager* game = GameManager::getGameManager();
     
+    game->setCaption("n8");
     
+    game->registerState(0, new MenuState());
     
-    game->start();
+    game->startGame();
+    
+    game->endGame();
     
     
     

@@ -9,26 +9,50 @@
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
 
+#include "Object.h"
 #include "StateManager.h"
+#include "State.h"
 
-class GameManager{
+
+class GameManager :public Object{
 
 public:
-    GameManager();
+    static const int DEFAULT_SCREEN_WIDTH = 400;
+    static const int DEFAULT_SCREEN_HEIGHT = 400;
+    static const int DEFAULT_FPS = 60;
+    static const int DEFAULT_BPP= 32;
+    
+    static GameManager* getGameManager();
     ~GameManager();
     
-    int fps;
-    Uint32 currentTime;
+    void startGame();
+    void endGame();
     
-    State_Manager* stateManager;
+    bool registerState(int identifier, State* state);
     
-    void start();
+    int setFPS(int newFPS);
+    
+    void setCaption(char* caption);
+    void resizeScreenSurface(int w, int h, int bpp);
+    SDL_Surface* getScreenSurface();
     
 protected:
     
-private:
     
-    SDL_Surface* background;
+    
+private:
+    static GameManager* GameManager_Instance_;
+    GameManager();
+    
+    State_Manager* stateManager_;
+    
+    
+    int fps_;
+    Uint32 currentTime_;
+    
+    int screenWidth_;
+    int screenHeight_;
+    SDL_Surface* background_;
     
     
 };
