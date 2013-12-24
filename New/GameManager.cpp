@@ -24,7 +24,7 @@ GameManager::GameManager(){
     background_ = NULL;
     resizeScreenSurface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
     
-    stateManager_ = new State_Manager();
+    stateManager_ = State_Manager::getInstance();
 }
 
 GameManager::~GameManager(){

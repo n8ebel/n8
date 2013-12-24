@@ -10,7 +10,7 @@
 #define GAME_MANAGER_H
 
 #include "Object.h"
-#include "StateManager.h"
+#include "State_Manager.h"
 #include "State.h"
 
 

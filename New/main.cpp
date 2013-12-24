@@ -10,6 +10,7 @@
 
 #include "GameManager.h"
 #include "MenuState.h"
+#include "GameState.h"
 
 #include <iostream>
 
@@ -25,6 +26,7 @@ int main(int argc, char* argv[]){
     game->setCaption("n8");
     
     game->registerState(0, new MenuState());
+    game->registerState(1, new GameState());
     
     game->startGame();
     

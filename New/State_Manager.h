@@ -20,17 +20,24 @@ using namespace std;
 class State_Manager{
 
 public:
+    static State_Manager* getInstance();
     virtual ~State_Manager();
-    State_Manager();
+    
     
     bool registerState(int identifier, State* state);
+    bool changeState(int identifier);
     
     void processState(Uint32 time, SDL_Surface* screen);
     
     
 private:
+    State_Manager();
+    
+    static State_Manager* instance_;
+    
     map<int, State*> registeredStates_;
     State* currentState_;
+    
     
 };
 

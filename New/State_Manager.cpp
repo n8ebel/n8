@@ -6,15 +6,26 @@
 //  Copyright (c) 2013 n8Tech. All rights reserved.
 //
 
-#include "StateManager.h"
+#include "State_Manager.h"
+
+State_Manager* State_Manager::instance_ = NULL;
 
 State_Manager::~State_Manager(){
     
 }
 
+State_Manager* State_Manager::getInstance(){
+    if (instance_) {
+        return instance_;
+    }
+    else{
+        instance_ = new State_Manager();
+        return instance_;
+    }
+}
 
 State_Manager::State_Manager(){
-    currentState_ = NULL;
+    
 }
 
 bool State_Manager::registerState(int identifier, State* state){
@@ -37,6 +48,22 @@ bool State_Manager::registerState(int identifier, State* state){
     
     
     
+}
+
+bool State_Manager::changeState(int identifier){
+    map<int, State*>::iterator ii = registeredStates_.find(identifier);
+    
+    if(ii != registeredStates_.end()){
+        
+        currentState_ = ii->second;
+        
+        return true;
+    }
+    else{
+        
+        return false;
+    }
+
 }
 
 void State_Manager::processState(Uint32 time, SDL_Surface* screen){
