@@ -23,18 +23,22 @@ public:
     ~InputManager();
     
     void handle_input();
+    bool handle_event();
     bool key_is_down(int key);
     bool key_is_up(int key);
     
-    SDL_Event *event_;
     
 private:
     
     static InputManager* instance_;
     InputManager();
     
+    SDL_Event *event_;
+    
     bool keysHeld_[323];  /** < Array to store whether or not a key is being held down **/
     
+    bool key_is_down(SDL_Event* event, int key);
+    bool key_is_up(SDL_Event* event, int key);
     
   	
     

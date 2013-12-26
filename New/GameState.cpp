@@ -33,9 +33,12 @@ void GameState::start(){
 }
 
 void GameState::processInput(){
-    if(InputManager::getInstance()->key_is_down(SDLK_ESCAPE)){
-        State_Manager::getInstance()->popState();
+    while(InputManager::getInstance()->handle_event()){
+        if(InputManager::getInstance()->key_is_down(SDLK_ESCAPE)){
+            State_Manager::getInstance()->popState();
+        }
     }
+    
     
 }
 

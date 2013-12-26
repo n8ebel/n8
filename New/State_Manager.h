@@ -21,7 +21,11 @@ using namespace std;
 
 
 /**
- *  State_Manager handles the state
+ *  State_Manager handles the state stack and holds pointers
+ *    to each registered game state.
+ *
+ *  The singleton pattern is used so there is a single
+ *    state stack and access point to state information.
  */
 class State_Manager{
 

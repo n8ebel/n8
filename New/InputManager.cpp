@@ -48,21 +48,34 @@ void InputManager::handle_input(){
     }
 }
 
+bool InputManager::handle_event(){
+    return SDL_PollEvent(event_);
+}
+
 bool InputManager::key_is_down(int key){
-    if (SDL_PollEvent(event_))
-    {
-        if (event_->type == SDL_KEYDOWN && event_->key.keysym.sym == key)
+    return key_is_down(event_, key);
+}
+
+bool InputManager::key_is_up(int key){
+    
+    return key_is_up(event_, key);
+    
+}
+
+bool InputManager::key_is_down(SDL_Event* event,int key){
+    
+        if (event->type == SDL_KEYDOWN && event->key.keysym.sym == key)
 		{
 			return true;
 		}
 		
         
-    }
+    
     
     return false;
 }
 
-bool InputManager::key_is_up(int key){
+bool InputManager::key_is_up(SDL_Event* event,int key){
     
     return false;
     

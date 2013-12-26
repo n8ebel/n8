@@ -22,7 +22,7 @@
  */
 class State{
 public:
-    
+    //virtual ~State() = 0;
     
     virtual ID* getID() = 0;
     

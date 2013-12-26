@@ -33,16 +33,16 @@ void MenuState::start(){
 }
 
 void MenuState::processInput(){
-   // while(SDL_PollEvent(InputManager::getInstance()->event_)){
-    if(InputManager::getInstance()->key_is_down(SDLK_ESCAPE)){
-        std::cout << "MenuState.escape" << std::endl;
-        State_Manager::getInstance()->popState();
-    }
+    while(InputManager::getInstance()->handle_event()){
+        if(InputManager::getInstance()->key_is_down(SDLK_ESCAPE)){
+            std::cout << "MenuState.escape" << std::endl;
+            State_Manager::getInstance()->popState();
+        }
     
-    if(InputManager::getInstance()->key_is_down(SDLK_SPACE)){
-        State_Manager::getInstance()->changeState(1);
-    }
-   // }
+        if(InputManager::getInstance()->key_is_down(SDLK_SPACE)){
+            State_Manager::getInstance()->changeState(1);
+        }
+   }
     
 }
 

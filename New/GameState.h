@@ -19,7 +19,7 @@
 class GameState : public State {
 public:
     GameState();
-    ~GameState();
+    virtual ~GameState();
     
     ID* getID() ;
     
