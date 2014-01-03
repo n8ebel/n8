@@ -36,10 +36,12 @@ public:
     
     bool registerState(int identifier, State* state);
     bool changeState(int identifier);
-    bool popState();
+    void popState();
     int getStackSize();
     
+    
     void processState(Uint32 time, SDL_Surface* screen);
+    
     
     
 private:

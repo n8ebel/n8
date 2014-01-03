@@ -16,7 +16,7 @@
 #include "State.h"
 
 
-class GameManager :public Object{
+class Game_Manager :public Object{
 
 public:
     static const int DEFAULT_SCREEN_WIDTH = 400;
@@ -24,8 +24,8 @@ public:
     static const int DEFAULT_FPS = 60;
     static const int DEFAULT_BPP= 32;
     
-    static GameManager* getGameManager();
-    ~GameManager();
+    static Game_Manager* getInstance();
+    ~Game_Manager();
     
     void startGame();
     void endGame();
@@ -43,11 +43,8 @@ protected:
     
     
 private:
-    static GameManager* GameManager_Instance_;
-    GameManager();
-    
-    State_Manager* stateManager_;
-    
+    static Game_Manager* instance_;
+    Game_Manager();
     
     int fps_;
     Uint32 currentTime_;

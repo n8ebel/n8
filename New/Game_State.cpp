@@ -8,33 +8,33 @@
  *
  */
 
-#include "GameState.h"
+#include "Game_State.h"
 #include "State_Manager.h"
 
 #include <iostream>
 
 using namespace std;
 
-GameState::GameState()  {
+Game_State::Game_State()  {
     id_ = new ID(0);
     
 }
 
-GameState::~GameState(){
+Game_State::~Game_State(){
     
 }
 
-ID* GameState::getID(){
+ID* Game_State::getID(){
     return id_;
 }
 
-void GameState::start(){
+void Game_State::start(){
     
 }
 
-void GameState::processInput(){
-    while(InputManager::getInstance()->handle_event()){
-        if(InputManager::getInstance()->key_is_down(SDLK_ESCAPE)){
+void Game_State::processInput(){
+    while(Input_Manager::getInstance()->handle_event()){
+        if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
             State_Manager::getInstance()->popState();
         }
     }
@@ -42,10 +42,10 @@ void GameState::processInput(){
     
 }
 
-void GameState::update(Uint32 currentTime){
+void Game_State::update(Uint32 currentTime){
    // std::cout << "GameState.update()" << std::endl;
 }
-void GameState::render(SDL_Surface* img){
+void Game_State::render(SDL_Surface* img){
     //std::cout << "GameState.render()" << std::endl;
     SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 255,0,0));
     SDL_Flip( img );

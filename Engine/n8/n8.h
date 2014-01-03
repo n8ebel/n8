@@ -11,6 +11,15 @@
 #ifndef N8_H
 #define N8_H
 
+
+#include "SDL/SDL.h"
+
+#include "Input_Manager.h"
+#include "State_Manager.h"
+#include "Game_Manager.h"
+
+#include "Menu_State.h"
+#include "Game_State.h"
 /*
 //#include "Game_Manager.h"
 #include "Game_Manager.h"
@@ -30,7 +39,9 @@ const int SCREEN = -1;
 const int CAMERA = -2;
 const int BACKGROUND = -3;
 
-static const string GAME_MANAGER = "GAME_MANAGER";
+static const string GAME_MANAGER = "Game_Manager";
+static const string STATE_MANAGER = "State_Manager";
+static const string INPUT_MANAGER = "Input_Manager";
 
 
 // Static constants for component identifiers
@@ -74,6 +85,8 @@ public:
     n8();
     
     static int get_next_id();
+    static bool setup_n8();
+    static bool shutdown_n8();
 
     /*
     static Name_Component* get_name_component(Entity* entity);

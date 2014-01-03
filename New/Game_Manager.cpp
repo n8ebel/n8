@@ -9,8 +9,8 @@
  */
 #include <iostream>
 
-#include "GameManager.h"
-#include "InputManager.h"
+#include "Game_Manager.h"
+#include "Input_Manager.h"
 #include "Log.h"
 #include "n8.h"
 
@@ -18,43 +18,35 @@ using namespace std;
 
 
 
-GameManager* GameManager::GameManager_Instance_ = NULL;
+Game_Manager* Game_Manager::instance_ = NULL;
 
-GameManager* GameManager::getGameManager(){
-    if(GameManager_Instance_ == NULL) {
-        GameManager_Instance_ = new GameManager();
+Game_Manager* Game_Manager::getInstance(){
+    if(instance_ == NULL) {
+        instance_ = new Game_Manager();
     }
     
-    return GameManager_Instance_;
+    return instance_;
 }
 
-GameManager::GameManager(){
+Game_Manager::Game_Manager(){
     fps_ = DEFAULT_FPS;
     quit_ = false;
     background_ = NULL;
     resizeScreenSurface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
-    
-    stateManager_ = State_Manager::getInstance();
 }
 
-GameManager::~GameManager(){
+Game_Manager::~Game_Manager(){
+    Log::info(GAME_MANAGER, "Destructor was called");
     SDL_FreeSurface(background_);
-    delete stateManager_;
 }
 
-void GameManager::startGame(){
-    
-    stateManager_->processState(currentTime_, background_);
-    
-    
+void Game_Manager::startGame(){
     
     while (quit_ == false) {
-        
-                
         currentTime_ = SDL_GetTicks();
         
        // InputManager::getInstance()->handle_input();
-        stateManager_->processState(currentTime_, background_);
+        State_Manager::getInstance()->processState(currentTime_, background_);
         
         if (State_Manager::getInstance()->getStackSize() == 0) {
             endGame();
@@ -72,7 +64,7 @@ void GameManager::startGame(){
 }
 
 
-void GameManager::endGame(){
+void Game_Manager::endGame(){
     quit_ = true;
     
     Log::info(GAME_MANAGER, "Ending Game");
@@ -80,7 +72,7 @@ void GameManager::endGame(){
 
 
 
-int GameManager::setFPS(int newFPS){
+int Game_Manager::setFPS(int newFPS){
     if(newFPS > 0){
         fps_ = newFPS;
     }
@@ -88,7 +80,7 @@ int GameManager::setFPS(int newFPS){
     return fps_;
 }
 
-void GameManager::resizeScreenSurface(int w, int h, int bpp){
+void Game_Manager::resizeScreenSurface(int w, int h, int bpp){
     screenWidth_ = w;
     screenHeight_ = h;
     
@@ -99,10 +91,10 @@ void GameManager::resizeScreenSurface(int w, int h, int bpp){
     background_ = SDL_SetVideoMode(screenWidth_, screenHeight_, bpp, SDL_SWSURFACE);
 }
 
-SDL_Surface* GameManager::getScreenSurface(){
+SDL_Surface* Game_Manager::getScreenSurface(){
     return background_;
 }
 
-void GameManager::setCaption(char* caption){
+void Game_Manager::setCaption(char* caption){
     SDL_WM_SetCaption( caption, NULL );
 }

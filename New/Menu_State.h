@@ -1,5 +1,5 @@
 /*
- * GameState.h
+ * MenuState.h
  * n8
  *
  * Author:          Nate Ebel
@@ -8,18 +8,19 @@
  *
  */
 
-#ifndef __goobar__GameState__
-#define __goobar__GameState__
+#ifndef MENU_STATE_H
+#define MENU_STATE_H
 
-#include <iostream>
+#include <iostream> 
 
 #include "State.h"
-#include "InputManager.h"
+#include "Input_Manager.h"
 
-class GameState : public State {
+
+class Menu_State : public State {
 public:
-    GameState();
-    virtual ~GameState();
+    Menu_State();
+    ~Menu_State();
     
     ID* getID() ;
     
@@ -41,4 +42,5 @@ private:
     
     
 };
+
 #endif

@@ -15,12 +15,12 @@
 
 #include "SDL/SDL.h"
 
-class InputManager{
+class Input_Manager{
 
 public:
     
-    static InputManager* getInstance();
-    ~InputManager();
+    static Input_Manager* getInstance();
+    ~Input_Manager();
     
     void handle_input();
     bool handle_event();
@@ -30,8 +30,8 @@ public:
     
 private:
     
-    static InputManager* instance_;
-    InputManager();
+    static Input_Manager* instance_;
+    Input_Manager();
     
     SDL_Event *event_;
     

@@ -35,6 +35,24 @@ int n8::get_next_id(){
     return nextid_;
 }
 
+bool n8::setup_n8(){
+    if (SDL_Init( SDL_INIT_EVERYTHING ) == 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+bool n8::shutdown_n8(){
+    delete Input_Manager::getInstance();
+    delete State_Manager::getInstance();
+    delete Game_Manager::getInstance();
+    
+    return true;
+}
+
 /** A convienience method for getting a pointer to an entity's Name_Component
  *
  *  @param entity The entity to get the Name_Component from

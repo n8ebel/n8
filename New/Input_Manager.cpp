@@ -8,25 +8,32 @@
  *
  */
 #include <iostream>
-#include "InputManager.h"
 
-InputManager* InputManager::instance_ = NULL;
+#include "n8.h"
+#include "Log.h"
+#include "Input_Manager.h"
 
-InputManager* InputManager::getInstance(){
+Input_Manager* Input_Manager::instance_ = NULL;
+
+Input_Manager* Input_Manager::getInstance(){
     if(instance_){
         return instance_;
     }
     else{
-        instance_ = new InputManager();
+        instance_ = new Input_Manager();
         return instance_;
     }
 }
 
-InputManager::InputManager(){
+Input_Manager::Input_Manager(){
     event_ = new SDL_Event;
 }
 
-void InputManager::handle_input(){
+Input_Manager::~Input_Manager(){
+    Log::info(INPUT_MANAGER, "Destructor was called");
+}
+
+void Input_Manager::handle_input(){
     std::cout << "Handle Input" << std::endl;
     if (SDL_PollEvent(event_))
     {
@@ -48,21 +55,21 @@ void InputManager::handle_input(){
     }
 }
 
-bool InputManager::handle_event(){
+bool Input_Manager::handle_event(){
     return SDL_PollEvent(event_);
 }
 
-bool InputManager::key_is_down(int key){
+bool Input_Manager::key_is_down(int key){
     return key_is_down(event_, key);
 }
 
-bool InputManager::key_is_up(int key){
+bool Input_Manager::key_is_up(int key){
     
     return key_is_up(event_, key);
     
 }
 
-bool InputManager::key_is_down(SDL_Event* event,int key){
+bool Input_Manager::key_is_down(SDL_Event* event,int key){
     
         if (event->type == SDL_KEYDOWN && event->key.keysym.sym == key)
 		{
@@ -75,7 +82,7 @@ bool InputManager::key_is_down(SDL_Event* event,int key){
     return false;
 }
 
-bool InputManager::key_is_up(SDL_Event* event,int key){
+bool Input_Manager::key_is_up(SDL_Event* event,int key){
     
     return false;
     

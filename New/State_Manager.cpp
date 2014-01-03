@@ -8,7 +8,10 @@
  *
  */
 
+#include <assert.h>
 #include "State_Manager.h"
+#include "n8.h"
+#include "Log.h"
 
 /** Pointer to single, static State_Manager pointer
  */
@@ -19,6 +22,7 @@ State_Manager* State_Manager::instance_ = NULL;
  *  Deletes registered game states
  */
 State_Manager::~State_Manager(){
+    Log::info(STATE_MANAGER, "Destructor was called");
     while (stateStack.size() > 0) {
         State* curState = stateStack.top();
         stateStack.pop();
@@ -106,24 +110,51 @@ bool State_Manager::changeState(int identifier){
 
 }
 
-
-bool State_Manager::popState(){
-    if (stateStack.size() == 0) {
-        return false;
-    }
-    else{
+/** If the state stack isn't empty, the top state is popped off
+ *
+ */
+ 
+void State_Manager::popState(){
+    if (stateStack.size() > 0) {
         stateStack.pop();
-        return true;
     }
 }
 
+/** Returns the size of the state stack
+ *
+ *  @return The integer size of the state stack
+ */
 int State_Manager::getStackSize(){
     return stateStack.size();
 }
 
+/** Processes a state by handling input events, updating the state logic, 
+ *    and rendering the state
+ *
+ *  @param time The current system time
+ *  @param screen The screen canvas for rendering
+ *
+ */
 void State_Manager::processState(Uint32 time, SDL_Surface* screen){
     
-    stateStack.top()->processInput();
-    stateStack.top()->update(time);
-    stateStack.top()->render(screen);
+    if(time > 0 && screen){
+    
+        if(stateStack.size() > 0){
+            stateStack.top()->processInput();
+        }
+        
+        if(stateStack.size() > 0){
+            stateStack.top()->update(time);
+        }
+        
+        if(stateStack.size() > 0){
+            stateStack.top()->render(screen);
+        }
+    }
+    else if(time <= 0){
+        Log::error(STATE_MANAGER + ".processState", "Game time not greater than 0");
+    }
+    else if(screen == NULL){
+        Log::error(STATE_MANAGER + ".processState", "Screen pointer is NULL");
+    }
 }
