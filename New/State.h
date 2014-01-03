@@ -28,7 +28,7 @@ public:
     
     virtual void start() = 0;
     
-    virtual void processInput() = 0;
+    virtual void respondToUserInput() = 0;
     virtual void update(Uint32 currentTime) = 0;
     virtual void render(SDL_Surface* img) = 0;
     

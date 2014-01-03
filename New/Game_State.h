@@ -25,7 +25,7 @@ public:
     
     void start() ;
     
-    void processInput();
+    void respondToUserInput();
     void update(Uint32 currentTime);
     void render(SDL_Surface* img);
     

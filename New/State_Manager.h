@@ -35,8 +35,10 @@ public:
     
     
     bool registerState(int identifier, State* state);
-    bool changeState(int identifier);
+    
+    bool pushState(int identifier);
     void popState();
+    
     int getStackSize();
     
     

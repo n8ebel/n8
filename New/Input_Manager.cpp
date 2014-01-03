@@ -13,6 +13,8 @@
 #include "Log.h"
 #include "Input_Manager.h"
 
+#define DEBUGGING true
+
 Input_Manager* Input_Manager::instance_ = NULL;
 
 Input_Manager* Input_Manager::getInstance(){
@@ -30,7 +32,9 @@ Input_Manager::Input_Manager(){
 }
 
 Input_Manager::~Input_Manager(){
-    Log::info(INPUT_MANAGER, "Destructor was called");
+    if (DEBUGGING) {
+        Log::info(INPUT_MANAGER, "Destructor was called");
+    }
 }
 
 void Input_Manager::handle_input(){

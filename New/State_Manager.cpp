@@ -13,6 +13,8 @@
 #include "n8.h"
 #include "Log.h"
 
+#define DEBUGGING true
+
 /** Pointer to single, static State_Manager pointer
  */
 State_Manager* State_Manager::instance_ = NULL;
@@ -22,7 +24,9 @@ State_Manager* State_Manager::instance_ = NULL;
  *  Deletes registered game states
  */
 State_Manager::~State_Manager(){
-    Log::info(STATE_MANAGER, "Destructor was called");
+    if(DEBUGGING){
+        Log::info(STATE_MANAGER, "Destructor was called");
+    }
     while (stateStack.size() > 0) {
         State* curState = stateStack.top();
         stateStack.pop();
@@ -94,7 +98,7 @@ bool State_Manager::registerState(int identifier, State* state){
  *  @return True if a State was pushed onto the stack, false otherwise.
  *
  */
-bool State_Manager::changeState(int identifier){
+bool State_Manager::pushState(int identifier){
     map<int, State*>::iterator ii = registeredStates_.find(identifier);
     
     if(ii != registeredStates_.end()){
@@ -140,7 +144,7 @@ void State_Manager::processState(Uint32 time, SDL_Surface* screen){
     if(time > 0 && screen){
     
         if(stateStack.size() > 0){
-            stateStack.top()->processInput();
+            stateStack.top()->respondToUserInput();
         }
         
         if(stateStack.size() > 0){

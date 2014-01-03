@@ -16,7 +16,7 @@
 
 using namespace std;
 
-
+#define DEBUGGING true
 
 Game_Manager* Game_Manager::instance_ = NULL;
 
@@ -36,7 +36,9 @@ Game_Manager::Game_Manager(){
 }
 
 Game_Manager::~Game_Manager(){
-    Log::info(GAME_MANAGER, "Destructor was called");
+    if (DEBUGGING) {
+        Log::info(GAME_MANAGER, "Destructor was called");
+    }
     SDL_FreeSurface(background_);
 }
 
