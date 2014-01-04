@@ -37,7 +37,7 @@ State_Manager::~State_Manager(){
  *
  * @return Pointer to the singleton State_Manager instance
  */
-State_Manager* State_Manager::getInstance(){
+State_Manager* State_Manager::get_instance(){
     if (instance_) {
         return instance_;
     }
@@ -65,7 +65,7 @@ State_Manager::State_Manager(){
  *
  *  @return True if the state was succesffuly stored in the map; False otherwise.
  */
-bool State_Manager::registerState(int identifier, State* state){
+bool State_Manager::register_state(int identifier, State* state){
     map<int, State*>::iterator ii = registeredStates_.find(identifier);
     
     if(ii == registeredStates_.end()){
@@ -91,7 +91,7 @@ bool State_Manager::registerState(int identifier, State* state){
  *  @return True if a State was pushed onto the stack, false otherwise.
  *
  */
-bool State_Manager::pushState(int identifier){
+bool State_Manager::push_state(int identifier){
     map<int, State*>::iterator ii = registeredStates_.find(identifier);
     
     if(ii != registeredStates_.end()){
@@ -112,7 +112,7 @@ bool State_Manager::pushState(int identifier){
  *
  */
  
-void State_Manager::popState(){
+void State_Manager::pop_state(){
     if (stateStack.size() > 1) {
         stateStack.top()->on_pause();
         stateStack.pop();
@@ -128,7 +128,7 @@ void State_Manager::popState(){
  *
  *  @return The integer size of the state stack
  */
-int State_Manager::getStackSize(){
+int State_Manager::get_stack_size(){
     return stateStack.size();
 }
 
@@ -139,19 +139,19 @@ int State_Manager::getStackSize(){
  *  @param screen The screen canvas for rendering
  *
  */
-void State_Manager::processState(Uint32 time, SDL_Surface* screen){
+void State_Manager::process_state(Uint32 time, SDL_Surface* screen){
     
     if(time > 0 && screen){
     
         if(stateStack.size() > 0){
-            Input_Manager::getInstance()->process_inputs(stateStack.top());
+            Input_Manager::get_instance()->process_inputs(stateStack.top());
             //stateStack.top()->respondToUserInput();
-            Event_Manager::getInstance()->processQueuedEvents();
+            Event_Manager::get_instance()->process_queued_events();
         }
         
         if(stateStack.size() > 0){
             stateStack.top()->update(time);
-            Event_Manager::getInstance()->processQueuedEvents();
+            Event_Manager::get_instance()->process_queued_events();
         }
         
         if(stateStack.size() > 0){

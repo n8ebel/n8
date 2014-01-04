@@ -16,9 +16,13 @@
 using namespace std;
 
 Game_Manager* Game_Manager::instance_ = NULL;  //Static singleton instance initialzation
-int Game_Manager::nextid_ = 0;
+int Game_Manager::nextid_ = 0;  //static counter for unique ids
 
-Game_Manager* Game_Manager::getInstance(){
+/** Singleton access method
+ *
+ *  @return Pointer to the Game_Manager instance
+ */
+Game_Manager* Game_Manager::get_instance(){
     if(instance_ == NULL) {
         instance_ = new Game_Manager();
     }
@@ -26,13 +30,23 @@ Game_Manager* Game_Manager::getInstance(){
     return instance_;
 }
 
+/** Default constructor
+ *
+ *  Initializes all values and resizes the screen to the
+ *      default values
+ *
+ */
 Game_Manager::Game_Manager(){
     fps_ = DEFAULT_FPS;
     quit_ = false;
     background_ = NULL;
-    resizeScreenSurface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
+    resize_screen_surface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
 }
 
+/** Default destructor
+ *
+ *  Frees the background surface
+ */
 Game_Manager::~Game_Manager(){
     if (DEBUGGING) {
         Log::info(GAME_MANAGER, "Destructor was called");
@@ -40,16 +54,17 @@ Game_Manager::~Game_Manager(){
     SDL_FreeSurface(background_);
 }
 
-void Game_Manager::startGame(){
+
+void Game_Manager::run_game(){
     
     while (quit_ == false) {
         currentTime_ = SDL_GetTicks();
         
        // InputManager::getInstance()->handle_input();
-        State_Manager::getInstance()->processState(currentTime_, background_);
+        State_Manager::get_instance()->process_state(currentTime_, background_);
         
-        if (State_Manager::getInstance()->getStackSize() == 0) {
-            endGame();
+        if (State_Manager::get_instance()->get_stack_size() == 0) {
+            end_game();
         }
         
         if ( 1000/fps_ > SDL_GetTicks() - currentTime_) {
@@ -64,7 +79,7 @@ void Game_Manager::startGame(){
 }
 
 
-void Game_Manager::endGame(){
+void Game_Manager::end_game(){
     quit_ = true;
     
     Log::info(GAME_MANAGER, "Ending Game");
@@ -81,7 +96,7 @@ int Game_Manager::get_next_id(){
 
 
 
-int Game_Manager::setFPS(int newFPS){
+int Game_Manager::set_fps(int newFPS){
     if(newFPS > 0){
         fps_ = newFPS;
     }
@@ -89,7 +104,7 @@ int Game_Manager::setFPS(int newFPS){
     return fps_;
 }
 
-void Game_Manager::resizeScreenSurface(int w, int h, int bpp){
+void Game_Manager::resize_screen_surface(int w, int h, int bpp){
     screenWidth_ = w;
     screenHeight_ = h;
     
@@ -100,10 +115,10 @@ void Game_Manager::resizeScreenSurface(int w, int h, int bpp){
     background_ = SDL_SetVideoMode(screenWidth_, screenHeight_, bpp, SDL_SWSURFACE);
 }
 
-SDL_Surface* Game_Manager::getScreenSurface(){
+SDL_Surface* Game_Manager::get_screen_surface(){
     return background_;
 }
 
-void Game_Manager::setCaption(char* caption){
+void Game_Manager::set_caption(char* caption){
     SDL_WM_SetCaption( caption, NULL );
 }

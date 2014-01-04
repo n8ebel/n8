@@ -8,7 +8,6 @@
 
 #include "Event_Manager.h"
 
-
 Event_Manager* Event_Manager::instance_ = NULL; //Static singleton instance initialzation
 
 /** Private constructor */
@@ -27,7 +26,7 @@ Event_Manager::~Event_Manager(){
  *
  *  @return Pointer to the Event_Manager instance
  */
-Event_Manager* Event_Manager::getInstance(){
+Event_Manager* Event_Manager::get_instance(){
     if (instance_ == NULL) {
         instance_ = new Event_Manager();
         return instance_;
@@ -43,7 +42,7 @@ Event_Manager* Event_Manager::getInstance(){
  *      handles some type of system event or interaction
  *
  */
-void Event_Manager::queueEvent(Event* newEvent){
+void Event_Manager::queue_event(Event* newEvent){
     if(newEvent != NULL){
         events_.push(newEvent);
     }
@@ -52,7 +51,7 @@ void Event_Manager::queueEvent(Event* newEvent){
 /** Processes each queued event and then deletes the event object
  *
  */
-void Event_Manager::processQueuedEvents(){
+void Event_Manager::process_queued_events(){
     for (int i = 0; i < events_.size(); i++) {
         Event* currentEvent = events_.front();
         currentEvent->process();

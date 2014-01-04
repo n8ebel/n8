@@ -21,7 +21,7 @@ Show_Menu_Event::~Show_Menu_Event(){
 }
 
 void Show_Menu_Event::process(){
-    State_Manager::getInstance()->pushState(MENU_STATE);
+    State_Manager::get_instance()->push_state(MENU_STATE);
 }
 
 

@@ -21,7 +21,7 @@ class Input_Manager :public Object {
 
 public:
     
-    static Input_Manager* getInstance();
+    static Input_Manager* get_instance();
     ~Input_Manager();
     
     void process_inputs(State*);

@@ -21,7 +21,7 @@ Exit_State_Event::~Exit_State_Event(){
 
 void Exit_State_Event::process(){
     std::cout << "MenuState.escape" << std::endl;
-    State_Manager::getInstance()->popState();
+    State_Manager::get_instance()->pop_state();
 }
 
 

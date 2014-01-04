@@ -15,7 +15,7 @@
 
 Input_Manager* Input_Manager::instance_ = NULL;  //Static singleton instance initialzation
 
-Input_Manager* Input_Manager::getInstance(){
+Input_Manager* Input_Manager::get_instance(){
     if(instance_){
         return instance_;
     }
@@ -37,7 +37,7 @@ Input_Manager::~Input_Manager(){
 
 void Input_Manager::process_inputs(State* currentState){
     while(handle_event()){
-        currentState->respondToUserInput();
+        currentState->respond_to_user_input();
     }
 }
 
@@ -79,14 +79,11 @@ bool Input_Manager::key_is_up(int key){
 
 bool Input_Manager::key_is_down(SDL_Event* event,int key){
     
-        if (event->type == SDL_KEYDOWN && event->key.keysym.sym == key)
-		{
-			return true;
-		}
+    if (event->type == SDL_KEYDOWN && event->key.keysym.sym == key)
+    {
+        return true;
+    }
 		
-        
-    
-    
     return false;
 }
 

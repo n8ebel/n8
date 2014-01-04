@@ -28,7 +28,7 @@ Menu_State::~Menu_State(){
     
 }
 
-ID* Menu_State::getID(){
+ID* Menu_State::get_id(){
     return id_;
 }
 
@@ -43,9 +43,9 @@ void Menu_State::on_pause(){
 }
 
 
-void Menu_State::respondToUserInput(){
-    if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
-        Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
+void Menu_State::respond_to_user_input(){
+    if(Input_Manager::get_instance()->key_is_down(SDLK_ESCAPE)){
+        Event_Manager::get_instance()->queue_event(new Exit_State_Event());
     }
 }
 

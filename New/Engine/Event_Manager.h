@@ -21,18 +21,18 @@ using namespace std;
 class Event_Manager :public Object{
 
 public:
-    static Event_Manager* getInstance();
+    static Event_Manager* get_instance();
     
     ~Event_Manager();
     
-    void queueEvent(Event*);
-    void processQueuedEvents();
+    void queue_event(Event*);
+    void process_queued_events();
     
 private:
     static Event_Manager* instance_;
     Event_Manager();
     
-	queue<Event*> events_;
+	queue<Event*> events_;  /** < stores events to be processed **/
 };
 
 #endif

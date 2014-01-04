@@ -17,7 +17,7 @@ class ID{
 public:
     ID(int newID);
     
-    int getID();
+    int get_id();
     
 private:
     int id_;

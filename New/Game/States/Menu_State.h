@@ -23,7 +23,7 @@ public:
     Menu_State();
     ~Menu_State();
     
-    ID* getID() ;
+    ID* get_id() ;
     
     
     void on_resume();
@@ -31,7 +31,7 @@ public:
     
     
     
-    void respondToUserInput();
+    void respond_to_user_input();
     void update(Uint32 currentTime);
     void render(SDL_Surface* img);
     

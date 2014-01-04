@@ -26,17 +26,17 @@ int main(int argc, char* argv[]){
     
     if(n8::setup_n8()){
     
-        Game_Manager* game = Game_Manager::getInstance();
+        Game_Manager* game = Game_Manager::get_instance();
     
-        game->setCaption("n8");
+        game->set_caption("n8");
         
-        State_Manager::getInstance()->registerState(GAME_STATE, new Game_State());
-        State_Manager::getInstance()->registerState(MENU_STATE, new Menu_State());
+        State_Manager::get_instance()->register_state(GAME_STATE, new Game_State());
+        State_Manager::get_instance()->register_state(MENU_STATE, new Menu_State());
         
-        State_Manager::getInstance()->pushState(GAME_STATE);
+        State_Manager::get_instance()->push_state(GAME_STATE);
         
         
-        game->startGame();
+        game->run_game();
         
         n8::shutdown_n8();
     }

@@ -15,6 +15,6 @@ ID::ID(int newID){
     
 }
 
-int ID::getID(){
+int ID::get_id(){
     return id_;
 }

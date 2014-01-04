@@ -27,7 +27,7 @@ Game_State::~Game_State(){
     
 }
 
-ID* Game_State::getID(){
+ID* Game_State::get_id(){
     return id_;
 }
 
@@ -41,13 +41,13 @@ void Game_State::on_pause(){
 }
 
 
-void Game_State::respondToUserInput(){
-    if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
-        Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
+void Game_State::respond_to_user_input(){
+    if(Input_Manager::get_instance()->key_is_down(SDLK_ESCAPE)){
+        Event_Manager::get_instance()->queue_event(new Exit_State_Event());
     }
     
-    if(Input_Manager::getInstance()->key_is_down(SDLK_SPACE)){
-        Event_Manager::getInstance()->queueEvent(new Show_Menu_Event());
+    if(Input_Manager::get_instance()->key_is_down(SDLK_SPACE)){
+        Event_Manager::get_instance()->queue_event(new Show_Menu_Event());
     }
 }
 

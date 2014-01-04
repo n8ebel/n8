@@ -32,19 +32,19 @@ using namespace std;
 class State_Manager :public Object{
 
 public:
-    static State_Manager* getInstance();
+    static State_Manager* get_instance();
     virtual ~State_Manager();
     
     
-    bool registerState(int identifier, State* state);
+    bool register_state(int identifier, State* state);
     
-    bool pushState(int identifier);
-    void popState();
+    bool push_state(int identifier);
+    void pop_state();
     
-    int getStackSize();
+    int get_stack_size();
     
     
-    void processState(Uint32 time, SDL_Surface* screen);
+    void process_state(Uint32 time, SDL_Surface* screen);
     
     
     
