@@ -24,7 +24,10 @@ public:
     
     virtual ID* getID() = 0;
     
-    virtual void start() = 0;
+    
+    virtual void on_resume() = 0;
+    virtual void on_pause() = 0;
+    
     
     virtual void respondToUserInput() = 0;
     virtual void update(Uint32 currentTime) = 0;

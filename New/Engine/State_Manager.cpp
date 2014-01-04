@@ -73,14 +73,9 @@ bool State_Manager::registerState(int identifier, State* state){
     if(ii == registeredStates_.end()){
         registeredStates_[identifier] = state;
         
-        if(registeredStates_.size() == 1){
-            
-            stateStack.push(state);
-        }
         return true;
     }
     else{
-        
         
         return false;
     }
@@ -104,6 +99,7 @@ bool State_Manager::pushState(int identifier){
     if(ii != registeredStates_.end()){
         
         stateStack.push( ii->second);
+        stateStack.top()->on_resume();
         
         return true;
     }
@@ -119,7 +115,13 @@ bool State_Manager::pushState(int identifier){
  */
  
 void State_Manager::popState(){
-    if (stateStack.size() > 0) {
+    if (stateStack.size() > 1) {
+        stateStack.top()->on_pause();
+        stateStack.pop();
+        stateStack.top()->on_resume();
+    }
+    else if(stateStack.size() == 1){
+        stateStack.top()->on_pause();
         stateStack.pop();
     }
 }

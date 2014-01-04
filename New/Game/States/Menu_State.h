@@ -13,6 +13,7 @@
 
 #include <iostream> 
 
+#include "Values.h"
 #include "State.h"
 #include "Input_Manager.h"
 
@@ -24,7 +25,11 @@ public:
     
     ID* getID() ;
     
-    void start() ;
+    
+    void on_resume();
+    void on_pause();
+    
+    
     
     void respondToUserInput();
     void update(Uint32 currentTime);

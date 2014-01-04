@@ -20,7 +20,7 @@ using namespace std;
 
 
 Menu_State::Menu_State()  {
-    id_ = new ID(0);
+    id_ = new ID(MENU_STATE);
     
 }
 
@@ -32,9 +32,16 @@ ID* Menu_State::getID(){
     return id_;
 }
 
-void Menu_State::start(){
+
+
+
+void Menu_State::on_resume(){
+    SDL_WM_SetCaption("Menu State", "Menu State");
+}
+void Menu_State::on_pause(){
     
 }
+
 
 void Menu_State::respondToUserInput(){
     if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){

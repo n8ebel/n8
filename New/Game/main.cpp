@@ -33,6 +33,8 @@ int main(int argc, char* argv[]){
         State_Manager::getInstance()->registerState(GAME_STATE, new Game_State());
         State_Manager::getInstance()->registerState(MENU_STATE, new Menu_State());
         
+        State_Manager::getInstance()->pushState(GAME_STATE);
+        
         
         game->startGame();
         

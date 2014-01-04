@@ -19,7 +19,7 @@
 using namespace std;
 
 Game_State::Game_State()  {
-    id_ = new ID(0);
+    id_ = new ID(GAME_STATE);
     
 }
 
@@ -31,9 +31,15 @@ ID* Game_State::getID(){
     return id_;
 }
 
-void Game_State::start(){
+
+
+void Game_State::on_resume(){
+    SDL_WM_SetCaption("Game State", "Game State");
+}
+void Game_State::on_pause(){
     
 }
+
 
 void Game_State::respondToUserInput(){
     if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
