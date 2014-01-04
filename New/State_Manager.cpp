@@ -145,10 +145,12 @@ void State_Manager::processState(Uint32 time, SDL_Surface* screen){
     
         if(stateStack.size() > 0){
             stateStack.top()->respondToUserInput();
+            Event_Manager::getInstance()->processQueuedEvents();
         }
         
         if(stateStack.size() > 0){
             stateStack.top()->update(time);
+            Event_Manager::getInstance()->processQueuedEvents();
         }
         
         if(stateStack.size() > 0){

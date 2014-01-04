@@ -12,7 +12,8 @@
 #define STATE_MANAGER_H
 
 
-#include "State.h";
+#include "State.h"
+#include "Event_Manager.h"
 #include <map>
 #include <stack>
 

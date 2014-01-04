@@ -16,7 +16,7 @@
 #include "State.h"
 
 
-class Game_Manager :public Object{
+class Game_Manager : public Object{
 
 public:
     static const int DEFAULT_SCREEN_WIDTH = 400;

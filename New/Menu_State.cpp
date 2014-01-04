@@ -10,6 +10,10 @@
 
 #include "Menu_State.h"
 #include "State_Manager.h"
+#include "Event_Manager.h"
+#include "Exit_State_Event.h"
+
+
 #include <iostream>
 
 using namespace std;
@@ -35,13 +39,10 @@ void Menu_State::start(){
 void Menu_State::respondToUserInput(){
     while(Input_Manager::getInstance()->handle_event()){
         if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
-            std::cout << "MenuState.escape" << std::endl;
-            State_Manager::getInstance()->popState();
+            Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
         }
     
-        if(Input_Manager::getInstance()->key_is_down(SDLK_SPACE)){
-            State_Manager::getInstance()->pushState(1);
-        }
+        
    }
     
 }

@@ -8,6 +8,7 @@
 
 
 #include "n8.h"
+#include "Values.h"
 
 #include <iostream>
 
@@ -25,8 +26,9 @@ int main(int argc, char* argv[]){
     
         game->setCaption("n8");
         
-        State_Manager::getInstance()->registerState(0, new Menu_State());
-        State_Manager::getInstance()->registerState(1, new Game_State());
+        State_Manager::getInstance()->registerState(GAME_STATE, new Game_State());
+        State_Manager::getInstance()->registerState(MENU_STATE, new Menu_State());
+        
         
         game->startGame();
         

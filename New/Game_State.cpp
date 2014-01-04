@@ -10,6 +10,9 @@
 
 #include "Game_State.h"
 #include "State_Manager.h"
+#include "Event_Manager.h"
+#include "Exit_State_Event.h"
+#include "Show_Menu_Event.h"
 
 #include <iostream>
 
@@ -35,7 +38,11 @@ void Game_State::start(){
 void Game_State::respondToUserInput(){
     while(Input_Manager::getInstance()->handle_event()){
         if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
-            State_Manager::getInstance()->popState();
+            Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
+        }
+        
+        if(Input_Manager::getInstance()->key_is_down(SDLK_SPACE)){
+            Event_Manager::getInstance()->queueEvent(new Show_Menu_Event());
         }
     }
     
