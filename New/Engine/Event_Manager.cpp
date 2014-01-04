@@ -8,9 +8,8 @@
 
 #include "Event_Manager.h"
 
-#define DEBUGGING true
 
-Event_Manager* Event_Manager::instance_ = NULL;
+Event_Manager* Event_Manager::instance_ = NULL; //Static singleton instance initialzation
 
 /** Private constructor */
 Event_Manager::Event_Manager(){

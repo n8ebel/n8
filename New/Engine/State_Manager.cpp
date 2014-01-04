@@ -13,11 +13,9 @@
 #include "Input_Manager.h"
 
 
-#define DEBUGGING true
-
 /** Pointer to single, static State_Manager pointer
  */
-State_Manager* State_Manager::instance_ = NULL;
+State_Manager* State_Manager::instance_ = NULL;  //Static singleton instance initialzation
 
 
 /** Virtual destructor

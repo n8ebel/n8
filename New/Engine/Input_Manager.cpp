@@ -12,9 +12,8 @@
 #include "Input_Manager.h"
 #include "State.h"
 
-#define DEBUGGING true
 
-Input_Manager* Input_Manager::instance_ = NULL;
+Input_Manager* Input_Manager::instance_ = NULL;  //Static singleton instance initialzation
 
 Input_Manager* Input_Manager::getInstance(){
     if(instance_){

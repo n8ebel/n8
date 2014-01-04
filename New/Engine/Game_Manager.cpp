@@ -15,9 +15,7 @@
 
 using namespace std;
 
-#define DEBUGGING true
-
-Game_Manager* Game_Manager::instance_ = NULL;
+Game_Manager* Game_Manager::instance_ = NULL;  //Static singleton instance initialzation
 int Game_Manager::nextid_ = 0;
 
 Game_Manager* Game_Manager::getInstance(){
