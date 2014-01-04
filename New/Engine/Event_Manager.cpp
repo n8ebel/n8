@@ -8,6 +8,8 @@
 
 #include "Event_Manager.h"
 
+#define DEBUGGING true
+
 Event_Manager* Event_Manager::instance_ = NULL;
 
 /** Private constructor */
@@ -17,7 +19,9 @@ Event_Manager::Event_Manager(){
 
 /** Default destructor */
 Event_Manager::~Event_Manager(){
-    
+    if(DEBUGGING){
+        Log::info(EVENT_MANAGER, "Destructor was called");
+    }
 }
 
 /** Singleton access method

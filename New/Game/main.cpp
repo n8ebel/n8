@@ -8,6 +8,10 @@
 
 
 #include "n8.h"
+
+#include "Game_State.h"
+#include "Menu_State.h"
+
 #include "Values.h"
 
 #include <iostream>

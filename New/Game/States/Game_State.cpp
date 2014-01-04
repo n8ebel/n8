@@ -36,17 +36,13 @@ void Game_State::start(){
 }
 
 void Game_State::respondToUserInput(){
-    while(Input_Manager::getInstance()->handle_event()){
-        if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
-            Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
-        }
-        
-        if(Input_Manager::getInstance()->key_is_down(SDLK_SPACE)){
-            Event_Manager::getInstance()->queueEvent(new Show_Menu_Event());
-        }
+    if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
+        Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
     }
     
-    
+    if(Input_Manager::getInstance()->key_is_down(SDLK_SPACE)){
+        Event_Manager::getInstance()->queueEvent(new Show_Menu_Event());
+    }
 }
 
 void Game_State::update(Uint32 currentTime){

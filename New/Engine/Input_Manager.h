@@ -13,15 +13,18 @@
 
 #include <iostream>
 
-#include "SDL/SDL.h"
+#include "Object.h"
 
-class Input_Manager{
+class State;
+
+class Input_Manager :public Object {
 
 public:
     
     static Input_Manager* getInstance();
     ~Input_Manager();
     
+    void process_inputs(State*);
     void handle_input();
     bool handle_event();
     bool key_is_down(int key);

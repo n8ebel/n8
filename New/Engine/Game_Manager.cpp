@@ -10,15 +10,15 @@
 #include <iostream>
 
 #include "Game_Manager.h"
-#include "Input_Manager.h"
-#include "Log.h"
-#include "n8.h"
+#include "State_Manager.h"
+
 
 using namespace std;
 
 #define DEBUGGING true
 
 Game_Manager* Game_Manager::instance_ = NULL;
+int Game_Manager::nextid_ = 0;
 
 Game_Manager* Game_Manager::getInstance(){
     if(instance_ == NULL) {
@@ -70,6 +70,15 @@ void Game_Manager::endGame(){
     quit_ = true;
     
     Log::info(GAME_MANAGER, "Ending Game");
+}
+
+/** Used to get the next available unique integer id for a created entity.  When called nextid_ is incremented so the return values are always unique.
+ *
+ *  @return The next available id number
+ */
+int Game_Manager::get_next_id(){
+    nextid_++;
+    return nextid_;
 }
 
 

@@ -11,8 +11,6 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "SDL/SDL.h"
-
 #include "Object.h"
 #include "ID.h"
 

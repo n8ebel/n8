@@ -8,10 +8,10 @@
  *
  */
 
-#include <assert.h>
+
 #include "State_Manager.h"
-#include "n8.h"
-#include "Log.h"
+#include "Input_Manager.h"
+
 
 #define DEBUGGING true
 
@@ -144,7 +144,8 @@ void State_Manager::processState(Uint32 time, SDL_Surface* screen){
     if(time > 0 && screen){
     
         if(stateStack.size() > 0){
-            stateStack.top()->respondToUserInput();
+            Input_Manager::getInstance()->process_inputs(stateStack.top());
+            //stateStack.top()->respondToUserInput();
             Event_Manager::getInstance()->processQueuedEvents();
         }
         

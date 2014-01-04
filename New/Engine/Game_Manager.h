@@ -12,9 +12,6 @@
 #define GAME_MANAGER_H
 
 #include "Object.h"
-#include "State_Manager.h"
-#include "State.h"
-
 
 class Game_Manager : public Object{
 
@@ -30,7 +27,7 @@ public:
     void startGame();
     void endGame();
     
-    
+    static int get_next_id();
     
     int setFPS(int newFPS);
     
@@ -53,6 +50,8 @@ private:
     int screenWidth_;
     int screenHeight_;
     SDL_Surface* background_;
+    
+    static int nextid_; /** < Static counter to get available id values for created entities **/
     
     
     

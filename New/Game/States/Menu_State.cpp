@@ -37,14 +37,9 @@ void Menu_State::start(){
 }
 
 void Menu_State::respondToUserInput(){
-    while(Input_Manager::getInstance()->handle_event()){
-        if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
-            Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
-        }
-    
-        
-   }
-    
+    if(Input_Manager::getInstance()->key_is_down(SDLK_ESCAPE)){
+        Event_Manager::getInstance()->queueEvent(new Exit_State_Event());
+    }
 }
 
 void Menu_State::update(Uint32 currentTime){

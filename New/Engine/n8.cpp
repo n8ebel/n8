@@ -9,15 +9,17 @@
  */
 
 #include "n8.h"
+#include "Game_Manager.h"
+#include "State_Manager.h"
+#include "Event_Manager.h"
+#include "Input_Manager.h"
+
 #include <iostream>
 #include <string>
 #include <sstream>
 
 
 using namespace std;
-
-
-int n8::nextid_ = 0;
 
 /* Default Constructor
  * 
@@ -26,14 +28,7 @@ n8::n8(){
     
 }
 
-/** Used to get the next available unique integer id for a created entity.  When called nextid_ is incremented so the return values are always unique.
- *
- *  @return The next available id number
- */
-int n8::get_next_id(){
-    nextid_++;
-    return nextid_;
-}
+
 
 bool n8::setup_n8(){
     if (SDL_Init( SDL_INIT_EVERYTHING ) == 0){
@@ -49,6 +44,7 @@ bool n8::shutdown_n8(){
     delete Input_Manager::getInstance();
     delete State_Manager::getInstance();
     delete Game_Manager::getInstance();
+    delete Event_Manager::getInstance();
     
     return true;
 }

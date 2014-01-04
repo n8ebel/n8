@@ -11,6 +11,9 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include "SDL/SDL.h"
+#include "System_Values.h"
+#include "Log.h"
 
 class Object {
   private:

@@ -14,6 +14,7 @@
 
 #include "State.h"
 #include "Event_Manager.h"
+
 #include <map>
 #include <stack>
 
@@ -28,7 +29,7 @@ using namespace std;
  *  The singleton pattern is used so there is a single
  *    state stack and access point to state information.
  */
-class State_Manager{
+class State_Manager :public Object{
 
 public:
     static State_Manager* getInstance();

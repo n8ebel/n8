@@ -11,16 +11,14 @@
 #ifndef EVENT_MANAGER_H
 #define EVENT_MANAGER_H
 
-//#include "n8.h"
+#include "Object.h"
 #include "Event.h"
 
 #include <queue>
 
-class Event;
-
 using namespace std;
 
-class Event_Manager {
+class Event_Manager :public Object{
 
 public:
     static Event_Manager* getInstance();

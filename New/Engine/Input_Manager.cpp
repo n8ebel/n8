@@ -9,9 +9,8 @@
  */
 #include <iostream>
 
-#include "n8.h"
-#include "Log.h"
 #include "Input_Manager.h"
+#include "State.h"
 
 #define DEBUGGING true
 
@@ -34,6 +33,12 @@ Input_Manager::Input_Manager(){
 Input_Manager::~Input_Manager(){
     if (DEBUGGING) {
         Log::info(INPUT_MANAGER, "Destructor was called");
+    }
+}
+
+void Input_Manager::process_inputs(State* currentState){
+    while(handle_event()){
+        currentState->respondToUserInput();
     }
 }
 
