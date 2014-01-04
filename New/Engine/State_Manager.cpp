@@ -132,6 +132,10 @@ int State_Manager::get_stack_size(){
     return stateStack.size();
 }
 
+ID* State_Manager::get_current_state_id(){
+    return stateStack.top()->get_id();
+}
+
 /** Processes a state by handling input events, updating the state logic, 
  *    and rendering the state
  *

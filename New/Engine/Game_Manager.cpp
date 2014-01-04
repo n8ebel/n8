@@ -54,13 +54,16 @@ Game_Manager::~Game_Manager(){
     SDL_FreeSurface(background_);
 }
 
-
+/** Runs the game loop for the engine
+ *
+ *  Uses the quit_ flag to determine when to exit the loop
+ *  Each iteration through the loop processes the current state
+ */
 void Game_Manager::run_game(){
     
     while (quit_ == false) {
         currentTime_ = SDL_GetTicks();
         
-       // InputManager::getInstance()->handle_input();
         State_Manager::get_instance()->process_state(currentTime_, background_);
         
         if (State_Manager::get_instance()->get_stack_size() == 0) {
@@ -70,15 +73,11 @@ void Game_Manager::run_game(){
         if ( 1000/fps_ > SDL_GetTicks() - currentTime_) {
             SDL_Delay(1000/fps_ - (SDL_GetTicks() - currentTime_));
         }
-        
-        
-        
     }
-    
-    
+
 }
 
-
+/** handles any operations specific to ending the game */
 void Game_Manager::end_game(){
     quit_ = true;
     
@@ -94,8 +93,12 @@ int Game_Manager::get_next_id(){
     return nextid_;
 }
 
-
-
+/** Changes the frame per second value for the game loop
+ *
+ *  @param newFPS The integer value for the fps value
+ *
+ *  @return The fps value
+ */
 int Game_Manager::set_fps(int newFPS){
     if(newFPS > 0){
         fps_ = newFPS;
@@ -104,6 +107,16 @@ int Game_Manager::set_fps(int newFPS){
     return fps_;
 }
 
+/** Resizes the screen to the specified dimensions
+ *  
+ *  First the existing screen surface is freed, then
+ *      a new surface is created with the specified
+ *      dimensions
+ *
+ *  @param w The integer width of the screen
+ *  @param h The integer height of the screen
+ *  @param bpp The bitmap depth
+ */
 void Game_Manager::resize_screen_surface(int w, int h, int bpp){
     screenWidth_ = w;
     screenHeight_ = h;
@@ -115,10 +128,14 @@ void Game_Manager::resize_screen_surface(int w, int h, int bpp){
     background_ = SDL_SetVideoMode(screenWidth_, screenHeight_, bpp, SDL_SWSURFACE);
 }
 
+/**
+ *  @return a pointer to the background surface
+ */
 SDL_Surface* Game_Manager::get_screen_surface(){
     return background_;
 }
 
+/** Sets the window caption */
 void Game_Manager::set_caption(char* caption){
     SDL_WM_SetCaption( caption, NULL );
 }

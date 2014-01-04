@@ -52,10 +52,9 @@ void Game_State::respond_to_user_input(){
 }
 
 void Game_State::update(Uint32 currentTime){
-   // std::cout << "GameState.update()" << std::endl;
+   
 }
 void Game_State::render(SDL_Surface* img){
-    //std::cout << "GameState.render()" << std::endl;
     SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 255,0,0));
     SDL_Flip( img );
 }

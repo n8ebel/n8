@@ -13,6 +13,7 @@
 
 #include <iostream>
 
+/** Handles id abstraction */
 class ID{
 public:
     ID(int newID);
@@ -20,7 +21,7 @@ public:
     int get_id();
     
 private:
-    int id_;
+    int id_; /** < Actual id value **/
 };
 
 #endif

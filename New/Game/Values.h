@@ -11,8 +11,17 @@
 #ifndef VALUES_H
 #define VALUES_H
 
-static const int GAME_STATE = 1;
-static const int MENU_STATE = 2;
+#include <string>
+
+using namespace std;
+
+static const int GAME_STATE = 0;
+static const int MENU_STATE = 1;
+
+static const string STATES[2] = {"Game State", "Menu State"};
+
+static const string EXIT_STATE_EVENT = "Exit State Event";
+static const string MENU_STATE_EVENT = "Menu State Event";
 
 
 #endif

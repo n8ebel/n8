@@ -42,7 +42,7 @@ public:
     void pop_state();
     
     int get_stack_size();
-    
+    ID* get_current_state_id();
     
     void process_state(Uint32 time, SDL_Surface* screen);
     
@@ -51,10 +51,10 @@ public:
 private:
     State_Manager();
     
-    static State_Manager* instance_;
+    static State_Manager* instance_; /** < static singleton instance */
     
-    map<int, State*> registeredStates_;
-    stack<State*> stateStack;
+    map<int, State*> registeredStates_; /** < map of identifiers and game state objects */
+    stack<State*> stateStack; /** < stack of state objects */
     
 };
 

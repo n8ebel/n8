@@ -10,17 +10,21 @@
 
 #include "Exit_State_Event.h"
 #include "State_Manager.h"
+#include "Values.h"
 
+/** Default constructor */
 Exit_State_Event::Exit_State_Event(){
 
 }
 
+/** Default destructor */
 Exit_State_Event::~Exit_State_Event(){
 
 }
 
+/** Carries out the operations of the event */
 void Exit_State_Event::process(){
-    std::cout << "MenuState.escape" << std::endl;
+    Log::debug(EXIT_STATE_EVENT, "Popping " + STATES[State_Manager::get_instance()->get_current_state_id()->get_id()]);
     State_Manager::get_instance()->pop_state();
 }
 

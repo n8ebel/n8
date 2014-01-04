@@ -13,6 +13,7 @@
 
 #include "Object.h"
 
+/** Base event class to handle different game events */
 class Event : public Object{
 
 public:

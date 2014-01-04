@@ -36,7 +36,7 @@ private:
     static Input_Manager* instance_;
     Input_Manager();
     
-    SDL_Event *event_;
+    SDL_Event *event_; /** < SDL_Event pointer to get dequeued events */
     
     bool keysHeld_[323];  /** < Array to store whether or not a key is being held down **/
     

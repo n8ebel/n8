@@ -29,7 +29,10 @@ n8::n8(){
 }
 
 
-
+/** Initializes SDL 
+ *
+ *  @return True if SDL was initialized properly, False otherwise
+ */
 bool n8::setup_n8(){
     if (SDL_Init( SDL_INIT_EVERYTHING ) == 0){
         return true;
@@ -39,7 +42,10 @@ bool n8::setup_n8(){
     }
 }
 
-
+/** Deletes all game systems 
+ *
+ *  @return True
+ */
 bool n8::shutdown_n8(){
     delete Input_Manager::get_instance();
     delete State_Manager::get_instance();

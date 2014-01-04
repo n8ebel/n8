@@ -15,6 +15,7 @@
 #include "System_Values.h"
 #include "Log.h"
 
+/** Generic base class */
 class Object {
   private:
 
