@@ -57,3 +57,7 @@ void Menu_State::render(SDL_Surface* img){
     SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 0,255,0));
     SDL_Flip( img );
 }
+
+void Menu_State::register_entity(Entity* newEntity){
+    
+}

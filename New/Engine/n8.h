@@ -11,7 +11,7 @@
 #ifndef N8_H
 #define N8_H
 
-#include "Game_Manager.h"
+#include "Managers/Game_Manager.h"
 #include "State_Manager.h"
 #include "Event_Manager.h"
 #include "Input_Manager.h"

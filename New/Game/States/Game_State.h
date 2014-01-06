@@ -16,6 +16,7 @@
 #include "Values.h"
 #include "State.h"
 #include "Input_Manager.h"
+#include "Entity.h"
 
 
 class Game_State : public State {
@@ -35,6 +36,7 @@ public:
     void update(Uint32 currentTime);
     void render(SDL_Surface* img);
     
+    void register_entity(Entity* newEntity);
     
 private:
     

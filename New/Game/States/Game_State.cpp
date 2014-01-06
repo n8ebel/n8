@@ -58,3 +58,7 @@ void Game_State::render(SDL_Surface* img){
     SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 255,0,0));
     SDL_Flip( img );
 }
+
+void Game_State::register_entity(Entity* newEntity){
+    
+}

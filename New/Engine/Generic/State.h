@@ -13,6 +13,9 @@
 
 #include "Object.h"
 #include "ID.h"
+#include "Entity.h"
+
+#include <vector>
 
 /**
  *  Base class for game states
@@ -33,11 +36,14 @@ public:
     virtual void update(Uint32 currentTime) = 0;
     virtual void render(SDL_Surface* img) = 0;
     
+    virtual void register_entity(Entity* newEntity) = 0;
     
 
 protected:
     Uint32 time_;
     ID* id_;
+    
+    vector<Entity*> entities_;  /** < Stores list of state entities */
     
 private:
     

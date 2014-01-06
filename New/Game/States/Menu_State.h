@@ -35,10 +35,7 @@ public:
     void update(Uint32 currentTime);
     void render(SDL_Surface* img);
     
-    
-    
-    
-    
+    void register_entity(Entity* newEntity);
     
     
 protected:
