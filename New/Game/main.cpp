@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
         
         State_Manager::get_instance()->push_state(GAME_STATE);
         
-        ResourceManager::GetInstance();
+       ResourceManager::GetInstance().print();
         
         
         game->run_game();

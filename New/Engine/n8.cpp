@@ -52,6 +52,7 @@ bool n8::shutdown_n8(){
     delete Game_Manager::get_instance();
     delete Event_Manager::get_instance();
     
+    
     return true;
 }
 

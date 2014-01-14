@@ -14,8 +14,14 @@
 #include "Singleton.h"
 #include <iostream>
 
+
+
 class ResourceManager : public Singleton<ResourceManager> {
+public:
+    
+private:
     
 };
+
 
 #endif
