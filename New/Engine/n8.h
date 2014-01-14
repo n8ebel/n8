@@ -15,6 +15,7 @@
 #include "State_Manager.h"
 #include "Event_Manager.h"
 #include "Input_Manager.h"
+#include "ResourceManager.h"
 
 class n8{
 
