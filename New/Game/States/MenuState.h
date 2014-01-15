@@ -15,27 +15,27 @@
 
 #include "Values.h"
 #include "State.h"
-#include "Input_Manager.h"
+#include "InputManager.h"
 
 
-class Menu_State : public State {
+class MenuState : public State {
 public:
-    Menu_State();
-    ~Menu_State();
+    MenuState();
+    ~MenuState();
     
-    ID* get_id() ;
-    
-    
-    void on_resume();
-    void on_pause();
+    ID* GetId() ;
     
     
+    void OnResume();
+    void OnPause();
     
-    void respond_to_user_input();
-    void update(Uint32 currentTime);
-    void render(SDL_Surface* img);
     
-    void register_entity(Entity* newEntity);
+    
+    void RespondToUserInput();
+    void Update(Uint32 currentTime);
+    void Render(SDL_Surface* img);
+    
+    void RegisterEntity(Entity* newEntity);
     
     
 protected:

@@ -14,8 +14,8 @@
 /** Class to store an x and y coordinate position **/
 class Point2D {
 private:
-    int x_;  /** < X coordinate of the object **/
-    int y_;  /** < Y coordinate of the object **/
+    int m_x;  /** < X coordinate of the object **/
+    int m_y;  /** < Y coordinate of the object **/
 
 public:
     ~Point2D();
@@ -25,37 +25,37 @@ public:
      *
      *  @return The x coordinate of the point 
      */
-    int get_x() { return x_; }
+    int GetX() { return m_x; }
     
     /** Used to get the y position of the point
      *
      *  @return The y coordinate of the point 
      */
-    int get_y() { return y_; }
+    int GetY() { return m_y; }
     
     /** Adds a value to the x coordinate of the point.  Used to update the horizontal position of an object
      *
      *  @param xOffset The value to add to the x coordinate
      */
-    void add_x(int xOffset) { x_ += xOffset; }
+    void AddX(int xOffset) { m_x += xOffset; }
     
     /** Adds a value to the y coordinate of the point.  Used to update the horizontal position of an object
      *
      *  @param yOffset The value to add to the y coordinate
      */
-    void add_y(int yOffset) { y_ += yOffset; }
+    void AddY(int yOffset) { m_y += yOffset; }
     
     /** Sets the x coordinate of the point to a passed value
      *
      *  @param newX The new x coordinate of the point
      */
-    void set_x(int newX) { x_ = newX; }
+    void SetX(int newX) { m_x = newX; }
     
     /** Sets the y coordinate of the point to a passsed value
      *
      *  @param newY The new y coordinate of the point
      */
-    void set_y(int newY) { y_ = newY; }
+    void SetY(int newY) { m_y = newY; }
 };
 
 #endif

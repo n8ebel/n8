@@ -25,25 +25,25 @@ class State{
 public:
     //virtual ~State() = 0;
     
-    virtual ID* get_id() = 0;
+    virtual ID* GetId() = 0;
     
     
-    virtual void on_resume() = 0;
-    virtual void on_pause() = 0;
+    virtual void OnResume() = 0;
+    virtual void OnPause() = 0;
     
     
-    virtual void respond_to_user_input() = 0;
-    virtual void update(Uint32 currentTime) = 0;
-    virtual void render(SDL_Surface* img) = 0;
+    virtual void RespondToUserInput() = 0;
+    virtual void Update(Uint32 currentTime) = 0;
+    virtual void Render(SDL_Surface* img) = 0;
     
-    virtual void register_entity(Entity* newEntity) = 0;
+    virtual void RegisterEntity(Entity* newEntity) = 0;
     
 
 protected:
-    Uint32 time_;
-    ID* id_;
+    Uint32 m_time;
+    ID* m_id;
     
-    vector<Entity*> entities_;  /** < Stores list of state entities */
+    vector<Entity*> m_entities;  /** < Stores list of state entities */
     
 private:
     

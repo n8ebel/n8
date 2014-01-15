@@ -25,16 +25,16 @@ class Component {
     
     /** Constructor <p>
      */
-    Component(string newID) { id_ = newID; }
+    Component(string newID) { m_id = newID; }
 
     /** Used to get the identifier of the component
      *
      *  @return The identifier of the component
      */
-    string get_id() { return id_; }
+    string GetId() { return m_id; }
 
   private:
-    string id_;   /** < The identifier for the component **/
+    string m_id;   /** < The identifier for the component **/
 };
 
 #endif 

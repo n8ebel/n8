@@ -15,18 +15,18 @@
  *  @param newID the value for the id
  */
 ID::ID(int newID){
-    id_ = newID;
+    m_id = newID;
     
 }
 
 /** @return The value of the id */
-int ID::get_id(){
-    return id_;
+int ID::GetId(){
+    return m_id;
 }
 
 bool operator== (ID &id1, ID &id2)
 {
-    return id1.get_id() == id2.get_id();
+    return id1.GetId() == id2.GetId();
 }
 
 bool operator!= (ID &id1, ID &id2)

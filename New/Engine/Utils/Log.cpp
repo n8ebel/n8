@@ -23,7 +23,7 @@ Log::~Log() {
  *  @param tag A string to indicate something about the message such as the class, method, or file it's from
  *  @param msg The message to print describing the error
  */
-void Log::error(string tag, string msg){
+void Log::Error(string tag, string msg){
     cout << "(ERROR) " << tag << ": " << msg << endl;
 }
 
@@ -32,7 +32,7 @@ void Log::error(string tag, string msg){
  *  @param tag A string to indicate something about the message such as the class, method, or file it's from
  *  @param msg The message to print
  */
-void Log::info(string tag, string msg){
+void Log::Info(string tag, string msg){
     cout << "(INFO) " << tag << ": " << msg << endl;
 }
 
@@ -41,6 +41,6 @@ void Log::info(string tag, string msg){
  *  @param tag A string to indicate something about the message such as the class, method, or file it's from
  *  @param msg The message to print
  */
-void Log::debug(string tag, string msg){
+void Log::Debug(string tag, string msg){
     cout << "(DEBUG) " << tag << ": " << msg << endl;
 }

@@ -34,30 +34,30 @@ class Entity{
      *  @param newId the unique id specifier for the new entity
      *  @param newType the type specifier for the new entity
      */
-    explicit Entity(int newId, string newType) { id_ = newId; type_ = newType; }
+    explicit Entity(int newId, string newType) { m_id = newId; m_type = newType; }
   
-    void add_component(Component* newComponent);
-    void remove_component(string componentID);
+    void AddComponent(Component* newComponent);
+    void RemoveComponent(string componentID);
   
     /** 
      *  
      *  @return the integer id of the entity
      */
-    int get_id() { return id_;}
+    int GetId() { return m_id;}
     
     /** Gets the type of the entity
      *
      *  @return The string type identifier
      */
-    string get_type() { return type_; }
+    string GetType() { return m_type; }
 
-    Component* get_component(string componentID);
-    map<string,Component*> get_components();
+    Component* GetComponent(string componentID);
+    map<string,Component*> GetComponents();
     
   private:
-    int id_; /** < a unique specifier for the entity **/
-    string type_;  /** < an identifier so entities can be grouped together.  ex: NPC, Enemy, User **/
-    map<string, Component*> component_map_;  /** < Stores all components added to the entity **/
+    int m_id; /** < a unique specifier for the entity **/
+    string m_type;  /** < an identifier so entities can be grouped together.  ex: NPC, Enemy, User **/
+    map<string, Component*> m_componentMap;  /** < Stores all components added to the entity **/
 
 };
 

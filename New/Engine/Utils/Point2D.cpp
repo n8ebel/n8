@@ -18,7 +18,7 @@ Point2D::~Point2D(){
  *  Sets the initial position of the point
  */
 Point2D::Point2D(int initX, int initY){
-    x_ = initX;
-    y_ = initY;
+    m_x = initX;
+    m_y = initY;
 }
 

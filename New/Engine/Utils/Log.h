@@ -15,9 +15,9 @@ using namespace std;
 
 class Log {
   public:
-	static void error(string tag,string msg);
-	static void info(string tag, string msg);
-	static void debug(string tag, string msg);
+	static void Error(string tag,string msg);
+	static void Info(string tag, string msg);
+	static void Debug(string tag, string msg);
 
   private:
 	Log();

@@ -13,13 +13,13 @@
 
 #include "Event.h"
 
-class Exit_State_Event :public Event{
+class ExitStateEvent :public Event{
 
 public:
-    Exit_State_Event();
-    ~Exit_State_Event();
+    ExitStateEvent();
+    ~ExitStateEvent();
     
-    virtual void process();
+    virtual void Process();
     
 private:
     

@@ -9,10 +9,10 @@
  */
 
 #include "n8.h"
-#include "Managers/Game_Manager.h"
-#include "State_Manager.h"
-#include "Event_Manager.h"
-#include "Input_Manager.h"
+#include "GameManager.h"
+#include "StateManager.h"
+#include "EventManager.h"
+#include "InputManager.h"
 
 #include <iostream>
 #include <string>
@@ -33,8 +33,15 @@ n8::n8(){
  *
  *  @return True if SDL was initialized properly, False otherwise
  */
-bool n8::setup_n8(){
+bool n8::Setup(){
     if (SDL_Init( SDL_INIT_EVERYTHING ) == 0){
+        GameManager::Create();
+        StateManager::Create();
+        InputManager::Create();
+        EventManager::Create();
+        ResourceManager::Create();
+        ResourceManager::GetInstance()->LoadImages("/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/images.txt");
+        
         return true;
     }
     else{
@@ -46,13 +53,8 @@ bool n8::setup_n8(){
  *
  *  @return True
  */
-bool n8::shutdown_n8(){
-    delete Input_Manager::get_instance();
-    delete State_Manager::get_instance();
-    delete Game_Manager::get_instance();
-    delete Event_Manager::get_instance();
-    
-    
+bool n8::Shutdown(){
+    ResourceManager::Destroy();
     return true;
 }
 

@@ -24,7 +24,7 @@ class Point3D: public Point2D {
 	     *
 	     *  @return The z coordinate of the point
 	     */
-	    int get_z() { return z_; }
+	    int GetZ() { return m_z; }
 
 
 
@@ -32,7 +32,7 @@ class Point3D: public Point2D {
 	     *
 	     *  @param zOffset The value to add to the z coordinate
 	     */
-	    void add_z(int zOffset) { z_ += zOffset; }
+	    void AddZ(int zOffset) { m_z += zOffset; }
 
 
 
@@ -40,10 +40,10 @@ class Point3D: public Point2D {
 	     *
 	     *  @param newZ The new z coordinate of the point
 	     */
-	    void set_z(int newZ) { z_ = newZ; }
+	    void SetZ(int newZ) { m_z = newZ; }
 
   private:
-	int z_;
+	int m_z;
 };
 
 #endif /* POINT3D_H */

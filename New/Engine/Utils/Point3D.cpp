@@ -11,7 +11,7 @@
 #include "Point3D.h"
 
 Point3D::Point3D(int initX, int initY, int initZ) : Point2D(initX, initY) {
-	z_ = initZ;
+	m_z = initZ;
 
 }
 

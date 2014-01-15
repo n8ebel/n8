@@ -13,13 +13,13 @@
 
 #include "Event.h"
 
-class Show_Menu_Event :public Event{
+class ShowMenuEvent :public Event{
     
 public:
-    Show_Menu_Event();
-    ~Show_Menu_Event();
+    ShowMenuEvent();
+    ~ShowMenuEvent();
     
-    virtual void process();
+    virtual void Process();
     
 private:
     

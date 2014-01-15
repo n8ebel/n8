@@ -12,7 +12,7 @@
 #define OBJECT_H
 
 #include "SDL/SDL.h"
-#include "System_Values.h"
+#include "SystemValues.h"
 #include "Log.h"
 
 /** Generic base class */

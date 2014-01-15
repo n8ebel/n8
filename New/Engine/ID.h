@@ -18,10 +18,10 @@ class ID{
 public:
     ID(int newID);
     
-    int get_id();
+    int GetId();
     
 private:
-    int id_; /** < Actual id value **/
+    int m_id; /** < Actual id value **/
 };
 
 #endif

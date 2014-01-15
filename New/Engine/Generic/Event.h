@@ -17,7 +17,7 @@
 class Event : public Object{
 
 public:
-    virtual void process() = 0;
+    virtual void Process() = 0;
     
 private:
     

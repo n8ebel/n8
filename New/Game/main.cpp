@@ -9,8 +9,8 @@
 
 #include "n8.h"
 
-#include "Game_State.h"
-#include "Menu_State.h"
+#include "GameState.h"
+#include "MenuState.h"
 
 #include "Values.h"
 
@@ -24,23 +24,22 @@ int main(int argc, char* argv[]){
     //SDL_Init( SDL_INIT_EVERYTHING );
     
     
-    if(n8::setup_n8()){
+    if(n8::Setup()){
     
-        Game_Manager* game = Game_Manager::get_instance();
+        
     
-        game->set_caption("n8");
+        GameManager::GetInstance()->SetCaption("n8");
         
-        State_Manager::get_instance()->register_state(GAME_STATE, new Game_State());
-        State_Manager::get_instance()->register_state(MENU_STATE, new Menu_State());
+        StateManager::GetInstance()->RegisterState(GAME_STATE, new GameState());
+        StateManager::GetInstance()->RegisterState(MENU_STATE, new MenuState());
         
-        State_Manager::get_instance()->push_state(GAME_STATE);
+        StateManager::GetInstance()->PushState(GAME_STATE);
+    
         
-       ResourceManager::GetInstance().print();
+        GameManager::GetInstance()->RunGame();
         
-        
-        game->run_game();
-        
-        n8::shutdown_n8();
+        n8::Shutdown();
+         
     }
     
     

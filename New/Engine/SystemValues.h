@@ -23,10 +23,12 @@ const int BACKGROUND = -3;
 
 static const bool DEBUGGING = true;
 
-static const string GAME_MANAGER = "Game_Manager";
-static const string STATE_MANAGER = "State_Manager";
-static const string INPUT_MANAGER = "Input_Manager";
-static const string EVENT_MANAGER = "Event_Manager";
+static const string GAME_MANAGER = "Game Manager";
+static const string STATE_MANAGER = "State Manager";
+static const string INPUT_MANAGER = "Input Manager";
+static const string EVENT_MANAGER = "Event Manager";
+static const string RESOURCE_MANAGER = "Resource Manager";
+static const string SINGLETON = "Singleton";
 
 
 
