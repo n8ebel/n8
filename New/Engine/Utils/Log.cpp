@@ -9,6 +9,10 @@
 
 using namespace std;
 
+bool Log::ERROR = true;
+bool Log::INFO = true;
+bool Log::DEBUGGING = true;
+
 Log::Log() {
 	// TODO Auto-generated constructor stub
 
@@ -24,7 +28,9 @@ Log::~Log() {
  *  @param msg The message to print describing the error
  */
 void Log::Error(string tag, string msg){
-    cout << "(ERROR) " << tag << ": " << msg << endl;
+    if (ERROR) {
+        cout << "(ERROR) " << tag << ": " << msg << endl;
+    }
 }
 
 /** Used to print info messages to the console
@@ -33,7 +39,9 @@ void Log::Error(string tag, string msg){
  *  @param msg The message to print
  */
 void Log::Info(string tag, string msg){
-    cout << "(INFO) " << tag << ": " << msg << endl;
+    if(INFO){
+        cout << "(INFO) " << tag << ": " << msg << endl;
+    }
 }
 
 /** Used to print debug messages to the console
@@ -42,5 +50,29 @@ void Log::Info(string tag, string msg){
  *  @param msg The message to print
  */
 void Log::Debug(string tag, string msg){
-    cout << "(DEBUG) " << tag << ": " << msg << endl;
+    if(DEBUGGING){
+        cout << "(DEBUG) " << tag << ": " << msg << endl;
+    }
+}
+
+void Log::TurnOnErrorMessages(){
+    ERROR = true;
+}
+
+void Log::TurnOffErrorMessages(){
+    ERROR = false;
+}
+
+void Log::TurnOnInfoMessages(){
+    INFO = true;
+}
+void Log::TurnOffInfoMessages(){
+    INFO = false;
+}
+
+void Log::TurnOnDebugMessages(){
+    DEBUGGING = true;
+}
+void Log::TurnOffDebugMessages(){
+    DEBUGGING = false;
 }

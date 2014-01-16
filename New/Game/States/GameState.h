@@ -14,32 +14,30 @@
 #include <iostream>
 
 #include "Values.h"
-#include "State.h"
+#include "EntityState.h"
 #include "InputManager.h"
 #include "Entity.h"
 
 
-class GameState : public State {
+class GameState : public EntityState {
 public:
     GameState();
     virtual ~GameState();
     
-    ID* GetId() ;
-    
-   
-    void OnResume();
-    void OnPause();
+    virtual void OnResume();
+    virtual void OnPause();
     
     
     
-    void RespondToUserInput();
-    void Update(Uint32 currentTime);
-    void Render(SDL_Surface* img);
+    virtual void RespondToUserInput();
+    virtual void Update(Uint32 currentTime);
+    virtual void Render(SDL_Surface* img);
     
-    void RegisterEntity(Entity* newEntity);
+    virtual void RegisterEntity(Entity* newEntity);
     
 private:
-    
+    virtual void CreateSystems();
+    virtual void CreateEntities();
     
 };
 #endif

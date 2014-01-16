@@ -23,5 +23,7 @@ static const string STATES[2] = {"Game State", "Menu State"};
 static const string EXIT_STATE_EVENT = "Exit State Event";
 static const string MENU_STATE_EVENT = "Menu State Event";
 
+static const string MISSLE_SPRITE = "/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/missile.bmp";
+
 
 #endif

@@ -39,8 +39,10 @@ bool n8::Setup(){
         StateManager::Create();
         InputManager::Create();
         EventManager::Create();
+        WindowManager::Create();
         ResourceManager::Create();
         ResourceManager::GetInstance()->LoadImages("/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/images.txt");
+        
         
         return true;
     }

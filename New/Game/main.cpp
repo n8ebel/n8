@@ -23,12 +23,15 @@ using namespace std;
 int main(int argc, char* argv[]){
     //SDL_Init( SDL_INIT_EVERYTHING );
     
+    Log::TurnOnDebugMessages();
+    Log::TurnOnInfoMessages();
+    Log::TurnOnErrorMessages();
     
     if(n8::Setup()){
     
         
     
-        GameManager::GetInstance()->SetCaption("n8");
+        WindowManager::GetInstance()->SetCaption("n8");
         
         StateManager::GetInstance()->RegisterState(GAME_STATE, new GameState());
         StateManager::GetInstance()->RegisterState(MENU_STATE, new MenuState());

@@ -57,6 +57,10 @@ SDL_Surface* ResourceManager::LoadImage( string filename )
         //Free the old image
         SDL_FreeSurface( loadedImage );
     }
+    else{
+        Log::Error(RESOURCE_MANAGER, "SDL_LoadBMP failed");
+    }
+    
     
     //Return the optimized image
     return optimizedImage;
@@ -68,17 +72,16 @@ SDL_Surface* ResourceManager::LoadImage( string filename )
  *  @param filepath the filepath for the configuration file containing all image filenames to load
  */
 void ResourceManager::LoadImages(string filepath){
-    cout << "Loading Images" << endl;
+    Log::Debug(RESOURCE_MANAGER, "Loading Images");
     ifstream inFile;
     inFile.open(filepath.c_str());
     if (inFile.is_open()) {
         while (!inFile.eof()) {
             string inputfile;
             inFile >> inputfile;
-            std::cout << inputfile << endl;
             SDL_Surface* img = LoadImage(inputfile);
             if (img == NULL) {
-                cout << "Failed to load: " << inputfile << endl;
+                 Log::Error(RESOURCE_MANAGER, "Failed to load " + inputfile);
             }
             Sprite* tmp = new Sprite(inputfile,img);
             m_loadedSprites[inputfile] = tmp;
@@ -93,10 +96,8 @@ void ResourceManager::LoadImages(string filepath){
  *  @return a pointer to the desired sprite object or NULL if it doesn't exist
  */
 Sprite* ResourceManager::GetSprite(string file){
-    cout << "file: " << file << endl;
     map<string,Sprite*>::iterator ia;
     for (ia = m_loadedSprites.begin(); ia != m_loadedSprites.end(); ia++) {
-        cout << ia->second << endl;
     }
     
     map<string,Sprite*>::iterator ii = m_loadedSprites.find(file);

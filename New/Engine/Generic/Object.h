@@ -14,6 +14,7 @@
 #include "SDL/SDL.h"
 #include "SystemValues.h"
 #include "Log.h"
+#include <assert.h>
 
 /** Generic base class */
 class Object {

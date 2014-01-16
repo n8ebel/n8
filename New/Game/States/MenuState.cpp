@@ -22,16 +22,13 @@ using namespace std;
 MenuState::MenuState()  {
     m_id = new ID(MENU_STATE);
     
+    CreateSystems();
+    
 }
 
 MenuState::~MenuState(){
     
 }
-
-ID* MenuState::GetId(){
-    return m_id;
-}
-
 
 
 
@@ -58,6 +55,9 @@ void MenuState::Render(SDL_Surface* img){
     SDL_Flip( img );
 }
 
-void MenuState::RegisterEntity(Entity* newEntity){
-    
+
+
+void MenuState::CreateSystems(){
+    Log::Info("Menu State", "Create Systems");
 }
+

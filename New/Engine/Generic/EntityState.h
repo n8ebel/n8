@@ -1,5 +1,5 @@
 /*
- * State.h
+ * EntityState.h
  * n8
  *
  * Author:          Nate Ebel
@@ -8,12 +8,11 @@
  *
  */
 
-#ifndef STATE_H
-#define STATE_H
+#ifndef ENTITY_STATE_H
+#define ENTITY_STATE_H
 
-#include "Object.h"
-#include "ID.h"
 #include "Entity.h"
+#include "State.h"
 
 #include <vector>
 
@@ -21,11 +20,8 @@
  *  Base class for game states
  *
  */
-class State{
+class EntityState : public State{
 public:
-    
-    ID* GetId() {assert(m_id); return m_id;};
-    
     
     virtual void OnResume() = 0;
     virtual void OnPause() = 0;
@@ -35,15 +31,17 @@ public:
     
     virtual void RespondToUserInput() = 0;
     
+    
+    virtual void RegisterEntity(Entity* newEntity) = 0;
+    
 
 protected:
-    Uint32 m_time;
-    ID* m_id;
     
-    
+    vector<Entity*> m_entities;  /** < Stores list of state entities */
     
 private:
     virtual void CreateSystems() {Log::Info("State", "Create Systems");};
+    virtual void CreateEntities() {};
     
 };
 

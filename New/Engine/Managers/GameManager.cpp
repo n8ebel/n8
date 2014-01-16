@@ -11,7 +11,7 @@
 
 #include "GameManager.h"
 #include "StateManager.h"
-
+#include "WindowManager.h"
 
 using namespace std;
 
@@ -31,8 +31,7 @@ GameManager::GameManager(){
     }
     m_fps = DEFAULT_FPS;
     m_quit = false;
-    m_background = NULL;
-    ResizeScreenSurface(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_BPP);
+    
     if (DEBUGGING) {
         Log::Info(GAME_MANAGER, "Constructor finished");
     }
@@ -46,10 +45,6 @@ GameManager::~GameManager(){
     if (DEBUGGING) {
         Log::Info(GAME_MANAGER, "Destructor was called");
     }
-    if (m_background != NULL) {
-        SDL_FreeSurface(m_background);
-    }
-    
 }
 
 /** Runs the game loop for the engine
@@ -62,7 +57,7 @@ void GameManager::RunGame(){
     while (m_quit == false) {
         m_currentTime = SDL_GetTicks();
         
-       StateManager::GetInstance()->ProcessState(m_currentTime, m_background);
+        StateManager::GetInstance()->ProcessState(m_currentTime, WindowManager::GetInstance()->GetScreenSurface());
         
         if (StateManager::GetInstance()->GetStackSize() == 0) {
             EndGame();
@@ -103,37 +98,4 @@ int GameManager::SetFPS(int newFPS){
     }
     
     return m_fps;
-}
-
-/** Resizes the screen to the specified dimensions
- *  
- *  First the existing screen surface is freed, then
- *      a new surface is created with the specified
- *      dimensions
- *
- *  @param w The integer width of the screen
- *  @param h The integer height of the screen
- *  @param bpp The bitmap depth
- */
-void GameManager::ResizeScreenSurface(int w, int h, int bpp){
-    m_screenWidth = w;
-    m_screenHeight = h;
-    
-    if(m_background != NULL){
-        SDL_FreeSurface(m_background);
-    }
-    
-    m_background = SDL_SetVideoMode(m_screenWidth, m_screenHeight, bpp, SDL_SWSURFACE);
-}
-
-/**
- *  @return a pointer to the background surface
- */
-SDL_Surface* GameManager::GetScreenSurface(){
-    return m_background;
-}
-
-/** Sets the window caption */
-void GameManager::SetCaption(char* caption){
-    SDL_WM_SetCaption( caption, NULL );
 }

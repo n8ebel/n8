@@ -16,6 +16,7 @@
 #include "EventManager.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "WindowManager.h"
 
 class n8{
 

@@ -23,24 +23,20 @@ public:
     MenuState();
     ~MenuState();
     
-    ID* GetId() ;
-    
-    
-    void OnResume();
-    void OnPause();
+    virtual void OnResume();
+    virtual void OnPause();
     
     
     
-    void RespondToUserInput();
-    void Update(Uint32 currentTime);
-    void Render(SDL_Surface* img);
-    
-    void RegisterEntity(Entity* newEntity);
+    virtual void RespondToUserInput();
+    virtual void Update(Uint32 currentTime);
+    virtual void Render(SDL_Surface* img);
     
     
 protected:
     
 private:
+    virtual void CreateSystems();
     
     
 };

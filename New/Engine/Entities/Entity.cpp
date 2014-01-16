@@ -28,8 +28,8 @@ Entity::~Entity(){
  *
  */
 void Entity::AddComponent(Component* newComponent){
-    cout << "Add Component.  ID= " << newComponent->GetId() << endl;
-    m_componentMap[newComponent->GetId()] = newComponent;
+    cout << "Add Component.  ID= " << newComponent->get_id() << endl;
+    m_componentMap[newComponent->get_id()] = newComponent;
     
     
 }
