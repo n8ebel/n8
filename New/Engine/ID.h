@@ -12,16 +12,23 @@
 #define ID_H
 
 #include <iostream>
+using namespace std;
 
 /** Handles id abstraction */
+template <class T>
 class ID{
 public:
-    ID(int newID);
+    ID(T newID) {m_id = newID;};
     
-    int GetId();
+    T GetId() {return m_id;};
+    
+   
     
 private:
-    int m_id; /** < Actual id value **/
+    T m_id; /** < Actual id value **/
 };
+
+
+
 
 #endif

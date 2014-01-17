@@ -43,7 +43,7 @@ public:
     void PopState();
     
     int GetStackSize();
-    ID* GetCurrentStateId();
+    ID<int>* GetCurrentStateId();
     
     void ProcessState(Uint32 time, SDL_Surface* screen);
     

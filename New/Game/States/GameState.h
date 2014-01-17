@@ -18,6 +18,8 @@
 #include "InputManager.h"
 #include "Entity.h"
 
+#include "Render_System.h"
+
 
 class GameState : public EntityState {
 public:
@@ -38,6 +40,8 @@ public:
 private:
     virtual void CreateSystems();
     virtual void CreateEntities();
+    
+    RenderSystem* m_renderSystem;
     
 };
 #endif

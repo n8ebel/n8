@@ -24,7 +24,7 @@
 class State{
 public:
     
-    ID* GetId() {assert(m_id); return m_id;};
+    ID<int>* GetId() {assert(m_id); return m_id;};
     
     
     virtual void OnResume() = 0;
@@ -38,7 +38,7 @@ public:
 
 protected:
     Uint32 m_time;
-    ID* m_id;
+    ID<int>* m_id;
     
     
     

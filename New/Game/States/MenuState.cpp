@@ -20,7 +20,7 @@ using namespace std;
 
 
 MenuState::MenuState()  {
-    m_id = new ID(MENU_STATE);
+    m_id = new ID<int>(MENU_STATE);
     
     CreateSystems();
     

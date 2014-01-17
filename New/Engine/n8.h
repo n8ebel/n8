@@ -18,6 +18,8 @@
 #include "ResourceManager.h"
 #include "WindowManager.h"
 
+#include "Render_System.h"
+
 class n8{
 
 public:

@@ -11,6 +11,7 @@
 #include "GameState.h"
 #include "StateManager.h"
 #include "EventManager.h"
+#include "WindowManager.h"
 #include "ExitStateEvent.h"
 #include "ShowMenuEvent.h"
 #include "ResourceManager.h"
@@ -23,7 +24,7 @@
 using namespace std;
 
 GameState::GameState() {
-    m_id = new ID(GAME_STATE);
+    m_id = new ID<int>(GAME_STATE);
     
     CreateSystems();
     CreateEntities();
@@ -76,6 +77,7 @@ void GameState::Render(SDL_Surface* img){
         SDL_BlitSurface( ((Drawable_Component*)m_entities[i]->GetComponent(DRAWABLE))->get_image(), NULL, img, &offset );
     }
     
+    m_renderSystem->Render(WindowManager::GetInstance()->GetScreenSurface());
     
     
     SDL_Flip( img );
@@ -86,8 +88,9 @@ void GameState::RegisterEntity(Entity* newEntity){
 }
 
 void GameState::CreateSystems(){
-    
+    m_renderSystem = new RenderSystem();
 }
+
 void GameState::CreateEntities(){
     
     Entity* backgroundEntity = new Entity(0,PROJECTILE_TYPE);
