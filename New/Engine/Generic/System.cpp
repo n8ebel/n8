@@ -78,8 +78,8 @@ bool System::RegisterEntity(Entity* newEntity){
  *
  *  @param ID The identifier of the entity to remove
  */
-void System::UnregisterEntity(int ID){
-	m_registeredEntities.erase(ID);
+void System::UnregisterEntity(Entity* entityToUnregister){
+	m_registeredEntities.erase(entityToUnregister->GetId());
 }
 
 

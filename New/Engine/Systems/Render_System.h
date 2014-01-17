@@ -24,11 +24,6 @@ class Entity;
  *  and will be drawn if they meet the system requirements.
  */
 class RenderSystem : public System {
-
-private:
-    
-    vector<Entity*> m_baseLayers;	/** < List of base layer entities used to draw game backgrounds **/
-    
 public:
     ~RenderSystem();
     RenderSystem();
@@ -36,11 +31,17 @@ public:
     void Update();
     void Render(SDL_Surface*);
     
-    virtual bool RegisterEntity(Entity* newEntity) ;
-    virtual void UnregisterEntity(int ID) ;
-	
-	
-	void AddBaseLayer(Entity* newLayer);
+    bool RegisterEntity(Entity*);
+    void UnregisterEntity(Entity*);
+    
+    void AddBaseLayer(Entity* newLayer);
+
+protected:
+   // bool CheckRequirements(Entity* entity);
+    
+private:
+    
+    vector<Entity*> m_baseLayers;	/** < List of base layer entities used to draw game backgrounds **/
     
 };
 

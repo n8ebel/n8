@@ -17,8 +17,12 @@
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "WindowManager.h"
+#include "SystemManager.h"
 
 #include "Render_System.h"
+
+#include "Position_Component.h"
+#include "Drawable_Component.h"
 
 class n8{
 

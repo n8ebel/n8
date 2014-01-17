@@ -55,24 +55,44 @@ void Log::Debug(string tag, string msg){
     }
 }
 
+/** Sets the ERROR flag to true.
+ *  This allows error messages to be displayed
+ */
 void Log::TurnOnErrorMessages(){
     ERROR = true;
 }
 
+/** Sets the ERROR flag to false
+ *  This causes error messages to not be displayed
+ */
 void Log::TurnOffErrorMessages(){
     ERROR = false;
 }
 
+/** Sets the INFO flag to true.
+ *  This allows info messages to be displayed
+ */
 void Log::TurnOnInfoMessages(){
     INFO = true;
 }
+
+/** Sets the INFO flag to false
+ *  This causes info messages to not be displayed
+ */
 void Log::TurnOffInfoMessages(){
     INFO = false;
 }
 
-void Log::TurnOnDebugMessages(){
+/** Sets the DEBUGGING flag to true.
+ *  This allows debugging messages to be displayed
+ */
+void Log::TurnOnDebuggingMessages(){
     DEBUGGING = true;
 }
-void Log::TurnOffDebugMessages(){
+
+/** Sets the DEBUGGING flag to false
+ *  This causes debugging messages to not be displayed
+ */
+void Log::TurnOffDebuggingMessages(){
     DEBUGGING = false;
 }

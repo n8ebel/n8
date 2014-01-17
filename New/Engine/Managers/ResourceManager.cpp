@@ -18,6 +18,10 @@ ResourceManager::ResourceManager() {
     
 }
 
+/** Destructor
+ *  Deletes all loaded resources
+ */
+ 
 ResourceManager::~ResourceManager() {
     Log::Info(RESOURCE_MANAGER, "Destructor");
     
@@ -46,6 +50,7 @@ SDL_Surface* ResourceManager::LoadImage( string filename )
     
     loadedImage = SDL_LoadBMP( filename.c_str() );
     
+   
     
     
     //If nothing went wrong in loading the image
@@ -80,11 +85,15 @@ void ResourceManager::LoadImages(string filepath){
             string inputfile;
             inFile >> inputfile;
             SDL_Surface* img = LoadImage(inputfile);
-            if (img == NULL) {
+            
+            if (img) {
+                Sprite* tmp = new Sprite(inputfile,img);
+                m_loadedSprites[inputfile] = tmp;
+            }
+            else {
                  Log::Error(RESOURCE_MANAGER, "Failed to load " + inputfile);
             }
-            Sprite* tmp = new Sprite(inputfile,img);
-            m_loadedSprites[inputfile] = tmp;
+            
         }
     }
 }

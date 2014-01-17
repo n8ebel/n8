@@ -109,6 +109,10 @@ int StateManager::GetStackSize(){
     return m_stateStack.size();
 }
 
+/** Gives access to the identifier of the current state object
+ *
+ *  @return The ID object of the current state object
+ */
 ID<int>* StateManager::GetCurrentStateId(){
     return m_stateStack.top()->GetId();
 }

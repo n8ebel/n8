@@ -15,6 +15,7 @@
 #include <map>
 #include <string>
 
+#include "Object.h"
 #include "Component.h"
 
 using namespace std;
@@ -23,7 +24,7 @@ using namespace std;
  *  by adding different components to customize them to meet specific needs.
  *  Everything from an in-game item to the game's screen is represented by an entity.
  */
-class Entity{
+class Entity : public Object{
  public:
     ~Entity();
     

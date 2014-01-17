@@ -29,11 +29,21 @@ Entity::~Entity(){
  */
 void Entity::AddComponent(Component* newComponent){
     cout << "Add Component.  ID= " << newComponent->get_id() << endl;
-    m_componentMap[newComponent->get_id()] = newComponent;
+    if (newComponent) {
+        m_componentMap[newComponent->get_id()] = newComponent;
+    }
+    else{
+        Log::Info(ENTITY, "Failed to add component.  Component was null.");
+    }
+    
     
     
 }
 
+/** Removes a specified component from the entity
+ *
+ *  @param componentID The identifier of the component to be removed
+ */
 void Entity::RemoveComponent(string componentID){
 
 }

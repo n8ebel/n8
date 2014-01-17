@@ -37,8 +37,8 @@ public:
     
 
 protected:
-    Uint32 m_time;
-    ID<int>* m_id;
+    Uint32 m_time;  /** < holds current game time > */
+    ID<int>* m_id;  /** < unique identifier for the state oobject > */
     
     
     

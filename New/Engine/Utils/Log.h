@@ -26,16 +26,16 @@ class Log {
     static void TurnOnInfoMessages();
     static void TurnOffInfoMessages();
     
-    static void TurnOnDebugMessages();
-    static void TurnOffDebugMessages();
+    static void TurnOnDebuggingMessages();
+    static void TurnOffDebuggingMessages();
 
   private:
 	Log();
 	virtual ~Log();
     
-    static bool ERROR;
-    static bool INFO;
-    static bool DEBUGGING;
+    static bool ERROR;  /** < static boolean flag to control whether ERROR messages are displayed > */
+    static bool INFO;  /** < static boolean flag to control whether INFO messages are displayed > */
+    static bool DEBUGGING;  /** < static boolean flag to control whether DEBUGGING messages are displayed > */
 };
 
 #endif /* LOG_H */

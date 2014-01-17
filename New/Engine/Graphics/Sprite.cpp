@@ -9,6 +9,7 @@
  */
 
 #include "Sprite.h"
+#include <assert.h>
 
 
 /** Default Destructor <p>
@@ -27,6 +28,8 @@ Sprite::~Sprite() {
  */
 Sprite::Sprite(string id, SDL_Surface* img){
 	id_ = id;
+    
+    assert(img);
 	image_ = img;
 	
 }
@@ -39,6 +42,9 @@ Sprite::Sprite(string id, SDL_Surface* img){
  */
 bool Sprite::draw( int x, int y, SDL_Surface* destination )
 {
+    assert(image_);
+    assert(destination);
+    
 	if( image_ == NULL || destination == NULL){
 		return false;
 	}
@@ -70,6 +76,9 @@ bool Sprite::draw( int x, int y, SDL_Surface* destination )
  *  @param destination The canvas SDL_Surface that images are drawn to
  */
 bool Sprite::draw( int x, int y, int x2, int y2, int width, int height, SDL_Surface* destination){
+
+    assert(image_);
+    assert(destination);
 
 	if( image_ == NULL || destination == NULL){
 		return false;

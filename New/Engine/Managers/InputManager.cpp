@@ -68,7 +68,8 @@ bool InputManager::HandleEvent(){
     return SDL_PollEvent(m_event);
 }
 
-/** checks whether a key is pressed down
+/** Checks whether a key is pressed down
+ *  Called by the user.
  *
  *  @param key The key that is being checked
  *
@@ -78,7 +79,8 @@ bool InputManager::KeyIsDown(int key){
     return KeyIsDown(m_event, key);
 }
 
-/** checks whether a key is up
+/** Checks whether a key is up
+ *  Called by the user.
  *
  *  @param key The key that is being checked
  *
@@ -90,7 +92,14 @@ bool InputManager::KeyIsUp(int key){
     
 }
 
-
+/** Checks whether a key is pressed down
+ *  Called internally by KeyIsDown(int key).
+ *
+ *  @param event The event object storing event information
+ *  @param key The key that is being checked
+ *
+ *  @return True if the specified key was pressed down, False otherwise
+ */
 bool InputManager::KeyIsDown(SDL_Event* event,int key){
     
     if (event->type == SDL_KEYDOWN && event->key.keysym.sym == key)
@@ -101,6 +110,14 @@ bool InputManager::KeyIsDown(SDL_Event* event,int key){
     return false;
 }
 
+/** Checks whether a key is up
+ *  Called internally by KeyIsUp(int key).
+ *
+ *  @param event The event object storing event information
+ *  @param key The key that is being checked
+ *
+ *  @return True if the specified key is up, False otherwise
+ */
 bool InputManager::KeyIsUp(SDL_Event* event,int key){
     
     return false;

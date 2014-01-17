@@ -15,6 +15,7 @@
 #include "ExitStateEvent.h"
 #include "ShowMenuEvent.h"
 #include "ResourceManager.h"
+#include "SystemManager.h"
 
 #include "Drawable_Component.h"
 #include "Position_Component.h"
@@ -57,30 +58,10 @@ void GameState::RespondToUserInput(){
 void GameState::Update(Uint32 currentTime){
    
 }
-void GameState::Render(SDL_Surface* img){
-    //SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 255,0,0));
-    
-    SDL_Rect offset;
-    
-    //Give the offsets to the rectangle
-    offset.x = 50;
-    offset.y = 50;
-	
-    
-    for (int i = 0; i < m_entities.size(); i++) {
-        //Give the offsets to the rectangle
-        offset.x = ((Position_Component*)m_entities[i]->GetComponent(POSITION))->get_left();
-        offset.y = ((Position_Component*)m_entities[i]->GetComponent(POSITION))->get_top();
-
-        
-        //Blit the surfaces
-        SDL_BlitSurface( ((Drawable_Component*)m_entities[i]->GetComponent(DRAWABLE))->get_image(), NULL, img, &offset );
-    }
-    
-    m_renderSystem->Render(WindowManager::GetInstance()->GetScreenSurface());
-    
-    
-    SDL_Flip( img );
+void GameState::Render(SDL_Surface* screen){
+    assert(screen);
+   
+    static_cast<RenderSystem*>(SystemManager::GetInstance()->GetSystem(RENDER_SYSTEM))->Render(screen);
 }
 
 void GameState::RegisterEntity(Entity* newEntity){
@@ -88,22 +69,20 @@ void GameState::RegisterEntity(Entity* newEntity){
 }
 
 void GameState::CreateSystems(){
-    m_renderSystem = new RenderSystem();
+    SystemManager::GetInstance()->RegisterSystem(RENDER_SYSTEM, new RenderSystem());
 }
 
 void GameState::CreateEntities(){
     
     Entity* backgroundEntity = new Entity(0,PROJECTILE_TYPE);
-    backgroundEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite("/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/background.bmp")));
+    backgroundEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite(BACKGROUND_SPRITE)));
     backgroundEntity->AddComponent(new Position_Component(POSITION,0,0,400,400));
-    
-    RegisterEntity(backgroundEntity);
+    SystemManager::GetInstance()->RegisterEntity(backgroundEntity);
     
     Entity* missileEntity = new Entity(1,PROJECTILE_TYPE);
-    missileEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite("/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/missile.bmp")));
-    missileEntity->AddComponent(new Position_Component(POSITION,0,0,32,32));
-    
-    RegisterEntity(missileEntity);
+    missileEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite(MISSILE_SPRITE)));
+    missileEntity->AddComponent(new Position_Component(POSITION,40,60,32,32));
+    SystemManager::GetInstance()->RegisterEntity(missileEntity);
     
     
 

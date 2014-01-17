@@ -28,6 +28,7 @@ static const string STATE_MANAGER = "State Manager";
 static const string INPUT_MANAGER = "Input Manager";
 static const string EVENT_MANAGER = "Event Manager";
 static const string RESOURCE_MANAGER = "Resource Manager";
+static const string SYSTEM_MANAGER = "System Manager";
 static const string SINGLETON = "Singleton";
 
 
@@ -56,6 +57,7 @@ static const string PROJECTILE_INTERACTION =     "PROJECTILE_INTERACTION";
 static const string GENERIC_INTERACTION =     	 "GENERIC_INTERACTION";
 
 // Static entity types
+static const string ENTITY =					"ENTITY";
 static const string USER_TYPE =					"USER";
 static const string ENEMY_TYPE =				"ENEMY";
 static const string PROJECTILE_TYPE =			"PROJECTILE";

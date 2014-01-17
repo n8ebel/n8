@@ -30,8 +30,8 @@ public:
     
     virtual void Update() = 0;
 
-    virtual bool RegisterEntity(Entity* newEntity) = 0;
-    virtual void UnregisterEntity(int ID) = 0;
+    virtual bool RegisterEntity(Entity*) = 0;
+    virtual void UnregisterEntity(Entity*) = 0;
     
 protected:
     map<string,int> m_systemRequirements;          /** < A map of the required components to be registered with

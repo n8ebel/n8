@@ -40,6 +40,7 @@ bool n8::Setup(){
         InputManager::Create();
         EventManager::Create();
         WindowManager::Create();
+        SystemManager::Create();
         ResourceManager::Create();
         ResourceManager::GetInstance()->LoadImages("/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/images.txt");
         
@@ -57,6 +58,13 @@ bool n8::Setup(){
  */
 bool n8::Shutdown(){
     ResourceManager::Destroy();
+    SystemManager::Destroy();
+    WindowManager::Destroy();
+    EventManager::Destroy();
+    InputManager::Destroy();
+    StateManager::Destroy();
+    GameManager::Destroy();
+    
     return true;
 }
 

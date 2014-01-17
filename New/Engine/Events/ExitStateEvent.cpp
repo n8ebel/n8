@@ -22,7 +22,7 @@ ExitStateEvent::~ExitStateEvent(){
 
 }
 
-/** Carries out the operations of the event */
+/** Pops the current state off of the state stack */
 void ExitStateEvent::Process(){
     Log::Debug(EXIT_STATE_EVENT, "Popping " + STATES[StateManager::GetInstance()->GetCurrentStateId()->GetId()]);
     StateManager::GetInstance()->PopState();
