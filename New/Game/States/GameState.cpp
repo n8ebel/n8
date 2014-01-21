@@ -75,8 +75,8 @@ void GameState::CreateSystems(){
 void GameState::CreateEntities(){
     
     Entity* backgroundEntity = new Entity(0,PROJECTILE_TYPE);
-    backgroundEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite(BACKGROUND_SPRITE)));
-    backgroundEntity->AddComponent(new Position_Component(POSITION,0,0,640,480));
+    backgroundEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite(BOARD_SPRITE)));
+    backgroundEntity->AddComponent(new Position_Component(POSITION,0,0,630,540));
     SystemManager::GetInstance()->RegisterEntity(backgroundEntity);
     
     Entity* missileEntity = new Entity(1,PROJECTILE_TYPE);
