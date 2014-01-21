@@ -32,6 +32,7 @@ int main(int argc, char* argv[]){
         
     
         WindowManager::GetInstance()->SetCaption("n8");
+        WindowManager::GetInstance()->ResizeScreenSurface(640, 408, WindowManager::DEFAULT_BPP);
         
         StateManager::GetInstance()->RegisterState(GAME_STATE, new GameState());
         StateManager::GetInstance()->RegisterState(MENU_STATE, new MenuState());

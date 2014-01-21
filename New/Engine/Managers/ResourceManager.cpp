@@ -11,8 +11,6 @@
 #include "ResourceManager.h"
 
 
-
-
 ResourceManager::ResourceManager() {
 	// TODO Auto-generated constructor stub
     
@@ -48,16 +46,17 @@ SDL_Surface* ResourceManager::LoadImage( string filename )
     
     //Load the image
     
-    loadedImage = SDL_LoadBMP( filename.c_str() );
-    
-   
+    loadedImage = IMG_Load( filename.c_str() );
     
     
     //If nothing went wrong in loading the image
     if( loadedImage != NULL )
     {
         //Create an optimized image
-        optimizedImage = SDL_DisplayFormat( loadedImage );
+        optimizedImage = SDL_DisplayFormatAlpha( loadedImage );
+        assert(optimizedImage);
+        
+        Log::Debug(RESOURCE_MANAGER, "  Successfully loaded optimized image");
         
         //Free the old image
         SDL_FreeSurface( loadedImage );
@@ -84,17 +83,22 @@ void ResourceManager::LoadImages(string filepath){
         while (!inFile.eof()) {
             string inputfile;
             inFile >> inputfile;
+            Log::Debug(RESOURCE_MANAGER, "  Loading optimized version of: " + inputfile);
             SDL_Surface* img = LoadImage(inputfile);
             
             if (img) {
                 Sprite* tmp = new Sprite(inputfile,img);
+                Log::Debug(RESOURCE_MANAGER, "    Created sprite:" + tmp->get_id());
                 m_loadedSprites[inputfile] = tmp;
             }
             else {
-                 Log::Error(RESOURCE_MANAGER, "Failed to load " + inputfile);
+                 Log::Error(RESOURCE_MANAGER, "Failed to load optimized image" + inputfile);
             }
             
         }
+    }
+    else{
+        Log::Error(RESOURCE_MANAGER, "Failed to open input file");
     }
 }
 
@@ -105,9 +109,6 @@ void ResourceManager::LoadImages(string filepath){
  *  @return a pointer to the desired sprite object or NULL if it doesn't exist
  */
 Sprite* ResourceManager::GetSprite(string file){
-    map<string,Sprite*>::iterator ia;
-    for (ia = m_loadedSprites.begin(); ia != m_loadedSprites.end(); ia++) {
-    }
     
     map<string,Sprite*>::iterator ii = m_loadedSprites.find(file);
     if ( ii != m_loadedSprites.end()) {

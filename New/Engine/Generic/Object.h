@@ -12,6 +12,7 @@
 #define OBJECT_H
 
 #include "SDL/SDL.h"
+#include "SDL_image/SDL_image.h"
 #include "SystemValues.h"
 #include "Log.h"
 #include <assert.h>

@@ -128,6 +128,7 @@ void RenderSystem::Render(SDL_Surface* screen){
         offset.x = ((Position_Component*)ii->second->GetComponent(POSITION))->get_left();
         offset.y = ((Position_Component*)ii->second->GetComponent(POSITION))->get_top();
         
+        Log::Debug(RENDER_SYSTEM, "Trying to draw:" + ((Drawable_Component*)ii->second->GetComponent(DRAWABLE))->get_sprite()->get_id());
         
         //Blit the surfaces
         SDL_BlitSurface( ((Drawable_Component*)ii->second->GetComponent(DRAWABLE))->get_image(), NULL, screen, &offset );

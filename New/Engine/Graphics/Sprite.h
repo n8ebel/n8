@@ -12,6 +12,8 @@
 #define Sprite_H
 
 #include "SDL/SDL.h"
+#include "SDL_image/SDL_image.h"
+
 #include <string>
 
 using namespace std;

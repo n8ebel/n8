@@ -23,9 +23,9 @@ static const string STATES[2] = {"Game State", "Menu State"};
 static const string EXIT_STATE_EVENT = "Exit State Event";
 static const string MENU_STATE_EVENT = "Menu State Event";
 
-static const string MISSILE_SPRITE = "/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/missile.bmp";
+static const string HERO_SPRITE = "/Users/lcballa44/Projects/n8/New/Game/gfx/sayain2.png";
 
 
-static const string BACKGROUND_SPRITE = "/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/background.bmp";
+static const string BACKGROUND_SPRITE = "/Users/lcballa44/Projects/n8/New/Game/gfx/background.bmp";
 
 #endif

@@ -34,15 +34,20 @@ n8::n8(){
  *  @return True if SDL was initialized properly, False otherwise
  */
 bool n8::Setup(){
-    if (SDL_Init( SDL_INIT_EVERYTHING ) == 0){
-        GameManager::Create();
-        StateManager::Create();
-        InputManager::Create();
-        EventManager::Create();
-        WindowManager::Create();
-        SystemManager::Create();
-        ResourceManager::Create();
-        ResourceManager::GetInstance()->LoadImages("/Users/lcballa44/Projects/n8/Deprecated/Assets/gfx/images.txt");
+    
+    if (SDL_Init( SDL_INIT_EVERYTHING ) == 0 ){
+        int flags=IMG_INIT_JPG|IMG_INIT_PNG;
+        int initted=IMG_Init(flags);
+        if(initted&flags == flags) {
+            GameManager::Create();
+            StateManager::Create();
+            InputManager::Create();
+            EventManager::Create();
+            WindowManager::Create();
+            SystemManager::Create();
+            ResourceManager::Create();
+            ResourceManager::GetInstance()->LoadImages("/Users/lcballa44/Projects/n8/New/Game/gfx/images.txt");
+        }
         
         
         return true;

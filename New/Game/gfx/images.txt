@@ -1,0 +1,2 @@
+/Users/lcballa44/Projects/n8/New/Game/gfx/sayain2.png
+/Users/lcballa44/Projects/n8/New/Game/gfx/background.bmp
