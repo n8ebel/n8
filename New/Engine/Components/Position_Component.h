@@ -26,8 +26,8 @@ class Position_Component : public Component {
     
 public:
     ~Position_Component();
-    Position_Component(string newID, Point2D* newPosition, int w, int h);
-    Position_Component(string newID, int initX, int initY, int w, int h);
+    Position_Component(Point2D* newPosition, int w, int h);
+    Position_Component(int initX, int initY, int w, int h);
     
     void update_location(int x, int y, int w, int h);
 

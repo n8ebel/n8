@@ -13,6 +13,6 @@
 #include "Controllable_Coponent.h"
 
 /** Constructor */
-Controllable_Coponent::Controllable_Coponent(string newID) : Component(newID){
-    
+Controllable_Coponent::Controllable_Coponent() {
+    m_id = new ID(COMPONENT_CONTROLLABLE);
 }

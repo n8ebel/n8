@@ -34,11 +34,11 @@ public:
     virtual void UnregisterEntity(Entity*) = 0;
     
 protected:
-    map<string,int> m_systemRequirements;          /** < A map of the required components to be registered with
+    map<ID,int> m_systemRequirements;          /** < A map of the required components to be registered with
                                              and be operated on by this system **/
-    map<int, Entity*> m_registeredEntities;   /** < Stores pointers to all entities that meet the system  requirements and have been registered with the system **/
+    map<ID, Entity*> m_registeredEntities;   /** < Stores pointers to all entities that meet the system  requirements and have been registered with the system **/
     
-    string m_id;     /** < Unique identifier for the system to indicate what type of system it is **/
+    ID m_id;     /** < Unique identifier for the system to indicate what type of system it is **/
     
     bool CheckRequirements(Entity* entity);
 

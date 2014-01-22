@@ -113,7 +113,7 @@ int StateManager::GetStackSize(){
  *
  *  @return The ID object of the current state object
  */
-ID<int>* StateManager::GetCurrentStateId(){
+ID StateManager::GetCurrentStateId(){
     return m_stateStack.top()->GetId();
 }
 

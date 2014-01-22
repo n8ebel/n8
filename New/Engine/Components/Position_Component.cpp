@@ -26,7 +26,8 @@ Position_Component::~Position_Component(){
  *  @param w The width of the component
  *  @param h The height of the component
  */
-Position_Component::Position_Component(string newID, Point2D* newPosition, int w, int h) : Component(newID){
+Position_Component::Position_Component(Point2D* newPosition, int w, int h) {
+    m_id = new ID(COMPONENT_POSITION);
     position_ = newPosition;
     update_location(position_->GetX(), position_->GetY(), w,h);
 }
@@ -41,7 +42,8 @@ Position_Component::Position_Component(string newID, Point2D* newPosition, int w
  *  @param w The width of the component
  *  @param h The height of the component
  */
-Position_Component::Position_Component(string newID, int initX, int initY, int w, int h) : Component(newID){
+Position_Component::Position_Component(int initX, int initY, int w, int h) {
+    m_id = new ID(COMPONENT_POSITION);
     position_ = new Point2D(initX, initY);
     update_location(position_->GetX(), position_->GetY(), w,h);
 }

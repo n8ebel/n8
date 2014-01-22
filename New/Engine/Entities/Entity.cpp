@@ -15,8 +15,8 @@
 using namespace std;
 
 Entity::~Entity(){
-    map<string, Component*>::iterator ii;
-    cout << "Deleting Entity " << m_id << endl;
+    map<ID, Component*>::iterator ii;
+    cout << "Deleting Entity " << m_id->GetId() << endl;
     for (ii = m_componentMap.begin(); ii != m_componentMap.end(); ii++) {
         delete ii->second;
     }
@@ -28,9 +28,9 @@ Entity::~Entity(){
  *
  */
 void Entity::AddComponent(Component* newComponent){
-    cout << "Add Component.  ID= " << newComponent->get_id() << endl;
+    cout << "Add Component.  ID= " << COMPONENT_IDS[newComponent->GetId().GetId()] << endl;
     if (newComponent) {
-        m_componentMap[newComponent->get_id()] = newComponent;
+        m_componentMap[newComponent->GetId()] = newComponent;
     }
     else{
         Log::Info(ENTITY, "Failed to add component.  Component was null.");
@@ -53,12 +53,13 @@ void Entity::RemoveComponent(string componentID){
  *  @param componentID The ID of the component to retrieve
  *
  */
-Component* Entity::GetComponent(string componentID){
-	map<string, Component*>::iterator ii = m_componentMap.find(componentID);
+Component* Entity::GetComponent(ID componentID){
+	map<ID, Component*>::iterator ii = m_componentMap.find(componentID);
 	if( ii != m_componentMap.end()){
 		return m_componentMap[componentID];
 	}
 	else{
+        Log::Debug("Component", "Didn't find " + COMPONENT_IDS[componentID.GetId()] + " component");
 		return NULL;
 	}
 }
@@ -67,6 +68,6 @@ Component* Entity::GetComponent(string componentID){
  *  @return the map of all registered components
  *
  */
-map<string, Component*> Entity:: GetComponents(){
+map<ID, Component*> Entity:: GetComponents(){
     return m_componentMap;
 }

@@ -16,7 +16,7 @@
 /** Class used to indicate that an entity can be controlled be a user */
 class Controllable_Coponent : public Component{
   public:
-    Controllable_Coponent(string newID);
+    Controllable_Coponent();
     
   private:
     

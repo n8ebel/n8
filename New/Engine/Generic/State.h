@@ -24,7 +24,7 @@
 class State{
 public:
     
-    ID<int>* GetId() {assert(m_id); return m_id;};
+    ID GetId() {return *m_id;};
     
     
     virtual void OnResume() = 0;
@@ -38,7 +38,7 @@ public:
 
 protected:
     Uint32 m_time;  /** < holds current game time > */
-    ID<int>* m_id;  /** < unique identifier for the state oobject > */
+    ID* m_id;  /** < unique identifier for the state oobject > */
     vector<Entity*> m_stateEntities;
     
     

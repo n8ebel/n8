@@ -27,7 +27,7 @@ System::~System(){
  *  Sets id_ to a default 'BASE_SYSTEM' value
  */
 System::System(){
-    m_id = BASE_SYSTEM;
+    m_id = ID(BASE_SYSTEM);
 }
 
 /** Used to check if an entity contains all the neccessary components to be operated on
@@ -42,7 +42,7 @@ System::System(){
  */
 bool System::CheckRequirements(Entity* entity){
 	
-    map<string,int>::iterator ii;
+    map<ID,int>::iterator ii;
     
     for (ii=m_systemRequirements.begin(); ii != m_systemRequirements.end(); ii++) {
         if ( entity->GetComponent(ii->first) == NULL) {

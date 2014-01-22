@@ -34,24 +34,56 @@ static const string SINGLETON = "Singleton";
 
 
 // Static constants for component identifiers
-static const string NAME =                  "NAME";
-static const string DRAWABLE =              "DRAWABLE";
-static const string POSITION =              "POSITION";
-static const string INTERACTABLE =          "INTERACTABLE";
-static const string CONTROLLABLE =          "CONTROLLABLE";
-static const string SIZE =                  "SIZE";
-static const string MOVEMENT =				"MOVEMENT";
-static const string COLOR =                 "COLOR";
+/*
+static const int NAME =                  0;
+static const int DRAWABLE =              1;
+static const int POSITION =              2;
+static const int INTERACTABLE =          3;
+static const int CONTROLLABLE =          4;
+static const int SIZE =                  5;
+static const int MOVEMENT =              6;
+static const int COLOR =                 7;
+*/
+enum COMPONENT {COMPONENT_INVALID_FIRST,
+                COMPONENT_BASE,
+                COMPONENT_NAME,
+                COMPONENT_DRAWABLE,
+                COMPONENT_POSITION,
+                COMPONENT_INTERACTABLE,
+                COMPONENT_CONTROLLABLE,
+                COMPONENT_SIZE,
+                COMPONENT_MOVEMENT,
+                COMPONENT_COLOR,
+                COMPONENT_INVALID_SECOND};
 
+static const string COMPONENT_IDS[] = { "INVALID FIRST",
+                                        "BASE",
+                                        "NAME",
+                                        "DRAWABLE",
+                                        "POSITION",
+                                        "INTERACTABLE",
+                                        "CONTROLLABLE",
+                                        "SIZE",
+                                        "MOVEMENT",
+                                        "COLOR",
+                                        "INVALID LAST"};
 
 // Static constants for system identifiers
-static const string BASE_SYSTEM =           "BASE_SYSTEM";
-static const string RENDER_SYSTEM =         "RENDER_SYSTEM";
-static const string MOVEMENT_SYSTEM =       "MOVEMENT_SYSTEM";
-static const string COLLISION_SYSTEM =      "COLLISION_SYSTEM";
-static const string INTERACTION_SYSTEM =    "INTERACTION_SYSTEM";
-static const string MESSAGE_SYSTEM =        "MESSAGE_SYSTEM";
-static const string CAMERA_SYSTEM = 		"CAMERA_SYSTEM";
+static const int BASE_SYSTEM =           0;
+static const int RENDER_SYSTEM =         1;
+static const int MOVEMENT_SYSTEM =       2;
+static const int COLLISION_SYSTEM =      3;
+static const int INTERACTION_SYSTEM =    4;
+static const int MESSAGE_SYSTEM =        5;
+static const int CAMERA_SYSTEM = 		6;
+
+static const string SYSTEM_IDS[] = {"BASE SYSTEM",
+                                    "RENDER SYSTEM",
+                                    "MOVEMENT_SYSTEM",
+                                    "COLLISION SYSTEM",
+                                    "INTERACTION SYSTEM",
+                                    "MESSAGE SYSTEM",
+                                    "CAMERA SYSTEM"};
 
 static const string PROJECTILE_INTERACTION =     "PROJECTILE_INTERACTION";
 static const string GENERIC_INTERACTION =     	 "GENERIC_INTERACTION";

@@ -15,6 +15,7 @@
 #include "SDL_image/SDL_image.h"
 #include "SystemValues.h"
 #include "Log.h"
+#include "NumericalUtilities.h"
 #include <assert.h>
 
 /** Generic base class */

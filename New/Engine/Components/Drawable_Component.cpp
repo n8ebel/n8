@@ -24,6 +24,7 @@ Drawable_Component::~Drawable_Component(){
  *  @param newID The identifier of the component
  *  @param newSprite The sprite to use to draw with
  */
-Drawable_Component::Drawable_Component(string newID, Sprite* newSprite) : Component(newID){
+Drawable_Component::Drawable_Component(Sprite* newSprite) {
+    m_id = new ID(COMPONENT_DRAWABLE);
     sprite_ = newSprite;
 }

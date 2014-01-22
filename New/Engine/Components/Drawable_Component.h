@@ -25,7 +25,7 @@ class Drawable_Component : public Component {
   public:
     
     ~Drawable_Component();
-    Drawable_Component(string newID, Sprite* newSprite);
+    Drawable_Component(Sprite* newSprite);
     
     /** Used to get the SDL_Surface stored by the sprite that can be drawn to the screen
      *

@@ -16,7 +16,7 @@
 
 class Movement_Component: public Component {
 public:
-	Movement_Component(string newID, double x, double y, double mag, bool worldBound);
+	Movement_Component(double x, double y, double mag, bool worldBound);
 	virtual ~Movement_Component();
 
 	/** Gets the amount to move in the x direction

@@ -62,7 +62,7 @@ void WindowManager::Draw(Sprite* spriteToDraw, int xOffset, int yOffset){
     offset.x = xOffset;
     offset.y = yOffset;
     
-    Log::Debug(RENDER_SYSTEM, "Trying to draw:" + spriteToDraw->get_id());
+    Log::Debug(SYSTEM_IDS[RENDER_SYSTEM], "Trying to draw:" + spriteToDraw->get_id());
         
         //Blit the surfaces
     SDL_BlitSurface( spriteToDraw->get_image(), NULL, m_background, &offset );

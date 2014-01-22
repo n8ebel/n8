@@ -15,18 +15,33 @@
 using namespace std;
 
 /** Handles id abstraction */
-template <class T>
 class ID{
 public:
-    ID(T newID) {m_id = newID;};
+    ID() { m_id = -1; };
+    ID(int newID) {m_id = newID;};
     
-    T GetId() {return m_id;};
+    int GetId() const {return m_id;};
     
-   
+    bool operator ==( const ID& other) const {
+        return m_id == other.GetId();
+    }
+    
+    bool operator <( const ID& other) const {
+        return m_id < other.GetId();
+    }
+    
+    bool operator >( const ID& other) const {
+        return m_id > other.GetId();
+    }
+    
+    
+protected:
+    
     
 private:
-    T m_id; /** < Actual id value **/
+    int m_id; /** < Actual id value **/
 };
+
 
 
 

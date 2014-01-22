@@ -11,6 +11,8 @@
 #ifndef Component_H
 #define Component_H
 
+#include "Object.h"
+#include "ID.h"
 #include <string>
 
 using namespace std;
@@ -19,22 +21,22 @@ using namespace std;
  *  Components contain all important data that an entity may want.  Entity data stored in components
  *  can be operated on by systems.
  */
-class Component {
+class Component : public Object {
   public:
     virtual ~Component();
     
     /** Constructor <p>
      */
-    Component(string newID) { id_ = newID; }
+    Component() { m_id = new ID(COMPONENT_BASE); }
 
     /** Used to get the identifier of the component
      *
      *  @return The identifier of the component
      */
-    string get_id() { return id_; }
+    ID GetId() { return *m_id; }
 
-  private:
-    string id_;   /** < The identifier for the component **/
+  protected:
+    ID* m_id;   /** < The identifier for the component **/
 };
 
 #endif 

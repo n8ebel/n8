@@ -122,13 +122,13 @@ void RenderSystem::Render(SDL_Surface* screen){
     //offset.x = 50;
     //offset.y = 50;
 	
-    map<int,Entity*>::iterator ii;
+    map<ID,Entity*>::iterator ii;
     for ( ii = m_registeredEntities.begin(); ii != m_registeredEntities.end(); ii++) {
         //Give the offsets to the rectangle
         offset.x = ((Position_Component*)ii->second->GetComponent(POSITION))->get_left();
         offset.y = ((Position_Component*)ii->second->GetComponent(POSITION))->get_top();
         
-        Log::Debug(RENDER_SYSTEM, "Trying to draw:" + ((Drawable_Component*)ii->second->GetComponent(DRAWABLE))->get_sprite()->get_id());
+        Log::Debug(SYSTEM_IDS[RENDER_SYSTEM], "Trying to draw:" + ((Drawable_Component*)ii->second->GetComponent(DRAWABLE))->get_sprite()->get_id());
         
         //Blit the surfaces
         SDL_BlitSurface( ((Drawable_Component*)ii->second->GetComponent(DRAWABLE))->get_image(), NULL, screen, &offset );

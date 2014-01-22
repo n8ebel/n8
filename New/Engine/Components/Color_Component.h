@@ -31,8 +31,8 @@ public:
 	 *	@param green The green value of the color between 0-255
 	 *	@param blue The blue value of the color between 0-255
 	 */
-    Color_Component(string newID, int red, int green, int blue) : Component(newID)
-    { red_ = red%255; green_ = green%255; blue_ = blue%255; alpha_ = 0;}
+    Color_Component(string newID, int red, int green, int blue)
+    { red_ = red%255; green_ = green%255; blue_ = blue%255; alpha_ = 0; m_id = new ID(COMPONENT_COLOR);}
 	
 	/** Constructor <p>
 	 *	Stores standard argb values so they may be used for drawing operations
@@ -42,8 +42,8 @@ public:
 	 *	@param green The green value of the color between 0-255
 	 *	@param blue The blue value of the color between 0-255
 	 */
-	Color_Component(string newID, double alpha, int red, int green, int blue) : Component(newID)
-    { red_ = red%255; green_ = green%255; blue_ = blue%255; alpha_ = alpha ;}
+	Color_Component(string newID, double alpha, int red, int green, int blue)
+    { red_ = red%255; green_ = green%255; blue_ = blue%255; alpha_ = alpha; m_id = new ID(COMPONENT_COLOR);}
     
 	/** Sets the rgb color values
 	 *

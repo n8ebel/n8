@@ -25,7 +25,7 @@
 using namespace std;
 
 GameState::GameState() {
-    m_id = new ID<int>(GAME_STATE);
+    m_id = new ID(GAME_STATE);
     
     CreateSystems();
     CreateEntities();
@@ -62,10 +62,14 @@ void GameState::Render(SDL_Surface* screen){
     assert(screen);
    
     for (int i = 0; i < m_stateEntities.size(); i++) {
-        Drawable_Component* drawableComponent = static_cast<Drawable_Component*>(m_stateEntities[i]->GetComponent(DRAWABLE));
-        Position_Component* positionComponent = static_cast<Position_Component*>(m_stateEntities[i]->GetComponent(POSITION));
+        Drawable_Component* drawableComponent = static_cast<Drawable_Component*>(m_stateEntities[i]->GetComponent(ID(COMPONENT_DRAWABLE)));
+        Position_Component* positionComponent = static_cast<Position_Component*>(m_stateEntities[i]->GetComponent(ID(COMPONENT_POSITION)));
         if (drawableComponent && positionComponent){
             WindowManager::GetInstance()->Draw(drawableComponent->get_sprite(), positionComponent->get_left(), positionComponent->get_top());
+        }
+        else{
+            
+            Log::Debug("GameState",  "Render() failed for entity " + Numerical_Utilities::num_to_string(m_stateEntities[i]->GetId().GetId()))  ;
         }
         
     }
@@ -85,14 +89,14 @@ void GameState::CreateSystems(){
 
 void GameState::CreateEntities(){
     
-    Entity* backgroundEntity = new Entity(0,PROJECTILE_TYPE);
-    backgroundEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite(BOARD_SPRITE)));
-    backgroundEntity->AddComponent(new Position_Component(POSITION,0,0,630,540));
+    Entity* backgroundEntity = new Entity( new ID(0), PROJECTILE_TYPE);
+    backgroundEntity->AddComponent(new Drawable_Component(ResourceManager::GetInstance()->GetSprite(BOARD_SPRITE)));
+    backgroundEntity->AddComponent(new Position_Component(0,0,630,540));
     RegisterEntity(backgroundEntity);
     
-    Entity* missileEntity = new Entity(1,PROJECTILE_TYPE);
-    missileEntity->AddComponent(new Drawable_Component(DRAWABLE,ResourceManager::GetInstance()->GetSprite(HERO_SPRITE)));
-    missileEntity->AddComponent(new Position_Component(POSITION,40,60,32,32));
+    Entity* missileEntity = new Entity( new ID(1), PROJECTILE_TYPE);
+    missileEntity->AddComponent(new Drawable_Component(ResourceManager::GetInstance()->GetSprite(HERO_SPRITE)));
+    missileEntity->AddComponent(new Position_Component(40,60,32,32));
     RegisterEntity(missileEntity);
     
     
