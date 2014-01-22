@@ -32,12 +32,13 @@ public:
     virtual void Update(Uint32 currentTime);
     virtual void Render(SDL_Surface* img);
     
+    virtual void RegisterEntity(Entity* newEntity);
     
 protected:
     
 private:
     virtual void CreateSystems();
-    
+    virtual void CreateEntities();
     
 };
 

@@ -51,9 +51,6 @@ void GameState::RespondToUserInput(){
         EventManager::GetInstance()->QueueEvent(new ExitStateEvent());
     }
     
-    if(InputManager::GetInstance()->KeyIsDown(SDLK_SPACE)){
-        EventManager::GetInstance()->QueueEvent(new ShowMenuEvent());
-    }
 }
 
 void GameState::Update(Uint32 currentTime){
@@ -61,6 +58,8 @@ void GameState::Update(Uint32 currentTime){
 }
 void GameState::Render(SDL_Surface* screen){
     assert(screen);
+    
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
    
     for (int i = 0; i < m_stateEntities.size(); i++) {
         Drawable_Component* drawableComponent = static_cast<Drawable_Component*>(m_stateEntities[i]->GetComponent(ID(COMPONENT_DRAWABLE)));
