@@ -16,6 +16,7 @@
 #include "ShowMenuEvent.h"
 #include "ResourceManager.h"
 #include "SystemManager.h"
+#include "GameManager.h"
 
 #include "Drawable_Component.h"
 #include "Position_Component.h"
@@ -89,12 +90,12 @@ void GameState::CreateSystems(){
 
 void GameState::CreateEntities(){
     
-    Entity* backgroundEntity = new Entity( new ID(0), PROJECTILE_TYPE);
+    Entity* backgroundEntity = new Entity( new ID(GameManager::GetNextId()), PROJECTILE_TYPE);
     backgroundEntity->AddComponent(new Drawable_Component(ResourceManager::GetInstance()->GetSprite(BOARD_SPRITE)));
     backgroundEntity->AddComponent(new Position_Component(0,0,630,540));
     RegisterEntity(backgroundEntity);
     
-    Entity* missileEntity = new Entity( new ID(1), PROJECTILE_TYPE);
+    Entity* missileEntity = new Entity( new ID(GameManager::GetNextId()), PROJECTILE_TYPE);
     missileEntity->AddComponent(new Drawable_Component(ResourceManager::GetInstance()->GetSprite(HERO_SPRITE)));
     missileEntity->AddComponent(new Position_Component(40,60,32,32));
     RegisterEntity(missileEntity);
