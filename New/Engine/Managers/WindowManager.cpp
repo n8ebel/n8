@@ -7,6 +7,8 @@
 //
 
 #include "WindowManager.h"
+#include "Drawable_Component.h"
+#include "Position_Component.h"
 
 WindowManager::WindowManager(){
     m_background = NULL;
@@ -52,3 +54,20 @@ SDL_Surface* WindowManager::GetScreenSurface(){
 void WindowManager::SetCaption(char* caption){
     SDL_WM_SetCaption( caption, NULL );
 }
+
+void WindowManager::Draw(Sprite* spriteToDraw, int xOffset, int yOffset){
+    SDL_Rect offset;
+	
+    //Give the offsets to the rectangle
+    offset.x = xOffset;
+    offset.y = yOffset;
+    
+    Log::Debug(RENDER_SYSTEM, "Trying to draw:" + spriteToDraw->get_id());
+        
+        //Blit the surfaces
+    SDL_BlitSurface( spriteToDraw->get_image(), NULL, m_background, &offset );
+    
+    
+    
+}
+

@@ -11,8 +11,12 @@
 #ifndef WINDOW_MANAGER_H
 #define WINDOW_MANAGER_H
 
+#include "Sprite.h"
 #include "Singleton.h"
 #include "Object.h"
+
+#include <vector>
+
 
 
 class WindowManager : public Singleton<WindowManager>,Object{
@@ -28,6 +32,9 @@ public:
     void SetCaption(char* caption);
     void ResizeScreenSurface(int w, int h, int bpp);
     SDL_Surface* GetScreenSurface();
+    
+    void Draw(Sprite*, int, int);
+    //void Draw(Sprite*, int, int, Camera*);
     
 protected:
     
