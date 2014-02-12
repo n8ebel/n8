@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
     Log::TurnOnInfoMessages();
     Log::TurnOnErrorMessages();
     
-    if(n8::Setup()){
+    if(n8::n8::Setup()){
     
         
     
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]){
         
         GameManager::GetInstance()->RunGame();
         
-        n8::Shutdown();
+        n8::n8::Shutdown();
          
     }
     

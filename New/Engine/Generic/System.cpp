@@ -14,8 +14,7 @@
 //#include "constants.h"
 //#include "Name_Component.h"
 
-using namespace std;
-
+namespace n8{
 
 /** Default Destructor
  */
@@ -40,7 +39,7 @@ System::System(){
  *  @see Entity
  *  @see Component
  */
-bool System::CheckRequirements(Entity* entity){
+bool System::CheckRequirements(entities::Entity* entity){
 	
     map<ID,int>::iterator ii;
     
@@ -63,7 +62,7 @@ bool System::CheckRequirements(Entity* entity){
  *  @see Entity
  *  @see Componenet
  */
-bool System::RegisterEntity(Entity* newEntity){
+bool System::RegisterEntity(entities::Entity* newEntity){
 	
     if (CheckRequirements(newEntity)) {
     	m_registeredEntities[newEntity->GetId()]= newEntity;
@@ -78,8 +77,8 @@ bool System::RegisterEntity(Entity* newEntity){
  *
  *  @param ID The identifier of the entity to remove
  */
-void System::UnregisterEntity(Entity* entityToUnregister){
+void System::UnregisterEntity(entities::Entity* entityToUnregister){
 	m_registeredEntities.erase(entityToUnregister->GetId());
 }
 
-
+} // namespace n8

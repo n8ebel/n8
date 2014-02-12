@@ -21,6 +21,9 @@
 
 using namespace std;
 
+namespace n8{
+    
+
 /* Default Constructor
  * 
 */ 
@@ -73,5 +76,5 @@ bool n8::Shutdown(){
     return true;
 }
 
-
+}
 

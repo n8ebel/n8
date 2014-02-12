@@ -24,17 +24,20 @@
 #include "Position_Component.h"
 #include "Drawable_Component.h"
 
-class n8{
+namespace n8{
+    
+    class n8{
 
-public:
-    
-    n8();
-    
-    
-    static bool Setup();
-    static bool Shutdown();
+    public:
+        
+        n8();
+        
+        
+        static bool Setup();
+        static bool Shutdown();
 
-    
-};
+        
+    };
+}
 
-#endif 
+#endif

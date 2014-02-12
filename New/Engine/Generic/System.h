@@ -17,8 +17,7 @@
 #include <map>
 #include <vector>
 
-using namespace std;
-
+namespace n8{
 /** Base system used to derive other game systems.  A system operates on entities
  *  that meet a set of defined component requirements.  This ensures that only
  *  entities that have the neccessary types of data are operated on.
@@ -30,18 +29,20 @@ public:
     
     virtual void Update() = 0;
 
-    virtual bool RegisterEntity(Entity*) = 0;
-    virtual void UnregisterEntity(Entity*) = 0;
+    virtual bool RegisterEntity(entities::Entity*) = 0;
+    virtual void UnregisterEntity(entities::Entity*) = 0;
     
 protected:
     map<ID,int> m_systemRequirements;          /** < A map of the required components to be registered with
                                              and be operated on by this system **/
-    map<ID, Entity*> m_registeredEntities;   /** < Stores pointers to all entities that meet the system  requirements and have been registered with the system **/
+    map<ID, n8::entities::Entity*> m_registeredEntities;   /** < Stores pointers to all entities that meet the system  requirements and have been registered with the system **/
     
     ID m_id;     /** < Unique identifier for the system to indicate what type of system it is **/
     
-    bool CheckRequirements(Entity* entity);
+    bool CheckRequirements(entities::Entity* entity);
 
 };
+    
+} //namespace n8
 
 #endif

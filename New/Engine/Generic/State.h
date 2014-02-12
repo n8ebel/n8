@@ -39,7 +39,7 @@ public:
 protected:
     Uint32 m_time;  /** < holds current game time > */
     ID* m_id;  /** < unique identifier for the state oobject > */
-    vector<Entity*> m_stateEntities;
+    vector<n8::entities::Entity*> m_stateEntities;
     
     
 private:
