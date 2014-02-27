@@ -83,11 +83,19 @@ A GameState is whatever is happening in the forefront of the game.  GameStates w
 \section{	Game levels}
 
 \section{ Globally Available Services}
-Possible options for commonly available services include:
+Use globally available service locator.  The service locator should support:
 \begin{itemize}
-	\item Singletons
-	\item Service Locator system.  GameObject base class could store registered services
-	\item Subclass sandbox where common operations are defined in GameObject base class
+	\item null services
+	\item registering and unregistering of services
+	\item should be initialized at start.  This is when service objects will be provided to the locator
+\end{itemize}
+
+\subsection{Questions to still answer}
+\begin{itemize}
+	\item Should common services such as logging, and audio be present without needing to preregister?
+	\begin{itemize}
+		\item This would make handling null services easier
+	\end{itemize}
 \end{itemize}
 
 \subsection{ Logging }
