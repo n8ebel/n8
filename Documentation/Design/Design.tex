@@ -1,4 +1,7 @@
 \documentclass[12pt]{article}
+
+\setcounter{secnumdepth}{5}
+
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}
 \onehalfspacing
@@ -23,29 +26,18 @@
 
 \section{Design and Use Patterns}
 \subsection{Command}
-Object oriented replacement for callbacks that encapsulates a request within an object.  Benefits and uses include:
-\begin{itemize}
-	\item Allows easy redo/undo functionality if do and undo methods are implemented and some type of history is kept
-	\item Can be made general enough to operate on different entities such as a ``jump'' command that works for both user controlled and computer controlled entities
-	\item Can become a sandbox if many common operations are included with the base class
-	\item If command is stateless, a single instance of the command may be used for the entire program
-	\item Can be easily mapped to new inputs
-\end{itemize}
-
 \subsection{Observer}
-Allows passing of information between loosely coupled components through the use of notify, and onNotify methods.  Objects can be either subjects that notify others when certain events happen, or they can be observers and respond to received notifications from observed objects.  Observers register an interest in an object so it may receive notifications from that object.  This pattern allows dissimilar objects to know about each other.  For example, a GUI object may want to update a life meter when a user entity is hit by an enemy.  The user class doesn't need to know about the GUI object, it just needs to broadcast that its life total has changed.
-
 \subsection{Subclass Sandbox}
 \subsection{Singleton}
 \subsection{Service Locator}
 \subsection{Components}
 
-\section{	Client Use/Interaction}
+\section{Client Use/Interaction}
 Client should instantiate a single instance of a Game object.  
 
-\section{ Resource Management}
+\section{Resource Management}
 
-\section{ Game Loop}
+\section{Game Loop}
 Takes place within Game and uses the Game object's GameTimer instance to control the loop.  Within the loop the current GameState is processed at each iteration.
 		
 \section{Window Management}
@@ -54,24 +46,33 @@ Should be a window object.  This object should be stored by the Game class.  Sho
 \section{	Game States}
 A GameState is whatever is happening in the forefront of the game.  GameStates will be maintained on a stack within a GameStateManger.  GameStateManager acts as a bridge between the game loop within Game and the currently active GameState.  Should support passing of entities between states, and each GameState will maintain a list of its entities.  GameStates will include 3 key methods of responding to user input, updating, and rendering.  The Update method will receive the current time as an argument, and Render will receive the current window canvas as an argument.  These 3 methods will be called in the game loop within the Game object.  Pause and resume methods can be overridden to handle changes to and from the GameState.
 
-\section{	Entities}
+\section{ Entity-Component System}
+\subsection{	Entities }
+Entities will be constructed using an entity-component system.  Entity will be a general class that can store different components.  Different behaviors will then come from which components an entity has.  Entity will have a broadcast method to send messages between components.
+\subsection{	Components }
+Functionality can be added to entities through components.  A component could be a position, a sprite, player information, or anything else that helps differentiate an entity or added to an entity's behavior.  Components should take a GameObject pointer as an argument to its methods so s single instance of a component could potentially be used for many entities if the component is stateless.
+\subsubsection{ Component Communication }
+\paragraph{ Shared State}
+Entity data that is cross-domain and will be used be multiple components should just be maintained in the entity class.  This is a good candidate for data such as x and y position.
+\paragraph{ Direct Reference }
+Components that are closely related could store direct references to one another.  For now, this approach is not supported.
+\paragraph{ Messaging }
+Components can broadcast and receive messages to one another.  A component can then be wired to handle a particular message type.  For example, physics component could detect and collision and broadcast a collision event which the audio component handles by playing a sound and the player info component handles be decreasing the player's health.  These messages could be as simple as an int or they could be a message object containing more information.
 
-\section{	Components}
+\section{	Input }
+Input will be handled by an central input manager that tracks which keys have been pressed down or are up.  Game states can then query the input manager and define state specific behaviors for inputs.
 
-\section{	Entity States}
+\section{	Events }
+Events/messages between components are handled by broadcasting messages to other components.  Events/messages between an entity/component and a higher level system such as GUI or achievement system will use the observer pattern.  
 
-\section{	Input}
-
-\section{	Events}
-
-\section{	Rendering}
-\subsection{Rendering operations}
+\section{	Rendering }
+\subsection{Rendering operations }
 \begin{itemize}
 	\item Render single entity
 	\item Render single entity with a camera object (Camera: see Section \ref{sec:Camera})
 \end{itemize}
-\subsection{Static sprite}
-\subsection{Animated sprite}
+\subsection{Static sprite }
+\subsection{Animated sprite }
 
 
 \section{ Camera} \label{sec:Camera}
@@ -90,7 +91,7 @@ Use globally available service locator.  The service locator should support:
 \end{itemize}
 
 \subsection{ Logging }
-Logging should be available to any aspect of the system. 
+Logging should be available to any aspect of the system.  The logging system will be available through the ServiceLocator.  
 \subsection{ Audio Player} 
 
 \section{	System wide values and enums}
