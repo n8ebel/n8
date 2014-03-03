@@ -76,6 +76,7 @@ Events/messages between components are handled by broadcasting messages to other
 
 
 \section{ Camera} \label{sec:Camera}
+Camera can be used to center drawing operations around a specified entity.  This entity will be registered with the camera as an observable object.  When the camera receives a ``position changed'' event from the entity, it will update its position accordingly.  The camera will be created with the height and width of the current game world.  When the world size changes, the camera will need to be updated.  The camera will be stored within a GameState.  A camera object can be passed in to an entity's render method to have it draw based on the camera's current position.
 
 \section{	Operations on or using entities}
 		AI
@@ -84,15 +85,12 @@ Events/messages between components are handled by broadcasting messages to other
 \section{	Game levels}
 
 \section{ Globally Available Services}
-Use globally available service locator.  The service locator should support:
-\begin{itemize}
-	\item registering and unregistering of services
-	\item should be initialized at start.  This is when service objects will be provided to the locator
-\end{itemize}
+Use globally available service locator.  The service locator should support registering and unregistering of services, and retrieval of those services.  Ensuring that a service is available before be used will be the job of client code.
 
 \subsection{ Logging }
-Logging should be available to any aspect of the system.  The logging system will be available through the ServiceLocator.  
+Logging should be available to any aspect of the system through the ServiceLocator.  
 \subsection{ Audio Player} 
+The audio service should be available to any aspect of the system through the ServiceLocator.  The audio service should maintain a queue of sounds that have been signaled to play.  Sounds should be played on a separate thread.  
 
 \section{	System wide values and enums}
 
