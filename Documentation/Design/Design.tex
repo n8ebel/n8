@@ -42,52 +42,75 @@
 \section{Client Use/Interaction}
 Client should instantiate a single instance of a Game object.  
 
-\section{Resource Management}
-
-\section{Game Loop}
+\section{	Engine Core}
+\subsection{Game Loop}
 Takes place within Game and uses the Game object's GameTimer instance to control the loop.  Within the loop the current GameState is processed at each iteration.
+
+\subsection{Window Management}
+Should be a window object.  Should support renaming and resizing.
+
+\subsection{Resource Management}
 		
-\section{Window Management}
-Should be a window object.  This object should be stored by the Game class.  Should support renaming and resizing.  
+\subsection{	State Management}
 	
 \section{	Game States}
 A GameState is whatever is happening in the forefront of the game.  GameStates will be maintained on a stack within a GameStateManger.  GameStateManager acts as a bridge between the game loop within Game and the currently active GameState.  Should support passing of entities between states, and each GameState will maintain a list of its entities.  GameStates will include 3 key methods of responding to user input, updating, and rendering.  The Update method will receive the current time as an argument, and Render will receive the current window canvas as an argument.  These 3 methods will be called in the game loop within the Game object.  Pause and resume methods can be overridden to handle changes to and from the GameState.
 
-\section{ Entity-Component System}
-\subsection{	Entities }
-Entities will be constructed using an entity-component system.  Entity will be a general class that can store different components.  Different behaviors will then come from which components an entity has.  Entity will have a broadcast method to send messages between components.
-\subsection{	Components }
-Functionality can be added to entities through components.  A component could be a position, a sprite, player information, or anything else that helps differentiate an entity or added to an entity's behavior.  Components should take a GameObject pointer as an argument to its methods so s single instance of a component could potentially be used for many entities if the component is stateless.
-\subsubsection{ Component Communication }
-\paragraph{ Shared State}
-Entity data that is cross-domain and will be used be multiple components should just be maintained in the entity class.  This is a good candidate for data such as x and y position.
-\paragraph{ Direct Reference }
-Components that are closely related could store direct references to one another.  For now, this approach is not supported.
-\paragraph{ Messaging }
-Components can broadcast and receive messages to one another.  A component can then be wired to handle a particular message type.  For example, physics component could detect and collision and broadcast a collision event which the audio component handles by playing a sound and the player info component handles be decreasing the player's health.  These messages could be as simple as an int or they could be a message object containing more information.
+%\section{ Entity-Component System}
+%\subsection{	Entities }
+%Entities will be constructed using an entity-component system.  Entity will be a general class that can store different components.  Different behaviors will then come from which components an entity has.  Entity will have a broadcast method to send messages between components.
+%\subsection{	Components }
+%Functionality can be added to entities through components.  A component could be a position, a sprite, player information, or anything else that helps differentiate an entity or added to an entity's behavior.  Components should take a GameObject pointer as an argument to its methods so s single instance of a component could potentially be used for many entities if the component is stateless.
+%\subsubsection{ Component Communication }
+%\paragraph{ Shared State}
+%Entity data that is cross-domain and will be used be multiple components should just be maintained in the entity class.  This is a good candidate for data such as x and y position.
+%\paragraph{ Direct Reference }
+%Components that are closely related could store direct references to one another.  For now, this approach is not supported.
+%\paragraph{ Messaging }
+%Components can broadcast and receive messages to one another.  A component can then be wired to handle a particular message type.  For example, physics component could detect and collision and broadcast a collision event which the audio component handles by playing a sound and the player info component handles be decreasing the player's health.  These messages could be as simple as an int or they could be a message object containing more information.
 
-\section{	Input }
-Input will be handled by an central input manager that tracks which keys have been pressed down or are up.  Game states can then query the input manager and define state specific behaviors for inputs.
+\section{Entity-Component System}
+The entity-component system will be the core of gameplay, logic, and game customization.  
+
+\subsection{Entities (GameObjects)}
+An object visible within the game's screen will be an entity of GameObject.  These could include a chest, a power up, or a user controller character.  GameObjects should simply act as a common identifier with which to relate separate components.  The behavior and attributes of a GameObject will depend solely on which components are related to the GameObject.  For example, the difference between a stationary enemy and one that moves around could be the additional of a ``movement'' component that updates the enemy's position frequently.  GameObjects will be created and stored by a GameObjectFactory that will be customized by the client to produced the desired object types.  GameObjects will maintain a list of handles for their associated components.  
+
+To maintain the life of a GameObject when a State goes out of focus, the client can simply not unregister that GameObject ID when the state goes out of focus.  
+
+\subsection{	Components}
+A component will contain the data needed to provide some specific functionality to a GameObject.  Every game object will have a ``Location'' component to track where the object is and its size.  Components will not contain methods, and instead will be operated on by ``Systems''.  These systems will store the components they operate on. 
+
+\subsection{	Systems} 
+A system provides behavior for, and operates on components.  They are responsible for updating components during each iteration of the game loop.  A system will store each object that it operates on so they are together in memory when System.Update() is called.  Components in the system will be referenced by their handle.  When a component is removed from a system, a member variable counting the current components will be decremented, and a placeholder object inserted so other components' handles aren't affected.  When a new component is created, if the size of the vector and the count of components aren't the same, the new component will be inserted at the empty position.  
+
+Systems will be able to communicate with one another by broadcasting messages to a SystemManager which will route message to registered systems.
+
+\subsection{	Input }
+Input will be handled by an InputSystem that tracks which keys have been pressed down or are up.  These states will be able to hold pointers to Command objects that define an action to take.  Game states can then register which commands are associated with which inputs when the state gains focus.
+ 
+
+\subsection{	Rendering }
+\subsubsection{Rendering operations }
+	\begin{itemize}
+		\item Render single entity
+		\item Render single entity with a camera object (Camera: see Section \ref{sec:Camera})
+	\end{itemize}
+
+\subsubsection{ Camera} \label{sec:Camera}
+A camera object can be passed in to an entity's render method to have it draw based on the camera's current position.
+
+\subsubsection{Static sprite }
+\subsubsection{Animated sprite }
+\subsection{	Physics}
+\subsection{	Game Logic}
+\subsection{	AI}
+\subsection{	UI}
+\subsection{	Audio}
+\subsection{	ObjectFactory}
+
 
 \section{	Events }
-Events/messages between components are handled by broadcasting messages to other components.  Events/messages between an entity/component and a higher level system such as GUI or achievement system will use the observer pattern.  
-
-\section{	Rendering }
-\subsection{Rendering operations }
-\begin{itemize}
-	\item Render single entity
-	\item Render single entity with a camera object (Camera: see Section \ref{sec:Camera})
-\end{itemize}
-\subsection{Static sprite }
-\subsection{Animated sprite }
-
-
-\section{ Camera} \label{sec:Camera}
-Camera can be used to center drawing operations around a specified entity.  This entity will be registered with the camera as an observable object.  When the camera receives a ``position changed'' event from the entity, it will update its position accordingly.  The camera will be created with the height and width of the current game world.  When the world size changes, the camera will need to be updated.  The camera will be stored within a GameState.  A camera object can be passed in to an entity's render method to have it draw based on the camera's current position.
-
-\section{	Operations on or using entities}
-		AI
-		physics
+Events/messages between components are handled by broadcasting messages to other components.  Events/messages between an entity/component and a higher level system such as GUI or achievement system will use the observer pattern. 
 
 \section{	Game levels}
 
@@ -95,9 +118,7 @@ Camera can be used to center drawing operations around a specified entity.  This
 Use globally available service locator.  The service locator should support registering and unregistering of services, and retrieval of those services.  Ensuring that a service is available before be used will be the job of client code.
 
 \subsection{ Logging }
-Logging should be available to any aspect of the system through the ServiceLocator.  
-\subsection{ Audio Player} 
-The audio service should be available to any aspect of the system through the ServiceLocator.  The audio service should maintain a queue of sounds that have been signaled to play.  Sounds should be played on a separate thread.  
+Logging should be available to any aspect of the system through the ServiceLocator.    
 
 \section{	System wide values and enums}
 
