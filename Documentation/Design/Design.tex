@@ -42,16 +42,18 @@
 \section{Client Use/Interaction}
 Client should instantiate a single instance of a Game object.  
 
-\section{	Engine Core}
+\subsection{	System wide values and enums}
+
+\subsection{	Configuration data/files}
+
+\section{Engine Core}
 \subsection{Game Loop}
 Takes place within Game and uses the Game object's GameTimer instance to control the loop.  Within the loop the current GameState is processed at each iteration.
 
 \subsection{Window Management}
 Should be a window object.  Should support renaming and resizing.
 
-\subsection{Resource Management}
-		
-\subsection{	State Management}
+\subsection{State Management}
 	
 \section{	Game States}
 A GameState is whatever is happening in the forefront of the game.  GameStates will be maintained on a stack within a GameStateManger.  GameStateManager acts as a bridge between the game loop within Game and the currently active GameState.  Should support passing of entities between states, and each GameState will maintain a list of its entities.  GameStates will include 3 key methods of responding to user input, updating, and rendering.  The Update method will receive the current time as an argument, and Render will receive the current window canvas as an argument.  These 3 methods will be called in the game loop within the Game object.  Pause and resume methods can be overridden to handle changes to and from the GameState.
@@ -76,51 +78,51 @@ The entity-component system will be the core of gameplay, logic, and game custom
 An object visible within the game's screen will be an entity of GameObject.  These could include a chest, a power up, or a user controller character.  GameObjects should act as a common identifier between components, and as the central storage location for each component.  The behavior and attributes of a GameObject will depend solely on which components are related to the GameObject.  For example, the difference between a stationary enemy and one that moves around could be the additional of a ``movement'' component that updates the enemy's position frequently.  GameObjects will be created and stored by a GameObjectFactory that will be customized by the client to produced the desired object types.  When the GameObjectFactory creates an object, it will register it with the necessary Systems.  GameObjects will maintain a list of their associated components.  Pointers to these components will be stored by Systems in order to do batch component processing.    
 
 \subsection{	Components}
-A component will contain the data needed to provide some specific functionality to a GameObject.  Every game object will have a ``Location'' component to track where the object is and its size.  Components will not contain methods, and instead will be operated on by ``Systems''.  These systems will store pointers to the components they operate on.  When an entity is registered with a System, if the entity possesses the required component a pointer to that component will be stored in the system to enable batch processing. 
+A component will contain the data needed to provide some specific functionality to a GameObject.  Every game object will have a ``Location'' component to track where the object is and its size.  Components will not contain methods, and instead will be operated on by ``Systems''.  These systems will store pointers to the components they operate on.  When an entity is registered with a System, if the entity possesses the required component a pointer to that component will be stored in the system to enable batch processing. Components should provide registration functions to handle registering and unregistering themselves from Systems.
 
 \subsection{	Systems} 
 A system provides behavior for, and operates on components.  They are responsible for updating components during each iteration of the game loop.  A system will store each object that it operates on so they are together in memory when System.Update() is called.  When a component is removed from a system, a member variable counting the current components will be decremented, and a placeholder object inserted so other components' handles aren't affected.  When a new component is created, if the size of the vector and the count of components aren't the same, the new component will be inserted at the empty position.  
 
 Systems will be able to communicate with one another using the Observer pattern.  During engine setup, default systems that need to communicate will be registered as observable and subject objects.  Game specific systems can register to observe other systems when they are created at game startup.
 
-\subsection{	Input }
+\subsection{Default Systems}
+\subsubsection{	Input }
 Input will be handled by an InputSystem that tracks which keys have been pressed down or are up.  These states will be able to hold pointers to Command objects that define an action to take.  Game states can then register which commands are associated with which inputs when the state gains focus.
  
 
-\subsection{	Rendering }
-\subsubsection{Rendering operations }
+\subsubsection{	Rendering }
+
 	\begin{itemize}
 		\item Render single entity
 		\item Render single entity with a camera object (Camera: see Section \ref{sec:Camera})
 	\end{itemize}
+	
+Static sprite 
+Animated sprite 
 
-\subsubsection{ Camera} \label{sec:Camera}
 A camera object can be passed in to an entity's render method to have it draw based on the camera's current position.
 
-\subsubsection{Static sprite }
-\subsubsection{Animated sprite }
-\subsection{	Physics}
-\subsection{	Game Logic}
-\subsection{	AI}
-\subsection{	UI}
-\subsection{	Audio}
-\subsection{	ObjectFactory}
+\subsubsection{	Audio}
 
+\subsubsection{ResourceManager}
 
-\section{	Events }
-Events/messages between components are handled by broadcasting messages to other components.  Events/messages between an entity/component and a higher level system such as GUI or achievement system will use the observer pattern. 
+\subsection{Game Specific Systems}
 
-\section{	Game levels}
+\subsubsection{	Physics}
+\subsubsection{	Game Logic}
+\subsubsection{	AI}
+\subsubsection{	UI}
+\subsubsection{	ObjectFactory}
 
 \section{ Globally Available Services}
-Use globally available service locator.  The service locator should support registering and unregistering of services, and retrieval of those services.  Ensuring that a service is available before be used will be the job of client code.
+Use globally available service locator.  The service locator should support registering and unregistering of services, and retrieval of those services.  Ensuring that a service is available before be used will be the job of client code.  Systems will be stored and served by the service locator.  This includes default systems, and game specific systems registered by the client.
 
 \subsection{ Logging }
-Logging should be available to any aspect of the system through the ServiceLocator.    
+Logging should be available to any aspect of the system through the ServiceLocator.
 
-\section{	System wide values and enums}
 
-\section{	Configuration data/files}
+
+\section{	Game levels}
 
 \section{Use Cases}
 \subsection{Input changes game state}
