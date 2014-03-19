@@ -9,6 +9,8 @@
 #include <assert.h>
 
 #include "Window.h"
+#include "ServiceManager.h"
+#include "Log.h"
 
 n8::Window::Window(){
     m_background = NULL;
@@ -16,8 +18,7 @@ n8::Window::Window(){
 }
 
 n8::Window::~Window(){
-    assert(m_background);
-    SDL_FreeSurface(m_background);
+    
 }
 
 /** Resizes the screen to the specified dimensions
@@ -38,7 +39,7 @@ void n8::Window::ResizeWindow(int w, int h){
         SDL_FreeSurface(m_background);
     }
     
-    m_background = SDL_SetVideoMode(m_screenWidth, m_screenHeight, DEFAULT_BPP, SDL_SWSURFACE);
+    m_background = SDL_SetVideoMode(m_screenWidth, m_screenHeight, DEFAULT_BPP, SDL_SWSURFACE );
     assert(m_background);
 }
 

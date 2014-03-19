@@ -7,6 +7,8 @@
 //
 
 #include "Game.h"
+#include "TestState.h"
+
 //#include "n8.h"
 
 /*
@@ -50,9 +52,25 @@ int main(int argc, char* argv[]){
      
      */
     
+    
     n8::Game game;
     game.Setup();
+    
+    TestState testState;
+    game.RegisterState(EState::Test, &testState);
+    game.SetStartState(EState::Test);
+    
     game.Start();
+    
+    
+    
+    game.Shutdown();
+    game.Stop();
+    
+    
+    
+    
+   
     
     
     

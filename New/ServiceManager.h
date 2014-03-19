@@ -13,11 +13,10 @@
 #include <map>
 
 #include "Singleton.h"
+#include "Service.h"
 #include "../Tools/Enums.h"
 
 namespace n8{
-    
-class Service;
 
 class ServiceManager : public Singleton<ServiceManager>{ 
 public:
@@ -26,6 +25,8 @@ public:
     
     void RegisterService(EService, Service*);
     void UnregisterService(EService);
+    
+    void RemoveAllServices();
     
     Service* GetService(EService);
     

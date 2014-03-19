@@ -10,8 +10,11 @@
 
 #include "Game.h"
 
+#define TAG "Game"
+
 /** Default Constructor */
 n8::Game::Game(){
+    Log::Info(TAG, "Constructor");
     m_fps = DEFAULT_FPS;
     m_quit = false;
 }
@@ -26,7 +29,11 @@ n8::Game::~Game(){
  */
 void n8::Game::Setup(){
     SDL_Init( SDL_INIT_EVERYTHING );
+    Log::Create();
+    
     m_serviceManager = ServiceManager::GetInstance();
+    m_serviceManager->RegisterService(EService::Input, new InputService());
+    m_serviceManager->RegisterService(EService::StateManager, new StateManagerService());
     
 }
 
@@ -34,6 +41,12 @@ void n8::Game::Setup(){
  *  Deletes registers game systems which in turn delete all other game data
  */
 void n8::Game::Shutdown(){
+    m_serviceManager->RemoveAllServices();
+    
+    ServiceManager::Destroy();
+    
+    Log::Destroy();
+    
     SDL_Quit();
 }
 
@@ -41,14 +54,24 @@ void n8::Game::Shutdown(){
  *  Starts the game loop
  */
 void n8::Game::Start(){
+    
     m_timer.UpdateCurrentTime();
     while (m_quit == false) {
         
-        //process state
+        //process input
+        static_cast<InputService*>(m_serviceManager->GetService(EService::Input))->HandleInput();
         
-        //check state stack size
+        //make sure there is a state on the stack
+        if(static_cast<StateManagerService*>(ServiceManager::GetInstance()->GetService(EService::StateManager))->GetStackSize() == 0){
+            break;
+        }
+        
+        //process state
+        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), m_window.GetSurface());
+        
         
         m_timer.SyncGame(m_fps);  //ensures proper fps
+        
     }
 }
 
@@ -76,7 +99,20 @@ void n8::Game::SetFPS(unsigned newFPS){
 *   @param unsigned width The desired width of the window
 *   @param unsigned height The desired height of the window
 */
-void n8::Game::ResizeWindow(unsigned width, unsigned height){
+void n8::Game::DefineWindowSize(unsigned width, unsigned height){
+    m_windowWidth = width;
+    m_windowHeight = height;
+    
     assert(&m_window);
-    m_window.ResizeWindow(width,height);
+    m_window.ResizeWindow(m_windowWidth,m_windowHeight);
+}
+
+void n8::Game::RegisterState(EState key, n8::State* newState){
+    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->RegisterState(key,newState);
+    
+}
+
+void n8::Game::SetStartState(EState key){
+    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);
+    
 }

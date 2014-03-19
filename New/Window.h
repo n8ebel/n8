@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "SDL/SDL.h"
+#include "SDL_image/SDL_image.h"
 
 namespace n8{
     
@@ -33,6 +34,8 @@ private:
     unsigned m_screenWidth;  /** < width of the screen surface **/
     unsigned m_screenHeight; /** < height of the screen surface **/
     SDL_Surface* m_background;  /** < surface to render things to **/
+    
+    
 };
 
 }

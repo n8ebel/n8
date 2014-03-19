@@ -23,7 +23,11 @@ public:
     void UpdateCurrentTime();
     void SyncGame(unsigned);
     
+    unsigned int GetElapsedTime();
+    unsigned int GetTime();
+    
 private:
+    Uint32 m_startTime;
     Uint32 m_currentTime;  /** < current game time **/
 };
 

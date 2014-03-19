@@ -7,15 +7,18 @@
  */
 
 #include "ServiceManager.h"
+#include "Log.h"
+
+#define TAG "ServiceManager"
 
 /** Default Constructor */
 n8::ServiceManager::ServiceManager(){
-    
+    Log::Info(TAG, "Constructor");
 }
 
 /** Destructor */
 n8::ServiceManager::~ServiceManager(){
-    
+    Log::Info(TAG, "Destructor");
 }
 
 /** RegisterService
@@ -40,6 +43,22 @@ void n8::ServiceManager::UnregisterService(EService key){
         m_registeredServices.erase(ii);
     }
 }
+
+/** RemoveAllServices
+ *  Removes and deletes all services from the map
+ */
+void n8::ServiceManager::RemoveAllServices(){
+    std::map<EService,n8::Service*>::iterator ii ;
+    
+    for (ii = m_registeredServices.begin(); ii!=m_registeredServices.end(); ii++) {
+        Service* tmp = ii->second;
+        ii->second = NULL;
+        delete tmp;
+    }
+    m_registeredServices.clear();
+}
+
+
 
 /** GetService
  *  Returns the service specified by the input key

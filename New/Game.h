@@ -15,6 +15,10 @@
 #include "SDL_image/SDL_image.h"
 
 #include "ServiceManager.h"
+#include "Log.h"
+#include "InputService.h"
+#include "StateManagerService.h"
+#include "State.h"
 #include "Timer.h"
 #include "Window.h"
 
@@ -33,8 +37,10 @@ public:
     void Stop();
     
     void SetFPS(unsigned);
-    void ResizeWindow(unsigned, unsigned);
+    void DefineWindowSize(unsigned, unsigned);
     
+    void RegisterState(EState, State*);
+    void SetStartState(EState);
 private:
     
     ServiceManager* m_serviceManager;
@@ -44,6 +50,9 @@ private:
     
     int m_fps;  /** < value to control game loop speed **/
     bool m_quit;  /** < flag to control when game loop ends **/
+    
+    unsigned m_windowWidth;
+    unsigned m_windowHeight;
     
 };
 
