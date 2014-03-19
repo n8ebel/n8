@@ -1,5 +1,6 @@
-#ifndef ENEUMS_H
+#ifndef ENUMS_H
 #define ENUMS_H
 
-enum EColor{Red,Green,Blue};enum ESystem{Render,Audio,Logging,AI};
+enum EColor{Red,Green,Blue};
+enum EService{Render,Audio,Logging,AI};
 #endif

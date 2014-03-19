@@ -6,7 +6,7 @@
 std::string FILEPATH = "../Enums.h";
 
 std::string HEADER =
-"#ifndef ENEUMS_H\n" 
+"#ifndef ENUMS_H\n" 
 "#define ENUMS_H\n\n";
  
  std::string FOOTER =
