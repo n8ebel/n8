@@ -24,14 +24,6 @@ n8::StateManagerService::StateManagerService(){
  */
 n8::StateManagerService::~StateManagerService(){
     Log::Info(TAG, "Destructor");
-    
-    /*
-    while (m_stateStack.size() > 0) {
-        State* curState = m_stateStack.top();
-        m_stateStack.pop();
-        delete curState;
-    }
-     */
 }
 
 
@@ -97,17 +89,20 @@ bool n8::StateManagerService::PushState(EState identifier){
  
 void n8::StateManagerService::PopState(){
     if (m_stateStack.size() > 1) {
-        /*
-        m_stateStack.top()->OnPause();
-        m_stateStack.pop();
-        m_stateStack.top()->OnResume();
-         */
+        vector<State*>::iterator ii = m_stateStack.end();
+        ii--;
+        (*ii)->OnPause();
+        m_stateStack.erase(ii);
+        
+        ii = m_stateStack.end();
+        ii--;
+        (*ii)->OnResume();
     }
     else if(m_stateStack.size() == 1){
-        /*
-        m_stateStack.top()->OnPause();
-        m_stateStack.pop();
-         */
+        vector<State*>::iterator ii = m_stateStack.end();
+        ii--;
+        (*ii)->OnPause();
+        m_stateStack.erase(ii);
     }
 }
 
@@ -166,7 +161,10 @@ void n8::StateManagerService::ProcessState(Uint32 time, SDL_Surface* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){
-    if(event->GetType() == EEvent::Exit){
+    if(event->GetType() == Events::Values::Exit){
         m_stateStack.clear();
+    }
+    else if(event->GetType() == Events::Values::Test2){
+        m_stateStack.push_back(m_registeredStates[EState::Test2]);
     }
 }

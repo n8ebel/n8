@@ -18,12 +18,12 @@ namespace n8 {
 /** Class to pass events between observable systems */
 class Event{
 public:
-    Event(EEvent);
+    Event(Events::Values);
     
-    EEvent GetType();
+    Events::Values GetType();
     
 private:
-    EEvent m_type; /** < The type of event.  Uses an enumerated type to differentiate event types > */
+    Events::Values m_type; /** < The type of event.  Uses an enumerated type to differentiate event types > */
     
     
 };

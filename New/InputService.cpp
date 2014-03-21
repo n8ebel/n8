@@ -38,13 +38,18 @@ void n8::InputService::HandleInput(){
     {
         if (m_event->type == SDL_QUIT)
 		{
-            Event event(EEvent::Exit);
+            Event event(Events::Values::Exit);
             Notify(&event);
 		}
         
 		if (m_event->type == SDL_KEYDOWN)
 		{
             m_keysHeld[m_event->key.keysym.sym] = true;
+            if (m_event->key.keysym.sym == SDLK_SPACE) {
+                std::cout << "pressed space" << std::endl;
+                Event event(Events::Values::Test2);
+                Notify(&event);
+            }
 		}
 		if (m_event->type == SDL_KEYUP)
 		{

@@ -13,7 +13,7 @@
  *
  *  @param type The type of the event
  */
-n8::Event::Event(EEvent type){
+n8::Event::Event(Events::Values type){
     m_type = type;
 }
 
@@ -22,6 +22,6 @@ n8::Event::Event(EEvent type){
  *
  *  @return The type of the event
  */
-EEvent n8::Event::GetType(){
+Events::Values n8::Event::GetType(){
     return m_type;
 }

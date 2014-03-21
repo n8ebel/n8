@@ -30,7 +30,7 @@ void n8::Subject::RemoveObserver(Observer* observer){
             break;
         }
     }
-    if(ii != m_observers.end(){
+    if(ii != m_observers.end()){
         m_observers.erase(ii);
     }
 }
