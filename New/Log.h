@@ -16,6 +16,7 @@
 
 namespace n8{
 
+/** Provides static logging functionality.  Could be extended to allow for runtime logging. */
 class Log : public Singleton<Log>{
 public:
     Log();

@@ -18,6 +18,8 @@
 
 namespace n8{
 
+/** Provides a global access point to registered services.  This gives a less coupled way of providing access to game systems.  Services are registered with the ServiceManager during the game's initialization.
+ */
 class ServiceManager : public Singleton<ServiceManager>{ 
 public:
     ServiceManager();

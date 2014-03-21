@@ -8,10 +8,20 @@
 
 #include "Event.h"
 
+/** Constructor
+ *  Creates the event and sets its type
+ *
+ *  @param type The type of the event
+ */
 n8::Event::Event(EEvent type){
     m_type = type;
 }
 
+/** GetType
+ *  Used to get the type of an event so it can be properly handled
+ *
+ *  @return The type of the event
+ */
 EEvent n8::Event::GetType(){
     return m_type;
 }

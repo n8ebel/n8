@@ -15,6 +15,7 @@
 
 namespace n8{
     
+/** Class to allow events to be handled in an uncoupled manner.  Follows the common Observer design pattern. */
 class Observer
 {
 public:

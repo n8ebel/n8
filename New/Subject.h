@@ -26,7 +26,7 @@ public:
     void Notify(Event*);
 
 private:
-    std::vector<Observer*> m_observers;
+    std::vector<Observer*> m_observers; /** < List of observers that can be notified of events > */
     
 };
     
