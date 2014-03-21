@@ -32,8 +32,14 @@ void n8::Game::Setup(){
     Log::Create();
     
     m_serviceManager = ServiceManager::GetInstance();
-    m_serviceManager->RegisterService(EService::Input, new InputService());
-    m_serviceManager->RegisterService(EService::StateManager, new StateManagerService());
+    
+    InputService* inputService = new InputService();
+    StateManagerService* stateManagerService = new StateManagerService();
+    
+    inputService->AddObserver(stateManagerService);
+    
+    m_serviceManager->RegisterService(EService::Input, inputService);
+    m_serviceManager->RegisterService(EService::StateManager, stateManagerService);
     
 }
 

@@ -16,6 +16,3 @@ n8::Service::~Service(){
     
 }
 
-void n8::Service::RegisterToObservice(EService,Service*){
-    
-}

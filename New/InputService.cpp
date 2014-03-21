@@ -38,7 +38,8 @@ void n8::InputService::HandleInput(){
     {
         if (m_event->type == SDL_QUIT)
 		{
-            static_cast<StateManagerService*>(ServiceManager::GetInstance()->GetService(EService::StateManager))->PopState();
+            Event event(EEvent::Exit);
+            Notify(&event);
 		}
         
 		if (m_event->type == SDL_KEYDOWN)
@@ -111,5 +112,9 @@ bool n8::InputService::KeyIsDown(SDL_Event* event,int key){
 bool n8::InputService::KeyIsUp(SDL_Event* event,int key){
     
     return false;
+    
+}
+
+void n8::InputService::OnNotify(Event* event){
     
 }

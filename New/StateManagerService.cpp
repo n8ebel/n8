@@ -79,7 +79,7 @@ bool n8::StateManagerService::PushState(EState identifier){
     
     if(ii != m_registeredStates.end()){
         
-        m_stateStack.push( ii->second);
+        m_stateStack.push_back(ii->second);
         //m_stateStack.top()->OnResume();
         
         return true;
@@ -145,8 +145,8 @@ void n8::StateManagerService::ProcessState(Uint32 time, SDL_Surface* screen){
     if(time > 0 && screen){
     
         if(m_stateStack.size() > 0){
-            m_stateStack.top()->Update(time);
-            m_stateStack.top()->Render(screen);
+            m_stateStack[m_stateStack.size()-1]->Update(time);
+            m_stateStack[m_stateStack.size()-1]->Render(screen);
         }
         
         if(m_stateStack.size() > 0){
@@ -162,5 +162,11 @@ void n8::StateManagerService::ProcessState(Uint32 time, SDL_Surface* screen){
     }
     else if(screen == NULL){
         Log::Error(TAG , "ProcessState(): Screen pointer is NULL");
+    }
+}
+
+void n8::StateManagerService::OnNotify(n8::Event* event){
+    if(event->GetType() == EEvent::Exit){
+        m_stateStack.clear();
     }
 }

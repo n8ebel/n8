@@ -12,7 +12,7 @@
 #define STATE_MANAGER_SERVICE_H
 
 #include <map>
-#include <stack>
+#include <vector>
 
 #include "SDL/SDL.h"
 #include "ID.h"
@@ -29,7 +29,7 @@ namespace n8{
  *  The singleton pattern is used so there is a single
  *    state stack and access point to state information.
  */
-class StateManagerService : public n8::Service{
+class StateManagerService : public Service{
 
 public:
     StateManagerService();
@@ -46,13 +46,13 @@ public:
     
     void ProcessState(Uint32 time, SDL_Surface* screen);
     
-    
+    void OnNotify(Event*);
     
 private:
     
     
     map<EState, State*> m_registeredStates; /** < map of identifiers and game state objects */
-    stack<State*> m_stateStack; /** < stack of state objects */
+    vector<State*> m_stateStack; /** < stack of state objects */
     
 };
 

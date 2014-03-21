@@ -18,7 +18,7 @@
 
 namespace n8{
 
-class InputService :public Service{
+class InputService :public Service {
 
 public:
     InputService();
@@ -30,7 +30,7 @@ public:
     bool KeyIsDown(int key);
     bool KeyIsUp(int key);
     
-    
+    void OnNotify(Event* event);
 private:
     
    

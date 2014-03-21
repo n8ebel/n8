@@ -13,18 +13,20 @@
 #include <map>
 
 #include "Enums.h"
+#include "Observer.h"
+#include "Subject.h"
 
 namespace n8 {
 
-class Service{
+class Service : public Subject,public Observer{
 public:
     Service();
     virtual ~Service() = 0;
-    
-    void RegisterToObservice(EService,Service*);
+        
+    virtual void OnNotify(Event* event) = 0;
     
 protected:
-    std::map<EService,Service*> m_observedServices;
+
 };
     
 }

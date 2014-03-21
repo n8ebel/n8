@@ -4,4 +4,6 @@
 enum EColor{Red,Green,Blue};
 enum EService{Input,StateManager,Render,Audio,Logging,AI};
 enum EState{Test};
+enum EEvent{Exit};
+
 #endif
