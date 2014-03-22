@@ -18,6 +18,7 @@
 #include "Log.h"
 #include "InputService.h"
 #include "StateManagerService.h"
+#include "ResourceManagerService.h"
 #include "State.h"
 #include "Timer.h"
 #include "Window.h"

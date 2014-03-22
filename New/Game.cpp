@@ -35,11 +35,13 @@ void n8::Game::Setup(){
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
+    ResourceManagerService* resourceManagerService = new ResourceManagerService();
     
     inputService->AddObserver(stateManagerService);
     
     m_serviceManager->RegisterService(EService::Input, inputService);
     m_serviceManager->RegisterService(EService::StateManager, stateManagerService);
+    m_serviceManager->RegisterService(EService::Resources, resourceManagerService);
     
 }
 
