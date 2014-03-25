@@ -13,8 +13,8 @@
 #include <string>
 #include <map>
 
-#include "SDL/SDL.h"
-#include "SDL_image/SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2_image/SDL_image.h"
 
 #include "Service.h"
 #include "Event.h"
@@ -22,7 +22,7 @@
 namespace n8{
     class ResourceManagerService : public Service{
     public:
-        ResourceManagerService();
+        ResourceManagerService(SDL_Surface* screen);
         ~ResourceManagerService();
         
         void LoadImages(std::string filepath);
@@ -33,6 +33,7 @@ namespace n8{
     private:
         std::map<std::string,SDL_Surface*> m_loadedSprites;  /** < Stores all images loaded by the system  ***/
         
+        SDL_Surface* m_screenSurface;
     };
 }
 

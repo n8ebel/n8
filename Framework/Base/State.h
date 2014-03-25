@@ -11,11 +11,16 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include <iostream>
 #include <vector>
 #include <assert.h>
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
+#include "SDL2_image/SDL_image.h"
+
 #include "ID.h"
+
+class SDL_Window;
 
 namespace n8{
 
@@ -33,7 +38,7 @@ public:
     virtual void OnPause() = 0;
     
     virtual void Update(Uint32 currentTime) = 0;
-    virtual void Render(SDL_Surface* img) = 0;
+    virtual void Render(SDL_Window* window) = 0;
     
 protected:
     Uint32 m_time;  /** < holds current game time > */

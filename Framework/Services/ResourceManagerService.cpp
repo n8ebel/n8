@@ -13,9 +13,10 @@
 
 #define TAG "ResourceManagerService"
 
-n8::ResourceManagerService::ResourceManagerService() {
+n8::ResourceManagerService::ResourceManagerService(SDL_Surface* screen) {
 	// TODO Auto-generated constructor stub
     
+    m_screenSurface = screen;
 }
 
 /** Destructor
@@ -40,6 +41,8 @@ n8::ResourceManagerService::~ResourceManagerService() {
  */
 SDL_Surface* n8::ResourceManagerService::LoadImage( string filename )
 {
+    
+    /*
     //Temporary storage for the image that's loaded
     SDL_Surface* loadedImage = NULL;
     
@@ -70,6 +73,35 @@ SDL_Surface* n8::ResourceManagerService::LoadImage( string filename )
     
     //Return the optimized image
     return optimizedImage;
+     
+     */
+    
+    //The final optimized image
+	SDL_Surface* optimizedSurface = NULL;
+    
+	//Load image at specified path
+	SDL_Surface* loadedSurface = SDL_LoadBMP( filename.c_str() );
+	if( loadedSurface == NULL )
+	{
+        std::string msg = "SDL_LoadBMP failed." + filename;
+		Log::Error(TAG, msg);
+	}
+    else
+	{
+        Log::Debug(TAG, "  Successfully loaded optimized bmp");
+		
+        //Convert surface to screen format
+		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_screenSurface->format, NULL );
+		if( optimizedSurface == NULL )
+		{
+			Log::Error(TAG, "Failed to load optimized version of: " + filename);
+		}
+        
+		//Get rid of old loaded surface
+		SDL_FreeSurface( loadedSurface );
+	}
+    
+	return optimizedSurface;
 }
 
 /**

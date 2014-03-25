@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 
 namespace n8{
     

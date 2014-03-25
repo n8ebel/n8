@@ -28,7 +28,7 @@ TestState::~TestState(){
 
 
 void TestState::OnResume(){
-    SDL_WM_SetCaption("Game State", "Game State");
+    
 }
 void TestState::OnPause(){
     
@@ -37,14 +37,16 @@ void TestState::OnPause(){
 void TestState::Update(Uint32 currentTime){
    
 }
-void TestState::Render(SDL_Surface* screen){
-    assert(screen);
+void TestState::Render(SDL_Window* p_window){
+   // assert(screen);
     
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 200,0,0));
+    SDL_FillRect(SDL_GetWindowSurface(p_window), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window)->format, 200,0,0));
    
     
-    SDL_Flip(screen);
+    //SDL_Flip(screen);
     
+    //Update the surface
+    SDL_UpdateWindowSurface( p_window );
     
 }
 

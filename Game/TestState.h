@@ -26,7 +26,7 @@ public:
     virtual void OnPause();
     
     virtual void Update(Uint32 currentTime);
-    virtual void Render(SDL_Surface* img);
+    virtual void Render(SDL_Window* window);
     
     virtual void RegisterEntity(Entity* newEntity);
     

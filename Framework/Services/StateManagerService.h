@@ -14,7 +14,7 @@
 #include <map>
 #include <vector>
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 #include "ID.h"
 #include "Service.h"
 #include "State.h"
@@ -44,7 +44,7 @@ public:
     int GetStackSize();
     ID GetCurrentStateId();
     
-    void ProcessState(Uint32 time, SDL_Surface* screen);
+    void ProcessState(Uint32 time, SDL_Window* screen);
     
     void OnNotify(Event*);
     

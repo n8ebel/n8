@@ -25,7 +25,7 @@ TestState2::~TestState2(){
 
 
 void TestState2::OnResume(){
-    SDL_WM_SetCaption("Game State", "Game State");
+    
 }
 void TestState2::OnPause(){
     
@@ -34,10 +34,10 @@ void TestState2::OnPause(){
 void TestState2::Update(Uint32 currentTime){
     
 }
-void TestState2::Render(SDL_Surface* screen){
-    assert(screen);
+void TestState2::Render(SDL_Window* p_window){
+    //assert(screen);
     
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,200,0));
+    SDL_FillRect(SDL_GetWindowSurface(p_window), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window)->format, 0,200,0));
     
     //Make a temporary rectangle to hold the offsets
     SDL_Rect offset;
@@ -49,12 +49,13 @@ void TestState2::Render(SDL_Surface* screen){
     SDL_Surface* img = static_cast<n8::ResourceManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->LoadImage("/Users/lcballa44/Projects/n8/Game/gfx/sayain2.png");
     
     //Blit the surface
-    SDL_BlitSurface( img, NULL, screen, &offset );
+    SDL_BlitSurface( img, NULL, SDL_GetWindowSurface(p_window), &offset );
     
     
     
-    SDL_Flip(screen);
-    
+    //SDL_Flip(screen);
+    //Update the surface
+    SDL_UpdateWindowSurface( p_window );
     
 }
 

@@ -10,9 +10,15 @@
 #define GAME_H
 
 #include <iostream>
-
+/*
 #include "SDL/SDL.h"
 #include "SDL_image/SDL_image.h"
+#include "SDL_mixer/SDL_mixer.h"
+*/
+#include <SDL2/SDL.h>
+#include "SDL2_image/SDL_image.h"
+#include "SDL2_mixer/SDL_mixer.h"
+#include "SDL2_ttf/SDL_ttf.h"
 
 #include "ServiceManager.h"
 #include "Log.h"
@@ -29,11 +35,13 @@ class Game{
 public:
     static const int DEFAULT_FPS = 60;
     
+    static void Init();
+    static void Shutdown();
+    
     Game();
     ~Game();
     
     void Setup();
-    void Shutdown();
     void Start();
     void Stop();
     

@@ -24,18 +24,32 @@ n8::Game::~Game(){
     
 }
 
+/** Shutdown
+ *  Deletes registers game systems which in turn delete all other game data
+ */
+void n8::Game::Shutdown(){
+    
+    
+    SDL_Quit();
+}
+
+void n8::Game::Init(){
+    SDL_Init( SDL_INIT_EVERYTHING );
+}
+
 /** Setup
  *  Initializes default game systems and member variables
  */
 void n8::Game::Setup(){
-    SDL_Init( SDL_INIT_EVERYTHING );
+    //SDL_Init( SDL_INIT_EVERYTHING );
+    
     Log::Create();
     
     m_serviceManager = ServiceManager::GetInstance();
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
-    ResourceManagerService* resourceManagerService = new ResourceManagerService();
+    ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
     
     inputService->AddObserver(stateManagerService);
     
@@ -45,24 +59,11 @@ void n8::Game::Setup(){
     
 }
 
-/** Shutdown
- *  Deletes registers game systems which in turn delete all other game data
- */
-void n8::Game::Shutdown(){
-    m_serviceManager->RemoveAllServices();
-    
-    ServiceManager::Destroy();
-    
-    Log::Destroy();
-    
-    SDL_Quit();
-}
-
 /** Start
  *  Starts the game loop
  */
 void n8::Game::Start(){
-    
+   
     m_timer.UpdateCurrentTime();
     while (m_quit == false) {
         
@@ -75,7 +76,7 @@ void n8::Game::Start(){
         }
         
         //process state
-        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), m_window.GetSurface());
+        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), m_window.GetWindow());
         
         
         m_timer.SyncGame(m_fps);  //ensures proper fps
@@ -88,7 +89,11 @@ void n8::Game::Start(){
  *  Stops the running game loop
  */
 void n8::Game::Stop(){
+    m_serviceManager->RemoveAllServices();
     
+    ServiceManager::Destroy();
+    
+    Log::Destroy();
 }
 
 /** Changes the frame per second value for the game loop
