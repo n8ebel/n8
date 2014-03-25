@@ -12,7 +12,7 @@
 #include <iostream>
 #include <map>
 
-#include "Enums.h"
+#include "../Core/Enums.h"
 #include "Observer.h"
 #include "Subject.h"
 

@@ -46,7 +46,7 @@ void TestState2::Render(SDL_Surface* screen){
     offset.x = 25;
     offset.y = 25;
 	
-    SDL_Surface* img = static_cast<n8::ResourceManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->LoadImage("/Users/lcballa44/Projects/n8/New/sayain2.png");
+    SDL_Surface* img = static_cast<n8::ResourceManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->LoadImage("/Users/lcballa44/Projects/n8/Game/gfx/sayain2.png");
     
     //Blit the surface
     SDL_BlitSurface( img, NULL, screen, &offset );

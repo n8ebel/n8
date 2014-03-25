@@ -14,7 +14,7 @@
 
 #include "Singleton.h"
 #include "Service.h"
-#include "../Tools/Enums.h"
+#include "../Core/Enums.h"
 
 namespace n8{
 

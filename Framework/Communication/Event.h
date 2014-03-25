@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "Enums.h"
+#include "../Core/Enums.h"
 
 namespace n8 {
     
