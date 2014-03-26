@@ -48,8 +48,8 @@ public:
     void SetFPS(unsigned);
     void DefineWindowSize(unsigned, unsigned);
     
-    void RegisterState(EState, State*);
-    void SetStartState(EState);
+    void RegisterState(EState::Values, State*);
+    void SetStartState(EState::Values);
 private:
     
     ServiceManager* m_serviceManager;

@@ -1,11 +1,34 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
-enum EColor{Red,Green,Blue};
-enum EService{Input,Resources,StateManager,Render,Audio,Logging,AI};
-enum EState{Test, Test2};
+namespace EColor {
+    enum Values{
+                Red,
+                Green,
+                Blue
+    };
+}
 
-namespace Events{
+namespace EService{
+    enum Values{
+                Input,
+                Resources,
+                StateManager,
+                Render,
+                Audio,
+                Logging,
+                AI
+    };
+}
+
+namespace EState {
+    enum Values{
+                Test,
+                Test2
+    };
+}
+
+namespace EEvents{
     enum Values{
                 Exit,
                 Test2

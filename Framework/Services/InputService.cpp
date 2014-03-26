@@ -38,7 +38,7 @@ void n8::InputService::HandleInput(){
     {
         if (m_event->type == SDL_QUIT)
 		{
-            Event event(Events::Values::Exit);
+            Event event(EEvents::Values::Exit);
             Notify(&event);
 		}
         
@@ -47,7 +47,7 @@ void n8::InputService::HandleInput(){
             m_keysHeld[m_event->key.keysym.sym] = true;
             if (m_event->key.keysym.sym == SDLK_SPACE) {
                 std::cout << "pressed space" << std::endl;
-                Event event(Events::Values::Test2);
+                Event event(EEvents::Values::Test2);
                 Notify(&event);
             }
 		}

@@ -18,7 +18,7 @@ public:
     static int m_nextId; /** < Static counter to get available id values for created entities **/
     
     ObjectFactory();
-    ~ObjectFactory();
+    virtual ~ObjectFactory() = 0;
     
     int GetNextId();
     

@@ -34,15 +34,19 @@ void n8::Game::Shutdown(){
 }
 
 void n8::Game::Init(){
-    SDL_Init( SDL_INIT_EVERYTHING );
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        // Unrecoverable error, exit here.
+        Log::Error(TAG, "SDL_Init failed: " + string(SDL_GetError()));
+    }
+    else{
+        Log::Info(TAG, "SDL Initializaed");
+    }
 }
 
 /** Setup
  *  Initializes default game systems and member variables
  */
 void n8::Game::Setup(){
-    //SDL_Init( SDL_INIT_EVERYTHING );
-    
     Log::Create();
     
     m_serviceManager = ServiceManager::GetInstance();
@@ -120,12 +124,12 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
     m_window.ResizeWindow(m_windowWidth,m_windowHeight);
 }
 
-void n8::Game::RegisterState(EState key, n8::State* newState){
+void n8::Game::RegisterState(EState::Values key, n8::State* newState){
     static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->RegisterState(key,newState);
     
 }
 
-void n8::Game::SetStartState(EState key){
+void n8::Game::SetStartState(EState::Values key){
     static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);
     
 }

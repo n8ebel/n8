@@ -109,7 +109,7 @@ SDL_Surface* n8::ResourceManagerService::LoadImage( string filename )
  *
  *  @param filepath the filepath for the configuration file containing all image filenames to load
  */
-void n8::ResourceManagerService::LoadImages(string filepath){
+void n8::ResourceManagerService::LoadImagesFromFile(string filepath){
     Log::Debug(TAG, "Loading Images");
     ifstream inFile;
     inFile.open(filepath.c_str());

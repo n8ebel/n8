@@ -25,7 +25,7 @@ namespace n8{
         ResourceManagerService(SDL_Surface* screen);
         ~ResourceManagerService();
         
-        void LoadImages(std::string filepath);
+        void LoadImagesFromFile(std::string filepath);
         SDL_Surface* LoadImage(std::string filename);
         
         void OnNotify(Event*);

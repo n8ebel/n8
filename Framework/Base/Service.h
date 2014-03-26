@@ -18,10 +18,10 @@
 
 namespace n8 {
 
-class Service : public Subject,public Observer{
+class Service : public Subject, public Observer{
 public:
-    Service();
-    virtual ~Service() = 0;
+    Service(){}
+    virtual ~Service() {};
         
     virtual void OnNotify(Event* event) = 0;
     
