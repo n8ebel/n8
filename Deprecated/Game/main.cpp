@@ -6,13 +6,18 @@
 //  Copyright (c) 2013 n8Tech. All rights reserved.
 //
 
+#include "Game.h"
+#include "TestState.h"
+#include "TestState2.h"
 
-#include "n8.h"
+//#include "n8.h"
 
+/*
 #include "GameState.h"
 #include "MenuState.h"
 
 #include "Values.h"
+ */
 
 #include <iostream>
 
@@ -21,7 +26,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
     //SDL_Init( SDL_INIT_EVERYTHING );
-    
+    /*
     Log::TurnOnDebuggingMessages();
     Log::TurnOnInfoMessages();
     Log::TurnOnErrorMessages();
@@ -45,10 +50,36 @@ int main(int argc, char* argv[]){
         n8::n8::Shutdown();
          
     }
+     
+     */
+    
+    
+    n8::Game game;
+    game.Setup();
+    
+    TestState testState;
+    game.RegisterState(EState::Test, &testState);
+    
+    TestState2 testState2;
+    game.RegisterState(EState::Test2, &testState2);
+    
+    game.SetStartState(EState::Test);
+    
+    game.Start();
+    
+    
+    
+    game.Shutdown();
+    game.Stop();
     
     
     
     
-    SDL_Quit();
+   
+    
+    
+    
+    
+    //SDL_Quit();
     return 0;
 }
