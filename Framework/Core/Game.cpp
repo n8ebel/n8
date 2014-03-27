@@ -43,11 +43,24 @@ void n8::Game::Init(){
     }
 }
 
+void n8::Game::InitializeDirectoryPath() {
+    char *base_path = SDL_GetBasePath();
+    if (base_path) {
+        m_directoryPath = SDL_strdup(base_path);
+        SDL_free(base_path);
+    } else {
+        m_directoryPath = SDL_strdup("./");
+    }
+}
+
 /** Setup
  *  Initializes default game systems and member variables
  */
 void n8::Game::Setup(){
     Log::Create();
+    InitializeDirectoryPath();
+    
+    ResourceManager tmp(m_window.GetSurface(),m_directoryPath);
     
     m_serviceManager = ServiceManager::GetInstance();
     

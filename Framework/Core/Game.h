@@ -25,6 +25,7 @@
 #include "InputService.h"
 #include "StateManagerService.h"
 #include "ResourceManagerService.h"
+#include "ResourceManager.h"
 #include "State.h"
 #include "Timer.h"
 #include "Window.h"
@@ -62,6 +63,10 @@ private:
     
     unsigned m_windowWidth;
     unsigned m_windowHeight;
+    
+    char* m_directoryPath;
+    
+    void InitializeDirectoryPath();
     
 };
 
