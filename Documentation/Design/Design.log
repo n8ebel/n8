@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 MAR 2014 09:20
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  26 MAR 2014 21:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -332,12 +332,12 @@ Here is how much of TeX's memory you used:
  6658 multiletter control sequences out of 15000+200000
  8808 words of font info for 31 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,6n,38p,983b,175s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,6n,38p,983b,180s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
 sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Design.pdf (7 pages, 64445 bytes).
+Output written on Design.pdf (7 pages, 65061 bytes).
 PDF statistics:
  44 PDF objects out of 1000 (max. 8388607)
  30 compressed objects within 1 object stream
