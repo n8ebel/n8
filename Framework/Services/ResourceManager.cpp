@@ -22,7 +22,6 @@ n8::ResourceManager::ResourceManager(SDL_Surface* screen, char* path) {
     m_texturesDirectoryPath = path + TEXTURES_DIRECTORY_SUFFIX;
     m_audioDirectoryPath = path + AUDIO_DIRECTORY_SUFFIX;
     
-    Log::Info(TAG, m_imagesDirectoryPath);
 }
 
 /** Destructor

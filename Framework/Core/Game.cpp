@@ -44,7 +44,8 @@ void n8::Game::Init(){
 }
 
 void n8::Game::InitializeDirectoryPath() {
-    char *base_path = SDL_GetBasePath();
+    char* base_path = SDL_GetBasePath();
+    
     if (base_path) {
         m_directoryPath = SDL_strdup(base_path);
         SDL_free(base_path);
@@ -56,7 +57,7 @@ void n8::Game::InitializeDirectoryPath() {
 /** Setup
  *  Initializes default game systems and member variables
  */
-void n8::Game::Setup(){
+void n8::Game::Setup(std::string configFilePath){
     Log::Create();
     InitializeDirectoryPath();
     

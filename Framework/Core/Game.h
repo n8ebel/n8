@@ -42,7 +42,7 @@ public:
     Game();
     ~Game();
     
-    void Setup();
+    void Setup(std::string);
     void Start();
     void Stop();
     
@@ -65,6 +65,7 @@ private:
     unsigned m_windowHeight;
     
     char* m_directoryPath;
+    char* m_directoryPathOffset;
     
     void InitializeDirectoryPath();
     
