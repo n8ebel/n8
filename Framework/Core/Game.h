@@ -19,6 +19,7 @@
 #include "SDL2_image/SDL_image.h"
 #include "SDL2_mixer/SDL_mixer.h"
 #include "SDL2_ttf/SDL_ttf.h"
+#include "tinyxml2.h"
 
 #include "ServiceManager.h"
 #include "Log.h"
@@ -30,6 +31,8 @@
 #include "Timer.h"
 #include "Window.h"
 
+
+
 namespace n8 {
     
 class Game{
@@ -39,7 +42,7 @@ public:
     static void Init();
     static void Shutdown();
     
-    Game();
+    Game(const char*);
     ~Game();
     
     void Setup(std::string);
@@ -64,9 +67,10 @@ private:
     unsigned m_windowWidth;
     unsigned m_windowHeight;
     
+    const char* m_configFilePath;
     char* m_directoryPath;
-    char* m_directoryPathOffset;
     
+    void ProcessConfigFile();
     void InitializeDirectoryPath();
     
 };

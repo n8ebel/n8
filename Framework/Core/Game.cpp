@@ -13,15 +13,54 @@
 #define TAG "Game"
 
 /** Default Constructor */
-n8::Game::Game(){
+n8::Game::Game(const char* configFile){
     Log::Info(TAG, "Constructor");
+    
+    m_serviceManager = NULL;
+    m_windowWidth = 1;
+    m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
     m_quit = false;
+    
+    m_configFilePath = configFile;
+    
+    InitializeDirectoryPath();
+    ProcessConfigFile();
 }
 
 /** Destructor */
 n8::Game::~Game(){
     
+}
+
+/** ProcessConfigFile
+ *  Reads and processes the configuration file
+ *  Needed information is saved to member variables so they can be used later
+ */
+ void n8::Game::ProcessConfigFile(){
+    tinyxml2::XMLDocument configFile;
+    configFile.LoadFile( m_configFilePath);
+     
+     /*
+      tinyxml2::XMLElement* configElement = doc.FirstChildElement( "Config" );
+      
+      tinyxml2::XMLElement* resourcesElement = configElement->FirstChildElement( "Resources" );
+      // Get Images
+      tinyxml2::XMLElement* imagesElement = resourcesElement->FirstChildElement("ImageResources");
+      const char* imagesPath = imagesElement->GetText();
+      printf( "Image Resources Path: %s\n", imagesPath );
+      
+      // Get Textures
+      tinyxml2::XMLElement* texturesElement = resourcesElement->FirstChildElement("TextureResources");
+      const char* texturesPath = texturesElement->GetText();
+      printf( "Textures Resources Path: %s\n", texturesPath );
+      
+      // Get Audio
+      tinyxml2::XMLElement* audioElement = resourcesElement->FirstChildElement("AudioResources");
+      const char* audioPath = audioElement->GetText();
+      printf( "Audio Resources Path: %s\n", audioPath );
+
+      */
 }
 
 /** Shutdown
