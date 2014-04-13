@@ -13,15 +13,17 @@
 
 #define TAG "ResourceManager"
 
-n8::ResourceManager::ResourceManager(SDL_Surface* screen, char* path) {
+n8::ResourceManager::ResourceManager(SDL_Surface* screen, std::string path) {
 	// TODO Auto-generated constructor stub
     
     m_screenSurface = screen;
     
+    m_resourcesListPath = path;
     m_imagesDirectoryPath = path +IMAGES_DIRECTORY_SUFFIX;
     m_texturesDirectoryPath = path + TEXTURES_DIRECTORY_SUFFIX;
     m_audioDirectoryPath = path + AUDIO_DIRECTORY_SUFFIX;
     
+    LoadResources();
 }
 
 /** Destructor
@@ -38,6 +40,41 @@ n8::ResourceManager::~ResourceManager() {
         ii->second = NULL;
         delete tmp;
     }
+}
+
+void n8::ResourceManager::LoadResources(){
+    
+    tinyxml2::XMLDocument resourcesListFile;
+    tinyxml2::XMLElement* root = NULL;
+    
+    resourcesListFile.LoadFile( m_resourcesListPath.c_str());
+    
+    root = resourcesListFile.FirstChildElement( RESOURCES_TAG.c_str() );
+    
+    if(root){
+        // Get Images
+        tinyxml2::XMLElement* imageElements = root->FirstChildElement( IMAGE_RESOURCES_TAG.c_str() );
+        
+        tinyxml2::XMLElement* imageElement = imageElements->FirstChildElement(IMAGE_TAG.c_str());
+        for( imageElement; imageElement; imageElement = imageElement->NextSiblingElement()){
+            std::string imagePath = imageElement->GetText();
+            Log::Debug( TAG,"Loading Image: " + imagePath );
+        }
+        
+        // Get Audio
+        tinyxml2::XMLElement* audioElements = root->FirstChildElement( AUDIO_RESOURCES_TAG.c_str() );
+        
+        tinyxml2::XMLElement* audioElement = audioElements->FirstChildElement(AUDIO_TAG.c_str());
+        for( audioElement; audioElement; audioElement = audioElement->NextSiblingElement()){
+            std::string audioPath = audioElement->GetText();
+            Log::Debug(TAG, "Loading Audio: " + audioPath );
+        }
+    }
+    else{
+        Log::Error(TAG, "Couldn't load root element of resources file list");
+    }
+    
+    
 }
 
 /**

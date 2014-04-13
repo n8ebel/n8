@@ -45,7 +45,7 @@ public:
     Game(const char*);
     ~Game();
     
-    void Setup(std::string);
+    void Setup();
     void Start();
     void Stop();
     
@@ -55,6 +55,7 @@ public:
     void RegisterState(EState::Values, State*);
     void SetStartState(EState::Values);
 private:
+    const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;
     
     ServiceManager* m_serviceManager;
     n8::Window m_window;
@@ -67,11 +68,14 @@ private:
     unsigned m_windowWidth;
     unsigned m_windowHeight;
     
-    const char* m_configFilePath;
-    char* m_directoryPath;
+    std::string m_configPath;
+    std::string m_directoryPath;
+    std::string m_resourcesListPath;
     
     void ProcessConfigFile();
+    
     void InitializeDirectoryPath();
+    void InitializeResourcesPath();
     
 };
 

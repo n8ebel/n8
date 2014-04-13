@@ -25,9 +25,10 @@ TestState2::~TestState2(){
 
 
 void TestState2::OnResume(){
-    
+    //Register input commands
 }
 void TestState2::OnPause(){
+    //Unregister input commands
     
 }
 

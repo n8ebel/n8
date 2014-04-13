@@ -15,6 +15,7 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2_image/SDL_image.h"
+#include "tinyxml2.h"
 
 #include "Service.h"
 #include "Event.h"
@@ -24,7 +25,7 @@ class Resource;
 namespace n8{
     class ResourceManager : public Service{
     public:
-        ResourceManager(SDL_Surface* screen, char* path);
+        ResourceManager(SDL_Surface* screen, std::string path);
         ~ResourceManager();
         
         Resource* GetResource(std::string);
@@ -35,11 +36,18 @@ namespace n8{
         void OnNotify(Event*);
         
     private:
+        const std::string RESOURCES_TAG = "Resources";
+        const std::string IMAGE_RESOURCES_TAG = "ImageResources";
+        const std::string AUDIO_RESOURCES_TAG = "AudioResources";
+        const std::string IMAGE_TAG = "Image";
+        const std::string AUDIO_TAG = "Audio";
+        
         const std::string RESOURCE_DIRECTORIES_PREFIX = "Resources";
         const std::string IMAGES_DIRECTORY_SUFFIX = "Images";
         const std::string TEXTURES_DIRECTORY_SUFFIX = "Textures";
         const std::string AUDIO_DIRECTORY_SUFFIX = "Audio";
         
+        std::string m_resourcesListPath;
         std::string m_imagesDirectoryPath;
         std::string m_texturesDirectoryPath;
         std::string m_audioDirectoryPath;

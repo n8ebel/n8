@@ -22,10 +22,11 @@ n8::Game::Game(const char* configFile){
     m_fps = DEFAULT_FPS;
     m_quit = false;
     
-    m_configFilePath = configFile;
+    m_configPath = configFile;
     
     InitializeDirectoryPath();
     ProcessConfigFile();
+    InitializeResourcesPath();
 }
 
 /** Destructor */
@@ -38,29 +39,7 @@ n8::Game::~Game(){
  *  Needed information is saved to member variables so they can be used later
  */
  void n8::Game::ProcessConfigFile(){
-    tinyxml2::XMLDocument configFile;
-    configFile.LoadFile( m_configFilePath);
      
-     /*
-      tinyxml2::XMLElement* configElement = doc.FirstChildElement( "Config" );
-      
-      tinyxml2::XMLElement* resourcesElement = configElement->FirstChildElement( "Resources" );
-      // Get Images
-      tinyxml2::XMLElement* imagesElement = resourcesElement->FirstChildElement("ImageResources");
-      const char* imagesPath = imagesElement->GetText();
-      printf( "Image Resources Path: %s\n", imagesPath );
-      
-      // Get Textures
-      tinyxml2::XMLElement* texturesElement = resourcesElement->FirstChildElement("TextureResources");
-      const char* texturesPath = texturesElement->GetText();
-      printf( "Textures Resources Path: %s\n", texturesPath );
-      
-      // Get Audio
-      tinyxml2::XMLElement* audioElement = resourcesElement->FirstChildElement("AudioResources");
-      const char* audioPath = audioElement->GetText();
-      printf( "Audio Resources Path: %s\n", audioPath );
-
-      */
 }
 
 /** Shutdown
@@ -93,14 +72,19 @@ void n8::Game::InitializeDirectoryPath() {
     }
 }
 
+void n8::Game::InitializeResourcesPath(){
+    m_resourcesListPath = m_directoryPath + RESOURCE_FILE_SUFFIX;
+    Log::Debug(TAG, "Resource list file path:" + m_resourcesListPath);
+}
+
 /** Setup
  *  Initializes default game systems and member variables
  */
-void n8::Game::Setup(std::string configFilePath){
+void n8::Game::Setup(){
     Log::Create();
     InitializeDirectoryPath();
     
-    ResourceManager tmp(m_window.GetSurface(),m_directoryPath);
+    ResourceManager tmp(m_window.GetSurface(), m_resourcesListPath.c_str());
     
     m_serviceManager = ServiceManager::GetInstance();
     
