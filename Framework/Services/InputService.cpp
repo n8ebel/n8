@@ -22,6 +22,11 @@
 n8::InputService::InputService(){
     Log::Info(TAG, "Constructor");
     m_event = new SDL_Event;
+    
+    for (int i = 0; i < 323; i++) {
+        m_registeredKeyDownCommands[i] = NULL;
+        m_registeredKeyUpCommands[i] = NULL;
+    }
 }
 
 /** Default destructor */
@@ -44,16 +49,26 @@ void n8::InputService::HandleInput(){
         
 		if (m_event->type == SDL_KEYDOWN)
 		{
+            
             m_keysHeld[m_event->key.keysym.sym] = true;
+            /*
             if (m_event->key.keysym.sym == SDLK_SPACE) {
                 std::cout << "pressed space" << std::endl;
                 Event event(EEvents::Values::Test2);
                 Notify(&event);
             }
+             */
+            if(m_registeredKeyDownCommands[m_event->key.keysym.sym] != NULL){
+                m_registeredKeyDownCommands[m_event->key.keysym.sym]->execute();
+            }
 		}
 		if (m_event->type == SDL_KEYUP)
 		{
 			m_keysHeld[m_event->key.keysym.sym] = false;
+            if (m_registeredKeyUpCommands[m_event->key.keysym.sym] != NULL) {
+                m_registeredKeyUpCommands[m_event->key.keysym.sym]->execute();
+            }
+            
 			
 		}
     }
@@ -86,6 +101,14 @@ bool n8::InputService::KeyIsUp(int key){
     
     return KeyIsUp(m_event, key);
     
+}
+
+void n8::InputService::RegisterKeyDownCommand(int key,Command* command){
+    m_registeredKeyDownCommands[key] = command;
+}
+
+void n8::InputService::RegisterKeyUpCommand(int key,Command* command){
+    m_registeredKeyUpCommands[key] = command;
 }
 
 /** Checks whether a key is pressed down

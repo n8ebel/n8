@@ -72,7 +72,7 @@ bool n8::StateManagerService::PushState(EState::Values identifier){
     if(ii != m_registeredStates.end()){
         
         m_stateStack.push_back(ii->second);
-        //m_stateStack.top()->OnResume();
+        m_stateStack[m_stateStack.size()-1]->OnResume();
         
         return true;
     }
@@ -161,8 +161,10 @@ void n8::StateManagerService::ProcessState(Uint32 time, SDL_Window* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){
+    cout << "ahhh" << endl;
     if(event->GetType() == EEvents::Values::Exit){
         m_stateStack.clear();
+        cout << "clearin" << endl;
     }
     else if(event->GetType() == EEvents::Values::Test2){
         m_stateStack.push_back(m_registeredStates[EState::Test2]);

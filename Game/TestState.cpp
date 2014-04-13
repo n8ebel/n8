@@ -14,9 +14,10 @@
 
 using namespace std;
 
-TestState::TestState() {
+TestState::TestState() : m_exitEvent(EEvents::Test2){
     //m_id = new ID(GAME_STATE);
-    
+    m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
+                                                    
     CreateSystems();
     CreateEntities();
 }
@@ -28,14 +29,20 @@ TestState::~TestState(){
 
 
 void TestState::OnResume(){
-    
+    m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PopStateCommand());
 }
+
 void TestState::OnPause(){
     
 }
 
 void TestState::Update(Uint32 currentTime){
-   
+    /*
+    cout << "updating" << endl;
+    if (m_inputService->KeyIsDown(SDLK_SPACE)) {
+        static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->Notify(&m_exitEvent);
+    }
+   */
 }
 void TestState::Render(SDL_Window* p_window){
    // assert(screen);
