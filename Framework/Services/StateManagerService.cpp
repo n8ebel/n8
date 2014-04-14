@@ -69,7 +69,13 @@ bool n8::StateManagerService::RegisterState(EState::Values identifier, State* st
 bool n8::StateManagerService::PushState(EState::Values identifier){
     map<EState::Values, State*>::iterator ii = m_registeredStates.find(identifier);
     
+    //if there is a matching state to push
     if(ii != m_registeredStates.end()){
+        
+        //if there is a current state pause it
+        if(m_stateStack.size() > 0){
+            m_stateStack[m_stateStack.size()-1]->OnPause();
+        }
         
         m_stateStack.push_back(ii->second);
         m_stateStack[m_stateStack.size()-1]->OnResume();
