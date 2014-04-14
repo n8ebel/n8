@@ -19,6 +19,7 @@
 #include "StateManagerService.h"
 #include "ServiceManager.h"
 #include "PopStateCommand.h"
+#include "PushStateCommand.h"
 
 class Entity;
 

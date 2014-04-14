@@ -38,6 +38,8 @@ public:
     void RegisterKeyUpCommand(int,Command*);
     void RegisterKeyDownCommand(int,Command*);
     
+    void UnregisterKeyCommands();
+    
     void OnNotify(Event* event);
 private:
     

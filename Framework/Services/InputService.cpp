@@ -111,6 +111,13 @@ void n8::InputService::RegisterKeyUpCommand(int key,Command* command){
     m_registeredKeyUpCommands[key] = command;
 }
 
+void n8::InputService::UnregisterKeyCommands(){
+    for (int i = 0; i < 323; i++) {
+        m_registeredKeyUpCommands[i] = NULL;
+        m_registeredKeyDownCommands[i] = NULL;
+    }
+}
+
 /** Checks whether a key is pressed down
  *  Called internally by KeyIsDown(int key).
  *
