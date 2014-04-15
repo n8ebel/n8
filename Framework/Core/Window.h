@@ -27,7 +27,7 @@ public:
     
     void SetTitle(char* caption);
     void ResizeWindow(int w, int h);
-    SDL_Surface* GetSurface();
+    SDL_Surface* GetSurface() const;
     SDL_Window* GetWindow();
     
 private:

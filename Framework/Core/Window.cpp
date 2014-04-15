@@ -68,10 +68,15 @@ void n8::Window::ResizeWindow(int w, int h){
 /**
  *  @return a pointer to the background surface
  */
-SDL_Surface* n8::Window::GetSurface(){
+SDL_Surface* n8::Window::GetSurface() const{
+    /*
     SDL_Surface* surface = SDL_GetWindowSurface(m_window);
     assert(surface);
     return surface;
+     */
+    
+    assert(m_window);
+    return SDL_GetWindowSurface(m_window);
 }
 
 SDL_Window* n8::Window::GetWindow(){

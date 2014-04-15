@@ -35,16 +35,16 @@ public:
      *
      *  @return The height of the SDL_Surface referenced by image_
      */
-	int get_height() { return m_image->h; }
+	int GetHeight() { return m_image->h; }
     
     /** Used to get the width of the sprite image
      *
      *  @return The width of the SDL_Surface referenced by image_
      */
-	int get_width() { return m_image->w; }
+	int GetWidth() { return m_image->w; }
 	
-	bool draw( int p_x, int p_y, SDL_Surface* p_destination );
-	bool draw( int p_x, int p_y, int p_x2, int p_y2, int p_width, int p_height, SDL_Surface* p_dest);
+	bool Draw( int p_x, int p_y, SDL_Surface* p_destination );
+	bool Draw( int p_x, int p_y, int p_x2, int p_y2, int p_width, int p_height, SDL_Surface* p_dest);
     
 private:
     

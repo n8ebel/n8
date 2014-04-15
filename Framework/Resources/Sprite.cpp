@@ -11,12 +11,13 @@
 #include "Sprite.h"
 #include <assert.h>
 
+namespace n8{
 
 /** Default Destructor <p>
  *  Frees the loaded SDL_Surface which is pointed to by image_
  */
-n8::Sprite::~Sprite() {
-	SDL_FreeSurface( m_image );
+Sprite::~Sprite() {
+    SDL_FreeSurface( m_image );
     
 }
 
@@ -26,7 +27,7 @@ n8::Sprite::~Sprite() {
  *  @param id The unique identifier for the sprite.
  *  @param img The SDL_Surface to store in the sprite object
  */
-n8::Sprite::Sprite(std::string p_id, SDL_Surface* p_img) : Resource(p_id){
+Sprite::Sprite(std::string p_id, SDL_Surface* p_img) : Resource(p_id){
     
     assert(p_img);
 	m_image = p_img;
@@ -39,7 +40,7 @@ n8::Sprite::Sprite(std::string p_id, SDL_Surface* p_img) : Resource(p_id){
  *  @param y The y location where the source SDL_Surface should be drawn
  *  @param destination The canvas SDL_Surface that images are drawn to
  */
-bool n8::Sprite::draw( int p_x, int p_y, SDL_Surface* p_destination )
+bool Sprite::Draw( int p_x, int p_y, SDL_Surface* p_destination )
 {
     assert(m_image);
     assert(p_destination);
@@ -61,7 +62,7 @@ bool n8::Sprite::draw( int p_x, int p_y, SDL_Surface* p_destination )
 	
 	return true;
 }
-namespace n8{
+
 /** Used to draw a section of the sprite image to the screen.  The size of the sub-image is given
  *	along with the coordinates in the source image to take the sub image from.  Specifying
  *  x2 = 0, y2=0, width = 50, height=50 would take the top left 50x50 portion of the source image.
@@ -74,7 +75,7 @@ namespace n8{
  *	@param height The height of the sub-image
  *  @param destination The canvas SDL_Surface that images are drawn to
  */
-bool Sprite::draw( int p_x, int p_y, int p_x2, int p_y2, int p_width, int p_height, SDL_Surface* p_destination){
+bool Sprite::Draw( int p_x, int p_y, int p_x2, int p_y2, int p_width, int p_height, SDL_Surface* p_destination){
 
     assert(m_image);
     assert(p_destination);
