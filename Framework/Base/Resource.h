@@ -12,17 +12,21 @@
 #include <string>
 
 
-namespace n8Tech {
+namespace n8 {
 
 
 class Resource{
 public:
     Resource(std::string p_id){m_id = p_id;}
-    virtual ~Resource() = 0;
+    virtual ~Resource(){};
     
+    /**
+     *  @return The string id of the resource
+     */
+    std::string GetId(){return m_id;}
     
 private:
-    std::string m_id;
+    std::string m_id; /** < The identifier of the resource > */
     
 };
 
