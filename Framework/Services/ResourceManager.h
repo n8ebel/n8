@@ -19,8 +19,9 @@
 
 #include "Service.h"
 #include "Event.h"
+#include "Resource.h"
 
-class Resource;
+//class Resource;
 
 namespace n8{
     class ResourceManager : public Service{
@@ -28,7 +29,7 @@ namespace n8{
         ResourceManager(SDL_Surface* screen, std::string path);
         ~ResourceManager();
         
-        Resource* GetResource(std::string);
+       // Resource* GetResource(std::string);
         
         void LoadImagesFromFile(std::string filepath);
         SDL_Surface* LoadImage(std::string filename);
@@ -52,7 +53,7 @@ namespace n8{
         std::string m_texturesDirectoryPath;
         std::string m_audioDirectoryPath;
         
-        std::map<std::string,Resource*> m_loadedResources;  /** < Stores all images loaded by the system  ***/
+        //std::map<std::string,Resource*> m_loadedResources;  /** < Stores all images loaded by the system  ***/
         SDL_Surface* m_screenSurface;
         
         void LoadResources();

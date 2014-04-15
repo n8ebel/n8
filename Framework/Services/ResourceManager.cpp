@@ -32,7 +32,7 @@ n8::ResourceManager::ResourceManager(SDL_Surface* screen, std::string path) {
 
 n8::ResourceManager::~ResourceManager() {
     Log::Info(TAG, "Destructor");
-    
+    /*
 	map<string, Resource*>::iterator ii;
     
     for (ii=m_loadedResources.begin(); ii != m_loadedResources.end(); ii++) {
@@ -40,6 +40,7 @@ n8::ResourceManager::~ResourceManager() {
         ii->second = NULL;
         delete tmp;
     }
+     */
 }
 
 void n8::ResourceManager::LoadResources(){
