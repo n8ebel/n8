@@ -11,24 +11,14 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "SDL2/SDL.h"
-#include "SDL2_image/SDL_image.h"
-
 #include <string>
 
 #include "Resource.h"
 
 namespace n8{
 
-    /** An object to hold an optimzed SDL_Surface image and provide access to it **/
-    class Sprite :public Resource{
-
-private:
-    
-	SDL_Surface* m_image;  /** < The image that can be drawn to a canvas  **/
-    
-    friend class RenderService;
-    
+/** An object to hold an optimzed SDL_Surface image and provide access to it **/
+class Sprite :public Resource{
 public:
 	~Sprite();
 	Sprite(std::string p_id, SDL_Surface* p_img);
@@ -55,6 +45,12 @@ public:
 	
 	bool draw( int p_x, int p_y, SDL_Surface* p_destination );
 	bool draw( int p_x, int p_y, int p_x2, int p_y2, int p_width, int p_height, SDL_Surface* p_dest);
+    
+private:
+    
+	SDL_Surface* m_image;  /** < The image that can be drawn to a canvas  **/
+    
+    friend class RenderService;
 };
 
 }
