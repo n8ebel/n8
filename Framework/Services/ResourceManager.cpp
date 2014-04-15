@@ -32,7 +32,7 @@ n8::ResourceManager::ResourceManager(SDL_Surface* screen, std::string path) {
 
 n8::ResourceManager::~ResourceManager() {
     Log::Info(TAG, "Destructor");
-    /*
+    
 	map<string, Resource*>::iterator ii;
     
     for (ii=m_loadedResources.begin(); ii != m_loadedResources.end(); ii++) {
@@ -40,7 +40,7 @@ n8::ResourceManager::~ResourceManager() {
         ii->second = NULL;
         delete tmp;
     }
-     */
+    
 }
 
 void n8::ResourceManager::LoadResources(){
@@ -60,6 +60,10 @@ void n8::ResourceManager::LoadResources(){
         for( imageElement; imageElement; imageElement = imageElement->NextSiblingElement()){
             std::string imagePath = imageElement->GetText();
             Log::Debug( TAG,"Loading Image: " + imagePath );
+            
+            /*
+             Load Sprite here:  LoadSprite(imagePath);
+             */
         }
         
         // Get Audio
@@ -69,6 +73,10 @@ void n8::ResourceManager::LoadResources(){
         for( audioElement; audioElement; audioElement = audioElement->NextSiblingElement()){
             std::string audioPath = audioElement->GetText();
             Log::Debug(TAG, "Loading Audio: " + audioPath );
+            
+            /*
+             Load Audio here:  LoadAudio(audioPath);
+             */
         }
     }
     else{
@@ -84,7 +92,7 @@ void n8::ResourceManager::LoadResources(){
  *  @param filename the filename of the image to load and optimize
  *  @return a pointer to the optimized copy of the image
  */
-SDL_Surface* n8::ResourceManager::LoadImage( string filename )
+SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
 {
     
     //The final optimized image
@@ -145,6 +153,27 @@ void n8::ResourceManager::LoadImagesFromFile(string filepath){
         Log::Error(TAG, "Failed to open input file");
     }
     */
+    
+}
+
+/**
+ *  Loads Sprite resources.  Currently not implemented.
+ */
+void n8::ResourceManager::LoadSprite(){
+    
+}
+
+/**
+ *  Loads Audio resources.  Currently not implemented.
+ */
+void n8::ResourceManager::LoadAudio(){
+    
+}
+
+/**
+ *  Loads font resources.  Currently not implemented.
+ */
+void n8::ResourceManager::LoadFont(){
     
 }
 
