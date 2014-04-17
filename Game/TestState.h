@@ -17,9 +17,12 @@
 #include "Event.h"
 #include "InputService.h"
 #include "StateManagerService.h"
+#include "ResourceManager.h"
 #include "ServiceManager.h"
 #include "PopStateCommand.h"
 #include "PushStateCommand.h"
+
+#include "Sprite.h"
 
 class Entity;
 

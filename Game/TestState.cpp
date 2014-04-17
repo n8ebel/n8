@@ -31,6 +31,8 @@ TestState::~TestState(){
 void TestState::OnResume(){
     m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PushStateCommand(EState::Test2));
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
+    
+    
 }
 
 void TestState::OnPause(){
@@ -52,7 +54,6 @@ void TestState::Render(SDL_Window* p_window){
     SDL_FillRect(SDL_GetWindowSurface(p_window), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window)->format, 200,0,0));
    
     
-    //SDL_Flip(screen);
     
     //Update the surface
     SDL_UpdateWindowSurface( p_window );

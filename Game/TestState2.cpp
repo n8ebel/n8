@@ -9,7 +9,6 @@
 #include "TestState2.h"
 
 #include "ServiceManager.h"
-#include "ResourceManagerService.h"
 
 TestState2::TestState2() {
     //m_id = new ID(GAME_STATE);
@@ -39,7 +38,7 @@ void TestState2::Render(SDL_Window* p_window){
     //assert(screen);
     
     SDL_FillRect(SDL_GetWindowSurface(p_window), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window)->format, 0,200,0));
-    
+    /*
     //Make a temporary rectangle to hold the offsets
     SDL_Rect offset;
     
@@ -51,7 +50,7 @@ void TestState2::Render(SDL_Window* p_window){
     
     //Blit the surface
     SDL_BlitSurface( img, NULL, SDL_GetWindowSurface(p_window), &offset );
-    
+    */
     
     
     //SDL_Flip(screen);

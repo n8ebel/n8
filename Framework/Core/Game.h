@@ -25,7 +25,7 @@
 #include "Log.h"
 #include "InputService.h"
 #include "StateManagerService.h"
-#include "ResourceManagerService.h"
+//#include "ResourceManager.h"
 #include "ResourceManager.h"
 #include "State.h"
 #include "Timer.h"

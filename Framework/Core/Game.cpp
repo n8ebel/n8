@@ -66,6 +66,7 @@ void n8::Game::InitializeDirectoryPath() {
     
     if (base_path) {
         m_directoryPath = SDL_strdup(base_path);
+        Log::Debug(TAG, "Project Directory: " + m_directoryPath);
         SDL_free(base_path);
     } else {
         m_directoryPath = SDL_strdup("./");
@@ -84,13 +85,14 @@ void n8::Game::Setup(){
     Log::Create();
     InitializeDirectoryPath();
     
-    ResourceManager tmp(m_window.GetSurface(), m_resourcesListPath.c_str());
+    ResourceManager* resourceManagerService = new ResourceManager(m_window.GetSurface(), m_resourcesListPath.c_str());
     
     m_serviceManager = ServiceManager::GetInstance();
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
-    ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
+   // ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
+    
     
     inputService->AddObserver(stateManagerService);
     

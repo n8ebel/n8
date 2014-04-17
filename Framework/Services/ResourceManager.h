@@ -20,6 +20,7 @@
 #include "Service.h"
 #include "Event.h"
 #include "Resource.h"
+#include "Sprite.h"
 
 //class Resource;
 
@@ -59,7 +60,7 @@ namespace n8{
         SDL_Surface* LoadOptimizedImage(std::string filename);
         
         void LoadResources();
-        void LoadSprite();
+        void LoadSprite(std::string);
         void LoadTexture();
         void LoadAudio();
         void LoadFont();

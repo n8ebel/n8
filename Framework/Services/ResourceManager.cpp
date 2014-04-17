@@ -61,9 +61,9 @@ void n8::ResourceManager::LoadResources(){
             std::string imagePath = imageElement->GetText();
             Log::Debug( TAG,"Loading Image: " + imagePath );
             
-            /*
-             Load Sprite here:  LoadSprite(imagePath);
-             */
+            
+             LoadSprite(imagePath);
+             
         }
         
         // Get Audio
@@ -99,15 +99,15 @@ SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
 	SDL_Surface* optimizedSurface = NULL;
     
 	//Load image at specified path
-	SDL_Surface* loadedSurface = SDL_LoadBMP( filename.c_str() );
+	SDL_Surface* loadedSurface = IMG_Load( filename.c_str() );
 	if( loadedSurface == NULL )
 	{
-        std::string msg = "SDL_LoadBMP failed." + filename;
+        std::string msg = "IMG_Load failed." + filename;
 		Log::Error(TAG, msg);
 	}
     else
 	{
-        Log::Debug(TAG, "  Successfully loaded optimized bmp");
+        Log::Debug(TAG, "  Successfully loaded optimized image");
 		
         //Convert surface to screen format
 		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_screenSurface->format, NULL );
@@ -159,7 +159,18 @@ void n8::ResourceManager::LoadImagesFromFile(string filepath){
 /**
  *  Loads Sprite resources.  Currently not implemented.
  */
-void n8::ResourceManager::LoadSprite(){
+void n8::ResourceManager::LoadSprite(std::string p_filename){
+    SDL_Surface* spriteImage = LoadOptimizedImage(p_filename);
+    
+    if(spriteImage != NULL){
+        m_loadedResources[p_filename] = new Sprite(p_filename, spriteImage);
+    }
+}
+
+/** 
+ *  Loads Texture resources.  Currently not implemented
+ */
+void n8::ResourceManager::LoadTexture(){
     
 }
 
@@ -177,6 +188,11 @@ void n8::ResourceManager::LoadFont(){
     
 }
 
+n8::Resource* n8::ResourceManager::GetResource(std::string p_resourceID){
+    return m_loadedResources[p_resourceID];
+}
+
 void n8::ResourceManager::OnNotify(n8::Event* event){
     
 }
+
