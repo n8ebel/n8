@@ -16,6 +16,7 @@
 n8::ResourceManager::ResourceManager(SDL_Surface* screen, std::string path) {
 	// TODO Auto-generated constructor stub
     
+    
     m_screenSurface = screen;
     
     m_resourcesListPath = path;
@@ -72,11 +73,11 @@ void n8::ResourceManager::LoadResources(){
         tinyxml2::XMLElement* audioElement = audioElements->FirstChildElement(AUDIO_TAG.c_str());
         for( audioElement; audioElement; audioElement = audioElement->NextSiblingElement()){
             std::string audioPath = audioElement->GetText();
-            Log::Debug(TAG, "Loading Audio: " + audioPath );
+            Log::Debug(TAG, "Loading SoundEffect: " + audioPath );
             
-            /*
-             Load Audio here:  LoadAudio(audioPath);
-             */
+            
+            LoadSoundEffect(audioPath);
+            
         }
     }
     else{
@@ -102,19 +103,20 @@ SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
 	SDL_Surface* loadedSurface = IMG_Load( filename.c_str() );
 	if( loadedSurface == NULL )
 	{
-        std::string msg = "IMG_Load failed." + filename;
+        std::string msg = "  IMG_Load failed." + filename;
 		Log::Error(TAG, msg);
 	}
     else
 	{
-        Log::Debug(TAG, "  Successfully loaded optimized image");
-		
         //Convert surface to screen format
 		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_screenSurface->format, NULL );
 		if( optimizedSurface == NULL )
 		{
-			Log::Error(TAG, "Failed to load optimized version of: " + filename);
+			Log::Error(TAG, "  Failed to load optimized version of: " + filename);
 		}
+        else{
+            Log::Debug(TAG, "  Successfully loaded optimized image");
+        }
         
 		//Get rid of old loaded surface
 		SDL_FreeSurface( loadedSurface );
@@ -177,8 +179,18 @@ void n8::ResourceManager::LoadTexture(){
 /**
  *  Loads Audio resources.  Currently not implemented.
  */
-void n8::ResourceManager::LoadAudio(){
+void n8::ResourceManager::LoadSoundEffect(std::string p_filename){
+    Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
     
+    if(soundEffect != NULL){
+        m_loadedResources[p_filename] = new SoundEffect(p_filename, soundEffect);
+        Log::Debug(TAG, "  Successfully loaded sound effect");
+    }
+    else{
+        Log::Error(TAG, "  Failed to load sound effect");
+    }
+    
+    Mix_PlayChannel( -1, soundEffect, 0 );
 }
 
 /**

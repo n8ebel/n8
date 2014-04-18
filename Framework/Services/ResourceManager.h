@@ -15,12 +15,14 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2_image/SDL_image.h"
+#include "SDL2_mixer/SDL_mixer.h"
 #include "tinyxml2.h"
 
 #include "Service.h"
 #include "Event.h"
 #include "Resource.h"
 #include "Sprite.h"
+#include "SoundEffect.h"
 
 //class Resource;
 
@@ -39,14 +41,14 @@ namespace n8{
     private:
         const std::string RESOURCES_TAG = "Resources";
         const std::string IMAGE_RESOURCES_TAG = "ImageResources";
-        const std::string AUDIO_RESOURCES_TAG = "AudioResources";
+        const std::string AUDIO_RESOURCES_TAG = "SoundEffectResources";
         const std::string IMAGE_TAG = "Image";
-        const std::string AUDIO_TAG = "Audio";
+        const std::string AUDIO_TAG = "SoundEffect";
         
         const std::string RESOURCE_DIRECTORIES_PREFIX = "Resources";
         const std::string IMAGES_DIRECTORY_SUFFIX = "Images";
         const std::string TEXTURES_DIRECTORY_SUFFIX = "Textures";
-        const std::string AUDIO_DIRECTORY_SUFFIX = "Audio";
+        const std::string AUDIO_DIRECTORY_SUFFIX = "SoundEffect";
         
         std::string m_resourcesListPath;
         std::string m_imagesDirectoryPath;
@@ -62,7 +64,7 @@ namespace n8{
         void LoadResources();
         void LoadSprite(std::string);
         void LoadTexture();
-        void LoadAudio();
+        void LoadSoundEffect(std::string);
         void LoadFont();
     };
 }

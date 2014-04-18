@@ -58,6 +58,28 @@ void n8::Game::Init(){
     }
     else{
         Log::Info(TAG, "SDL Initializaed");
+        
+        //Initialize PNG loading
+        int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+        if( !( IMG_Init( imgFlags ) & imgFlags ) )
+        {
+            std::string msg( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+            Log::Error(TAG, msg);
+        }
+        else{
+            Log::Info(TAG, "SDL_Image Initialized");
+        }
+        
+        //Initialize SDL_mixer
+        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            std::string msg("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+            Log::Error(TAG, msg);
+            
+        }
+        else{
+            Log::Info(TAG, "SDL_Mixer Initialized");
+        }
     }
 }
 
@@ -83,7 +105,6 @@ void n8::Game::InitializeResourcesPath(){
  */
 void n8::Game::Setup(){
     Log::Create();
-    InitializeDirectoryPath();
     
     ResourceManager* resourceManagerService = new ResourceManager(m_window.GetSurface(), m_resourcesListPath.c_str());
     
