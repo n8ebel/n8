@@ -47,7 +47,9 @@ n8::Game::~Game(){
  */
 void n8::Game::Shutdown(){
     
-    
+    Mix_Quit();
+    IMG_Quit();
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -79,6 +81,16 @@ void n8::Game::Init(){
         }
         else{
             Log::Info(TAG, "SDL_Mixer Initialized");
+        }
+        
+        //Initialize SDL_ttf
+        if( TTF_Init() == -1 )
+        {
+            std::string msg( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+            Log::Error(TAG, msg);
+        }
+        else{
+            Log::Info(TAG, "SDL_ttf Initialized");
         }
     }
 }

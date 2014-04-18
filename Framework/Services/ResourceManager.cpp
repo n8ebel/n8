@@ -51,6 +51,7 @@ void n8::ResourceManager::LoadResources(){
     
     tinyxml2::XMLDocument resourcesListFile;
     tinyxml2::XMLElement* root = NULL;
+    tinyxml2::XMLElement* idElement = NULL;
     
     resourcesListFile.LoadFile( m_resourcesListPath.c_str());
     
@@ -62,12 +63,13 @@ void n8::ResourceManager::LoadResources(){
         
         tinyxml2::XMLElement* imageElement = imageElements->FirstChildElement(IMAGE_TAG.c_str());
         for( imageElement; imageElement; imageElement = imageElement->NextSiblingElement()){
+            
+            idElement = imageElement->FirstChildElement(ID_TAG.c_str());
             std::string imagePath = imageElement->GetText();
-            Log::Debug( TAG,"Loading Image: " + imagePath );
+            std::string imageID = idElement->GetText();
             
-            
-             LoadSprite(imagePath);
-             
+            Log::Debug( TAG,"Loading Image: " + imagePath + " with ID: " + imageID );
+            LoadSprite(imagePath,imageID);
         }
         
         // Get SoundEffects
@@ -75,11 +77,13 @@ void n8::ResourceManager::LoadResources(){
         
         tinyxml2::XMLElement* soundEffectElement = soundEffectElements->FirstChildElement(SOUND_EFFECT_TAG.c_str());
         for( soundEffectElement; soundEffectElement; soundEffectElement = soundEffectElement->NextSiblingElement()){
+            
+            idElement = soundEffectElement->FirstChildElement(ID_TAG.c_str());
             std::string soundEffectPath = soundEffectElement->GetText();
-            Log::Debug(TAG, "Loading SoundEffect: " + soundEffectPath );
+            std::string effectID = idElement->GetText();
             
-            
-            LoadSoundEffect(soundEffectPath);
+            Log::Debug(TAG, "Loading SoundEffect: " + soundEffectPath +" with ID: " + effectID );
+            LoadSoundEffect(soundEffectPath,effectID);
         }
         
         // Get Music
@@ -87,11 +91,39 @@ void n8::ResourceManager::LoadResources(){
         
         tinyxml2::XMLElement* musicElement = musicElements->FirstChildElement(MUSIC_TAG.c_str());
         for( musicElement; musicElement; musicElement = musicElement->NextSiblingElement()){
+            
+            idElement = musicElement->FirstChildElement(ID_TAG.c_str());
             std::string musicPath = musicElement->GetText();
-            Log::Debug(TAG, "Loading Music: " + musicPath );
+            std::string musicID = idElement->GetText();
+            
+            Log::Debug(TAG, "Loading Music: " + musicPath + " with ID: " + musicID );
+            LoadMusic(musicPath,musicID);
+        }
+        
+        // Get Font
+        tinyxml2::XMLElement* fontElements = root->FirstChildElement( FONT_RESOURCES_TAG.c_str() );
+        
+        tinyxml2::XMLElement* fontElement = fontElements->FirstChildElement(FONT_TAG.c_str());
+        for( fontElement; fontElement; fontElement = fontElement->NextSiblingElement()){
+            
+            tinyxml2::XMLElement* sizeElement = fontElement->FirstChildElement(SIZE_TAG.c_str());
+            idElement = fontElement->FirstChildElement(ID_TAG.c_str());
+            
+            std::string fontPath = fontElement->GetText();
+            int fontSize = atoi( sizeElement->GetText() );
+            std::string fontID = idElement->GetText();
+            
+            std::stringstream ss;//create a stringstream
+            ss << ("Loading Font: " + fontPath + "with Size: ");
+            ss << fontSize;
+            ss << (" with ID: " + fontID);
+            
+            std::string msg = ss.str();
+            
+            Log::Debug(TAG, msg);
             
             
-            LoadMusic(musicPath);
+            LoadFont(fontPath, fontID, fontSize);
         }
     }
     else{
@@ -175,18 +207,22 @@ void n8::ResourceManager::LoadImagesFromFile(string filepath){
 /**
  *  Loads Sprite resources.  Currently not implemented.
  */
-void n8::ResourceManager::LoadSprite(std::string p_filename){
+void n8::ResourceManager::LoadSprite(std::string p_filename, std::string p_id){
     SDL_Surface* spriteImage = LoadOptimizedImage(p_filename);
     
     if(spriteImage != NULL){
-        m_loadedResources[p_filename] = new Sprite(p_filename, spriteImage);
+        m_loadedResources[p_id] = new Sprite(p_filename, spriteImage);
+        Log::Debug(TAG, "  Successfully loaded sprite: " + p_filename);
+    }
+    else{
+        Log::Error(TAG, "  Failed to load sprite: " + p_filename);
     }
 }
 
 /** 
  *  Loads Texture resources.  Currently not implemented
  */
-void n8::ResourceManager::LoadTexture(){
+void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     
 }
 
@@ -194,15 +230,15 @@ void n8::ResourceManager::LoadTexture(){
  *  
  *  @param p_filename Name of the resource file to load into a Music object
  */
-void n8::ResourceManager::LoadMusic(std::string p_filename){
+void n8::ResourceManager::LoadMusic(std::string p_filename, std::string p_id){
     Mix_Music* music = Mix_LoadMUS(p_filename.c_str());
     
     if(music != NULL){
-        m_loadedResources[p_filename] = new Music(p_filename, music);
-        Log::Debug(TAG, "  Successfully loaded music");
+        m_loadedResources[p_id] = new Music(p_filename, music);
+        Log::Debug(TAG, "  Successfully loaded music: " + p_filename);
     }
     else{
-        Log::Error(TAG, "  Failed to load music");
+        Log::Error(TAG, "  Failed to load music: " + p_filename);
     }
 }
 
@@ -210,23 +246,32 @@ void n8::ResourceManager::LoadMusic(std::string p_filename){
  *
  *  @param p_filename Name of the resource file to load into a SoundEffect object
  */
-void n8::ResourceManager::LoadSoundEffect(std::string p_filename){
+void n8::ResourceManager::LoadSoundEffect(std::string p_filename, std::string p_id){
     Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
     
     if(soundEffect != NULL){
-        m_loadedResources[p_filename] = new SoundEffect(p_filename, soundEffect);
-        Log::Debug(TAG, "  Successfully loaded sound effect");
+        m_loadedResources[p_id] = new SoundEffect(p_filename, soundEffect);
+        Log::Debug(TAG, "  Successfully loaded sound effect: " + p_filename);
     }
     else{
-        Log::Error(TAG, "  Failed to load sound effect");
+        Log::Error(TAG, "  Failed to load sound effect: " + p_filename);
     }
 }
 
 /**
  *  Loads font resources.  Currently not implemented.
  */
-void n8::ResourceManager::LoadFont(){
+void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int p_size){
+    TTF_Font* font = TTF_OpenFont( p_filename.c_str(), p_size );
     
+    if(font != NULL){
+        m_loadedResources[p_id] = new Font(p_filename, font);
+        Log::Debug(TAG, "  Successfully loaded font: " + p_filename);
+    }
+    else{
+        
+        Log::Error(TAG, "  Failed to load font: " + p_filename + "  " + TTF_GetError());
+    }
 }
 
 n8::Resource* n8::ResourceManager::GetResource(std::string p_resourceID){
