@@ -1,0 +1,111 @@
+\hypertarget{classn8_1_1_resource_manager_service}{\section{n8\-:\-:Resource\-Manager\-Service Class Reference}
+\label{classn8_1_1_resource_manager_service}\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}}
+}
+
+
+{\ttfamily \#include $<$Resource\-Manager\-Service.\-h$>$}
+
+Inheritance diagram for n8\-:\-:Resource\-Manager\-Service\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classn8_1_1_resource_manager_service}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classn8_1_1_resource_manager_service_a96e9074b770e268e038daf0d2afb20dc}{Resource\-Manager\-Service} (S\-D\-L\-\_\-\-Surface $\ast$screen)
+\item 
+\hyperlink{classn8_1_1_resource_manager_service_ac9aea35cebd03445c5bd0bc07e45289c}{$\sim$\-Resource\-Manager\-Service} ()
+\item 
+void \hyperlink{classn8_1_1_resource_manager_service_ad104d496f6e1dc61ed12895ed9989fe5}{Load\-Images\-From\-File} (std\-::string filepath)
+\item 
+S\-D\-L\-\_\-\-Surface $\ast$ \hyperlink{classn8_1_1_resource_manager_service_afb39562b3a9448d73eaf5e3041e52011}{Load\-Image} (std\-::string filename)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_service_a0c5bb1ec14fea9971e8fec2efe8d56cd}{On\-Notify} (\hyperlink{classn8_1_1_event}{Event} $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::map$<$ std\-::string, \\*
+S\-D\-L\-\_\-\-Surface $\ast$ $>$ \hyperlink{classn8_1_1_resource_manager_service_af203735b1015f5cf94024e8857c8c17d}{m\-\_\-loaded\-Sprites}
+\item 
+S\-D\-L\-\_\-\-Surface $\ast$ \hyperlink{classn8_1_1_resource_manager_service_a430459934276e8fd19f5501c04569ab5}{m\-\_\-screen\-Surface}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classn8_1_1_resource_manager_service_a96e9074b770e268e038daf0d2afb20dc}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!Resource\-Manager\-Service@{Resource\-Manager\-Service}}
+\index{Resource\-Manager\-Service@{Resource\-Manager\-Service}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{Resource\-Manager\-Service}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Resource\-Manager\-Service\-::\-Resource\-Manager\-Service (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{screen}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_service_a96e9074b770e268e038daf0d2afb20dc}
+\hypertarget{classn8_1_1_resource_manager_service_ac9aea35cebd03445c5bd0bc07e45289c}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!$\sim$\-Resource\-Manager\-Service@{$\sim$\-Resource\-Manager\-Service}}
+\index{$\sim$\-Resource\-Manager\-Service@{$\sim$\-Resource\-Manager\-Service}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{$\sim$\-Resource\-Manager\-Service}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Resource\-Manager\-Service\-::$\sim$\-Resource\-Manager\-Service (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_service_ac9aea35cebd03445c5bd0bc07e45289c}
+Destructor Deletes all loaded resources 
+
+\subsection{Member Function Documentation}
+\hypertarget{classn8_1_1_resource_manager_service_afb39562b3a9448d73eaf5e3041e52011}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!Load\-Image@{Load\-Image}}
+\index{Load\-Image@{Load\-Image}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{Load\-Image}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Surface $\ast$ n8\-::\-Resource\-Manager\-Service\-::\-Load\-Image (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{filename}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_service_afb39562b3a9448d73eaf5e3041e52011}
+Loads an image from a specified filepath, then creates an optimzed copy of the image
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & the filename of the image to load and optimize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the optimized copy of the image 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_resource_manager_service_ad104d496f6e1dc61ed12895ed9989fe5}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!Load\-Images\-From\-File@{Load\-Images\-From\-File}}
+\index{Load\-Images\-From\-File@{Load\-Images\-From\-File}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{Load\-Images\-From\-File}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-Service\-::\-Load\-Images\-From\-File (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{filepath}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_service_ad104d496f6e1dc61ed12895ed9989fe5}
+Parses an input file containing image filepaths, loads those images, and stores them in a map
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & the filepath for the configuration file containing all image filenames to load \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_resource_manager_service_a0c5bb1ec14fea9971e8fec2efe8d56cd}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!On\-Notify@{On\-Notify}}
+\index{On\-Notify@{On\-Notify}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{On\-Notify}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-Service\-::\-On\-Notify (
+\begin{DoxyParamCaption}
+\item[{{\bf n8\-::\-Event} $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classn8_1_1_resource_manager_service_a0c5bb1ec14fea9971e8fec2efe8d56cd}
+
+
+Implements \hyperlink{classn8_1_1_service_a756a170eba7e5c34a1c12008e22d3ca7}{n8\-::\-Service}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classn8_1_1_resource_manager_service_af203735b1015f5cf94024e8857c8c17d}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!m\-\_\-loaded\-Sprites@{m\-\_\-loaded\-Sprites}}
+\index{m\-\_\-loaded\-Sprites@{m\-\_\-loaded\-Sprites}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{m\-\_\-loaded\-Sprites}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string,S\-D\-L\-\_\-\-Surface$\ast$$>$ n8\-::\-Resource\-Manager\-Service\-::m\-\_\-loaded\-Sprites\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_service_af203735b1015f5cf94024e8857c8c17d}
+\hypertarget{classn8_1_1_resource_manager_service_a430459934276e8fd19f5501c04569ab5}{\index{n8\-::\-Resource\-Manager\-Service@{n8\-::\-Resource\-Manager\-Service}!m\-\_\-screen\-Surface@{m\-\_\-screen\-Surface}}
+\index{m\-\_\-screen\-Surface@{m\-\_\-screen\-Surface}!n8::ResourceManagerService@{n8\-::\-Resource\-Manager\-Service}}
+\subsubsection[{m\-\_\-screen\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Surface$\ast$ n8\-::\-Resource\-Manager\-Service\-::m\-\_\-screen\-Surface\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_service_a430459934276e8fd19f5501c04569ab5}
+$<$ Stores all images loaded by the system 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Services/\hyperlink{_resource_manager_service_8h}{Resource\-Manager\-Service.\-h}\item 
+Services/\hyperlink{_resource_manager_service_8cpp}{Resource\-Manager\-Service.\-cpp}\end{DoxyCompactItemize}

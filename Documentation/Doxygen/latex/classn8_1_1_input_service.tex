@@ -1,0 +1,220 @@
+\hypertarget{classn8_1_1_input_service}{\section{n8\-:\-:Input\-Service Class Reference}
+\label{classn8_1_1_input_service}\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}}
+}
+
+
+{\ttfamily \#include $<$Input\-Service.\-h$>$}
+
+Inheritance diagram for n8\-:\-:Input\-Service\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classn8_1_1_input_service}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classn8_1_1_input_service_a5f141dc8a07dde9ea917fd9c0ae48631}{Input\-Service} ()
+\item 
+\hyperlink{classn8_1_1_input_service_a11df32939e83610aec40636e4da4fe0c}{$\sim$\-Input\-Service} ()
+\item 
+void \hyperlink{classn8_1_1_input_service_ab8a0f93cf27cd8255bbb81993c5b3add}{Handle\-Input} ()
+\item 
+bool \hyperlink{classn8_1_1_input_service_a7c44294b125316e30398cdae2fb8bbb3}{Handle\-Event} ()
+\item 
+bool \hyperlink{classn8_1_1_input_service_a3b542975c80b74fc1088086645cf5415}{Key\-Is\-Down} (int key)
+\item 
+bool \hyperlink{classn8_1_1_input_service_a3ce5da16a67e2595a91167b533b7e074}{Key\-Is\-Up} (int key)
+\item 
+void \hyperlink{classn8_1_1_input_service_a8a5cc25bb823653ce6d4abb55a289cd3}{Register\-Key\-Up\-Command} (int, \hyperlink{classn8_1_1_command}{Command} $\ast$)
+\item 
+void \hyperlink{classn8_1_1_input_service_a1b0a32e9ed8f21c3138d69d07a9cf90c}{Register\-Key\-Down\-Command} (int, \hyperlink{classn8_1_1_command}{Command} $\ast$)
+\item 
+void \hyperlink{classn8_1_1_input_service_ab4a13fe0d3e6d6ed6642e7c9df77e884}{Unregister\-Key\-Commands} ()
+\item 
+void \hyperlink{classn8_1_1_input_service_aa52767bfd35d3785ea236c8175598212}{On\-Notify} (\hyperlink{classn8_1_1_event}{Event} $\ast$event)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classn8_1_1_input_service_a3f04f6225455752a020818c9267442cc}{Key\-Is\-Down} (S\-D\-L\-\_\-\-Event $\ast$event, int key)
+\item 
+bool \hyperlink{classn8_1_1_input_service_a8f872d72b45d21e42cd6e7ef1b7c202a}{Key\-Is\-Up} (S\-D\-L\-\_\-\-Event $\ast$event, int key)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+S\-D\-L\-\_\-\-Event $\ast$ \hyperlink{classn8_1_1_input_service_a9eab1e8bff2306d4e581175d0d683184}{m\-\_\-event}
+\item 
+bool \hyperlink{classn8_1_1_input_service_ac35485b7fde20abe519f9deebc813eb2}{m\-\_\-keys\-Held} \mbox{[}323\mbox{]}
+\item 
+\hyperlink{classn8_1_1_command}{Command} $\ast$ \hyperlink{classn8_1_1_input_service_a7ac30fbb458b6b41138a1a9ae76e3497}{m\-\_\-registered\-Key\-Down\-Commands} \mbox{[}323\mbox{]}
+\item 
+\hyperlink{classn8_1_1_command}{Command} $\ast$ \hyperlink{classn8_1_1_input_service_a3f222cabde1339a524d0a9ca70bc1d3f}{m\-\_\-registered\-Key\-Up\-Commands} \mbox{[}323\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classn8_1_1_input_service_a5f141dc8a07dde9ea917fd9c0ae48631}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Input\-Service@{Input\-Service}}
+\index{Input\-Service@{Input\-Service}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Input\-Service}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Input\-Service\-::\-Input\-Service (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a5f141dc8a07dde9ea917fd9c0ae48631}
+Default constructor Initializes event\-\_\- \hypertarget{classn8_1_1_input_service_a11df32939e83610aec40636e4da4fe0c}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!$\sim$\-Input\-Service@{$\sim$\-Input\-Service}}
+\index{$\sim$\-Input\-Service@{$\sim$\-Input\-Service}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{$\sim$\-Input\-Service}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Input\-Service\-::$\sim$\-Input\-Service (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a11df32939e83610aec40636e4da4fe0c}
+Default destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classn8_1_1_input_service_a7c44294b125316e30398cdae2fb8bbb3}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Handle\-Event@{Handle\-Event}}
+\index{Handle\-Event@{Handle\-Event}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Handle\-Event}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Input\-Service\-::\-Handle\-Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a7c44294b125316e30398cdae2fb8bbb3}
+\begin{DoxyReturn}{Returns}
+True if there is an event in the queue 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_input_service_ab8a0f93cf27cd8255bbb81993c5b3add}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Handle\-Input@{Handle\-Input}}
+\index{Handle\-Input@{Handle\-Input}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Handle\-Input}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Input\-Service\-::\-Handle\-Input (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_ab8a0f93cf27cd8255bbb81993c5b3add}
+Takes a polled event and tracks which events have occured so they can be responded to by a game state \hypertarget{classn8_1_1_input_service_a3b542975c80b74fc1088086645cf5415}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Key\-Is\-Down@{Key\-Is\-Down}}
+\index{Key\-Is\-Down@{Key\-Is\-Down}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Key\-Is\-Down}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Input\-Service\-::\-Key\-Is\-Down (
+\begin{DoxyParamCaption}
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a3b542975c80b74fc1088086645cf5415}
+Checks whether a key is pressed down Called by the user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key that is being checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key was pressed down, False otherwise 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_input_service_a3f04f6225455752a020818c9267442cc}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Key\-Is\-Down@{Key\-Is\-Down}}
+\index{Key\-Is\-Down@{Key\-Is\-Down}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Key\-Is\-Down}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Input\-Service\-::\-Key\-Is\-Down (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-Event $\ast$}]{event, }
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_input_service_a3f04f6225455752a020818c9267442cc}
+Checks whether a key is pressed down Called internally by \hyperlink{classn8_1_1_input_service_a3b542975c80b74fc1088086645cf5415}{Key\-Is\-Down(int key)}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The event object storing event information \\
+\hline
+{\em key} & The key that is being checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the specified key was pressed down, False otherwise 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_input_service_a3ce5da16a67e2595a91167b533b7e074}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Key\-Is\-Up@{Key\-Is\-Up}}
+\index{Key\-Is\-Up@{Key\-Is\-Up}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Key\-Is\-Up}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Input\-Service\-::\-Key\-Is\-Up (
+\begin{DoxyParamCaption}
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a3ce5da16a67e2595a91167b533b7e074}
+Checks whether a key is up Called by the user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key that is being checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key is up, False otherwise 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_input_service_a8f872d72b45d21e42cd6e7ef1b7c202a}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Key\-Is\-Up@{Key\-Is\-Up}}
+\index{Key\-Is\-Up@{Key\-Is\-Up}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Key\-Is\-Up}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Input\-Service\-::\-Key\-Is\-Up (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-Event $\ast$}]{event, }
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_input_service_a8f872d72b45d21e42cd6e7ef1b7c202a}
+Checks whether a key is up Called internally by \hyperlink{classn8_1_1_input_service_a3ce5da16a67e2595a91167b533b7e074}{Key\-Is\-Up(int key)}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The event object storing event information \\
+\hline
+{\em key} & The key that is being checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the specified key is up, False otherwise 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_input_service_aa52767bfd35d3785ea236c8175598212}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!On\-Notify@{On\-Notify}}
+\index{On\-Notify@{On\-Notify}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{On\-Notify}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Input\-Service\-::\-On\-Notify (
+\begin{DoxyParamCaption}
+\item[{{\bf Event} $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classn8_1_1_input_service_aa52767bfd35d3785ea236c8175598212}
+
+
+Implements \hyperlink{classn8_1_1_service_a756a170eba7e5c34a1c12008e22d3ca7}{n8\-::\-Service}.
+
+\hypertarget{classn8_1_1_input_service_a1b0a32e9ed8f21c3138d69d07a9cf90c}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Register\-Key\-Down\-Command@{Register\-Key\-Down\-Command}}
+\index{Register\-Key\-Down\-Command@{Register\-Key\-Down\-Command}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Register\-Key\-Down\-Command}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Input\-Service\-::\-Register\-Key\-Down\-Command (
+\begin{DoxyParamCaption}
+\item[{int}]{key, }
+\item[{{\bf Command} $\ast$}]{command}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a1b0a32e9ed8f21c3138d69d07a9cf90c}
+\hypertarget{classn8_1_1_input_service_a8a5cc25bb823653ce6d4abb55a289cd3}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Register\-Key\-Up\-Command@{Register\-Key\-Up\-Command}}
+\index{Register\-Key\-Up\-Command@{Register\-Key\-Up\-Command}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Register\-Key\-Up\-Command}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Input\-Service\-::\-Register\-Key\-Up\-Command (
+\begin{DoxyParamCaption}
+\item[{int}]{key, }
+\item[{{\bf Command} $\ast$}]{command}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_a8a5cc25bb823653ce6d4abb55a289cd3}
+\hypertarget{classn8_1_1_input_service_ab4a13fe0d3e6d6ed6642e7c9df77e884}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!Unregister\-Key\-Commands@{Unregister\-Key\-Commands}}
+\index{Unregister\-Key\-Commands@{Unregister\-Key\-Commands}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{Unregister\-Key\-Commands}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Input\-Service\-::\-Unregister\-Key\-Commands (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_input_service_ab4a13fe0d3e6d6ed6642e7c9df77e884}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classn8_1_1_input_service_a9eab1e8bff2306d4e581175d0d683184}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!m\-\_\-event@{m\-\_\-event}}
+\index{m\-\_\-event@{m\-\_\-event}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{m\-\_\-event}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Event$\ast$ n8\-::\-Input\-Service\-::m\-\_\-event\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_input_service_a9eab1e8bff2306d4e581175d0d683184}
+\hypertarget{classn8_1_1_input_service_ac35485b7fde20abe519f9deebc813eb2}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!m\-\_\-keys\-Held@{m\-\_\-keys\-Held}}
+\index{m\-\_\-keys\-Held@{m\-\_\-keys\-Held}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{m\-\_\-keys\-Held}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Input\-Service\-::m\-\_\-keys\-Held\mbox{[}323\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_input_service_ac35485b7fde20abe519f9deebc813eb2}
+$<$ S\-D\-L\-\_\-\-Event pointer to get dequeued events \hypertarget{classn8_1_1_input_service_a7ac30fbb458b6b41138a1a9ae76e3497}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!m\-\_\-registered\-Key\-Down\-Commands@{m\-\_\-registered\-Key\-Down\-Commands}}
+\index{m\-\_\-registered\-Key\-Down\-Commands@{m\-\_\-registered\-Key\-Down\-Commands}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{m\-\_\-registered\-Key\-Down\-Commands}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command}$\ast$ n8\-::\-Input\-Service\-::m\-\_\-registered\-Key\-Down\-Commands\mbox{[}323\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_input_service_a7ac30fbb458b6b41138a1a9ae76e3497}
+$<$ Array to store whether or not a key is being held down \hypertarget{classn8_1_1_input_service_a3f222cabde1339a524d0a9ca70bc1d3f}{\index{n8\-::\-Input\-Service@{n8\-::\-Input\-Service}!m\-\_\-registered\-Key\-Up\-Commands@{m\-\_\-registered\-Key\-Up\-Commands}}
+\index{m\-\_\-registered\-Key\-Up\-Commands@{m\-\_\-registered\-Key\-Up\-Commands}!n8::InputService@{n8\-::\-Input\-Service}}
+\subsubsection[{m\-\_\-registered\-Key\-Up\-Commands}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command}$\ast$ n8\-::\-Input\-Service\-::m\-\_\-registered\-Key\-Up\-Commands\mbox{[}323\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_input_service_a3f222cabde1339a524d0a9ca70bc1d3f}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Services/\hyperlink{_input_service_8h}{Input\-Service.\-h}\item 
+Services/\hyperlink{_input_service_8cpp}{Input\-Service.\-cpp}\end{DoxyCompactItemize}

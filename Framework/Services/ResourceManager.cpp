@@ -171,38 +171,6 @@ SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
 	return optimizedSurface;
 }
 
-/**
- *  Parses an input file containing image filepaths, loads those images, and stores them in a map
- *
- *  @param filepath the filepath for the configuration file containing all image filenames to load
- */
-void n8::ResourceManager::LoadImagesFromFile(string filepath){
-    /*
-    Log::Debug(TAG, "Loading Images");
-    ifstream inFile;
-    inFile.open(filepath.c_str());
-    if (inFile.is_open()) {
-        while (!inFile.eof()) {
-            string inputfile;
-            inFile >> inputfile;
-            Log::Debug(TAG, "  Loading optimized version of: " + inputfile);
-            SDL_Surface* img = LoadImage(inputfile);
-            
-            if (img) {
-                m_loadedResources[inputfile] = img;
-            }
-            else {
-                Log::Error(TAG, "Failed to load optimized image" + inputfile);
-            }
-            
-        }
-    }
-    else{
-        Log::Error(TAG, "Failed to open input file");
-    }
-    */
-    
-}
 
 /**
  *  Loads Sprite resources.  Currently not implemented.
@@ -245,6 +213,8 @@ void n8::ResourceManager::LoadMusic(std::string p_filename, std::string p_id){
 /** Loads sound effect resources
  *
  *  @param p_filename Name of the resource file to load into a SoundEffect object
+ *  @param p_id The identifier for the SoundEffect object.  Acts as the key for the object in the resource map
+
  */
 void n8::ResourceManager::LoadSoundEffect(std::string p_filename, std::string p_id){
     Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
@@ -258,8 +228,12 @@ void n8::ResourceManager::LoadSoundEffect(std::string p_filename, std::string p_
     }
 }
 
-/**
- *  Loads font resources.  Currently not implemented.
+/** LoadFont
+ *  Loads font resources specified by Resources.xml
+ *
+ *  @param p_filename Filename of font to load
+ *  @param p_id The identifier for the font object.  Acts as the key for the object in the resource map
+ *  @param p_size The font size of the desired font object
  */
 void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int p_size){
     TTF_Font* font = TTF_OpenFont( p_filename.c_str(), p_size );
@@ -274,6 +248,13 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
     }
 }
 
+/** GetResource
+ *  Used to get resource object pointers from the resource manager
+ *
+ *  @param p_resourceID The identifier for the desired resource.  Used as the key for looking up the resource in the resource map
+ *
+ *  @return Pointer to a resource object matching the passed key, NULL otherwise
+ */
 n8::Resource* n8::ResourceManager::GetResource(std::string p_resourceID){
     return m_loadedResources[p_resourceID];
 }

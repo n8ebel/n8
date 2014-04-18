@@ -31,6 +31,14 @@
 //class Resource;
 
 namespace n8{
+    /** \class ResourceManager
+     *  \brief Loads and stores game resources
+     *
+     *  Loads resource information from an xml file.  Attempts to load all
+     *    specified data and store the neccessary resource objects using
+     *    unique keys for lookup.  The user can then request pointers to
+     *    resource objects when needed.
+     */
     class ResourceManager : public Service{
     public:
         ResourceManager(SDL_Surface* screen, std::string path);
@@ -64,17 +72,16 @@ namespace n8{
         const std::string MUSIC_DIRECTORY_SUFFIX = "Music";
         const std::string FONT_DIRECTORY_SUFFIX = "Font";
         
-        std::string m_resourcesListPath;
+        std::string m_resourcesListPath; /**< Filepath to the resource list */
         /*
         std::string m_imagesDirectoryPath;
         std::string m_texturesDirectoryPath;
         std::string m_audioDirectoryPath;
         */
         
-        std::map<std::string,Resource*> m_loadedResources;  /** < Stores all images loaded by the system  ***/
-        SDL_Surface* m_screenSurface;
+        std::map<std::string,Resource*> m_loadedResources;  /**< Stores all images loaded by the system  */
+        SDL_Surface* m_screenSurface;  /**< Stores pointer to the game's screen surface.  Used to load optimized versions of images */
         
-        void LoadImagesFromFile(std::string filepath);
         SDL_Surface* LoadOptimizedImage(std::string filename);
         
         void LoadResources();
