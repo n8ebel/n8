@@ -23,6 +23,7 @@
 #include "Resource.h"
 #include "Sprite.h"
 #include "SoundEffect.h"
+#include "Music.h"
 
 //class Resource;
 
@@ -41,19 +42,24 @@ namespace n8{
     private:
         const std::string RESOURCES_TAG = "Resources";
         const std::string IMAGE_RESOURCES_TAG = "ImageResources";
-        const std::string AUDIO_RESOURCES_TAG = "SoundEffectResources";
+        const std::string SOUND_EFFECT_RESOURCES_TAG = "SoundEffectResources";
+        const std::string MUSIC_RESOURCES_TAG = "MusicResources";
         const std::string IMAGE_TAG = "Image";
-        const std::string AUDIO_TAG = "SoundEffect";
+        const std::string SOUND_EFFECT_TAG = "SoundEffect";
+        const std::string MUSIC_TAG = "Music";
         
         const std::string RESOURCE_DIRECTORIES_PREFIX = "Resources";
         const std::string IMAGES_DIRECTORY_SUFFIX = "Images";
         const std::string TEXTURES_DIRECTORY_SUFFIX = "Textures";
-        const std::string AUDIO_DIRECTORY_SUFFIX = "SoundEffect";
+        const std::string SOUND_EFFECT_DIRECTORY_SUFFIX = "SoundEffect";
+        const std::string MUSIC_DIRECTORY_SUFFIX = "Music";
         
         std::string m_resourcesListPath;
+        /*
         std::string m_imagesDirectoryPath;
         std::string m_texturesDirectoryPath;
         std::string m_audioDirectoryPath;
+        */
         
         std::map<std::string,Resource*> m_loadedResources;  /** < Stores all images loaded by the system  ***/
         SDL_Surface* m_screenSurface;
@@ -64,6 +70,7 @@ namespace n8{
         void LoadResources();
         void LoadSprite(std::string);
         void LoadTexture();
+        void LoadMusic(std::string);
         void LoadSoundEffect(std::string);
         void LoadFont();
     };

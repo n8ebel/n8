@@ -20,9 +20,12 @@ n8::ResourceManager::ResourceManager(SDL_Surface* screen, std::string path) {
     m_screenSurface = screen;
     
     m_resourcesListPath = path;
+    
+    /*
     m_imagesDirectoryPath = path +IMAGES_DIRECTORY_SUFFIX;
     m_texturesDirectoryPath = path + TEXTURES_DIRECTORY_SUFFIX;
     m_audioDirectoryPath = path + AUDIO_DIRECTORY_SUFFIX;
+    */
     
     LoadResources();
 }
@@ -67,17 +70,28 @@ void n8::ResourceManager::LoadResources(){
              
         }
         
-        // Get Audio
-        tinyxml2::XMLElement* audioElements = root->FirstChildElement( AUDIO_RESOURCES_TAG.c_str() );
+        // Get SoundEffects
+        tinyxml2::XMLElement* soundEffectElements = root->FirstChildElement( SOUND_EFFECT_RESOURCES_TAG.c_str() );
         
-        tinyxml2::XMLElement* audioElement = audioElements->FirstChildElement(AUDIO_TAG.c_str());
-        for( audioElement; audioElement; audioElement = audioElement->NextSiblingElement()){
-            std::string audioPath = audioElement->GetText();
-            Log::Debug(TAG, "Loading SoundEffect: " + audioPath );
+        tinyxml2::XMLElement* soundEffectElement = soundEffectElements->FirstChildElement(SOUND_EFFECT_TAG.c_str());
+        for( soundEffectElement; soundEffectElement; soundEffectElement = soundEffectElement->NextSiblingElement()){
+            std::string soundEffectPath = soundEffectElement->GetText();
+            Log::Debug(TAG, "Loading SoundEffect: " + soundEffectPath );
             
             
-            LoadSoundEffect(audioPath);
+            LoadSoundEffect(soundEffectPath);
+        }
+        
+        // Get Music
+        tinyxml2::XMLElement* musicElements = root->FirstChildElement( MUSIC_RESOURCES_TAG.c_str() );
+        
+        tinyxml2::XMLElement* musicElement = musicElements->FirstChildElement(MUSIC_TAG.c_str());
+        for( musicElement; musicElement; musicElement = musicElement->NextSiblingElement()){
+            std::string musicPath = musicElement->GetText();
+            Log::Debug(TAG, "Loading Music: " + musicPath );
             
+            
+            LoadMusic(musicPath);
         }
     }
     else{
@@ -176,8 +190,25 @@ void n8::ResourceManager::LoadTexture(){
     
 }
 
-/**
- *  Loads Audio resources.  Currently not implemented.
+/** Loads music resources
+ *  
+ *  @param p_filename Name of the resource file to load into a Music object
+ */
+void n8::ResourceManager::LoadMusic(std::string p_filename){
+    Mix_Music* music = Mix_LoadMUS(p_filename.c_str());
+    
+    if(music != NULL){
+        m_loadedResources[p_filename] = new Music(p_filename, music);
+        Log::Debug(TAG, "  Successfully loaded music");
+    }
+    else{
+        Log::Error(TAG, "  Failed to load music");
+    }
+}
+
+/** Loads sound effect resources
+ *
+ *  @param p_filename Name of the resource file to load into a SoundEffect object
  */
 void n8::ResourceManager::LoadSoundEffect(std::string p_filename){
     Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
@@ -189,8 +220,6 @@ void n8::ResourceManager::LoadSoundEffect(std::string p_filename){
     else{
         Log::Error(TAG, "  Failed to load sound effect");
     }
-    
-    Mix_PlayChannel( -1, soundEffect, 0 );
 }
 
 /**
