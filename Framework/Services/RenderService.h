@@ -23,10 +23,18 @@ namespace n8 {
      *
      *  This class handles rendering of game images by providing
      *   rendering methods for both sprites and texture.
+     *
+     *  @see Sprite, @see Texture
      */
     class RenderService : public Service{
     public:
-        enum ERenderMode{ESprite,ETexture};
+        /** \enum ERenderMode
+         *  \brief Indicates rendering modes
+         *
+         */
+        enum ERenderMode{   ESprite, /**< Indicates sprite rendering mode with SDL_Surface **/
+                            ETexture /**< Indicates texture rendering mode with SDL_Texture **/
+                        };
         
         RenderService(Window*);
         ~RenderService();
@@ -50,12 +58,12 @@ namespace n8 {
     private:
         
         Window* m_gameWindow; /**< Pointer to the game window object **/
-        ERenderMode m_renderMode;
+        ERenderMode m_renderMode; /**< The current rendering mode **/
         
-        int m_red;
-        int m_green;
-        int m_blue;
-        int m_alpha;
+        int m_red; /**< red value for drawing color **/
+        int m_green; /**< green value for drawing color **/
+        int m_blue; /**< blue value for drawing color **/
+        int m_alpha; /**< alpha value for drawing color **/
         
     };
 }

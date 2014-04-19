@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>n8 Game Framework: Core/Window.h Source File</title>
+<title>n8 Game Framework: /Users/lcballa44/Projects/n8/Framework/Core/Window.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">n8 Game Framework
-   &#160;<span id="projectnumber">0.7</span>
+   &#160;<span id="projectnumber">0.75</span>
    </div>
   </td>
  </tr>
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bcbb2cf9a3d3d83e5515c82071a07177.html">Framework</a></li><li class="navelem"><a class="el" href="dir_9f165b2481dacfe69aa54d326bd5cd47.html">Core</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -119,25 +119,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_window.html#aa603ad1f6e4df1327401df37a0e34529">SetTitle</a>(<span class="keywordtype">char</span>* caption);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_window.html#ae4ab3029b3ee1eaabe98947738c486f6">ResizeWindow</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    SDL_Surface* <a class="code" href="classn8_1_1_window.html#a1442cc3a052dea262f04cf2c30d868d5">GetSurface</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    SDL_Window* <a class="code" href="classn8_1_1_window.html#ae218e0dcdc9081e835cb3a136a7e39e5">GetWindow</a>();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#acb7bbe7407c00a0f14b5d0a1a42694d8">   35</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#acb7bbe7407c00a0f14b5d0a1a42694d8">m_screenWidth</a>;  </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#a7a1bc0ad691db2677c94330f743f0915">   36</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#a7a1bc0ad691db2677c94330f743f0915">m_screenHeight</a>; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#a9ba324f2cc04e8183fd9b938dc730222">   37</a></span>&#160;    SDL_Surface* <a class="code" href="classn8_1_1_window.html#a9ba324f2cc04e8183fd9b938dc730222">m_screenSurface</a>;  </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#ae658f6f3a5aefdde5b699b65fc4337e3">   39</a></span>&#160;    SDL_Window* <a class="code" href="classn8_1_1_window.html#ae658f6f3a5aefdde5b699b65fc4337e3">m_window</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    SDL_Window* <a class="code" href="classn8_1_1_window.html#a2c92b3ed7cea52caf0e7cbb3cd0fc08a">GetWindow</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    SDL_Renderer* <a class="code" href="classn8_1_1_window.html#a9786d6e49839a835018eb358638508f7">GetRenderer</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#afe179eb18f0f0c1b48e5aa4c6f070983">   36</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#afe179eb18f0f0c1b48e5aa4c6f070983">m_rendererR</a> = 255;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#ab158df107a9449ad6a150fe85f2b6386">   37</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#ab158df107a9449ad6a150fe85f2b6386">m_rendererG</a> = 255;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#abe9ddf7f06c92579bf749e882f636d7f">   38</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#abe9ddf7f06c92579bf749e882f636d7f">m_rendererB</a> = 255;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#a3b117da46991d7f4522b3746ef342b82">   39</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#a3b117da46991d7f4522b3746ef342b82">m_renererA</a> = 255;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(WINDOW_H) */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#acb7bbe7407c00a0f14b5d0a1a42694d8">   41</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#acb7bbe7407c00a0f14b5d0a1a42694d8">m_screenWidth</a>;  </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#a7a1bc0ad691db2677c94330f743f0915">   42</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classn8_1_1_window.html#a7a1bc0ad691db2677c94330f743f0915">m_screenHeight</a>; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#a9ba324f2cc04e8183fd9b938dc730222">   43</a></span>&#160;    SDL_Surface* <a class="code" href="classn8_1_1_window.html#a9ba324f2cc04e8183fd9b938dc730222">m_screenSurface</a>;  </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#a59329f4cb931a0032ae9f86824b4d217">   44</a></span>&#160;    SDL_Renderer* <a class="code" href="classn8_1_1_window.html#a59329f4cb931a0032ae9f86824b4d217">m_screenRenderer</a>; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="classn8_1_1_window.html#ae658f6f3a5aefdde5b699b65fc4337e3">   45</a></span>&#160;    SDL_Window* <a class="code" href="classn8_1_1_window.html#ae658f6f3a5aefdde5b699b65fc4337e3">m_window</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* defined(WINDOW_H) */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 18 2014 00:28:56 for n8 Game Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 19 2014 14:20:30 for n8 Game Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -15,6 +15,8 @@ TestState2::TestState2() {
     
     CreateSystems();
     CreateEntities();
+    
+    m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
 }
 
 TestState2::~TestState2(){
@@ -25,6 +27,7 @@ TestState2::~TestState2(){
 
 void TestState2::OnResume(){
     //Register input commands
+    m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
 }
 void TestState2::OnPause(){
     //Unregister input commands
