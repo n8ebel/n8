@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>n8 Game Framework: Services/StateManagerService.h Source File</title>
+<title>n8 Game Framework: /Users/lcballa44/Projects/n8/Framework/Services/StateManagerService.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">n8 Game Framework
-   &#160;<span id="projectnumber">0.7</span>
+   &#160;<span id="projectnumber">0.75</span>
    </div>
   </td>
  </tr>
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d69fddb65e10ed1e1aad5b4f2a8c0135.html">Services</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bcbb2cf9a3d3d83e5515c82071a07177.html">Framework</a></li><li class="navelem"><a class="el" href="dir_1e89778d8e862b6f1ef84f225e1b7cd1.html">Services</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -109,43 +109,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_d_8h.html">ID.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_service_8h.html">Service.h</a>&quot;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_state_8h.html">State.h</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_window_8h.html">Window.h</a>&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>n8{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="classn8_1_1_state_manager_service.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classn8_1_1_state_manager_service.html">StateManagerService</a> : <span class="keyword">public</span> <a class="code" href="classn8_1_1_service.html">Service</a>{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classn8_1_1_state_manager_service.html#af22d4c68cce45903992e1bfcb12e85f3">StateManagerService</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classn8_1_1_state_manager_service.html#a6293e74d12398884b2154dda87f507ce">~StateManagerService</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>n8{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="classn8_1_1_state_manager_service.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classn8_1_1_state_manager_service.html">StateManagerService</a> : <span class="keyword">public</span> <a class="code" href="classn8_1_1_service.html">Service</a>{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classn8_1_1_state_manager_service.html#af22d4c68cce45903992e1bfcb12e85f3">StateManagerService</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classn8_1_1_state_manager_service.html#a6293e74d12398884b2154dda87f507ce">~StateManagerService</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classn8_1_1_state_manager_service.html#a287093da3f70c807293f3199aa9a6232">RegisterState</a>(<a class="code" href="namespace_e_state.html#aee586325ec9fecd1205d41439870dd81">EState::Values</a> identifier, <a class="code" href="classn8_1_1_state.html">State</a>* state);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classn8_1_1_state_manager_service.html#a4cec486fa154cc2ded5d5c348bf5f140">PushState</a>(<a class="code" href="namespace_e_state.html#aee586325ec9fecd1205d41439870dd81">EState::Values</a> identifier);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state_manager_service.html#a903f56a680ac411d2ae7f34f4e251c38">PopState</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classn8_1_1_state_manager_service.html#ac553d556b5c925025252719d4319b3de">GetStackSize</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_i_d.html">ID</a> <a class="code" href="classn8_1_1_state_manager_service.html#a1e11e7a3f32567f416141f436904025d">GetCurrentStateId</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state_manager_service.html#a85d24e9b582f01d65e90c33fa36a6764">ProcessState</a>(Uint32 time, SDL_Window* screen);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state_manager_service.html#a931551f9b6dc470297e9d86abf27b603">OnNotify</a>(<a class="code" href="classn8_1_1_event.html">Event</a>*);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classn8_1_1_state_manager_service.html#a287093da3f70c807293f3199aa9a6232">RegisterState</a>(<a class="code" href="namespace_e_state.html#aee586325ec9fecd1205d41439870dd81">EState::Values</a> identifier, <a class="code" href="classn8_1_1_state.html">State</a>* state);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classn8_1_1_state_manager_service.html#a4cec486fa154cc2ded5d5c348bf5f140">PushState</a>(<a class="code" href="namespace_e_state.html#aee586325ec9fecd1205d41439870dd81">EState::Values</a> identifier);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state_manager_service.html#a903f56a680ac411d2ae7f34f4e251c38">PopState</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classn8_1_1_state_manager_service.html#ac553d556b5c925025252719d4319b3de">GetStackSize</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_i_d.html">ID</a> <a class="code" href="classn8_1_1_state_manager_service.html#a1e11e7a3f32567f416141f436904025d">GetCurrentStateId</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state_manager_service.html#ac48425aad0e88e1367c7f7187f539805">ProcessState</a>(Uint32 time, <a class="code" href="classn8_1_1_window.html">Window</a>* screen);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state_manager_service.html#a931551f9b6dc470297e9d86abf27b603">OnNotify</a>(<a class="code" href="classn8_1_1_event.html">Event</a>*);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="classn8_1_1_state_manager_service.html#a8bc933661f9accae81f82c6e682068c0">   54</a></span>&#160;    map&lt;EState::Values, State*&gt; <a class="code" href="classn8_1_1_state_manager_service.html#a8bc933661f9accae81f82c6e682068c0">m_registeredStates</a>; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="classn8_1_1_state_manager_service.html#a3ab9712018eebbfd3b99e406e9b004c0">   55</a></span>&#160;    vector&lt;State*&gt; <a class="code" href="classn8_1_1_state_manager_service.html#a3ab9712018eebbfd3b99e406e9b004c0">m_stateStack</a>; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="classn8_1_1_state_manager_service.html#a8bc933661f9accae81f82c6e682068c0">   55</a></span>&#160;    map&lt;EState::Values, State*&gt; <a class="code" href="classn8_1_1_state_manager_service.html#a8bc933661f9accae81f82c6e682068c0">m_registeredStates</a>; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="classn8_1_1_state_manager_service.html#a3ab9712018eebbfd3b99e406e9b004c0">   56</a></span>&#160;    vector&lt;State*&gt; <a class="code" href="classn8_1_1_state_manager_service.html#a3ab9712018eebbfd3b99e406e9b004c0">m_stateStack</a>; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 18 2014 00:28:56 for n8 Game Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 19 2014 14:20:30 for n8 Game Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

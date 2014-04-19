@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>n8 Game Framework: Base/State.h Source File</title>
+<title>n8 Game Framework: /Users/lcballa44/Projects/n8/Framework/Base/State.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">n8 Game Framework
-   &#160;<span id="projectnumber">0.7</span>
+   &#160;<span id="projectnumber">0.75</span>
    </div>
   </td>
  </tr>
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_628593db0cdce5a76fb85526ae5aa762.html">Base</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bcbb2cf9a3d3d83e5515c82071a07177.html">Framework</a></li><li class="navelem"><a class="el" href="dir_7ee9a088afba88a408ce40558e0ea26f.html">Base</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -110,41 +110,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;SDL2_image/SDL_image.h&quot;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_d_8h.html">ID.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span>SDL_Window;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span>n8{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="classn8_1_1_state.html">State</a>{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html#adbb6b659c390b191bb61f0e160e93eec">   34</a></span>&#160;    <a class="code" href="class_i_d.html">ID</a> <a class="code" href="classn8_1_1_state.html#adbb6b659c390b191bb61f0e160e93eec">GetId</a>() {<span class="keywordflow">return</span> *<a class="code" href="classn8_1_1_state.html#a1029f2fda72e7e50369d48f4c9641843">m_id</a>;};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_window_8h.html">Window.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>SDL_Window;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>n8{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classn8_1_1_state.html">State</a>{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html#adbb6b659c390b191bb61f0e160e93eec">   35</a></span>&#160;    <a class="code" href="class_i_d.html">ID</a> <a class="code" href="classn8_1_1_state.html#adbb6b659c390b191bb61f0e160e93eec">GetId</a>() {<span class="keywordflow">return</span> *<a class="code" href="classn8_1_1_state.html#a1029f2fda72e7e50369d48f4c9641843">m_id</a>;};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#acbd41cd50cb1238068cb758862369797">OnResume</a>() = 0;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#a0ba47df708916069474719d872a78481">OnPause</a>() = 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#a4a881caf4314fb528f82ad974ad26ef7">Update</a>(Uint32 currentTime) = 0;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#a1ec9371023ca55c020727a6b49167a91">Render</a>(SDL_Window* window) = 0;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html#ab8ef61270130e480fd946b62badd6123">   44</a></span>&#160;    Uint32 <a class="code" href="classn8_1_1_state.html#ab8ef61270130e480fd946b62badd6123">m_time</a>;  </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html#a1029f2fda72e7e50369d48f4c9641843">   45</a></span>&#160;    <a class="code" href="class_i_d.html">ID</a>* <a class="code" href="classn8_1_1_state.html#a1029f2fda72e7e50369d48f4c9641843">m_id</a>;  </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">//vector&lt;n8::entities::Entity*&gt; m_stateEntities;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#acbd41cd50cb1238068cb758862369797">OnResume</a>() = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#a0ba47df708916069474719d872a78481">OnPause</a>() = 0;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#a4a881caf4314fb528f82ad974ad26ef7">Update</a>(Uint32 currentTime) = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classn8_1_1_state.html#a9db90c5f87073e6c8eafade898ba4d34">Render</a>(<a class="code" href="classn8_1_1_window.html">Window</a>* window) = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html#ab8ef61270130e480fd946b62badd6123">   45</a></span>&#160;    Uint32 <a class="code" href="classn8_1_1_state.html#ab8ef61270130e480fd946b62badd6123">m_time</a>;  </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="classn8_1_1_state.html#a1029f2fda72e7e50369d48f4c9641843">   46</a></span>&#160;    <a class="code" href="class_i_d.html">ID</a>* <a class="code" href="classn8_1_1_state.html#a1029f2fda72e7e50369d48f4c9641843">m_id</a>;  </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//vector&lt;n8::entities::Entity*&gt; m_stateEntities;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor"></span>    </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor"></span>    </div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 18 2014 00:28:56 for n8 Game Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 19 2014 14:20:30 for n8 Game Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

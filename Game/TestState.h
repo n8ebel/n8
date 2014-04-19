@@ -16,6 +16,8 @@
 #include "State.h"
 #include "Event.h"
 #include "RenderService.h"
+#include "AudioService.h"
+
 #include "InputService.h"
 #include "StateManagerService.h"
 #include "ResourceManager.h"
@@ -46,6 +48,7 @@ private:
     
     n8::InputService* m_inputService;
     n8::RenderService* m_renderService;
+    n8::AudioService* m_audioService;
     
     n8::Event m_exitEvent;
     

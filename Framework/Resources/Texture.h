@@ -21,11 +21,14 @@ namespace n8{
     class Texture :public Resource{
     public:
         ~Texture();
-        Texture(std::string p_id, SDL_Texture* p_img);
+        Texture(std::string p_id, SDL_Texture* p_img, int p_w, int p_h);
         
     private:
         
         SDL_Texture* m_texture;  /** < The texture that can be rendered to the screen  **/
+        
+        int m_width;
+        int m_height;
         
         friend class RenderService;
     };

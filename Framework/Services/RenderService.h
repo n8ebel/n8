@@ -23,20 +23,47 @@ namespace n8 {
      *
      *  This class handles rendering of game images by providing
      *   rendering methods for both sprites and texture.
+     *
+     *  @see Sprite, @see Texture
      */
     class RenderService : public Service{
     public:
+        /** \enum ERenderMode
+         *  \brief Indicates rendering modes
+         *
+         */
+        enum ERenderMode{   ESprite, /**< Indicates sprite rendering mode with SDL_Surface **/
+                            ETexture /**< Indicates texture rendering mode with SDL_Texture **/
+                        };
+        
         RenderService(Window*);
         ~RenderService();
         
+        void SetRenderMode(ERenderMode);
+        
         void OnNotify(Event*);
         
-        void DrawSprite(Sprite*, int, int);
+        void Draw(Sprite*, int, int);
+        
+        //renders texture at position with default size
+        void Draw(Texture* p_texture, int p_x, int p_y);
+        //renders texture over a specified area
+        void Draw(Texture*, int p_x, int p_y, int p_w, int p_h);
+        
+        void SetDrawingColor(int p_r, int p_g, int p_b, int p_a);
+        
+        void ColorBackground();
+        void PostToScreen();
         
     private:
         
         Window* m_gameWindow; /**< Pointer to the game window object **/
+        ERenderMode m_renderMode; /**< The current rendering mode **/
         
+        int m_red; /**< red value for drawing color **/
+        int m_green; /**< green value for drawing color **/
+        int m_blue; /**< blue value for drawing color **/
+        int m_alpha; /**< alpha value for drawing color **/
         
     };
 }
