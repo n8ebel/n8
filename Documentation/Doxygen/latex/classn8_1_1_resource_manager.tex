@@ -1,0 +1,304 @@
+\hypertarget{classn8_1_1_resource_manager}{\section{n8\-:\-:Resource\-Manager Class Reference}
+\label{classn8_1_1_resource_manager}\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}}
+}
+
+
+Loads and stores game resources.  
+
+
+
+
+{\ttfamily \#include $<$Resource\-Manager.\-h$>$}
+
+Inheritance diagram for n8\-:\-:Resource\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classn8_1_1_resource_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classn8_1_1_resource_manager_a047ca08ea13d151e5c5162e4fae1c785}{Resource\-Manager} (S\-D\-L\-\_\-\-Surface $\ast$screen, std\-::string path)
+\item 
+\hyperlink{classn8_1_1_resource_manager_a06074da1d8fa5b1eb26e8a6996c6696e}{$\sim$\-Resource\-Manager} ()
+\item 
+\hyperlink{classn8_1_1_resource}{Resource} $\ast$ \hyperlink{classn8_1_1_resource_manager_a0d9c23c34a44338e53add156a88260bd}{Get\-Resource} (std\-::string)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_ace97033b439ac0954cf2fc45a79081c9}{On\-Notify} (\hyperlink{classn8_1_1_event}{Event} $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\-D\-L\-\_\-\-Surface $\ast$ \hyperlink{classn8_1_1_resource_manager_acf5f0aafedcb3ed0c2a9b4e8518c8092}{Load\-Optimized\-Image} (std\-::string filename)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_aa3424e9950ae39330cecba06286b6af1}{Load\-Resources} ()
+\item 
+void \hyperlink{classn8_1_1_resource_manager_ab8cb4600e3ee61439ddba958c2c1c3bf}{Load\-Sprite} (std\-::string, std\-::string)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_a65cd9b6e010bdac87976e464c580b93a}{Load\-Texture} (std\-::string, std\-::string)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_a21c0d9fbdf9413c4e5e9ac0e81461010}{Load\-Music} (std\-::string, std\-::string)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_a38702603536a2f7c396cb0dcaab2df0d}{Load\-Sound\-Effect} (std\-::string, std\-::string)
+\item 
+void \hyperlink{classn8_1_1_resource_manager_ae80f49455160d64a2cf27099ba0d128f}{Load\-Font} (std\-::string, std\-::string, int)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_aa8b18502df6a0b62127137c683d07f1c}{R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G} = \char`\"{}Resources\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a49db9fd91a84fdab02ddf86560677a72}{I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G} = \char`\"{}Image\-Resources\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_ad8a40ca4c1bfbd9ab2091a75ebf1d1b0}{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G} = \char`\"{}Sound\-Effect\-Resources\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a99df9f9f63f408c2173ded9cc234aee1}{M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G} = \char`\"{}Music\-Resources\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_aab02445c4198c8ffc987e19310b88264}{F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G} = \char`\"{}Font\-Resources\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a5070a7664d8876080169bb19d67c981e}{I\-M\-A\-G\-E\-\_\-\-T\-A\-G} = \char`\"{}Image\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_adddc8602373da08bf20c073087856f39}{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G} = \char`\"{}Sound\-Effect\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a1ad23bd82f0c2b5ec4cda6b3f7c200f5}{M\-U\-S\-I\-C\-\_\-\-T\-A\-G} = \char`\"{}Music\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a629c37bbc7cab402c22138873c447e76}{F\-O\-N\-T\-\_\-\-T\-A\-G} = \char`\"{}Font\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_ab2d2c6626b2c68384f1d400c17d1b38f}{S\-I\-Z\-E\-\_\-\-T\-A\-G} = \char`\"{}Size\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a2893f0f975614d26af2b61e139d9acbe}{I\-D\-\_\-\-T\-A\-G} = \char`\"{}I\-D\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_ac7a0bd07466d2db724c71608a373c83e}{R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X} = \char`\"{}Resources\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_aa8fd98d5b987be54652a08f49e5ac7f7}{I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X} = \char`\"{}Images\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_af0ddf0154273d7fa5fc31f63b5ce387c}{T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X} = \char`\"{}Textures\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_a3bdb6e51b5a59ce6278d2ed13321edbb}{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X} = \char`\"{}Sound\-Effect\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_af0d462dc1037e8377c297a02d53e761c}{M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X} = \char`\"{}Music\char`\"{}
+\item 
+const std\-::string \hyperlink{classn8_1_1_resource_manager_aa8b34428079b65912e1bcc4ffc04fbf1}{F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X} = \char`\"{}Font\char`\"{}
+\item 
+std\-::string \hyperlink{classn8_1_1_resource_manager_a8b5220baaa8694b0229fea6ef8155d74}{m\-\_\-resources\-List\-Path}
+\item 
+std\-::map$<$ std\-::string, \hyperlink{classn8_1_1_resource}{Resource} $\ast$ $>$ \hyperlink{classn8_1_1_resource_manager_a1599b33c3fbe8b04045c2f39ea4ec80a}{m\-\_\-loaded\-Resources}
+\item 
+S\-D\-L\-\_\-\-Surface $\ast$ \hyperlink{classn8_1_1_resource_manager_a871c40637220ed8c82d230410aaf2aa2}{m\-\_\-screen\-Surface}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Loads and stores game resources. 
+
+Loads resource information from an xml file. Attempts to load all specified data and store the neccessary resource objects using unique keys for lookup. The user can then request pointers to resource objects when needed. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classn8_1_1_resource_manager_a047ca08ea13d151e5c5162e4fae1c785}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Resource\-Manager@{Resource\-Manager}}
+\index{Resource\-Manager@{Resource\-Manager}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Resource\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Resource\-Manager\-::\-Resource\-Manager (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{screen, }
+\item[{std\-::string}]{path}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_a047ca08ea13d151e5c5162e4fae1c785}
+\hypertarget{classn8_1_1_resource_manager_a06074da1d8fa5b1eb26e8a6996c6696e}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!$\sim$\-Resource\-Manager@{$\sim$\-Resource\-Manager}}
+\index{$\sim$\-Resource\-Manager@{$\sim$\-Resource\-Manager}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{$\sim$\-Resource\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Resource\-Manager\-::$\sim$\-Resource\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_a06074da1d8fa5b1eb26e8a6996c6696e}
+Destructor Deletes all loaded resources 
+
+\subsection{Member Function Documentation}
+\hypertarget{classn8_1_1_resource_manager_a0d9c23c34a44338e53add156a88260bd}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Get\-Resource@{Get\-Resource}}
+\index{Get\-Resource@{Get\-Resource}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Get\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}{\bf n8\-::\-Resource} $\ast$ n8\-::\-Resource\-Manager\-::\-Get\-Resource (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-resource\-I\-D}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_resource_manager_a0d9c23c34a44338e53add156a88260bd}
+Get\-Resource Used to get resource object pointers from the resource manager
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-\_\-resource\-I\-D} & The identifier for the desired resource. Used as the key for looking up the resource in the resource map\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to a resource object matching the passed key, N\-U\-L\-L otherwise 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_resource_manager_ae80f49455160d64a2cf27099ba0d128f}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Font@{Load\-Font}}
+\index{Load\-Font@{Load\-Font}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Font}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-Load\-Font (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-filename, }
+\item[{std\-::string}]{p\-\_\-id, }
+\item[{int}]{p\-\_\-size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_ae80f49455160d64a2cf27099ba0d128f}
+Load\-Font Loads font resources specified by Resources.\-xml
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-\_\-filename} & Filename of font to load \\
+\hline
+{\em p\-\_\-id} & The identifier for the font object. Acts as the key for the object in the resource map \\
+\hline
+{\em p\-\_\-size} & The font size of the desired font object \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_resource_manager_a21c0d9fbdf9413c4e5e9ac0e81461010}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Music@{Load\-Music}}
+\index{Load\-Music@{Load\-Music}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Music}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-Load\-Music (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-filename, }
+\item[{std\-::string}]{p\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a21c0d9fbdf9413c4e5e9ac0e81461010}
+Loads music resources
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-\_\-filename} & Name of the resource file to load into a \hyperlink{classn8_1_1_music}{Music} object \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_resource_manager_acf5f0aafedcb3ed0c2a9b4e8518c8092}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Optimized\-Image@{Load\-Optimized\-Image}}
+\index{Load\-Optimized\-Image@{Load\-Optimized\-Image}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Optimized\-Image}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Surface $\ast$ n8\-::\-Resource\-Manager\-::\-Load\-Optimized\-Image (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_acf5f0aafedcb3ed0c2a9b4e8518c8092}
+Loads an image from a specified filepath, then creates an optimzed copy of the image
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & the filename of the image to load and optimize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the optimized copy of the image 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_resource_manager_aa3424e9950ae39330cecba06286b6af1}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Resources@{Load\-Resources}}
+\index{Load\-Resources@{Load\-Resources}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Resources}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-Load\-Resources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_aa3424e9950ae39330cecba06286b6af1}
+\hypertarget{classn8_1_1_resource_manager_a38702603536a2f7c396cb0dcaab2df0d}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Sound\-Effect@{Load\-Sound\-Effect}}
+\index{Load\-Sound\-Effect@{Load\-Sound\-Effect}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Sound\-Effect}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-Load\-Sound\-Effect (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-filename, }
+\item[{std\-::string}]{p\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a38702603536a2f7c396cb0dcaab2df0d}
+Loads sound effect resources
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-\_\-filename} & Name of the resource file to load into a \hyperlink{classn8_1_1_sound_effect}{Sound\-Effect} object \\
+\hline
+{\em p\-\_\-id} & The identifier for the \hyperlink{classn8_1_1_sound_effect}{Sound\-Effect} object. Acts as the key for the object in the resource map \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_resource_manager_ab8cb4600e3ee61439ddba958c2c1c3bf}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Sprite@{Load\-Sprite}}
+\index{Load\-Sprite@{Load\-Sprite}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-Load\-Sprite (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-filename, }
+\item[{std\-::string}]{p\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_ab8cb4600e3ee61439ddba958c2c1c3bf}
+Loads \hyperlink{classn8_1_1_sprite}{Sprite} resources. Currently not implemented. \hypertarget{classn8_1_1_resource_manager_a65cd9b6e010bdac87976e464c580b93a}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!Load\-Texture@{Load\-Texture}}
+\index{Load\-Texture@{Load\-Texture}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{Load\-Texture}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-Load\-Texture (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-filename, }
+\item[{std\-::string}]{p\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a65cd9b6e010bdac87976e464c580b93a}
+Loads Texture resources. Currently not implemented \hypertarget{classn8_1_1_resource_manager_ace97033b439ac0954cf2fc45a79081c9}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!On\-Notify@{On\-Notify}}
+\index{On\-Notify@{On\-Notify}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{On\-Notify}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Resource\-Manager\-::\-On\-Notify (
+\begin{DoxyParamCaption}
+\item[{{\bf n8\-::\-Event} $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classn8_1_1_resource_manager_ace97033b439ac0954cf2fc45a79081c9}
+
+
+Implements \hyperlink{classn8_1_1_service_a756a170eba7e5c34a1c12008e22d3ca7}{n8\-::\-Service}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classn8_1_1_resource_manager_aa8b34428079b65912e1bcc4ffc04fbf1}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}}
+\index{F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-F\-O\-N\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X = \char`\"{}Font\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_aa8b34428079b65912e1bcc4ffc04fbf1}
+\hypertarget{classn8_1_1_resource_manager_aab02445c4198c8ffc987e19310b88264}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}}
+\index{F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-F\-O\-N\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G = \char`\"{}Font\-Resources\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_aab02445c4198c8ffc987e19310b88264}
+\hypertarget{classn8_1_1_resource_manager_a629c37bbc7cab402c22138873c447e76}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!F\-O\-N\-T\-\_\-\-T\-A\-G@{F\-O\-N\-T\-\_\-\-T\-A\-G}}
+\index{F\-O\-N\-T\-\_\-\-T\-A\-G@{F\-O\-N\-T\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{F\-O\-N\-T\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-F\-O\-N\-T\-\_\-\-T\-A\-G = \char`\"{}Font\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a629c37bbc7cab402c22138873c447e76}
+\hypertarget{classn8_1_1_resource_manager_a2893f0f975614d26af2b61e139d9acbe}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!I\-D\-\_\-\-T\-A\-G@{I\-D\-\_\-\-T\-A\-G}}
+\index{I\-D\-\_\-\-T\-A\-G@{I\-D\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{I\-D\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-I\-D\-\_\-\-T\-A\-G = \char`\"{}I\-D\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a2893f0f975614d26af2b61e139d9acbe}
+\hypertarget{classn8_1_1_resource_manager_a49db9fd91a84fdab02ddf86560677a72}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}}
+\index{I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-I\-M\-A\-G\-E\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G = \char`\"{}Image\-Resources\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a49db9fd91a84fdab02ddf86560677a72}
+\hypertarget{classn8_1_1_resource_manager_a5070a7664d8876080169bb19d67c981e}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!I\-M\-A\-G\-E\-\_\-\-T\-A\-G@{I\-M\-A\-G\-E\-\_\-\-T\-A\-G}}
+\index{I\-M\-A\-G\-E\-\_\-\-T\-A\-G@{I\-M\-A\-G\-E\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{I\-M\-A\-G\-E\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-I\-M\-A\-G\-E\-\_\-\-T\-A\-G = \char`\"{}Image\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a5070a7664d8876080169bb19d67c981e}
+\hypertarget{classn8_1_1_resource_manager_aa8fd98d5b987be54652a08f49e5ac7f7}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}}
+\index{I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-I\-M\-A\-G\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X = \char`\"{}Images\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_aa8fd98d5b987be54652a08f49e5ac7f7}
+\hypertarget{classn8_1_1_resource_manager_a1599b33c3fbe8b04045c2f39ea4ec80a}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!m\-\_\-loaded\-Resources@{m\-\_\-loaded\-Resources}}
+\index{m\-\_\-loaded\-Resources@{m\-\_\-loaded\-Resources}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{m\-\_\-loaded\-Resources}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string,{\bf Resource}$\ast$$>$ n8\-::\-Resource\-Manager\-::m\-\_\-loaded\-Resources\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a1599b33c3fbe8b04045c2f39ea4ec80a}
+Stores all images loaded by the system \hypertarget{classn8_1_1_resource_manager_a8b5220baaa8694b0229fea6ef8155d74}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!m\-\_\-resources\-List\-Path@{m\-\_\-resources\-List\-Path}}
+\index{m\-\_\-resources\-List\-Path@{m\-\_\-resources\-List\-Path}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{m\-\_\-resources\-List\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string n8\-::\-Resource\-Manager\-::m\-\_\-resources\-List\-Path\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a8b5220baaa8694b0229fea6ef8155d74}
+Filepath to the resource list \hypertarget{classn8_1_1_resource_manager_a871c40637220ed8c82d230410aaf2aa2}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!m\-\_\-screen\-Surface@{m\-\_\-screen\-Surface}}
+\index{m\-\_\-screen\-Surface@{m\-\_\-screen\-Surface}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{m\-\_\-screen\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Surface$\ast$ n8\-::\-Resource\-Manager\-::m\-\_\-screen\-Surface\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a871c40637220ed8c82d230410aaf2aa2}
+Stores pointer to the game's screen surface. Used to load optimized versions of images \hypertarget{classn8_1_1_resource_manager_af0d462dc1037e8377c297a02d53e761c}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}}
+\index{M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-M\-U\-S\-I\-C\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X = \char`\"{}Music\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_af0d462dc1037e8377c297a02d53e761c}
+\hypertarget{classn8_1_1_resource_manager_a99df9f9f63f408c2173ded9cc234aee1}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}}
+\index{M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-M\-U\-S\-I\-C\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G = \char`\"{}Music\-Resources\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a99df9f9f63f408c2173ded9cc234aee1}
+\hypertarget{classn8_1_1_resource_manager_a1ad23bd82f0c2b5ec4cda6b3f7c200f5}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!M\-U\-S\-I\-C\-\_\-\-T\-A\-G@{M\-U\-S\-I\-C\-\_\-\-T\-A\-G}}
+\index{M\-U\-S\-I\-C\-\_\-\-T\-A\-G@{M\-U\-S\-I\-C\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{M\-U\-S\-I\-C\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-M\-U\-S\-I\-C\-\_\-\-T\-A\-G = \char`\"{}Music\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a1ad23bd82f0c2b5ec4cda6b3f7c200f5}
+\hypertarget{classn8_1_1_resource_manager_ac7a0bd07466d2db724c71608a373c83e}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X@{R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X}}
+\index{R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X@{R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-R\-E\-S\-O\-U\-R\-C\-E\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-I\-E\-S\-\_\-\-P\-R\-E\-F\-I\-X = \char`\"{}Resources\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_ac7a0bd07466d2db724c71608a373c83e}
+\hypertarget{classn8_1_1_resource_manager_aa8b18502df6a0b62127137c683d07f1c}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}}
+\index{R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G = \char`\"{}Resources\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_aa8b18502df6a0b62127137c683d07f1c}
+\hypertarget{classn8_1_1_resource_manager_ab2d2c6626b2c68384f1d400c17d1b38f}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!S\-I\-Z\-E\-\_\-\-T\-A\-G@{S\-I\-Z\-E\-\_\-\-T\-A\-G}}
+\index{S\-I\-Z\-E\-\_\-\-T\-A\-G@{S\-I\-Z\-E\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{S\-I\-Z\-E\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-S\-I\-Z\-E\-\_\-\-T\-A\-G = \char`\"{}Size\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_ab2d2c6626b2c68384f1d400c17d1b38f}
+\hypertarget{classn8_1_1_resource_manager_a3bdb6e51b5a59ce6278d2ed13321edbb}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}}
+\index{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X = \char`\"{}Sound\-Effect\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_a3bdb6e51b5a59ce6278d2ed13321edbb}
+\hypertarget{classn8_1_1_resource_manager_ad8a40ca4c1bfbd9ab2091a75ebf1d1b0}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}}
+\index{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G@{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-R\-E\-S\-O\-U\-R\-C\-E\-S\-\_\-\-T\-A\-G = \char`\"{}Sound\-Effect\-Resources\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_ad8a40ca4c1bfbd9ab2091a75ebf1d1b0}
+\hypertarget{classn8_1_1_resource_manager_adddc8602373da08bf20c073087856f39}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G@{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G}}
+\index{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G@{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-S\-O\-U\-N\-D\-\_\-\-E\-F\-F\-E\-C\-T\-\_\-\-T\-A\-G = \char`\"{}Sound\-Effect\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_adddc8602373da08bf20c073087856f39}
+\hypertarget{classn8_1_1_resource_manager_af0ddf0154273d7fa5fc31f63b5ce387c}{\index{n8\-::\-Resource\-Manager@{n8\-::\-Resource\-Manager}!T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}}
+\index{T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X@{T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}!n8::ResourceManager@{n8\-::\-Resource\-Manager}}
+\subsubsection[{T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string n8\-::\-Resource\-Manager\-::\-T\-E\-X\-T\-U\-R\-E\-S\-\_\-\-D\-I\-R\-E\-C\-T\-O\-R\-Y\-\_\-\-S\-U\-F\-F\-I\-X = \char`\"{}Textures\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_resource_manager_af0ddf0154273d7fa5fc31f63b5ce387c}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Services/\hyperlink{_resource_manager_8h}{Resource\-Manager.\-h}\item 
+Services/\hyperlink{_resource_manager_8cpp}{Resource\-Manager.\-cpp}\end{DoxyCompactItemize}

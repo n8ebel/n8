@@ -31,10 +31,10 @@
 \contentsline {subsubsection}{\numberline {6.5.5} ObjectFactory}{6}
 \contentsline {section}{\numberline {7} Globally Available Services}{6}
 \contentsline {subsection}{\numberline {7.1} Logging }{6}
-\contentsline {section}{\numberline {8} Game levels}{6}
-\contentsline {section}{\numberline {9}Use Cases}{6}
-\contentsline {subsection}{\numberline {9.1}Input changes game state}{6}
-\contentsline {subsection}{\numberline {9.2}Input changes player state}{6}
+\contentsline {section}{\numberline {8} Game levels}{7}
+\contentsline {section}{\numberline {9}Use Cases}{7}
+\contentsline {subsection}{\numberline {9.1}Input changes game state}{7}
+\contentsline {subsection}{\numberline {9.2}Input changes player state}{7}
 \contentsline {subsection}{\numberline {9.3}Input moves player}{7}
 \contentsline {subsection}{\numberline {9.4}Entity destroyed and animation is played}{7}
 \contentsline {subsection}{\numberline {9.5}Timed event activated}{7}

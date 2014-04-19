@@ -105,6 +105,9 @@ A camera object can be passed in to an entity's render method to have it draw ba
 \subsubsection{	Audio}
 
 \subsubsection{ResourceManager}
+\begin{enumerate}
+	\item Resources types (Image, Texture, Audio) will be subtypes of a base resource class.  Each resource type will have a designated directory where the resources of that type will be stored.  The location of the resource directories will be specified in the Game.config file.  When the ResourceManager loads resources, it will look in these directories, load the file, load all files and create the necessary resource objects, and store them in a map.  
+\end{enumerate}
 
 \subsection{Game Specific Systems}
 

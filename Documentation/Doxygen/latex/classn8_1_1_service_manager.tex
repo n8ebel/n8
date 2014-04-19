@@ -1,0 +1,122 @@
+\hypertarget{classn8_1_1_service_manager}{\section{n8\-:\-:Service\-Manager Class Reference}
+\label{classn8_1_1_service_manager}\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Service\-Manager.\-h$>$}
+
+Inheritance diagram for n8\-:\-:Service\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classn8_1_1_service_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classn8_1_1_service_manager_abfe06bc245147f48eca750686d9e1ca0}{Service\-Manager} ()
+\item 
+\hyperlink{classn8_1_1_service_manager_a329524860b322f5a3ba6ac0b5f909cd8}{$\sim$\-Service\-Manager} ()
+\item 
+void \hyperlink{classn8_1_1_service_manager_ae3bbc7dc34aa6e747eb301c7935039ab}{Register\-Service} (\hyperlink{namespace_e_service_a7d0bb3de6ea857dc1253fc5a2cef6884}{E\-Service\-::\-Values}, \hyperlink{classn8_1_1_service}{Service} $\ast$)
+\item 
+void \hyperlink{classn8_1_1_service_manager_a1309152e05c95e60cf98600b9e3053c6}{Unregister\-Service} (\hyperlink{namespace_e_service_a7d0bb3de6ea857dc1253fc5a2cef6884}{E\-Service\-::\-Values})
+\item 
+void \hyperlink{classn8_1_1_service_manager_a56b16c5856e36f9765029bdbb802bc18}{Remove\-All\-Services} ()
+\item 
+\hyperlink{classn8_1_1_service}{Service} $\ast$ \hyperlink{classn8_1_1_service_manager_a050b710ab08a641c6562898409afae02}{Get\-Service} (\hyperlink{namespace_e_service_a7d0bb3de6ea857dc1253fc5a2cef6884}{E\-Service\-::\-Values})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::map$<$ \hyperlink{namespace_e_service_a7d0bb3de6ea857dc1253fc5a2cef6884}{E\-Service\-::\-Values}, \\*
+\hyperlink{classn8_1_1_service}{Service} $\ast$ $>$ \hyperlink{classn8_1_1_service_manager_a631c25768aaa053b06aa519fc8a00d65}{m\-\_\-registered\-Services}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Provides a global access point to registered services. This gives a less coupled way of providing access to game systems. Services are registered with the \hyperlink{classn8_1_1_service_manager}{Service\-Manager} during the game's initialization. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classn8_1_1_service_manager_abfe06bc245147f48eca750686d9e1ca0}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!Service\-Manager@{Service\-Manager}}
+\index{Service\-Manager@{Service\-Manager}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{Service\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Service\-Manager\-::\-Service\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_service_manager_abfe06bc245147f48eca750686d9e1ca0}
+Default Constructor \hypertarget{classn8_1_1_service_manager_a329524860b322f5a3ba6ac0b5f909cd8}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!$\sim$\-Service\-Manager@{$\sim$\-Service\-Manager}}
+\index{$\sim$\-Service\-Manager@{$\sim$\-Service\-Manager}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{$\sim$\-Service\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Service\-Manager\-::$\sim$\-Service\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_service_manager_a329524860b322f5a3ba6ac0b5f909cd8}
+Destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classn8_1_1_service_manager_a050b710ab08a641c6562898409afae02}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!Get\-Service@{Get\-Service}}
+\index{Get\-Service@{Get\-Service}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{Get\-Service}]{\setlength{\rightskip}{0pt plus 5cm}{\bf n8\-::\-Service} $\ast$ n8\-::\-Service\-Manager\-::\-Get\-Service (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-Service\-::\-Values}}]{key}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_service_manager_a050b710ab08a641c6562898409afae02}
+Get\-Service Returns the service specified by the input key
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{namespace_e_service}{E\-Service}} & An enum value to use as the lookup key for the map \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_service_manager_ae3bbc7dc34aa6e747eb301c7935039ab}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!Register\-Service@{Register\-Service}}
+\index{Register\-Service@{Register\-Service}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{Register\-Service}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Service\-Manager\-::\-Register\-Service (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-Service\-::\-Values}}]{key, }
+\item[{{\bf Service} $\ast$}]{new\-Service}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_service_manager_ae3bbc7dc34aa6e747eb301c7935039ab}
+Register\-Service Registers a provided service by adding it to a map of registered services using a provided enum value as a key.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{namespace_e_service}{E\-Service}} & An enum value to use as a map key \\
+\hline
+{\em Service$\ast$} & A pointer to a new service \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_service_manager_a56b16c5856e36f9765029bdbb802bc18}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!Remove\-All\-Services@{Remove\-All\-Services}}
+\index{Remove\-All\-Services@{Remove\-All\-Services}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{Remove\-All\-Services}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Service\-Manager\-::\-Remove\-All\-Services (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_service_manager_a56b16c5856e36f9765029bdbb802bc18}
+Remove\-All\-Services Removes and deletes all services from the map \hypertarget{classn8_1_1_service_manager_a1309152e05c95e60cf98600b9e3053c6}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!Unregister\-Service@{Unregister\-Service}}
+\index{Unregister\-Service@{Unregister\-Service}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{Unregister\-Service}]{\setlength{\rightskip}{0pt plus 5cm}void n8\-::\-Service\-Manager\-::\-Unregister\-Service (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-Service\-::\-Values}}]{key}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_service_manager_a1309152e05c95e60cf98600b9e3053c6}
+Unregister\-Service Unregisters a service by removing it from the map
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{namespace_e_service}{E\-Service}} & An enum value to use as a map key \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classn8_1_1_service_manager_a631c25768aaa053b06aa519fc8a00d65}{\index{n8\-::\-Service\-Manager@{n8\-::\-Service\-Manager}!m\-\_\-registered\-Services@{m\-\_\-registered\-Services}}
+\index{m\-\_\-registered\-Services@{m\-\_\-registered\-Services}!n8::ServiceManager@{n8\-::\-Service\-Manager}}
+\subsubsection[{m\-\_\-registered\-Services}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<${\bf E\-Service\-::\-Values},{\bf Service}$\ast$$>$ n8\-::\-Service\-Manager\-::m\-\_\-registered\-Services\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_service_manager_a631c25768aaa053b06aa519fc8a00d65}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{_service_manager_8h}{Service\-Manager.\-h}\item 
+Core/\hyperlink{_service_manager_8cpp}{Service\-Manager.\-cpp}\end{DoxyCompactItemize}

@@ -18,6 +18,7 @@
 #include "ID.h"
 #include "Service.h"
 #include "State.h"
+#include "Window.h"
 
 
 namespace n8{
@@ -44,7 +45,7 @@ public:
     int GetStackSize();
     ID GetCurrentStateId();
     
-    void ProcessState(Uint32 time, SDL_Window* screen);
+    void ProcessState(Uint32 time, Window* screen);
     
     void OnNotify(Event*);
     
