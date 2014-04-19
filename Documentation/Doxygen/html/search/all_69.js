@@ -7,7 +7,7 @@ var searchData=
   ['image_5fresources_5ftag',['IMAGE_RESOURCES_TAG',['../classn8_1_1_resource_manager.html#a49db9fd91a84fdab02ddf86560677a72',1,'n8::ResourceManager']]],
   ['image_5ftag',['IMAGE_TAG',['../classn8_1_1_resource_manager.html#a5070a7664d8876080169bb19d67c981e',1,'n8::ResourceManager']]],
   ['images_5fdirectory_5fsuffix',['IMAGES_DIRECTORY_SUFFIX',['../classn8_1_1_resource_manager.html#aa8fd98d5b987be54652a08f49e5ac7f7',1,'n8::ResourceManager']]],
-  ['info',['INFO',['../classn8_1_1_log.html#a5784cbe90ebfbfc2c0293be4aefc37df',1,'n8::Log::INFO()'],['../classn8_1_1_log.html#a97be57e8b2c04da6f47f1e699c827024',1,'n8::Log::Info(std::string tag, std::string msg)']]],
+  ['info',['Info',['../classn8_1_1_log.html#a97be57e8b2c04da6f47f1e699c827024',1,'n8::Log::Info(std::string tag, std::string msg)'],['../classn8_1_1_log.html#a5784cbe90ebfbfc2c0293be4aefc37df',1,'n8::Log::INFO()']]],
   ['init',['Init',['../classn8_1_1_game.html#a07f1d9b3613d256ed65abc029f45263b',1,'n8::Game']]],
   ['initializedirectorypath',['InitializeDirectoryPath',['../classn8_1_1_game.html#a177132db60f27b7b72cedebe8b3c31ff',1,'n8::Game']]],
   ['initializeresourcespath',['InitializeResourcesPath',['../classn8_1_1_game.html#a406cab23a3df73bb69e29b6e6f0de5a4',1,'n8::Game']]],

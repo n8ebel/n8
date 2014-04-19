@@ -18,6 +18,7 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     //m_id = new ID(GAME_STATE);
     m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
     m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(EService::Render));
+    m_audioService = static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(EService::Audio));
                                                     
     CreateSystems();
     CreateEntities();
@@ -33,12 +34,14 @@ void TestState::OnResume(){
     m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PushStateCommand(EState::Test2));
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
+    m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
     
 }
 
 void TestState::OnPause(){
     m_inputService->UnregisterKeyCommands();
     
+    m_audioService->StopMusic();
 }
 
 void TestState::Update(Uint32 currentTime){
@@ -48,15 +51,19 @@ void TestState::Update(Uint32 currentTime){
         static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->Notify(&m_exitEvent);
     }
    */
+    
 }
 void TestState::Render(n8::Window* p_window){
-   // assert(screen);
+   m_renderService->SetDrawingColor(255, 0, 0, 255);
     
-    SDL_FillRect(SDL_GetWindowSurface(p_window->GetWindow()), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window->GetWindow())->format, 200,0,0));
-   
-    m_renderService->DrawSprite(static_cast<n8::Sprite*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("menu")),10,10);
-    //Update the surface
-    SDL_UpdateWindowSurface( p_window->GetWindow() );
+    //texture rendering
+    m_renderService->ColorBackground();
+    
+    m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,10);
+    
+    m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,80,100,100);
+    
+    m_renderService->PostToScreen();
     
 }
 
@@ -65,10 +72,9 @@ void TestState::RegisterEntity(Entity* newEntity){
 }
 
 void TestState::CreateSystems(){
-    //SystemManager::GetInstance()->RegisterSystem(RENDER_SYSTEM, new RenderSystem());
+    
 }
 
 void TestState::CreateEntities(){
     
-
 }

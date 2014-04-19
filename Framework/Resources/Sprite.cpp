@@ -31,7 +31,8 @@ Sprite::Sprite(std::string p_id, SDL_Surface* p_img) : Resource(p_id){
     
     assert(p_img);
 	m_image = p_img;
-	
+	m_width = m_image->w;
+    m_height = m_image->h;
 }
 
 /** Draws the sprite image to a destination SDL_Surface.
