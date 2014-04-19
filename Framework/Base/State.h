@@ -19,6 +19,7 @@
 #include "SDL2_image/SDL_image.h"
 
 #include "ID.h"
+#include "Window.h"
 
 class SDL_Window;
 
@@ -38,7 +39,7 @@ public:
     virtual void OnPause() = 0;
     
     virtual void Update(Uint32 currentTime) = 0;
-    virtual void Render(SDL_Window* window) = 0;
+    virtual void Render(Window* window) = 0;
     
 protected:
     Uint32 m_time;  /** < holds current game time > */

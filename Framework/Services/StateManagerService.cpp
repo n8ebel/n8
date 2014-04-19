@@ -69,10 +69,16 @@ bool n8::StateManagerService::RegisterState(EState::Values identifier, State* st
 bool n8::StateManagerService::PushState(EState::Values identifier){
     map<EState::Values, State*>::iterator ii = m_registeredStates.find(identifier);
     
+    //if there is a matching state to push
     if(ii != m_registeredStates.end()){
         
+        //if there is a current state pause it
+        if(m_stateStack.size() > 0){
+            m_stateStack[m_stateStack.size()-1]->OnPause();
+        }
+        
         m_stateStack.push_back(ii->second);
-        //m_stateStack.top()->OnResume();
+        m_stateStack[m_stateStack.size()-1]->OnResume();
         
         return true;
     }
@@ -135,7 +141,7 @@ ID n8::StateManagerService::GetCurrentStateId(){
  *  @param screen The screen canvas for rendering
  *
  */
-void n8::StateManagerService::ProcessState(Uint32 time, SDL_Window* screen){
+void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     
     if(time > 0 && screen){
     
@@ -161,8 +167,10 @@ void n8::StateManagerService::ProcessState(Uint32 time, SDL_Window* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){
+    cout << "ahhh" << endl;
     if(event->GetType() == EEvents::Values::Exit){
         m_stateStack.clear();
+        cout << "clearin" << endl;
     }
     else if(event->GetType() == EEvents::Values::Test2){
         m_stateStack.push_back(m_registeredStates[EState::Test2]);

@@ -1,0 +1,176 @@
+\hypertarget{classn8_1_1_sprite}{\section{n8\-:\-:Sprite Class Reference}
+\label{classn8_1_1_sprite}\index{n8\-::\-Sprite@{n8\-::\-Sprite}}
+}
+
+
+{\ttfamily \#include $<$Sprite.\-h$>$}
+
+Inheritance diagram for n8\-:\-:Sprite\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classn8_1_1_sprite}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classn8_1_1_sprite_a6cbe9ac58c5f03c898b8247b96852769}{$\sim$\-Sprite} ()
+\item 
+\hyperlink{classn8_1_1_sprite_a8c20ff646bf175ed1419bf85dac7368f}{Sprite} (std\-::string p\-\_\-id, S\-D\-L\-\_\-\-Surface $\ast$p\-\_\-img)
+\item 
+int \hyperlink{classn8_1_1_sprite_a7de2553c07f843b8fd6a1431342e463f}{Get\-Height} ()
+\item 
+int \hyperlink{classn8_1_1_sprite_a683b19b12bc8d3b655598666200b1387}{Get\-Width} ()
+\item 
+bool \hyperlink{classn8_1_1_sprite_a54005df4d27a045f844b0074b5e1b119}{Draw} (int p\-\_\-x, int p\-\_\-y, S\-D\-L\-\_\-\-Surface $\ast$p\-\_\-destination)
+\item 
+bool \hyperlink{classn8_1_1_sprite_a074384ce9bc2c0a5c7740c1d8faeb501}{Draw} (int p\-\_\-x, int p\-\_\-y, int p\-\_\-x2, int p\-\_\-y2, int p\-\_\-width, int p\-\_\-height, S\-D\-L\-\_\-\-Surface $\ast$p\-\_\-dest)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+S\-D\-L\-\_\-\-Surface $\ast$ \hyperlink{classn8_1_1_sprite_a8bbf98f385191ab5d756784ceac802b1}{m\-\_\-image}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classn8_1_1_sprite_aedde775898ebe0d7c84c0060e1c9d770}{Render\-Service}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An object to hold an optimzed S\-D\-L\-\_\-\-Surface image and provide access to it 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classn8_1_1_sprite_a6cbe9ac58c5f03c898b8247b96852769}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!$\sim$\-Sprite@{$\sim$\-Sprite}}
+\index{$\sim$\-Sprite@{$\sim$\-Sprite}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{$\sim$\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Sprite\-::$\sim$\-Sprite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_sprite_a6cbe9ac58c5f03c898b8247b96852769}
+Default Destructor 
+
+Frees the loaded S\-D\-L\-\_\-\-Surface which is pointed to by image\-\_\- \hypertarget{classn8_1_1_sprite_a8c20ff646bf175ed1419bf85dac7368f}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!Sprite@{Sprite}}
+\index{Sprite@{Sprite}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{Sprite}]{\setlength{\rightskip}{0pt plus 5cm}n8\-::\-Sprite\-::\-Sprite (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{p\-\_\-id, }
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{p\-\_\-img}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_sprite_a8c20ff646bf175ed1419bf85dac7368f}
+Constructor 
+
+Initializes id\-\_\- and image\-\_\- to passed values
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The unique identifier for the sprite. \\
+\hline
+{\em img} & The S\-D\-L\-\_\-\-Surface to store in the sprite object \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classn8_1_1_sprite_a54005df4d27a045f844b0074b5e1b119}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!Draw@{Draw}}
+\index{Draw@{Draw}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Sprite\-::\-Draw (
+\begin{DoxyParamCaption}
+\item[{int}]{p\-\_\-x, }
+\item[{int}]{p\-\_\-y, }
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{p\-\_\-destination}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_sprite_a54005df4d27a045f844b0074b5e1b119}
+Draws the sprite image to a destination S\-D\-L\-\_\-\-Surface.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x location where the source S\-D\-L\-\_\-\-Surface should be drawn \\
+\hline
+{\em y} & The y location where the source S\-D\-L\-\_\-\-Surface should be drawn \\
+\hline
+{\em destination} & The canvas S\-D\-L\-\_\-\-Surface that images are drawn to \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_sprite_a074384ce9bc2c0a5c7740c1d8faeb501}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!Draw@{Draw}}
+\index{Draw@{Draw}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}bool n8\-::\-Sprite\-::\-Draw (
+\begin{DoxyParamCaption}
+\item[{int}]{p\-\_\-x, }
+\item[{int}]{p\-\_\-y, }
+\item[{int}]{p\-\_\-x2, }
+\item[{int}]{p\-\_\-y2, }
+\item[{int}]{p\-\_\-width, }
+\item[{int}]{p\-\_\-height, }
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{p\-\_\-destination}
+\end{DoxyParamCaption}
+)}}\label{classn8_1_1_sprite_a074384ce9bc2c0a5c7740c1d8faeb501}
+Used to draw a section of the sprite image to the screen. The size of the sub-\/image is given along with the coordinates in the source image to take the sub image from. Specifying x2 = 0, y2=0, width = 50, height=50 would take the top left 50x50 portion of the source image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x location where the sub-\/image should be drawn \\
+\hline
+{\em y} & The y location where the sub-\/image should be drawn \\
+\hline
+{\em x2} & The x location for the sub-\/image to be taken from the source image \\
+\hline
+{\em y2} & The y location for the sub-\/image to be taken from the source image \\
+\hline
+{\em width} & The width of the sub-\/image \\
+\hline
+{\em height} & The height of the sub-\/image \\
+\hline
+{\em destination} & The canvas S\-D\-L\-\_\-\-Surface that images are drawn to \\
+\hline
+\end{DoxyParams}
+\hypertarget{classn8_1_1_sprite_a7de2553c07f843b8fd6a1431342e463f}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!Get\-Height@{Get\-Height}}
+\index{Get\-Height@{Get\-Height}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{Get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int n8\-::\-Sprite\-::\-Get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classn8_1_1_sprite_a7de2553c07f843b8fd6a1431342e463f}
+\begin{DoxyVerb}Used to get the image stored in the sprite so it can be drawn to the screen
+\end{DoxyVerb}
+
+
+\begin{DoxyReturn}{Returns}
+The S\-D\-L\-\_\-\-Surface stored with image\-\_\-
+\end{DoxyReturn}
+S\-D\-L\-\_\-\-Surface$\ast$ get\-\_\-image() \{return m\-\_\-image;\}Used to get the height of the sprite image
+
+\begin{DoxyReturn}{Returns}
+The height of the S\-D\-L\-\_\-\-Surface referenced by image\-\_\- 
+\end{DoxyReturn}
+\hypertarget{classn8_1_1_sprite_a683b19b12bc8d3b655598666200b1387}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!Get\-Width@{Get\-Width}}
+\index{Get\-Width@{Get\-Width}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{Get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int n8\-::\-Sprite\-::\-Get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classn8_1_1_sprite_a683b19b12bc8d3b655598666200b1387}
+Used to get the width of the sprite image
+
+\begin{DoxyReturn}{Returns}
+The width of the S\-D\-L\-\_\-\-Surface referenced by image\-\_\- 
+\end{DoxyReturn}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classn8_1_1_sprite_aedde775898ebe0d7c84c0060e1c9d770}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!Render\-Service@{Render\-Service}}
+\index{Render\-Service@{Render\-Service}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{Render\-Service}]{\setlength{\rightskip}{0pt plus 5cm}friend class Render\-Service\hspace{0.3cm}{\ttfamily [friend]}}}\label{classn8_1_1_sprite_aedde775898ebe0d7c84c0060e1c9d770}
+$<$ The image that can be drawn to a canvas 
+
+\subsection{Member Data Documentation}
+\hypertarget{classn8_1_1_sprite_a8bbf98f385191ab5d756784ceac802b1}{\index{n8\-::\-Sprite@{n8\-::\-Sprite}!m\-\_\-image@{m\-\_\-image}}
+\index{m\-\_\-image@{m\-\_\-image}!n8::Sprite@{n8\-::\-Sprite}}
+\subsubsection[{m\-\_\-image}]{\setlength{\rightskip}{0pt plus 5cm}S\-D\-L\-\_\-\-Surface$\ast$ n8\-::\-Sprite\-::m\-\_\-image\hspace{0.3cm}{\ttfamily [private]}}}\label{classn8_1_1_sprite_a8bbf98f385191ab5d756784ceac802b1}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Resources/\hyperlink{_sprite_8h}{Sprite.\-h}\item 
+Resources/\hyperlink{_sprite_8cpp}{Sprite.\-cpp}\end{DoxyCompactItemize}

@@ -13,10 +13,20 @@
 #define TAG "Game"
 
 /** Default Constructor */
-n8::Game::Game(){
+n8::Game::Game(const char* configFile){
     Log::Info(TAG, "Constructor");
+    
+    m_serviceManager = NULL;
+    m_windowWidth = 1;
+    m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
     m_quit = false;
+    
+    m_configPath = configFile;
+    
+    InitializeDirectoryPath();
+    ProcessConfigFile();
+    InitializeResourcesPath();
 }
 
 /** Destructor */
@@ -24,12 +34,22 @@ n8::Game::~Game(){
     
 }
 
+/** ProcessConfigFile
+ *  Reads and processes the configuration file
+ *  Needed information is saved to member variables so they can be used later
+ */
+ void n8::Game::ProcessConfigFile(){
+     
+}
+
 /** Shutdown
  *  Deletes registers game systems which in turn delete all other game data
  */
 void n8::Game::Shutdown(){
     
-    
+    Mix_Quit();
+    IMG_Quit();
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -40,7 +60,56 @@ void n8::Game::Init(){
     }
     else{
         Log::Info(TAG, "SDL Initializaed");
+        
+        //Initialize PNG loading
+        int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+        if( !( IMG_Init( imgFlags ) & imgFlags ) )
+        {
+            std::string msg( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+            Log::Error(TAG, msg);
+        }
+        else{
+            Log::Info(TAG, "SDL_Image Initialized");
+        }
+        
+        //Initialize SDL_mixer
+        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            std::string msg("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+            Log::Error(TAG, msg);
+            
+        }
+        else{
+            Log::Info(TAG, "SDL_Mixer Initialized");
+        }
+        
+        //Initialize SDL_ttf
+        if( TTF_Init() == -1 )
+        {
+            std::string msg( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+            Log::Error(TAG, msg);
+        }
+        else{
+            Log::Info(TAG, "SDL_ttf Initialized");
+        }
     }
+}
+
+void n8::Game::InitializeDirectoryPath() {
+    char* base_path = SDL_GetBasePath();
+    
+    if (base_path) {
+        m_directoryPath = SDL_strdup(base_path);
+        Log::Debug(TAG, "Project Directory: " + m_directoryPath);
+        SDL_free(base_path);
+    } else {
+        m_directoryPath = SDL_strdup("./");
+    }
+}
+
+void n8::Game::InitializeResourcesPath(){
+    m_resourcesListPath = m_directoryPath + RESOURCE_FILE_SUFFIX;
+    Log::Debug(TAG, "Resource list file path:" + m_resourcesListPath);
 }
 
 /** Setup
@@ -49,17 +118,21 @@ void n8::Game::Init(){
 void n8::Game::Setup(){
     Log::Create();
     
+    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
+    
     m_serviceManager = ServiceManager::GetInstance();
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
-    ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
+   // ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
+    RenderService* renderService = new RenderService(&m_window);
     
     inputService->AddObserver(stateManagerService);
     
     m_serviceManager->RegisterService(EService::Input, inputService);
     m_serviceManager->RegisterService(EService::StateManager, stateManagerService);
     m_serviceManager->RegisterService(EService::Resources, resourceManagerService);
+    m_serviceManager->RegisterService(EService::Render, renderService);
     
 }
 
@@ -80,7 +153,7 @@ void n8::Game::Start(){
         }
         
         //process state
-        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), m_window.GetWindow());
+        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), &m_window);
         
         
         m_timer.SyncGame(m_fps);  //ensures proper fps
