@@ -14,12 +14,19 @@
 
 n8::Window::Window(){
     m_screenSurface = NULL;
+    m_screenRenderer = NULL;
     m_window = NULL;
     ResizeWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 }
 
 n8::Window::~Window(){
-    SDL_DestroyWindow(m_window);
+    if(m_screenRenderer){
+        SDL_DestroyRenderer(m_screenRenderer);
+    }
+    
+    if(m_window){
+        SDL_DestroyWindow(m_window);
+    }
 }
 
 /** Resizes the screen to the specified dimensions
@@ -35,15 +42,6 @@ n8::Window::~Window(){
 void n8::Window::ResizeWindow(int w, int h){
     m_screenWidth = w;
     m_screenHeight = h;
-    
-    /*
-    if(m_background != NULL){
-        SDL_FreeSurface(m_background);
-    }
-    
-    m_background = SDL_SetVideoMode(m_screenWidth, m_screenHeight, DEFAULT_BPP, SDL_SWSURFACE );
-    assert(m_background);
-     */
     
     // create a window
     
@@ -61,7 +59,12 @@ void n8::Window::ResizeWindow(int w, int h){
                                            
                                            0           // flags
                                            
-                                           );
+           
+                                );
+    
+    m_screenSurface = SDL_GetWindowSurface(m_window);
+    
+    m_screenRenderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_ACCELERATED );
 
 }
 
@@ -69,17 +72,16 @@ void n8::Window::ResizeWindow(int w, int h){
  *  @return a pointer to the background surface
  */
 SDL_Surface* n8::Window::GetSurface() const{
-    /*
-    SDL_Surface* surface = SDL_GetWindowSurface(m_window);
-    assert(surface);
-    return surface;
-     */
-    
     assert(m_window);
-    return SDL_GetWindowSurface(m_window);
+    return m_screenSurface;
 }
 
-SDL_Window* n8::Window::GetWindow(){
+SDL_Renderer* n8::Window::GetRenderer() const{
+    assert(m_screenRenderer);
+    return m_screenRenderer;
+}
+
+SDL_Window* n8::Window::GetWindow() const{
     assert(m_window);
     return m_window;
 }

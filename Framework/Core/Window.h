@@ -28,14 +28,15 @@ public:
     void SetTitle(char* caption);
     void ResizeWindow(int w, int h);
     SDL_Surface* GetSurface() const;
-    SDL_Window* GetWindow();
+    SDL_Window* GetWindow() const;
+    SDL_Renderer* GetRenderer() const;
     
 private:
     
     unsigned m_screenWidth;  /** < width of the screen surface **/
     unsigned m_screenHeight; /** < height of the screen surface **/
     SDL_Surface* m_screenSurface;  /** < surface to render things to **/
-    
+    SDL_Renderer* m_screenRenderer; /** < The window renderer **/
     SDL_Window* m_window;
     
     

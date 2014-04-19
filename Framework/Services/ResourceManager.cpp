@@ -73,6 +73,20 @@ void n8::ResourceManager::LoadResources(){
             LoadSprite(imagePath,imageID);
         }
         
+        // Get Textures
+        tinyxml2::XMLElement* textureElements = root->FirstChildElement( TEXTURE_RESOURCES_TAG.c_str() );
+        
+        tinyxml2::XMLElement* textureElement = textureElements->FirstChildElement(TEXTURE_TAG.c_str());
+        for( textureElement; textureElement; textureElement = textureElement->NextSiblingElement()){
+            
+            idElement = textureElement->FirstChildElement(ID_TAG.c_str());
+            std::string texturePath = textureElement->GetText();
+            std::string textureID = idElement->GetText();
+            
+            Log::Debug( TAG,"Loading Texture: " + texturePath + " with ID: " + textureID );
+            LoadTexture(texturePath,textureID);
+        }
+        
         // Get SoundEffects
         tinyxml2::XMLElement* soundEffectElements = root->FirstChildElement( SOUND_EFFECT_RESOURCES_TAG.c_str() );
         
@@ -174,7 +188,7 @@ SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
 
 
 /**
- *  Loads Sprite resources.  Currently not implemented.
+ *  Loads Sprite resources.
  */
 void n8::ResourceManager::LoadSprite(std::string p_filename, std::string p_id){
     SDL_Surface* spriteImage = LoadOptimizedImage(p_filename);
@@ -189,10 +203,36 @@ void n8::ResourceManager::LoadSprite(std::string p_filename, std::string p_id){
 }
 
 /** 
- *  Loads Texture resources.  Currently not implemented
+ *  Loads Texture resources.
  */
 void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
+    SDL_Texture* texture = NULL;
     
+    //Load image at specified path
+    SDL_Surface* loadedSurface = IMG_Load( p_filename.c_str() );
+    if( loadedSurface == NULL )
+    {
+        std::string msg("  Unable to load texture " + p_filename + " SDL_image Error: " + IMG_GetError() );
+        Log::Error(TAG, msg);
+    }
+    else
+    {
+        //Create texture from surface pixels
+        texture = SDL_CreateTextureFromSurface( m_gameWindow->GetRenderer(), loadedSurface );
+        if( texture == NULL )
+        {
+            std::string msg( "  Unable to create texture from " + p_filename + "SDL Error: " +SDL_GetError() );
+            Log::Error(TAG, msg);
+        }
+        
+        //Get rid of old loaded surface
+        SDL_FreeSurface( loadedSurface );
+    }
+    
+    if (texture != NULL) {
+        m_loadedResources[p_id] = new Texture(p_filename, texture);
+        Log::Debug(TAG, "  Successfully loaded texture: " + p_filename);
+    }
 }
 
 /** Loads music resources

@@ -24,6 +24,7 @@
 #include "Event.h"
 #include "Resource.h"
 #include "Sprite.h"
+#include "Texture.h"
 #include "SoundEffect.h"
 #include "Music.h"
 #include "Font.h"
