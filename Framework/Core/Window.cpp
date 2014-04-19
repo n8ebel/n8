@@ -22,10 +22,17 @@ n8::Window::Window(){
 n8::Window::~Window(){
     if(m_screenRenderer){
         SDL_DestroyRenderer(m_screenRenderer);
+        m_screenRenderer = NULL;
     }
     
     if(m_window){
         SDL_DestroyWindow(m_window);
+        m_window = NULL;
+        
+        if(m_screenSurface){
+            SDL_FreeSurface(m_screenSurface);
+            m_screenSurface = NULL;
+        }
     }
 }
 
@@ -65,6 +72,9 @@ void n8::Window::ResizeWindow(int w, int h){
     m_screenSurface = SDL_GetWindowSurface(m_window);
     
     m_screenRenderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_ACCELERATED );
+    
+    //Initialize renderer color
+    SDL_SetRenderDrawColor( m_screenRenderer, m_rendererR, m_rendererG, m_rendererB, m_renererA );
 
 }
 
