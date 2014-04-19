@@ -15,6 +15,7 @@
 
 #include "State.h"
 #include "Event.h"
+#include "RenderService.h"
 #include "InputService.h"
 #include "StateManagerService.h"
 #include "ResourceManager.h"
@@ -44,6 +45,8 @@ private:
     virtual void CreateEntities();
     
     n8::InputService* m_inputService;
+    n8::RenderService* m_renderService;
+    
     n8::Event m_exitEvent;
     
 };

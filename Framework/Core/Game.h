@@ -23,6 +23,7 @@
 
 #include "ServiceManager.h"
 #include "Log.h"
+#include "RenderService.h"
 #include "InputService.h"
 #include "StateManagerService.h"
 //#include "ResourceManager.h"

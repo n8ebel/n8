@@ -17,6 +17,7 @@ using namespace std;
 TestState::TestState() : m_exitEvent(EEvents::Test2){
     //m_id = new ID(GAME_STATE);
     m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
+    m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(EService::Render));
                                                     
     CreateSystems();
     CreateEntities();
@@ -52,9 +53,8 @@ void TestState::Render(n8::Window* p_window){
    // assert(screen);
     
     SDL_FillRect(SDL_GetWindowSurface(p_window->GetWindow()), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window->GetWindow())->format, 200,0,0));
-   /*
-    static_cast<n8::Sprite*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("menu.png"))->Draw(20,20,SDL_GetWindowSurface(p_window));
-    */
+   
+    m_renderService->DrawSprite(static_cast<n8::Sprite*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("menu")),10,10);
     //Update the surface
     SDL_UpdateWindowSurface( p_window->GetWindow() );
     

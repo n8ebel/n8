@@ -125,13 +125,14 @@ void n8::Game::Setup(){
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
    // ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
-    
+    RenderService* renderService = new RenderService(&m_window);
     
     inputService->AddObserver(stateManagerService);
     
     m_serviceManager->RegisterService(EService::Input, inputService);
     m_serviceManager->RegisterService(EService::StateManager, stateManagerService);
     m_serviceManager->RegisterService(EService::Resources, resourceManagerService);
+    m_serviceManager->RegisterService(EService::Render, renderService);
     
 }
 
