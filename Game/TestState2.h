@@ -12,6 +12,8 @@
 #include <iostream>
 
 #include "State.h"
+#include "InputService.h"
+#include "PopStateCommand.h"
 
 class Entity;
 
@@ -31,6 +33,8 @@ public:
 private:
     virtual void CreateSystems();
     virtual void CreateEntities();
+    
+    n8::InputService* m_inputService;
     
 };
 

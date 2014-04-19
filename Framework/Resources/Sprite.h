@@ -49,6 +49,8 @@ public:
 private:
     
 	SDL_Surface* m_image;  /** < The image that can be drawn to a canvas  **/
+    int m_width;
+    int m_height;
     
     friend class RenderService;
 };

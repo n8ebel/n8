@@ -11,6 +11,7 @@ var searchData=
   ['getid',['GetId',['../class_i_d.html#ae804d9569ccff108c70ac2047a96c17f',1,'ID::GetId()'],['../classn8_1_1_resource.html#a18baa304ac93bd0b94b368ae64282f54',1,'n8::Resource::GetId()'],['../classn8_1_1_state.html#adbb6b659c390b191bb61f0e160e93eec',1,'n8::State::GetId()']]],
   ['getinstance',['GetInstance',['../class_singleton.html#a9460c2b31ff4dd9f7d022b0fff0afda4',1,'Singleton']]],
   ['getnextid',['GetNextId',['../classn8_1_1_object_factory.html#a1f79e646d459d001f62f1920c323e204',1,'n8::ObjectFactory']]],
+  ['getrenderer',['GetRenderer',['../classn8_1_1_window.html#a9786d6e49839a835018eb358638508f7',1,'n8::Window']]],
   ['getresource',['GetResource',['../classn8_1_1_resource_manager.html#a0d9c23c34a44338e53add156a88260bd',1,'n8::ResourceManager']]],
   ['getservice',['GetService',['../classn8_1_1_service_manager.html#a050b710ab08a641c6562898409afae02',1,'n8::ServiceManager']]],
   ['getstacksize',['GetStackSize',['../classn8_1_1_state_manager_service.html#ac553d556b5c925025252719d4319b3de',1,'n8::StateManagerService']]],
@@ -20,5 +21,5 @@ var searchData=
   ['gettime',['GetTime',['../classn8_1_1_timer.html#aa3e91a189e9c7dc1b54b79a177398638',1,'n8::Timer']]],
   ['gettype',['GetType',['../classn8_1_1_event.html#a8298170bd089652972f44c92d6c0c21d',1,'n8::Event']]],
   ['getwidth',['GetWidth',['../classn8_1_1_sprite.html#a683b19b12bc8d3b655598666200b1387',1,'n8::Sprite']]],
-  ['getwindow',['GetWindow',['../classn8_1_1_window.html#ae218e0dcdc9081e835cb3a136a7e39e5',1,'n8::Window']]]
+  ['getwindow',['GetWindow',['../classn8_1_1_window.html#a2c92b3ed7cea52caf0e7cbb3cd0fc08a',1,'n8::Window']]]
 ];

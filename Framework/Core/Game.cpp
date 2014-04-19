@@ -126,6 +126,7 @@ void n8::Game::Setup(){
     StateManagerService* stateManagerService = new StateManagerService();
    // ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
     RenderService* renderService = new RenderService(&m_window);
+    AudioService* audioService = new AudioService();
     
     inputService->AddObserver(stateManagerService);
     
@@ -133,6 +134,7 @@ void n8::Game::Setup(){
     m_serviceManager->RegisterService(EService::StateManager, stateManagerService);
     m_serviceManager->RegisterService(EService::Resources, resourceManagerService);
     m_serviceManager->RegisterService(EService::Render, renderService);
+    m_serviceManager->RegisterService(EService::Audio, audioService);
     
 }
 
