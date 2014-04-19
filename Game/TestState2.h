@@ -24,7 +24,7 @@ public:
     virtual void OnPause();
     
     virtual void Update(Uint32 currentTime);
-    virtual void Render(SDL_Window* img);
+    virtual void Render(n8::Window* img);
     
     virtual void RegisterEntity(Entity* newEntity);
     
