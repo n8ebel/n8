@@ -118,7 +118,7 @@ void n8::Game::InitializeResourcesPath(){
 void n8::Game::Setup(){
     Log::Create();
     
-    ResourceManager* resourceManagerService = new ResourceManager(m_window.GetSurface(), m_resourcesListPath.c_str());
+    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
     
     m_serviceManager = ServiceManager::GetInstance();
     
@@ -152,7 +152,7 @@ void n8::Game::Start(){
         }
         
         //process state
-        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), m_window.GetWindow());
+        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), &m_window);
         
         
         m_timer.SyncGame(m_fps);  //ensures proper fps

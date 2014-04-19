@@ -34,10 +34,10 @@ void TestState2::OnPause(){
 void TestState2::Update(Uint32 currentTime){
     
 }
-void TestState2::Render(SDL_Window* p_window){
+void TestState2::Render(n8::Window* p_window){
     //assert(screen);
     
-    SDL_FillRect(SDL_GetWindowSurface(p_window), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window)->format, 0,200,0));
+    SDL_FillRect(SDL_GetWindowSurface(p_window->GetWindow()), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window->GetWindow())->format, 0,200,0));
     /*
     //Make a temporary rectangle to hold the offsets
     SDL_Rect offset;
@@ -55,7 +55,7 @@ void TestState2::Render(SDL_Window* p_window){
     
     //SDL_Flip(screen);
     //Update the surface
-    SDL_UpdateWindowSurface( p_window );
+    SDL_UpdateWindowSurface( p_window->GetWindow() );
     
 }
 

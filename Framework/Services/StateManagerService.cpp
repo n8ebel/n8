@@ -141,7 +141,7 @@ ID n8::StateManagerService::GetCurrentStateId(){
  *  @param screen The screen canvas for rendering
  *
  */
-void n8::StateManagerService::ProcessState(Uint32 time, SDL_Window* screen){
+void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     
     if(time > 0 && screen){
     

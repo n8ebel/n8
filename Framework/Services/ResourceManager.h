@@ -27,6 +27,7 @@
 #include "SoundEffect.h"
 #include "Music.h"
 #include "Font.h"
+#include "Window.h"
 
 //class Resource;
 
@@ -41,7 +42,7 @@ namespace n8{
      */
     class ResourceManager : public Service{
     public:
-        ResourceManager(SDL_Surface* screen, std::string path);
+        ResourceManager(Window* p_window, std::string p_path);
         ~ResourceManager();
         
         Resource* GetResource(std::string);
@@ -53,11 +54,13 @@ namespace n8{
     private:
         const std::string RESOURCES_TAG = "Resources";
         const std::string IMAGE_RESOURCES_TAG = "ImageResources";
+        const std::string TEXTURE_RESOURCES_TAG = "TextureResources";
         const std::string SOUND_EFFECT_RESOURCES_TAG = "SoundEffectResources";
         const std::string MUSIC_RESOURCES_TAG = "MusicResources";
         const std::string FONT_RESOURCES_TAG = "FontResources";
         
         const std::string IMAGE_TAG = "Image";
+        const std::string TEXTURE_TAG = "Texture";
         const std::string SOUND_EFFECT_TAG = "SoundEffect";
         const std::string MUSIC_TAG = "Music";
         const std::string FONT_TAG = "Font";
@@ -80,7 +83,9 @@ namespace n8{
         */
         
         std::map<std::string,Resource*> m_loadedResources;  /**< Stores all images loaded by the system  */
-        SDL_Surface* m_screenSurface;  /**< Stores pointer to the game's screen surface.  Used to load optimized versions of images */
+        
+        Window* m_gameWindow;
+        //SDL_Surface* m_screenSurface;  /**< Stores pointer to the game's screen surface.  Used to load optimized versions of images */
         
         SDL_Surface* LoadOptimizedImage(std::string filename);
         

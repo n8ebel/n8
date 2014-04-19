@@ -13,11 +13,12 @@
 
 #define TAG "ResourceManager"
 
-n8::ResourceManager::ResourceManager(SDL_Surface* screen, std::string path) {
+n8::ResourceManager::ResourceManager(Window* p_window, std::string path) {
 	// TODO Auto-generated constructor stub
     
     
-    m_screenSurface = screen;
+    m_gameWindow = p_window;
+    //m_screenSurface = screen;
     
     m_resourcesListPath = path;
     
@@ -155,7 +156,7 @@ SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
     else
 	{
         //Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_screenSurface->format, NULL );
+		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_gameWindow->GetSurface()->format, NULL );
 		if( optimizedSurface == NULL )
 		{
 			Log::Error(TAG, "  Failed to load optimized version of: " + filename);
