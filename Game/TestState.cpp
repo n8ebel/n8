@@ -50,13 +50,16 @@ void TestState::Update(Uint32 currentTime){
    */
 }
 void TestState::Render(n8::Window* p_window){
-   // assert(screen);
+   m_renderService->SetDrawingColor(255, 0, 0, 255);
     
-    SDL_FillRect(SDL_GetWindowSurface(p_window->GetWindow()), NULL, SDL_MapRGB(SDL_GetWindowSurface(p_window->GetWindow())->format, 200,0,0));
-   
-    m_renderService->DrawSprite(static_cast<n8::Sprite*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("menu")),10,10);
-    //Update the surface
-    SDL_UpdateWindowSurface( p_window->GetWindow() );
+    //texture rendering
+    m_renderService->ColorBackground();
+    
+    m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,10);
+    
+    m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,80,100,100);
+    
+    m_renderService->PostToScreen();
     
 }
 

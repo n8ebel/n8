@@ -207,6 +207,8 @@ void n8::ResourceManager::LoadSprite(std::string p_filename, std::string p_id){
  */
 void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     SDL_Texture* texture = NULL;
+    int texW = 0;
+    int texH = 0;
     
     //Load image at specified path
     SDL_Surface* loadedSurface = IMG_Load( p_filename.c_str() );
@@ -225,12 +227,14 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
             Log::Error(TAG, msg);
         }
         
+        texW = loadedSurface->w;
+        texH = loadedSurface->h;
         //Get rid of old loaded surface
         SDL_FreeSurface( loadedSurface );
     }
     
     if (texture != NULL) {
-        m_loadedResources[p_id] = new Texture(p_filename, texture);
+        m_loadedResources[p_id] = new Texture(p_filename, texture, texW, texH);
         Log::Debug(TAG, "  Successfully loaded texture: " + p_filename);
     }
 }

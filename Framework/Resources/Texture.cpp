@@ -10,8 +10,10 @@
 
 #include "Texture.h"
 
-n8::Texture::Texture(std::string p_id, SDL_Texture* p_texture): Resource(p_id){
+n8::Texture::Texture(std::string p_id, SDL_Texture* p_texture, int p_w, int p_h): Resource(p_id){
     m_texture = p_texture;
+    m_width = p_w;
+    m_height = p_h;
 }
 
 n8::Texture::~Texture(){

@@ -12,6 +12,8 @@
 #include "ServiceManager.h"
 #include "Log.h"
 
+#define TAG "Window"
+
 n8::Window::Window(){
     m_screenSurface = NULL;
     m_screenRenderer = NULL;
@@ -68,13 +70,34 @@ void n8::Window::ResizeWindow(int w, int h){
                                            
            
                                 );
+    if( m_window == NULL )
+    {
+        std::string msg("Window could not be created: SDL Error: %s\n", SDL_GetError() );
+        Log::Error(TAG, msg);
+        assert(m_window);
+    }
     
     m_screenSurface = SDL_GetWindowSurface(m_window);
+    if( m_screenSurface == NULL )
+    {
+        std::string msg("Could not get screen surface: SDL Error: %s\n", SDL_GetError() );
+        Log::Error(TAG, msg);
+        assert(m_screenSurface);
+    }
     
-    m_screenRenderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_ACCELERATED );
+    m_screenRenderer = SDL_GetRenderer(m_window);
+    if( m_screenRenderer == NULL )
+    {
+        std::string msg("Could not get renderer: SDL Error: %s\n", SDL_GetError() );
+        Log::Error(TAG, msg);
+        assert(m_screenRenderer);
+    }
+    else{
+        //Initialize renderer color
+        SDL_SetRenderDrawColor( m_screenRenderer, m_rendererR, m_rendererG, m_rendererB, m_renererA );
+    }
     
-    //Initialize renderer color
-    SDL_SetRenderDrawColor( m_screenRenderer, m_rendererR, m_rendererG, m_rendererB, m_renererA );
+    
 
 }
 
