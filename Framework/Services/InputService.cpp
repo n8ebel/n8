@@ -27,6 +27,8 @@ n8::InputService::InputService(){
         m_registeredKeyDownCommands[i] = NULL;
         m_registeredKeyUpCommands[i] = NULL;
     }
+    
+    m_mouseMoveCommand=NULL;
 }
 
 /** Default destructor */
@@ -71,6 +73,14 @@ void n8::InputService::HandleInput(){
             
 			
 		}
+        if( m_event->type == SDL_MOUSEMOTION  )
+        {
+            if(m_mouseMoveCommand){
+                m_mouseMoveCommand->execute();
+            }
+        
+        }
+        // m_event->type == SDL_MOUSEBUTTONDOWN || m_event->type == SDL_MOUSEBUTTONUP
     }
 }
 
@@ -148,6 +158,14 @@ bool n8::InputService::KeyIsUp(SDL_Event* event,int key){
     
     return false;
     
+}
+
+void n8::InputService::RegisterMouseMoveCommand(Command* p_command){
+    m_mouseMoveCommand = p_command;
+}
+
+void n8::InputService::UnregisterMouseMoveCommand(){
+    m_mouseMoveCommand = NULL;
 }
 
 void n8::InputService::OnNotify(Event* event){

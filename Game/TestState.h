@@ -24,8 +24,11 @@
 #include "ServiceManager.h"
 #include "PopStateCommand.h"
 #include "PushStateCommand.h"
+#include "MouseMoveCommand.h"
 
 #include "Sprite.h"
+
+#include "Button.h"
 
 class Entity;
 
@@ -51,6 +54,8 @@ private:
     n8::AudioService* m_audioService;
     
     n8::Event m_exitEvent;
+    
+    gui::Button* m_button;
     
 };
 #endif
