@@ -142,7 +142,7 @@ void n8::Game::Setup(){
  *  Starts the game loop
  */
 void n8::Game::Start(){
-   
+    
     m_timer.UpdateCurrentTime();
     while (m_quit == false) {
         
