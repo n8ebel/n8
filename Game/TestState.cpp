@@ -25,7 +25,9 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
 }
 
 TestState::~TestState(){
-    
+    if(m_button){
+        delete m_button;
+    }
 }
 
 
@@ -35,6 +37,11 @@ void TestState::OnResume(){
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
     m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
+    
+    m_button = new gui::Button( 50,50,100,50);
+    m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(m_button));
+    
+    
     
 }
 
@@ -53,6 +60,7 @@ void TestState::Update(Uint32 currentTime){
    */
     
 }
+
 void TestState::Render(n8::Window* p_window){
    m_renderService->SetDrawingColor(255, 0, 0, 255);
     
@@ -63,8 +71,10 @@ void TestState::Render(n8::Window* p_window){
     
     m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,80,100,100);
     
-    m_renderService->PostToScreen();
     
+   m_button->Draw(p_window);
+    
+    m_renderService->PostToScreen();
 }
 
 void TestState::RegisterEntity(Entity* newEntity){

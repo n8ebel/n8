@@ -40,6 +40,9 @@ public:
     
     void UnregisterKeyCommands();
     
+    void RegisterMouseMoveCommand(Command*);
+    void UnregisterMouseMoveCommand();
+    
     void OnNotify(Event* event);
 private:
     
@@ -52,6 +55,8 @@ private:
     
     bool KeyIsDown(SDL_Event* event, int key);
     bool KeyIsUp(SDL_Event* event, int key);
+    
+    Command* m_mouseMoveCommand;
     
 };
 
