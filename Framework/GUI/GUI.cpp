@@ -16,8 +16,18 @@ gui::GUI::~GUI(){
     
 }
 
-void gui::GUI::CheckMouse(){
-    for (int i = 0; i < m_widgets.size(); i++) {
-        m_widgets[i]->CheckMouse();
+void gui::GUI::AddElement(gui::Widget* p_newWidget){
+    m_guiElements.push_back(p_newWidget);
+}
+
+void gui::GUI::Process(){
+    for (int i = 0; i < m_guiElements.size(); i++) {
+        m_guiElements[i]->CheckMouse();
+    }
+}
+
+void gui::GUI::Draw(n8::Window* p_window){
+    for (int i = 0; i < m_guiElements.size(); i++) {
+        m_guiElements[i]->Draw(p_window);
     }
 }

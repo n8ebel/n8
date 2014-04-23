@@ -25,8 +25,11 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
 }
 
 TestState::~TestState(){
-    if(m_button){
-        delete m_button;
+    if(m_button1){
+        delete m_button1;
+    }
+    if(m_button2){
+        delete m_button2;
     }
 }
 
@@ -38,10 +41,13 @@ void TestState::OnResume(){
     
     m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
     
-    m_button = new gui::Button( 50,50,100,50);
-    m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(m_button));
+    m_button1 = new gui::Button( 50,50,100,50);
+    m_button2 = new gui::Button( 150,50,100,50);
+    //m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(m_button1));
     
     
+    m_gui.AddElement(m_button1);
+    m_gui.AddElement(m_button2);
     
 }
 
@@ -58,7 +64,7 @@ void TestState::Update(Uint32 currentTime){
         static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->Notify(&m_exitEvent);
     }
    */
-    
+    m_gui.Process();
 }
 
 void TestState::Render(n8::Window* p_window){
@@ -72,7 +78,7 @@ void TestState::Render(n8::Window* p_window){
     m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,80,100,100);
     
     
-   m_button->Draw(p_window);
+    m_gui.Draw(p_window);
     
     m_renderService->PostToScreen();
 }

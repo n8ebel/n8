@@ -18,10 +18,11 @@
 #include "SDL2_ttf/SDL_ttf.h"
 
 #include "Window.h"
+#include "Widget.h"
 
 namespace gui{
 
-class Button{
+    class Button : public Widget{
 public:
     Button(int p_x, int p_y, int p_w, int p_h);
     ~Button();

@@ -12,18 +12,21 @@
 #include <iostream>
 #include <vector>
 
+#include "Window.h"
 #include "Container.h"
 
 namespace gui{
-    class GUI : public Container{
+    class GUI {
     public:
         GUI();
         ~GUI();
         
-        void CheckMouse();
+        void AddElement(Widget*);
+        void Process();
+        void Draw(n8::Window*);
         
     private:
-        
+        std::vector<Widget*> m_guiElements;
         
     };
 }

@@ -28,6 +28,7 @@
 
 #include "Sprite.h"
 
+#include "GUI.h"
 #include "Button.h"
 
 class Entity;
@@ -55,7 +56,9 @@ private:
     
     n8::Event m_exitEvent;
     
-    gui::Button* m_button;
+    gui::GUI m_gui;
+    gui::Button* m_button1;
+    gui::Button* m_button2;
     
 };
 #endif
