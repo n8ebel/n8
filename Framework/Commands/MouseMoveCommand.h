@@ -22,7 +22,7 @@ namespace n8{
         MouseMoveCommand(gui::Button*);
         
         ~MouseMoveCommand();
-        virtual void execute();
+        virtual bool execute();
         
     private:
         gui::Button* m_button;

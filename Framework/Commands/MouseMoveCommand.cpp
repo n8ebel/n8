@@ -16,7 +16,8 @@ n8::MouseMoveCommand::~MouseMoveCommand(){
     
 }
 
-void n8::MouseMoveCommand::execute(){
+bool n8::MouseMoveCommand::execute(){
     m_button->CheckMouse();
     
+    return true;
 }

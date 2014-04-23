@@ -16,8 +16,9 @@ n8::PushStateCommand::~PushStateCommand(){
     
 }
 
-void n8::PushStateCommand::execute(){
+bool n8::PushStateCommand::execute(){
     
     static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->PushState(m_state);
     
+    return true;
 }

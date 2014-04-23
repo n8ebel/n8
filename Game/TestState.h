@@ -12,6 +12,7 @@
 #define __goobar__GameState__
 
 #include <iostream>
+#include <vector>
 
 #include "State.h"
 #include "Event.h"
@@ -25,6 +26,7 @@
 #include "PopStateCommand.h"
 #include "PushStateCommand.h"
 #include "MouseMoveCommand.h"
+#include "MouseClickCommand.h"
 
 #include "Sprite.h"
 

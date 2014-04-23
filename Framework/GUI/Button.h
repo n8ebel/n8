@@ -28,7 +28,7 @@ public:
     ~Button();
     
     void Draw(n8::Window*);
-    void CheckMouse();
+    bool CheckMouse();
     
 private:
     SDL_Texture* m_texture;

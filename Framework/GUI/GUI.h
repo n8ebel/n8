@@ -22,7 +22,7 @@ namespace gui{
         ~GUI();
         
         void AddElement(Widget*);
-        void Process();
+        bool CheckClick();
         void Draw(n8::Window*);
         
     private:

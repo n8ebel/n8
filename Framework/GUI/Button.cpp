@@ -23,7 +23,7 @@ gui::Button::~Button(){
     
 }
 
-void gui::Button::CheckMouse(){
+bool gui::Button::CheckMouse(){
     int x,y;
     SDL_GetMouseState(&x, &y);
     
@@ -33,6 +33,8 @@ void gui::Button::CheckMouse(){
     else{
         m_hover = false;
     }
+    
+    return false;
 }
 
 void gui::Button::Draw(n8::Window* p_window){

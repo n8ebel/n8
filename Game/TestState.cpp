@@ -15,7 +15,7 @@
 using namespace std;
 
 TestState::TestState() : m_exitEvent(EEvents::Test2){
-    //m_id = new ID(GAME_STATE);
+    
     m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
     m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(EService::Render));
     m_audioService = static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(EService::Audio));
@@ -36,51 +36,43 @@ TestState::~TestState(){
 
 
 void TestState::OnResume(){
+
+    //register key commands
     m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PushStateCommand(EState::Test2));
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
-    m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
-    
+//build user interface
     m_button1 = new gui::Button( 50,50,100,50);
     m_button2 = new gui::Button( 150,50,100,50);
-    //m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(m_button1));
-    
     
     m_gui.AddElement(m_button1);
     m_gui.AddElement(m_button2);
     
+//start music
+    m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
 }
 
 void TestState::OnPause(){
     m_inputService->UnregisterKeyCommands();
+    m_inputService->UnregisterMouseButtonDownCommand();
+    m_inputService->UnregisterMouseMoveCommand();
     
     m_audioService->StopMusic();
 }
 
 void TestState::Update(Uint32 currentTime){
-    /*
-    cout << "updating" << endl;
-    if (m_inputService->KeyIsDown(SDLK_SPACE)) {
-        static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->Notify(&m_exitEvent);
-    }
-   */
-    m_gui.Process();
+    
 }
 
 void TestState::Render(n8::Window* p_window){
-   m_renderService->SetDrawingColor(255, 0, 0, 255);
+    m_renderService->SetDrawingColor(255, 0, 0, 255);  //set background color
     
-    //texture rendering
-    m_renderService->ColorBackground();
     
-    m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,10);
-    
-    m_renderService->Draw(static_cast<n8::Texture*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("sayainTexture")),10,80,100,100);
-    
+    m_renderService->ColorBackground();  //color the background
     
     m_gui.Draw(p_window);
     
-    m_renderService->PostToScreen();
+    m_renderService->PostToScreen();  //draw everything to the screen
 }
 
 void TestState::RegisterEntity(Entity* newEntity){

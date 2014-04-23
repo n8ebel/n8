@@ -24,7 +24,7 @@ public:
     PushStateCommand(EState::Values);
     
     ~PushStateCommand();
-    virtual void execute();
+    virtual bool execute();
     
 private:
     EState::Values m_state;
