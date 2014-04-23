@@ -37,19 +37,25 @@ TestState::~TestState(){
 
 void TestState::OnResume(){
 
-    //register key commands
+    //register input commands
     m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PushStateCommand(EState::Test2));
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
+    std::vector<n8::PositionCommand*> commands;
+    commands.push_back(new n8::ClickGUICommand(&m_gui));
+    m_inputService->RegisterMouseButtonDownCommand(new n8::MouseClickCommand(commands));
+    
+    m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(&m_gui));
+    
 //build user interface
-    m_button1 = new gui::Button( 50,50,100,50);
-    m_button2 = new gui::Button( 150,50,100,50);
+    m_button1 = new gui::Button("button1", 50,50,100,50, NULL);
+    m_button2 = new gui::Button("button2", 150,50,100,50, NULL);
     
     m_gui.AddElement(m_button1);
     m_gui.AddElement(m_button2);
     
 //start music
-    m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
+    //m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
 }
 
 void TestState::OnPause(){

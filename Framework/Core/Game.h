@@ -10,6 +10,7 @@
 #define GAME_H
 
 #include <iostream>
+#include <sstream>
 /*
 #include "SDL/SDL.h"
 #include "SDL_image/SDL_image.h"

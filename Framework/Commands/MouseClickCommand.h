@@ -12,23 +12,22 @@
 #include <iostream>
 #include <vector>
 
-#include "Command.h"
+#include "PositionCommand.h"
 #include "Button.h"
 
 namespace n8{
     
-    class MouseClickCommand : public Command {
+    class MouseClickCommand : public PositionCommand {
         
     public:
-        MouseClickCommand(std::vector<Command*>&);
-        MouseClickCommand(Command*);
+        MouseClickCommand(std::vector<PositionCommand*>&);
         
         ~MouseClickCommand();
         virtual bool execute();
+        bool execute(int p_x, int p_y);
         
     private:
-        std::vector<Command*> m_commands;
-        Command* m_command;
+        std::vector<PositionCommand*> m_commands;
         
     };
     

@@ -20,9 +20,19 @@ void gui::GUI::AddElement(gui::Widget* p_newWidget){
     m_guiElements.push_back(p_newWidget);
 }
 
-bool gui::GUI::CheckClick(){
+bool gui::GUI::CheckClick(int p_x, int p_y){
     for (int i = 0; i < m_guiElements.size(); i++) {
-        if( m_guiElements[i]->CheckMouse() ){
+        if( m_guiElements[i]->CheckMouseClick(p_x,p_y) ){
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool gui::GUI::CheckMove(){
+    for (int i = 0; i < m_guiElements.size(); i++) {
+        if( m_guiElements[i]->CheckMouseMove() ){
             return true;
         }
     }

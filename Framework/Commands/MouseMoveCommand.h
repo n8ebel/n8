@@ -12,20 +12,20 @@
 #include <iostream>
 
 #include "Command.h"
-#include "Button.h"
+#include "GUI.h"
 
 namespace n8{
     
     class MouseMoveCommand : public Command {
         
     public:
-        MouseMoveCommand(gui::Button*);
+        MouseMoveCommand(gui::GUI*);
         
         ~MouseMoveCommand();
         virtual bool execute();
         
     private:
-        gui::Button* m_button;
+        gui::GUI* m_gui;
         
     };
     

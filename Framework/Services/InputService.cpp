@@ -28,7 +28,8 @@ n8::InputService::InputService(){
         m_registeredKeyUpCommands[i] = NULL;
     }
     
-    m_mouseMoveCommand=NULL;
+    m_mouseMoveCommand = NULL;
+    m_mouseButtonDownCommand = NULL;
 }
 
 /** Default destructor */
@@ -82,7 +83,9 @@ void n8::InputService::HandleInput(){
         }
         if( m_event->type == SDL_MOUSEBUTTONDOWN){
             if(m_mouseButtonDownCommand){
-                m_mouseButtonDownCommand->execute();
+                int x,y;
+                SDL_GetMouseState(&x, &y);
+                m_mouseButtonDownCommand->execute(x,y);
             }
         }
         //|| m_event->type == SDL_MOUSEBUTTONUP
@@ -173,7 +176,7 @@ void n8::InputService::UnregisterMouseMoveCommand(){
     m_mouseMoveCommand = NULL;
 }
 
-void n8::InputService::RegisterMouseButtonDownCommand(Command* p_command){
+void n8::InputService::RegisterMouseButtonDownCommand(PositionCommand* p_command){
     m_mouseButtonDownCommand = p_command;
 }
 

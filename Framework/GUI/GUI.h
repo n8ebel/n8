@@ -22,7 +22,8 @@ namespace gui{
         ~GUI();
         
         void AddElement(Widget*);
-        bool CheckClick();
+        bool CheckClick(int p_x, int p_y);
+        bool CheckMove();
         void Draw(n8::Window*);
         
     private:

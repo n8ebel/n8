@@ -20,7 +20,8 @@ namespace gui {
         virtual ~GUIElement();
         
         virtual void Draw(n8::Window*) = 0;
-        virtual bool CheckMouse() = 0;
+        virtual bool CheckMouseClick(int p_x, int p_y) = 0;
+        virtual bool CheckMouseMove() = 0;
     private:
         
     };

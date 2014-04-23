@@ -148,6 +148,7 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
         if(m_stateStack.size() > 0){
             m_stateStack[m_stateStack.size()-1]->Update(time);
             m_stateStack[m_stateStack.size()-1]->Render(screen);
+            
         }
         
         if(m_stateStack.size() > 0){

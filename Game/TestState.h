@@ -27,6 +27,7 @@
 #include "PushStateCommand.h"
 #include "MouseMoveCommand.h"
 #include "MouseClickCommand.h"
+#include "ClickGUICommand.h"
 
 #include "Sprite.h"
 

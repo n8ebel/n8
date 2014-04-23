@@ -144,8 +144,20 @@ void n8::Game::Setup(){
 void n8::Game::Start(){
     
     m_timer.UpdateCurrentTime();
+    unsigned lasttime = m_timer.GetTime();
+    unsigned curtime = m_timer.GetTime();
+    int frames = 0;
     while (m_quit == false) {
-        
+        frames++;
+        curtime = m_timer.GetTime();
+        if (curtime-lasttime >= 1000) {
+            lasttime = curtime;
+            std::stringstream ss;
+            ss << frames;
+            std::string msg("Frames: " + ss.str());
+            //Log::Info(TAG, msg);
+            frames = 0;
+        }
         //process input
         static_cast<InputService*>(m_serviceManager->GetService(EService::Input))->HandleInput();
         
@@ -154,10 +166,10 @@ void n8::Game::Start(){
             break;
         }
         
+        
         //process state
         static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), &m_window);
-        
-        
+                
         m_timer.SyncGame(m_fps);  //ensures proper fps
         
     }

@@ -8,7 +8,7 @@
 
 #include "MouseMoveCommand.h"
 
-n8::MouseMoveCommand::MouseMoveCommand(gui::Button* p_button):m_button(p_button) {
+n8::MouseMoveCommand::MouseMoveCommand(gui::GUI* p_gui):m_gui(p_gui) {
     
 }
 
@@ -17,7 +17,9 @@ n8::MouseMoveCommand::~MouseMoveCommand(){
 }
 
 bool n8::MouseMoveCommand::execute(){
-    m_button->CheckMouse();
+    if (m_gui) {
+        return m_gui->CheckMove();
+    }
     
     return true;
 }

@@ -16,6 +16,7 @@
 #include "SDL2/SDL.h"
 #include "Service.h"
 #include "Command.h"
+#include "PositionCommand.h"
 
 #include <map>
 
@@ -43,7 +44,7 @@ public:
     void RegisterMouseMoveCommand(Command*);
     void UnregisterMouseMoveCommand();
     
-    void RegisterMouseButtonDownCommand(Command*);
+    void RegisterMouseButtonDownCommand(PositionCommand*);
     void UnregisterMouseButtonDownCommand();
     
     void OnNotify(Event* event);
@@ -60,7 +61,7 @@ private:
     bool KeyIsUp(SDL_Event* event, int key);
     
     Command* m_mouseMoveCommand;
-    Command* m_mouseButtonDownCommand;
+    PositionCommand* m_mouseButtonDownCommand;
     
 };
 
