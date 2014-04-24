@@ -22,6 +22,16 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
                                                     
     CreateSystems();
     CreateEntities();
+    
+    //build user interface
+    m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
+    m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
+    
+    m_toolbar = new gui::Container(0,0,400,30);
+    m_toolbar->AddElement(m_button1);
+    m_toolbar->AddElement(m_button2);
+    
+    m_gui.AddElement(m_toolbar);
 }
 
 TestState::~TestState(){
@@ -47,15 +57,7 @@ void TestState::OnResume(){
     m_inputService->RegisterMouseButtonUpCommand(new n8::ClickUpGUICommand(&m_gui));
     m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(&m_gui));
     
-//build user interface
-    m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
-    m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
-    
-    m_toolbar = new gui::Container(0,0,400,30);
-    m_toolbar->AddElement(m_button1);
-    m_toolbar->AddElement(m_button2);
-    
-    m_gui.AddElement(m_toolbar);
+
     
 //start music
     //m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));

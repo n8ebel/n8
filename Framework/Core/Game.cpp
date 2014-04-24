@@ -150,12 +150,12 @@ void n8::Game::Start(){
     while (m_quit == false) {
         frames++;
         curtime = m_timer.GetTime();
-        if (curtime-lasttime >= 1000) {
+        if (curtime-lasttime >= 250) {
             lasttime = curtime;
             std::stringstream ss;
-            ss << frames;
+            ss << (frames*4);
             std::string msg("Frames: " + ss.str());
-            //Log::Info(TAG, msg);
+            Log::Info(TAG, msg);
             frames = 0;
         }
         //process input

@@ -40,7 +40,7 @@ namespace n8 {
     
 class Game{
 public:
-    static const int DEFAULT_FPS = 60;
+    static const int DEFAULT_FPS = 200;
     
     static void Init();
     static void Shutdown();
