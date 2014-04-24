@@ -27,12 +27,14 @@
 #include "PushStateCommand.h"
 #include "MouseMoveCommand.h"
 #include "MouseClickCommand.h"
-#include "ClickGUICommand.h"
+#include "ClickDownGUICommand.h"
+#include "ClickUpGUICommand.h"
 
 #include "Sprite.h"
 
 #include "GUI.h"
 #include "Button.h"
+#include "Container.h"
 
 class Entity;
 
@@ -62,6 +64,7 @@ private:
     gui::GUI m_gui;
     gui::Button* m_button1;
     gui::Button* m_button2;
+    gui::Container* m_toolbar;
     
 };
 #endif

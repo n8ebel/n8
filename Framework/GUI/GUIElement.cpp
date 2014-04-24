@@ -16,3 +16,8 @@ gui::GUIElement::GUIElement(){
 gui::GUIElement::~GUIElement(){
     
 }
+
+void gui::GUIElement::OffsetPosition(int p_x, int p_y){
+    m_x += p_x;
+    m_y += p_y;
+}

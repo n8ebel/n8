@@ -88,7 +88,13 @@ void n8::InputService::HandleInput(){
                 m_mouseButtonDownCommand->execute(x,y);
             }
         }
-        //|| m_event->type == SDL_MOUSEBUTTONUP
+        if( m_event->type == SDL_MOUSEBUTTONUP){
+            if(m_mouseButtonUpCommand){
+                int x,y;
+                SDL_GetMouseState(&x, &y);
+                m_mouseButtonUpCommand->execute(x,y);
+            }
+        }
     }
 }
 
@@ -182,6 +188,14 @@ void n8::InputService::RegisterMouseButtonDownCommand(PositionCommand* p_command
 
 void n8::InputService::UnregisterMouseButtonDownCommand(){
     m_mouseButtonDownCommand = NULL;
+}
+
+void n8::InputService::RegisterMouseButtonUpCommand(PositionCommand* p_command){
+    m_mouseButtonUpCommand = p_command;
+}
+
+void n8::InputService::UnregisterMouseButtonUpCommand(){
+    m_mouseButtonUpCommand = nullptr;
 }
 
 void n8::InputService::OnNotify(Event* event){

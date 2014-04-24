@@ -21,13 +21,14 @@ namespace gui{
         GUI();
         ~GUI();
         
-        void AddElement(Widget*);
-        bool CheckClick(int p_x, int p_y);
+        void AddElement(GUIElement*);
+        bool CheckClickDown(int p_x, int p_y);
+        bool CheckClickUp(int p_x, int p_y);
         bool CheckMove();
         void Draw(n8::Window*);
         
     private:
-        std::vector<Widget*> m_guiElements;
+        std::vector<GUIElement*> m_guiElements;
         
     };
 }

@@ -16,13 +16,23 @@ gui::GUI::~GUI(){
     
 }
 
-void gui::GUI::AddElement(gui::Widget* p_newWidget){
+void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
     m_guiElements.push_back(p_newWidget);
 }
 
-bool gui::GUI::CheckClick(int p_x, int p_y){
+bool gui::GUI::CheckClickDown(int p_x, int p_y){
     for (int i = 0; i < m_guiElements.size(); i++) {
-        if( m_guiElements[i]->CheckMouseClick(p_x,p_y) ){
+        if( m_guiElements[i]->CheckMouseClickDown(p_x,p_y) ){
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool gui::GUI::CheckClickUp(int p_x, int p_y){
+    for (int i = 0; i < m_guiElements.size(); i++) {
+        if( m_guiElements[i]->CheckMouseClickUp(p_x,p_y) ){
             return true;
         }
     }

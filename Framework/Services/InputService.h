@@ -47,6 +47,9 @@ public:
     void RegisterMouseButtonDownCommand(PositionCommand*);
     void UnregisterMouseButtonDownCommand();
     
+    void RegisterMouseButtonUpCommand(PositionCommand*);
+    void UnregisterMouseButtonUpCommand();
+    
     void OnNotify(Event* event);
 private:
     
@@ -62,6 +65,7 @@ private:
     
     Command* m_mouseMoveCommand;
     PositionCommand* m_mouseButtonDownCommand;
+    PositionCommand* m_mouseButtonUpCommand;
     
 };
 

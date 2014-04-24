@@ -20,10 +20,20 @@ namespace gui {
         virtual ~GUIElement();
         
         virtual void Draw(n8::Window*) = 0;
-        virtual bool CheckMouseClick(int p_x, int p_y) = 0;
+        virtual bool CheckMouseClickDown(int p_x, int p_y) = 0;
+        virtual bool CheckMouseClickUp(int p_x, int p_y) = 0;
         virtual bool CheckMouseMove() = 0;
-    private:
         
+        void OffsetPosition(int p_x, int p_y);
+    protected:
+        SDL_Texture* m_texture;
+        
+        int m_x;
+        int m_y;
+        int m_h;
+        int m_w;
+        
+        SDL_Rect m_shape;
     };
 }
 

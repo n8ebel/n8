@@ -20,15 +20,18 @@
 namespace gui{
     class Container : public GUIElement{
     public:
-        Container();
-        virtual ~Container() = 0;
+        Container(int p_x, int p_y, int p_w, int p_h);
+        virtual ~Container();
         
-        virtual void Draw(n8::Window*) = 0;
-        virtual bool CheckMouseClick(int p_x, int p_y) = 0;
-        virtual bool CheckMouseMove() = 0;
+        virtual void Draw(n8::Window*) override;
+        virtual bool CheckMouseClickDown(int p_x, int p_y) override;
+        virtual bool CheckMouseClickUp(int p_x, int p_y) override;
+        virtual bool CheckMouseMove() override;
+        
+        void AddElement(GUIElement*);
         
     protected:
-        std::vector<Widget*> m_widgets;
+        std::vector<GUIElement*> m_elements;
         
     };
 }

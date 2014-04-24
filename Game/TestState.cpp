@@ -42,17 +42,20 @@ void TestState::OnResume(){
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
     std::vector<n8::PositionCommand*> commands;
-    commands.push_back(new n8::ClickGUICommand(&m_gui));
+    commands.push_back(new n8::ClickDownGUICommand(&m_gui));
     m_inputService->RegisterMouseButtonDownCommand(new n8::MouseClickCommand(commands));
-    
+    m_inputService->RegisterMouseButtonUpCommand(new n8::ClickUpGUICommand(&m_gui));
     m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(&m_gui));
     
 //build user interface
-    m_button1 = new gui::Button("button1", 50,50,100,50, NULL);
-    m_button2 = new gui::Button("button2", 150,50,100,50, NULL);
+    m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
+    m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
     
-    m_gui.AddElement(m_button1);
-    m_gui.AddElement(m_button2);
+    m_toolbar = new gui::Container(0,0,400,30);
+    m_toolbar->AddElement(m_button1);
+    m_toolbar->AddElement(m_button2);
+    
+    m_gui.AddElement(m_toolbar);
     
 //start music
     //m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
