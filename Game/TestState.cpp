@@ -23,15 +23,21 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     CreateSystems();
     CreateEntities();
     
+    /*
     //build user interface
     m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
     m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
+    //m_inputBox = new gui::InputBox(50,300,300,50);
     
     m_toolbar = new gui::Container(0,0,400,30);
     m_toolbar->AddElement(m_button1);
     m_toolbar->AddElement(m_button2);
     
     m_gui.AddElement(m_toolbar);
+    m_gui.AddElement(m_inputBox);
+    
+     m_inputService->m_gui = &m_gui;
+     */
 }
 
 TestState::~TestState(){

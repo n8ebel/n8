@@ -17,7 +17,7 @@
 #include "Service.h"
 #include "Command.h"
 #include "PositionCommand.h"
-
+#include "GUI.h"
 #include <map>
 
 
@@ -30,7 +30,7 @@ public:
     InputService();
     
     ~InputService();
-    
+    gui::GUI* m_gui;
     void HandleInput();
     bool HandleEvent();
     bool KeyIsDown(int key);

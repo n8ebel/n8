@@ -19,13 +19,13 @@
 #include "SDL2_ttf/SDL_ttf.h"
 
 #include "Window.h"
-#include "Widget.h"
+#include "GUIElement.h"
 #include "Command.h"
 #include "Log.h"
 
 namespace gui{
 
-    class Button : public Widget{
+    class Button : public GUIElement{
 public:
         Button(std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command);
     ~Button();

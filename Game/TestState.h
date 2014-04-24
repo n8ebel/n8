@@ -35,6 +35,7 @@
 #include "GUI.h"
 #include "Button.h"
 #include "Container.h"
+#include "InputBox.h"
 
 class Entity;
 
@@ -65,6 +66,7 @@ private:
     gui::Button* m_button1;
     gui::Button* m_button2;
     gui::Container* m_toolbar;
+    gui::InputBox* m_inputBox;
     
 };
 #endif

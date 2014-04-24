@@ -55,3 +55,11 @@ void gui::GUI::Draw(n8::Window* p_window){
         m_guiElements[i]->Draw(p_window);
     }
 }
+
+void gui::GUI::ProcessInput(SDL_Event* e){
+    for(GUIElement* element : m_guiElements){
+        if (dynamic_cast<InputBox*>(element) != nullptr) {
+            dynamic_cast<InputBox*>(element)->HandleKeyboardInput(e);
+        }
+    }
+}

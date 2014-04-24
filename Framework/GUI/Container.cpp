@@ -8,11 +8,9 @@
 
 #include "Container.h"
 
-gui::Container::Container(int p_x, int p_y, int p_w, int p_h){
-    m_x = m_shape.x = p_x;
-    m_y = m_shape.y = p_y;
-    m_w = m_shape.w = p_w;
-    m_h = m_shape.h = p_h;
+gui::Container::Container(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h)
+{
+    
 }
 
 gui::Container::~Container(){

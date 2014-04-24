@@ -27,7 +27,7 @@ n8::InputService::InputService(){
         m_registeredKeyDownCommands[i] = NULL;
         m_registeredKeyUpCommands[i] = NULL;
     }
-    
+    m_gui = nullptr;
     m_mouseMoveCommand = NULL;
     m_mouseButtonDownCommand = NULL;
 }
@@ -43,7 +43,7 @@ n8::InputService::~InputService(){
  */
 void n8::InputService::HandleInput(){
     if (SDL_PollEvent(m_event))
-    {
+    {   if(m_gui){m_gui->ProcessInput(m_event);}
         if (m_event->type == SDL_QUIT)
 		{
             Event event(EEvents::Values::Exit);

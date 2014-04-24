@@ -14,6 +14,7 @@
 
 #include "Window.h"
 #include "Container.h"
+#include "InputBox.h"
 
 namespace gui{
     class GUI {
@@ -26,7 +27,7 @@ namespace gui{
         bool CheckClickUp(int p_x, int p_y);
         bool CheckMove();
         void Draw(n8::Window*);
-        
+        void ProcessInput(SDL_Event*);
     private:
         std::vector<GUIElement*> m_guiElements;
         

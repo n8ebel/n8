@@ -12,13 +12,9 @@
 
 #define TAG "Button"
 
-gui::Button::Button( std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command)
+gui::Button::Button( std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_id = p_id;
-    m_x = m_shape.x = p_x;
-    m_y = m_shape.y = p_y;
-    m_w = m_shape.w = p_w;
-    m_h = m_shape.h = p_h;
     m_hover = false;
     m_pressed = false;
     m_command = p_command;
