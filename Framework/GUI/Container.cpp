@@ -14,8 +14,10 @@ gui::Container::Container(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p
 }
 
 gui::Container::~Container(){
-    SDL_DestroyTexture(m_texture);
-    m_texture = nullptr;
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
 }
 
 bool gui::Container::CheckMouseClickDown(int p_x, int p_y){

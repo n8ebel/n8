@@ -30,9 +30,12 @@ namespace gui {
         virtual bool Update(Uint32 p_currentTime) override;
     
     private:
+        const unsigned M_TEXT_OFFSET_X = 10;
+        const unsigned M_TEXT_OFFSET_Y = 10;
+        const unsigned M_CURSOR_OFFSET_X = 2;
         //Set text color as black
         SDL_Color m_textColor;
-        LTexture texture;
+        LTexture m_textTexture;
         TTF_Font* m_font;
         
         std::string m_inputString;
@@ -41,9 +44,6 @@ namespace gui {
         
         unsigned m_currentTime;
         unsigned m_lastTime;
-        
-        unsigned m_textOffsetY;
-        unsigned m_textOffsetX;
     };
 }
 

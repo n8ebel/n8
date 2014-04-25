@@ -18,7 +18,7 @@ gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :   m_x(p_x),
     m_shape.y = m_y;
     m_shape.w = m_w;
     m_shape.h = m_h;
-    
+    m_texture = nullptr;
 }
 
 gui::GUIElement::~GUIElement(){

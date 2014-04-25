@@ -37,8 +37,10 @@ gui::Button::Button(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::f
 }
 
 gui::Button::~Button(){
-    SDL_DestroyTexture(m_texture);
-    m_texture = nullptr;
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
     m_command = nullptr;
     m_function = nullptr;
 }

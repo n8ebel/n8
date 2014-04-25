@@ -14,7 +14,7 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
     m_cursorShown = false;
     m_lastTime = 0;
     m_hasFocus = false;
-    m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - 20 );
+    m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
 }
 
 gui::InputBox::~InputBox(){
@@ -60,13 +60,13 @@ void gui::InputBox::Draw(n8::Window* p_window){
         if( m_inputString != "" )
         {
             //Render new text
-            texture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), m_textColor );
+            m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), m_textColor );
         }
         //Text is empty
         else
         {
             //Render space texture
-            texture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", m_textColor );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", m_textColor );
         }
     }
     
@@ -80,10 +80,11 @@ void gui::InputBox::Draw(n8::Window* p_window){
         SDL_RenderDrawRect(renderer, &m_shape);
     }
     
-    texture.render(p_window->GetRenderer(), m_x+5,m_y+5);
+    m_textTexture.render(p_window->GetRenderer(),   m_x + M_TEXT_OFFSET_X,
+                                                    m_y + M_TEXT_OFFSET_Y);
     
     if (m_cursorShown && m_hasFocus) {
-        int x = m_x+2+texture.getWidth()+5;
+        int x = m_x + M_CURSOR_OFFSET_X + m_textTexture.getWidth() + M_TEXT_OFFSET_X;
         int y1 = m_y+10;
         int y2 = m_y + m_h - 10;
         SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
