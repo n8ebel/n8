@@ -1,13 +1,15 @@
-//
-//  InputBox.h
-//  DevApp
-//
-//  Created by Nate Ebel on 4/24/14.
-//  Copyright (c) 2014 n8Tech. All rights reserved.
-//
+/*
+ * InputBox.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            4/24/14
+ * Organization:    n8Tech
+ *
+ */
 
-#ifndef __DevApp__InputBox__
-#define __DevApp__InputBox__
+#ifndef INPUT_BOX_H
+#define INPUT_BOX_H
 
 #include <iostream>
 #include <string>
@@ -47,4 +49,4 @@ namespace gui {
     };
 }
 
-#endif /* defined(__DevApp__InputBox__) */
+#endif /* defined(INPUT_BOX_H) */

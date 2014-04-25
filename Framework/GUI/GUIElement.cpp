@@ -1,10 +1,12 @@
-//
-//  GUIElement.cpp
-//  DevApp
-//
-//  Created by Nate Ebel on 4/21/14.
-//  Copyright (c) 2014 n8Tech. All rights reserved.
-//
+/*
+ * GUIElement.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            4/20/14
+ * Organization:    n8Tech
+ *
+ */
 
 #include "GUIElement.h"
 

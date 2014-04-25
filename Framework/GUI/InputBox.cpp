@@ -1,10 +1,12 @@
-//
-//  InputBox.cpp
-//  DevApp
-//
-//  Created by Nate Ebel on 4/24/14.
-//  Copyright (c) 2014 n8Tech. All rights reserved.
-//
+/*
+ * InputBox.cpp
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            4/24/14
+ * Organization:    n8Tech
+ *
+ */
 
 #include "InputBox.h"
 

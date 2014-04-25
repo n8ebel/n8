@@ -1,13 +1,15 @@
-//
-//  GUIElement.h
-//  DevApp
-//
-//  Created by Nate Ebel on 4/21/14.
-//  Copyright (c) 2014 n8Tech. All rights reserved.
-//
+/*
+ * GUIElement.h
+ * n8
+ *
+ * Author:          Nate Ebel
+ * Date:            4/20/14
+ * Organization:    n8Tech
+ *
+ */
 
-#ifndef __DevApp__GUIElement__
-#define __DevApp__GUIElement__
+#ifndef GUI_ELEMENT_H
+#define GUI_ELEMENT_H
 
 #include <iostream>
 
@@ -44,4 +46,4 @@ class GUIElement{
     };
 }
 
-#endif /* defined(__DevApp__GUIElement__) */
+#endif /* defined(GUI_ELEMENT_H) */
