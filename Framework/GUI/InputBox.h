@@ -22,20 +22,28 @@ namespace gui {
         ~InputBox();
         
         void Draw(n8::Window*) override;
+        
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
         virtual bool CheckMouseMove() override;
         virtual void HandleKeyboardInput(SDL_Event*);
+        virtual bool Update(Uint32 p_currentTime) override;
+    
     private:
-        std::string m_inputString;
-        bool m_updateTexture;
-        bool m_addingText;
-        
         //Set text color as black
         SDL_Color m_textColor;
         LTexture texture;
+        TTF_Font* m_font;
         
-        TTF_Font* font;
+        std::string m_inputString;
+        bool m_updateTexture;
+        bool m_cursorShown;
+        
+        unsigned m_currentTime;
+        unsigned m_lastTime;
+        
+        unsigned m_textOffsetY;
+        unsigned m_textOffsetX;
     };
 }
 

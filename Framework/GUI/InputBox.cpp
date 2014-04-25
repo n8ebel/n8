@@ -11,12 +11,20 @@
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h){
     m_textColor = { 0, 0, 0, 0xFF };
     m_inputString = "";
-    
-    font = TTF_OpenFont( "stocky/stocky.ttf", 24 );
+    m_cursorShown = false;
+    m_lastTime = 0;
+    m_hasFocus = false;
+    m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - 20 );
 }
 
 gui::InputBox::~InputBox(){
-    
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
+    if (m_font){
+        TTF_CloseFont(m_font);
+    }
 }
 
 bool gui::InputBox::CheckMouseMove(){
@@ -26,11 +34,11 @@ bool gui::InputBox::CheckMouseMove(){
 bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
     if( p_x >= m_x && p_x <=m_x+m_w && p_y>=m_y && p_y<=m_y+m_h){
         SDL_StartTextInput();
-        m_addingText = true;
+        m_hasFocus = true;
         return true;
     }
     else{
-        m_addingText = false;
+        m_hasFocus = false;
         SDL_StopTextInput();
         return false;
     }
@@ -52,26 +60,39 @@ void gui::InputBox::Draw(n8::Window* p_window){
         if( m_inputString != "" )
         {
             //Render new text
-            texture.loadFromRenderedText( p_window->GetRenderer(), font, m_inputString.c_str(), m_textColor );
+            texture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), m_textColor );
         }
         //Text is empty
         else
         {
             //Render space texture
-            texture.loadFromRenderedText(p_window->GetRenderer(), font, " ", m_textColor );
+            texture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", m_textColor );
         }
     }
     
     SDL_Renderer* renderer= p_window->GetRenderer();
     
-        SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
-        SDL_RenderFillRect( renderer, &m_shape );
+    SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
+    SDL_RenderFillRect( renderer, &m_shape );
+    
+    if (m_hasFocus) {
+        SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
+        SDL_RenderDrawRect(renderer, &m_shape);
+    }
     
     texture.render(p_window->GetRenderer(), m_x+5,m_y+5);
+    
+    if (m_cursorShown && m_hasFocus) {
+        int x = m_x+2+texture.getWidth()+5;
+        int y1 = m_y+10;
+        int y2 = m_y + m_h - 10;
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+        SDL_RenderDrawLine(renderer, x, y1, x, y2);
+    }
 }
 
 void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
-    if(m_addingText){
+    if(m_hasFocus){
         SDL_Event e = *p_event;
         if( e.type == SDL_KEYDOWN )
         {
@@ -107,4 +128,13 @@ void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
         }
     }
     
+}
+
+bool gui::InputBox::Update(Uint32 p_currentTime){
+    if ( (p_currentTime - m_lastTime) > 500) {
+        m_cursorShown = !m_cursorShown;
+        m_lastTime = p_currentTime;
+    }
+    
+    return m_hasFocus;
 }

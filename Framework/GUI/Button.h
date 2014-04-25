@@ -25,23 +25,34 @@
 
 namespace gui{
 
-    class Button : public GUIElement{
-public:
-        Button(std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command);
-    ~Button();
+class Button : public GUIElement{
+    public:
+        Button(std::string p_id,
+                int p_x, int p_y, int p_w, int p_h,
+                n8::Command* p_command);
     
-    void Draw(n8::Window*) override;
-    virtual bool CheckMouseClickDown(int p_x, int p_y) override;
+        Button(std::string p_id,
+               int p_x, int p_y, int p_w, int p_h,
+               std::function<void()> func);
+    
+        ~Button();
+    
+        void Draw(n8::Window*) override;
+        virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
-    virtual bool CheckMouseMove() override;
+        virtual bool CheckMouseMove() override;
+        bool Update(Uint32 p_currentTime) override;
     
-private:
-    std::string m_id;
+    private:
+        std::string m_id;
     
-    bool m_hover;
-        bool m_pressed;
+        bool m_hover; /** < mouse is hovering over the button **/
+        bool m_pressed; /** < whether button appears pressed down **/
+        bool m_mouseClickedDown; /** < whether button is currently pressed down **/
+        unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
         
-    n8::Command* m_command;
+        n8::Command* m_command;
+        std::function<void()> m_function;
 };
     
 }

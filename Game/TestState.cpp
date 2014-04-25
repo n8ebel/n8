@@ -23,11 +23,11 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     CreateSystems();
     CreateEntities();
     
-    /*
+    
     //build user interface
     m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
     m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
-    //m_inputBox = new gui::InputBox(50,300,300,50);
+    m_inputBox = new gui::InputBox(50,300,300,50);
     
     m_toolbar = new gui::Container(0,0,400,30);
     m_toolbar->AddElement(m_button1);
@@ -37,7 +37,7 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     m_gui.AddElement(m_inputBox);
     
      m_inputService->m_gui = &m_gui;
-     */
+     
 }
 
 TestState::~TestState(){
@@ -53,17 +53,14 @@ TestState::~TestState(){
 
 void TestState::OnResume(){
 
-    //register input commands
+    //register keyboard commands
     m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PushStateCommand(EState::Test2));
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
-    std::vector<n8::PositionCommand*> commands;
-    commands.push_back(new n8::ClickDownGUICommand(&m_gui));
-    m_inputService->RegisterMouseButtonDownCommand(new n8::MouseClickCommand(commands));
-    m_inputService->RegisterMouseButtonUpCommand(new n8::ClickUpGUICommand(&m_gui));
-    m_inputService->RegisterMouseMoveCommand(new n8::MouseMoveCommand(&m_gui));
-    
-
+    //register mouse actions
+    m_inputService->RegisterMouseMoveAction( [this](){m_gui.CheckMove();});
+    m_inputService->RegisterMouseButtonUpAction( [this](int x, int y){m_gui.CheckClickUp(x, y);});
+    m_inputService->RegisterMouseButtonDownAction( [this](int x, int y){m_gui.CheckClickDown(x, y);});
     
 //start music
     //m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
@@ -71,14 +68,15 @@ void TestState::OnResume(){
 
 void TestState::OnPause(){
     m_inputService->UnregisterKeyCommands();
-    m_inputService->UnregisterMouseButtonDownCommand();
-    m_inputService->UnregisterMouseMoveCommand();
+    m_inputService->UnregisterMouseButtonDownAction();
+    m_inputService->UnregisterMouseButtonUpAction();
+    m_inputService->UnregisterMouseMoveAction();
     
     m_audioService->StopMusic();
 }
 
 void TestState::Update(Uint32 currentTime){
-    
+    m_gui.Update(currentTime);
 }
 
 void TestState::Render(n8::Window* p_window){

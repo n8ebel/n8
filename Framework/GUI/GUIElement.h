@@ -18,7 +18,8 @@
 #include "Window.h"
 
 namespace gui {
-    class GUIElement{
+    
+class GUIElement{
     public:
         GUIElement(int p_x, int p_y, int p_w, int p_h);
         virtual ~GUIElement();
@@ -27,9 +28,11 @@ namespace gui {
         virtual bool CheckMouseClickDown(int p_x, int p_y) = 0;
         virtual bool CheckMouseClickUp(int p_x, int p_y) = 0;
         virtual bool CheckMouseMove() = 0;
+        virtual bool Update(Uint32 p_currentTime) = 0;
         
         void OffsetPosition(int p_x, int p_y);
     protected:
+        SDL_Rect m_shape;
         SDL_Texture* m_texture;
         
         int m_x;
@@ -37,7 +40,7 @@ namespace gui {
         int m_h;
         int m_w;
         
-        SDL_Rect m_shape;
+        bool m_hasFocus;
     };
 }
 

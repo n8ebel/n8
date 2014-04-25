@@ -8,7 +8,7 @@
 
 #include "GUI.h"
 
-gui::GUI::GUI(){
+gui::GUI::GUI() : m_hasFocus(false){
     
 }
 
@@ -62,4 +62,19 @@ void gui::GUI::ProcessInput(SDL_Event* e){
             dynamic_cast<InputBox*>(element)->HandleKeyboardInput(e);
         }
     }
+}
+
+bool gui::GUI::Update(Uint32 p_currentTime){
+    m_hasFocus = false;
+    for(auto element : m_guiElements){
+        if(element->Update(p_currentTime)){
+            m_hasFocus = true;
+        }
+    }
+    
+    return m_hasFocus;
+}
+
+bool gui::GUI::HasFocus(){
+    return m_hasFocus;
 }

@@ -25,10 +25,7 @@
 #include "ServiceManager.h"
 #include "PopStateCommand.h"
 #include "PushStateCommand.h"
-#include "MouseMoveCommand.h"
-#include "MouseClickCommand.h"
-#include "ClickDownGUICommand.h"
-#include "ClickUpGUICommand.h"
+
 
 #include "Sprite.h"
 

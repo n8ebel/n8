@@ -28,9 +28,12 @@ namespace gui{
         bool CheckMove();
         void Draw(n8::Window*);
         void ProcessInput(SDL_Event*);
+        bool Update(Uint32 p_currentTime);
+        
+        bool HasFocus();
     private:
         std::vector<GUIElement*> m_guiElements;
-        
+        bool m_hasFocus;
     };
 }
 

@@ -17,11 +17,30 @@ gui::Button::Button( std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::C
     m_id = p_id;
     m_hover = false;
     m_pressed = false;
+    m_mouseClickedDown = false;
+    m_timeClickedDown = 0;
+    m_hasFocus = false;
     m_command = p_command;
+    m_function = nullptr;
+}
+
+gui::Button::Button(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::function<void()> func) : GUIElement(p_x,p_y,p_w,p_h)
+{
+    m_id = p_id;
+    m_hover = false;
+    m_pressed = false;
+    m_mouseClickedDown = false;
+    m_timeClickedDown = 0;
+    m_hasFocus = false;
+    m_command = nullptr;
+    m_function = func;
 }
 
 gui::Button::~Button(){
-    
+    SDL_DestroyTexture(m_texture);
+    m_texture = nullptr;
+    m_command = nullptr;
+    m_function = nullptr;
 }
 
 bool gui::Button::CheckMouseMove(){
@@ -41,10 +60,14 @@ bool gui::Button::CheckMouseMove(){
 bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
     
     if( p_x >= m_x && p_x <=m_x+m_w && p_y>=m_y && p_y<=m_y+m_h){
-        n8::Log::Debug(TAG, "Button " + m_id + " was clicked");
         m_pressed = true;
+        m_mouseClickedDown = true;
+        m_timeClickedDown = SDL_GetTicks();
         if (m_command) {
             m_command->execute();
+        }
+        else if(m_function){
+            m_function();
         }
         return true;
     }
@@ -57,8 +80,10 @@ bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
 
 bool gui::Button::CheckMouseClickUp(int p_x, int p_y){
     
-    m_pressed = false;
-    
+    m_mouseClickedDown = false;
+    if(SDL_GetTicks() - m_timeClickedDown > 500){
+        m_pressed = false;
+    }
     return false;
 }
 
@@ -76,4 +101,14 @@ void gui::Button::Draw(n8::Window* p_window){
         SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
         SDL_RenderFillRect( renderer, &m_shape );
     }
+}
+
+bool gui::Button::Update(Uint32 p_currentTime){
+    if(SDL_GetTicks() - m_timeClickedDown > 100 && !m_mouseClickedDown){
+        m_pressed = false;
+    }
+    if(m_pressed){
+        m_hasFocus = true;
+    }
+    return m_hasFocus;
 }
