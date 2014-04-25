@@ -28,8 +28,15 @@ n8::InputService::InputService(){
         m_registeredKeyUpCommands[i] = NULL;
     }
     
-    m_mouseMoveCommand = NULL;
-    m_mouseButtonDownCommand = NULL;
+    m_gui = nullptr;
+    
+    m_mouseMoveCommand = nullptr;
+    m_mouseButtonDownCommand = nullptr;
+    m_mouseButtonUpCommand = nullptr;
+    
+    m_mouseMoveFunction = nullptr;
+    m_mouseButtonDownFunction = nullptr;
+    m_mouseButtonUpFunction = nullptr;
 }
 
 /** Default destructor */
@@ -44,55 +51,65 @@ n8::InputService::~InputService(){
 void n8::InputService::HandleInput(){
     if (SDL_PollEvent(m_event))
     {
+        bool guiHasFocus = false;
+        if(m_gui){
+            m_gui->ProcessInput(m_event);
+        }
+        guiHasFocus = m_gui->HasFocus();
+        
         if (m_event->type == SDL_QUIT)
 		{
             Event event(EEvents::Values::Exit);
             Notify(&event);
 		}
         
-		if (m_event->type == SDL_KEYDOWN)
-		{
-            
-            m_keysHeld[m_event->key.keysym.sym] = true;
-            /*
-            if (m_event->key.keysym.sym == SDLK_SPACE) {
-                std::cout << "pressed space" << std::endl;
-                Event event(EEvents::Values::Test2);
-                Notify(&event);
+        if (!guiHasFocus) {
+            if (m_event->type == SDL_KEYDOWN)
+            {
+                m_keysHeld[m_event->key.keysym.sym] = true;
+                if(m_registeredKeyDownCommands[m_event->key.keysym.sym] != NULL){
+                    m_registeredKeyDownCommands[m_event->key.keysym.sym]->execute();
+                }
             }
-             */
-            if(m_registeredKeyDownCommands[m_event->key.keysym.sym] != NULL){
-                m_registeredKeyDownCommands[m_event->key.keysym.sym]->execute();
+            if (m_event->type == SDL_KEYUP)
+            {
+                m_keysHeld[m_event->key.keysym.sym] = false;
+                if (m_registeredKeyUpCommands[m_event->key.keysym.sym] != NULL) {
+                    m_registeredKeyUpCommands[m_event->key.keysym.sym]->execute();
+                }
             }
-		}
-		if (m_event->type == SDL_KEYUP)
-		{
-			m_keysHeld[m_event->key.keysym.sym] = false;
-            if (m_registeredKeyUpCommands[m_event->key.keysym.sym] != NULL) {
-                m_registeredKeyUpCommands[m_event->key.keysym.sym]->execute();
-            }
-            
-			
-		}
+
+        }
+        
         if( m_event->type == SDL_MOUSEMOTION  )
         {
             if(m_mouseMoveCommand){
-                m_mouseMoveCommand->execute();
+               m_mouseMoveCommand->execute();
             }
-        
+            if (m_mouseMoveFunction) {
+                m_mouseMoveFunction();
+            }
         }
         if( m_event->type == SDL_MOUSEBUTTONDOWN){
+            int x,y;
+            SDL_GetMouseState(&x, &y);
+            
             if(m_mouseButtonDownCommand){
-                int x,y;
-                SDL_GetMouseState(&x, &y);
                 m_mouseButtonDownCommand->execute(x,y);
+            }
+            if (m_mouseButtonDownFunction) {
+                m_mouseButtonDownFunction(x,y);
             }
         }
         if( m_event->type == SDL_MOUSEBUTTONUP){
+            int x,y;
+            SDL_GetMouseState(&x, &y);
+            
             if(m_mouseButtonUpCommand){
-                int x,y;
-                SDL_GetMouseState(&x, &y);
                 m_mouseButtonUpCommand->execute(x,y);
+            }
+            if (m_mouseButtonUpFunction) {
+                m_mouseButtonUpFunction(x,y);
             }
         }
     }
@@ -174,28 +191,43 @@ bool n8::InputService::KeyIsUp(SDL_Event* event,int key){
     
 }
 
-void n8::InputService::RegisterMouseMoveCommand(Command* p_command){
+void n8::InputService::RegisterMouseMoveAction(Command* p_command){
     m_mouseMoveCommand = p_command;
 }
 
-void n8::InputService::UnregisterMouseMoveCommand(){
-    m_mouseMoveCommand = NULL;
+void n8::InputService::RegisterMouseMoveAction(std::function<void()> func){
+    m_mouseMoveFunction = func;
 }
 
-void n8::InputService::RegisterMouseButtonDownCommand(PositionCommand* p_command){
+void n8::InputService::UnregisterMouseMoveAction(){
+    m_mouseMoveCommand = NULL;
+    m_mouseMoveFunction = nullptr;
+}
+
+void n8::InputService::RegisterMouseButtonDownAction(PositionCommand* p_command){
     m_mouseButtonDownCommand = p_command;
 }
 
-void n8::InputService::UnregisterMouseButtonDownCommand(){
-    m_mouseButtonDownCommand = NULL;
+void n8::InputService::RegisterMouseButtonDownAction(std::function<void(int,int)> func){
+    m_mouseButtonDownFunction = func;
 }
 
-void n8::InputService::RegisterMouseButtonUpCommand(PositionCommand* p_command){
+void n8::InputService::UnregisterMouseButtonDownAction(){
+    m_mouseButtonDownCommand = NULL;
+    m_mouseButtonDownFunction = nullptr;
+}
+
+void n8::InputService::RegisterMouseButtonUpAction(PositionCommand* p_command){
     m_mouseButtonUpCommand = p_command;
 }
 
-void n8::InputService::UnregisterMouseButtonUpCommand(){
+void n8::InputService::RegisterMouseButtonUpAction(std::function<void(int,int)> func){
+    m_mouseButtonUpFunction = func;
+}
+
+void n8::InputService::UnregisterMouseButtonUpAction(){
     m_mouseButtonUpCommand = nullptr;
+    m_mouseButtonUpFunction = nullptr;
 }
 
 void n8::InputService::OnNotify(Event* event){

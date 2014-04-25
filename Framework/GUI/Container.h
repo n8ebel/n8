@@ -28,10 +28,11 @@ namespace gui{
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
         virtual bool CheckMouseMove() override;
         
+        bool Update(Uint32 p_currentTime) override;
         void AddElement(GUIElement*);
         
     protected:
-        std::vector<GUIElement*> m_elements;
+        std::vector<GUIElement*> m_guiElements;
         
     };
 }

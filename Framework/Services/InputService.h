@@ -17,7 +17,7 @@
 #include "Service.h"
 #include "Command.h"
 #include "PositionCommand.h"
-
+#include "GUI.h"
 #include <map>
 
 
@@ -30,7 +30,7 @@ public:
     InputService();
     
     ~InputService();
-    
+    gui::GUI* m_gui;
     void HandleInput();
     bool HandleEvent();
     bool KeyIsDown(int key);
@@ -41,16 +41,20 @@ public:
     
     void UnregisterKeyCommands();
     
-    void RegisterMouseMoveCommand(Command*);
-    void UnregisterMouseMoveCommand();
+    void RegisterMouseMoveAction(Command*);
+    void RegisterMouseMoveAction(std::function<void()> func);
+    void UnregisterMouseMoveAction();
     
-    void RegisterMouseButtonDownCommand(PositionCommand*);
-    void UnregisterMouseButtonDownCommand();
+    void RegisterMouseButtonDownAction(PositionCommand*);
+    void RegisterMouseButtonDownAction(std::function<void(int,int)> func);
+    void UnregisterMouseButtonDownAction();
     
-    void RegisterMouseButtonUpCommand(PositionCommand*);
-    void UnregisterMouseButtonUpCommand();
+    void RegisterMouseButtonUpAction(PositionCommand*);
+    void RegisterMouseButtonUpAction(std::function<void(int,int)> func);
+    void UnregisterMouseButtonUpAction();
     
     void OnNotify(Event* event);
+    
 private:
     
    
@@ -66,6 +70,10 @@ private:
     Command* m_mouseMoveCommand;
     PositionCommand* m_mouseButtonDownCommand;
     PositionCommand* m_mouseButtonUpCommand;
+    std::function<void()> m_mouseMoveFunction;
+    std::function<void(int,int)> m_mouseButtonDownFunction;
+    std::function<void(int,int)> m_mouseButtonUpFunction;
+    
     
 };
 

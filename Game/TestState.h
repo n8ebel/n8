@@ -25,16 +25,14 @@
 #include "ServiceManager.h"
 #include "PopStateCommand.h"
 #include "PushStateCommand.h"
-#include "MouseMoveCommand.h"
-#include "MouseClickCommand.h"
-#include "ClickDownGUICommand.h"
-#include "ClickUpGUICommand.h"
+
 
 #include "Sprite.h"
 
 #include "GUI.h"
 #include "Button.h"
 #include "Container.h"
+#include "InputBox.h"
 
 class Entity;
 
@@ -65,6 +63,7 @@ private:
     gui::Button* m_button1;
     gui::Button* m_button2;
     gui::Container* m_toolbar;
+    gui::InputBox* m_inputBox;
     
 };
 #endif
