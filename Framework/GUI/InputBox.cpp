@@ -141,3 +141,7 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
     
     return m_hasFocus;
 }
+
+std::string gui::InputBox::GetText(){
+    return m_inputString;
+}

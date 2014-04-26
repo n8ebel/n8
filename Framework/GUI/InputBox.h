@@ -30,6 +30,8 @@ namespace gui {
         virtual bool CheckMouseMove() override;
         virtual void HandleKeyboardInput(SDL_Event*);
         virtual bool Update(Uint32 p_currentTime) override;
+        
+        std::string GetText();
     
     private:
         const unsigned M_TEXT_OFFSET_X = 10;

@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef __DevApp__Container__
-#define __DevApp__Container__
+#ifndef CONTAINER_H
+#define CONTAINER_H
 
 #include <iostream>
 #include <vector>
@@ -39,4 +39,4 @@ namespace gui{
     };
 }
 
-#endif /* defined(__DevApp__Container__) */
+#endif /* defined(CONTAINER_H) */
