@@ -16,6 +16,19 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
     m_cursorShown = false;
     m_lastTime = 0;
     m_hasFocus = false;
+                                                                         m_updateTexture = true;
+    m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
+}
+
+gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h){
+    
+    m_textColor = { 0, 0, 0, 0xFF };
+    m_hintString = p_hint;
+    m_inputString = "";
+    m_cursorShown = false;
+    m_lastTime = 0;
+    m_hasFocus = false;
+    m_updateTexture = true;
     m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
 }
 
@@ -44,7 +57,7 @@ bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
         SDL_StopTextInput();
         return false;
     }
-    
+    m_updateTexture = true;
     return false;
 }
 
@@ -55,36 +68,29 @@ bool gui::InputBox::CheckMouseClickUp(int p_x, int p_y){
 
 void gui::InputBox::Draw(n8::Window* p_window){
     
-    //Rerender text if needed
-    if( m_updateTexture )
-    {
-        //Text is not empty
-        if( m_inputString != "" )
-        {
-            //Render new text
-            m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), m_textColor );
-        }
-        //Text is empty
-        else
-        {
-            //Render space texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", m_textColor );
-        }
+    if(m_updateTexture){
+        UpdateTexture(p_window);
     }
     
     SDL_Renderer* renderer= p_window->GetRenderer();
     
+    //draw box background
     SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
     SDL_RenderFillRect( renderer, &m_shape );
     
+    //draw outline if has focus
     if (m_hasFocus) {
         SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
         SDL_RenderDrawRect(renderer, &m_shape);
     }
     
-    m_textTexture.render(p_window->GetRenderer(),   m_x + M_TEXT_OFFSET_X,
-                                                    m_y + M_TEXT_OFFSET_Y);
+    //draw text
+    if (m_hintString != "" || m_inputString != "") {
+        m_textTexture.render(p_window->GetRenderer(),   m_x + M_TEXT_OFFSET_X,
+                             m_y + M_TEXT_OFFSET_Y);
+    }
     
+    //draw cursor
     if (m_cursorShown && m_hasFocus) {
         int x = m_x + M_CURSOR_OFFSET_X + m_textTexture.getWidth() + M_TEXT_OFFSET_X;
         int y1 = m_y+10;
@@ -95,6 +101,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
 }
 
 void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
+    
     if(m_hasFocus){
         SDL_Event e = *p_event;
         if( e.type == SDL_KEYDOWN )
@@ -130,7 +137,6 @@ void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
             }
         }
     }
-    
 }
 
 bool gui::InputBox::Update(Uint32 p_currentTime){
@@ -144,4 +150,25 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
 
 std::string gui::InputBox::GetText(){
     return m_inputString;
+}
+
+void gui::InputBox::UpdateTexture(n8::Window* p_window){
+    //Text is not empty
+    if( m_inputString.length() > 0)
+    {
+        //load input text to texture
+        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), m_textColor );
+    }
+    //Text is empty
+    else
+    {
+        if (m_hintString != "" && !m_hasFocus) {
+            //load hint text to texture
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, m_hintString, m_textColor );
+        }
+        else{
+            //load empty texture
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", m_textColor );
+        }
+    }
 }

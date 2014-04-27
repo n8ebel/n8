@@ -27,7 +27,7 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     //build user interface
     m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
     m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
-    m_inputBox = new gui::InputBox(50,300,300,50);
+    m_inputBox = new gui::InputBox(50,300,300,50, "Enter Text");
     
     m_toolbar = new gui::Container(0,0,400,30);
     m_toolbar->AddElement(m_button1);

@@ -21,6 +21,7 @@ namespace gui {
     class InputBox : public GUIElement{
     public:
         InputBox(int p_x, int p_y, int p_w, int p_h);
+        InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint);
         ~InputBox();
         
         void Draw(n8::Window*) override;
@@ -42,12 +43,15 @@ namespace gui {
         LTexture m_textTexture;
         TTF_Font* m_font;
         
+        std::string m_hintString;
         std::string m_inputString;
         bool m_updateTexture;
         bool m_cursorShown;
         
         unsigned m_currentTime;
         unsigned m_lastTime;
+        
+        void UpdateTexture(n8::Window*);
     };
 }
 
