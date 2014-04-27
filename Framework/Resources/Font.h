@@ -25,7 +25,7 @@ namespace n8{
         
     private:
         
-        TTF_Font* p_font;
+        TTF_Font* m_font;
         
         friend class RenderService;
     };

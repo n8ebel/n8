@@ -25,6 +25,7 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     
     
     //build user interface
+    m_font = (n8::Font*)((n8::ResourceManager*)n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("stocky24");
     m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
     m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
     m_inputBox = new gui::InputBox(50,300,300,50, "Enter Text");
@@ -86,6 +87,7 @@ void TestState::Render(n8::Window* p_window){
     m_renderService->ColorBackground();  //color the background
     
     m_gui.Draw(p_window);
+    m_renderService->DrawText("goobaroo", m_font, n8::RenderService::EColor::Black, 100, 250);
     
     m_renderService->PostToScreen();  //draw everything to the screen
 }

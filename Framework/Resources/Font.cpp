@@ -10,11 +10,11 @@
 
 n8::Font::Font(std::string p_id, TTF_Font* p_ttfFont) : Resource(p_id){
     
-    p_font = p_ttfFont;
+    m_font = p_ttfFont;
     
 }
 
 n8::Font::~Font(){
-    TTF_CloseFont(p_font);
-    p_font = NULL;
+    TTF_CloseFont(m_font);
+    m_font = NULL;
 }
