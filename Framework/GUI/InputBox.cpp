@@ -84,12 +84,12 @@ void gui::InputBox::Draw(n8::Window* p_window){
     
     //draw box background
     SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
-    SDL_RenderFillRect( renderer, &m_shape );
+    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     
     //draw outline if has focus
     if (m_hasFocus) {
         SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
-        SDL_RenderDrawRect(renderer, &m_shape);
+        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
     }
     
     //draw text

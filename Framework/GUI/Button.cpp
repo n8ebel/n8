@@ -93,15 +93,15 @@ void gui::Button::Draw(n8::Window* p_window){
     SDL_Renderer* renderer= p_window->GetRenderer();
     if(m_pressed){
         SDL_SetRenderDrawColor( renderer, 200, 200, 150, 255 );
-        SDL_RenderFillRect( renderer, &m_shape );
+        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
     else if (m_hover) {
         SDL_SetRenderDrawColor( renderer, 0, 255, 0, 255 );
-        SDL_RenderFillRect( renderer, &m_shape );
+        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
     else{
         SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
-        SDL_RenderFillRect( renderer, &m_shape );
+        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
 }
 

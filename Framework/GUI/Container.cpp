@@ -62,7 +62,7 @@ void gui::Container::Draw(n8::Window* p_window){
     SDL_Renderer* renderer= p_window->GetRenderer();
     
     SDL_SetRenderDrawColor( renderer, 255, 0, 255, 255 );
-    SDL_RenderFillRect( renderer, &m_shape );
+    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     
     for (const auto& widget : m_guiElements){
         widget->Draw(p_window);

@@ -18,6 +18,7 @@
 #include "SDL2_ttf/SDL_ttf.h"
 
 #include "Window.h"
+#include "Rectangle.h"
 
 namespace gui {
     
@@ -35,7 +36,7 @@ class GUIElement{
         
         virtual void OffsetPosition(int p_x, int p_y);
     protected:
-        SDL_Rect m_shape;
+        n8::Rectangle m_rectangle;
         SDL_Texture* m_texture;
         
         int m_x;
