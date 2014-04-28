@@ -13,6 +13,11 @@
 
 #include "SDL2/SDL.h"
 
+/** @class Rectangle
+ *  @brief Wraps SDL_Rect
+ *
+ *  Stores rectangular coordinates used to determine the shape of many elements
+ */
 namespace n8 {
     class Rectangle{
     public:
@@ -20,8 +25,9 @@ namespace n8 {
         Rectangle(int p_x, int p_y, int p_w, int p_h);
         ~Rectangle();
         
-        void Resize(int p_x, int p_y, int p_w, int p_h);
+        void Resize(int p_width, int p_height);
         void Offset(int p_xOffset, int p_yOffset);
+        void RepositionAndResize(int p_x, int p_y, int p_w, int p_h);
         int GetX();
         int GetY();
         int GetW();
@@ -29,7 +35,7 @@ namespace n8 {
         SDL_Rect* GetRect();
         
     private:
-        SDL_Rect m_rectangle;
+        SDL_Rect m_rectangle; /** < SDL_Rect object that is wrapped by class.  Needed by many SDL_functions **/
     };
 }
 
