@@ -23,6 +23,8 @@ namespace n8{
         Font(std::string p_id, TTF_Font* p_ttfFont);
         ~Font();
         
+        TTF_Font* GetFont();
+        
     private:
         
         TTF_Font* m_font;

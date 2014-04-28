@@ -62,6 +62,8 @@ namespace n8 {
         void ColorBackground();
         void PostToScreen();
         
+        const Window* GetWindow(){return m_gameWindow;}
+        
     private:
         
         Window* m_gameWindow; /**< Pointer to the game window object **/

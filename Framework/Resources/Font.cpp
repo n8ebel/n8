@@ -18,3 +18,7 @@ n8::Font::~Font(){
     TTF_CloseFont(m_font);
     m_font = NULL;
 }
+
+TTF_Font* n8::Font::GetFont(){
+    return m_font;
+}

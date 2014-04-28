@@ -33,6 +33,8 @@ namespace gui{
         bool Update(Uint32 p_currentTime) override;
         void AddElement(GUIElement*);
         
+        virtual void OffsetPosition(int p_x, int p_y) override;
+        
     protected:
         std::vector<GUIElement*> m_guiElements;
         

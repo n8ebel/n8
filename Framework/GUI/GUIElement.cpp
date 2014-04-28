@@ -11,6 +11,10 @@
 #include "GUIElement.h"
 
 
+gui::GUIElement::GUIElement(){
+    
+}
+
 gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
                                                                     
                                                                     m_x(p_x),

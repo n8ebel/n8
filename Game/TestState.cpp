@@ -19,7 +19,7 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
     m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(EService::Render));
     m_audioService = static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(EService::Audio));
-                                                    
+    
     CreateSystems();
     CreateEntities();
     
@@ -34,8 +34,11 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
     m_toolbar->AddElement(m_button1);
     m_toolbar->AddElement(m_button2);
     
+    m_label = new gui::Label("hi there", m_font, gui::Label::EColor::Black, m_renderService->GetWindow(), 100,100);
+    
     m_gui.AddElement(m_toolbar);
     m_gui.AddElement(m_inputBox);
+    m_gui.AddElement(m_label);
     
      m_inputService->m_gui = &m_gui;
      
@@ -44,9 +47,23 @@ TestState::TestState() : m_exitEvent(EEvents::Test2){
 TestState::~TestState(){
     if(m_button1){
         delete m_button1;
+        m_button1 = nullptr;
     }
     if(m_button2){
         delete m_button2;
+        m_button2 = nullptr;
+    }
+    if (m_toolbar) {
+        delete m_toolbar;
+        m_toolbar = nullptr;
+    }
+    if(m_inputBox){
+        delete m_inputBox;
+        m_inputBox = nullptr;
+    }
+    if (m_label) {
+        delete m_label;
+        m_label = nullptr;
     }
 }
 
@@ -87,7 +104,7 @@ void TestState::Render(n8::Window* p_window){
     m_renderService->ColorBackground();  //color the background
     
     m_gui.Draw(p_window);
-    m_renderService->DrawText("goobaroo", m_font, n8::RenderService::EColor::Black, 100, 250);
+    //m_renderService->DrawText("goobaroo", m_font, n8::RenderService::EColor::Black, 100, 250);
     
     m_renderService->PostToScreen();  //draw everything to the screen
 }

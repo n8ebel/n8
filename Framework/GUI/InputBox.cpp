@@ -16,8 +16,11 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
     m_cursorShown = false;
     m_lastTime = 0;
     m_hasFocus = false;
-                                                                         m_updateTexture = true;
+    m_updateTexture = true;
     m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
+    if (m_font == nullptr) {
+        std::cout << SDL_GetError() << std::endl;
+    }
 }
 
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h){
@@ -30,15 +33,20 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) 
     m_hasFocus = false;
     m_updateTexture = true;
     m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
+    if (m_font == nullptr) {
+        std::cout << SDL_GetError() << std::endl;
+    }
 }
 
 gui::InputBox::~InputBox(){
-    if (m_texture) {
+    if (m_texture != nullptr) {
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
-    if (m_font){
+    if (m_font != nullptr){
+        
         TTF_CloseFont(m_font);
+        
     }
 }
 

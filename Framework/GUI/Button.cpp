@@ -112,5 +112,8 @@ bool gui::Button::Update(Uint32 p_currentTime){
     if(m_pressed){
         m_hasFocus = true;
     }
+    else{
+        m_hasFocus = false;
+    }
     return m_hasFocus;
 }

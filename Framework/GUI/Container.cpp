@@ -86,3 +86,12 @@ bool gui::Container::Update(Uint32 p_currentTime){
     
     return m_hasFocus;
 }
+
+void gui::Container::OffsetPosition(int p_x, int p_y){
+    m_x += p_x;
+    m_y += p_y;
+    
+    for (auto element : m_guiElements) {
+        element->OffsetPosition(p_x, p_y);
+    }
+}

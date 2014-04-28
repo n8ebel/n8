@@ -23,6 +23,7 @@ namespace gui {
     
 class GUIElement{
     public:
+        GUIElement();
         GUIElement(int p_x, int p_y, int p_w, int p_h);
         virtual ~GUIElement();
         
@@ -32,7 +33,7 @@ class GUIElement{
         virtual bool CheckMouseMove() = 0;
         virtual bool Update(Uint32 p_currentTime) = 0;
         
-        void OffsetPosition(int p_x, int p_y);
+        virtual void OffsetPosition(int p_x, int p_y);
     protected:
         SDL_Rect m_shape;
         SDL_Texture* m_texture;
