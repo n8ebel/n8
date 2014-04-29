@@ -45,7 +45,7 @@ TestState::TestState() : m_gui(nullptr),m_exitEvent(EEvents::Test2){
     
     m_gui->Build();
     
-    m_inputService->m_gui = m_gui;
+    m_inputService->RegisterUserInterface(m_gui);
     
     
      

@@ -30,11 +30,13 @@ public:
     InputService();
     
     ~InputService();
-    gui::GUI* m_gui;
+    
     void HandleInput();
     bool HandleEvent();
     bool KeyIsDown(int key);
     bool KeyIsUp(int key);
+    
+    void RegisterUserInterface(gui::GUI* p_gui);
     
     void RegisterKeyUpCommand(int,Command*);
     void RegisterKeyDownCommand(int,Command*);
@@ -60,6 +62,9 @@ private:
    
     
     SDL_Event m_event; /** < SDL_Event pointer to get dequeued events */
+    
+    gui::GUI* m_userInterface;
+    
     bool m_keysHeld[323];  /** < Array to store whether or not a key is being held down **/
     Command* m_registeredKeyDownCommands[323];
     Command* m_registeredKeyUpCommands[323];

@@ -28,7 +28,7 @@ n8::InputService::InputService(){
         m_registeredKeyUpCommands[i] = NULL;
     }
     
-    m_gui = nullptr;
+    m_userInterface = nullptr;
     
     m_mouseMoveCommand = nullptr;
     m_mouseButtonDownCommand = nullptr;
@@ -52,9 +52,9 @@ void n8::InputService::HandleInput(){
     if (SDL_PollEvent(&m_event))
     {
         bool guiHasFocus = false;
-        if(m_gui){
-            m_gui->ProcessInput(&m_event);
-            guiHasFocus = m_gui->HasFocus();
+        if(m_userInterface){
+            m_userInterface->ProcessInput(&m_event);
+            guiHasFocus = m_userInterface->HasFocus();
         }
         
         
@@ -143,6 +143,10 @@ bool n8::InputService::KeyIsUp(int key){
     
     return KeyIsUp(&m_event, key);
     
+}
+
+void n8::InputService::RegisterUserInterface(gui::GUI* p_gui){
+    m_userInterface = p_gui;
 }
 
 void n8::InputService::RegisterKeyDownCommand(int key,Command* command){
