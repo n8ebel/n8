@@ -16,8 +16,6 @@
 #include "GUIElement.h"
 
 #include "Window.h"
-#include "LTexture.h"
-#include "Font.h"
 #include "Log.h"
 
 namespace gui {
@@ -42,7 +40,7 @@ class Label : public GUIElement{
     
         SDL_Rect m_shape;
         SDL_Texture* m_texture;
-        SDL_Color m_textColor;
+        n8::Color m_textColor;
         LTexture m_textTexture;
     
         std::string m_labelText;

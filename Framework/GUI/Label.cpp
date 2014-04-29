@@ -19,19 +19,13 @@ gui::Label::Label(std::string p_text, n8::Font* p_font, EColor p_color, const n8
     m_y = p_y;
     
     if (p_color == EColor::Black) {
-        m_textColor.r = 0;
-        m_textColor.g = 0;
-        m_textColor.b = 0;
-        m_textColor.a = 255;
+        m_textColor.Set(0,0,0,255);
     }
     else{
-        m_textColor.r = 255;
-        m_textColor.g = 255;
-        m_textColor.b = 255;
-        m_textColor.a = 255;
+        m_textColor.Set(255, 255, 255,255);
     }
     
-    m_textTexture.loadFromRenderedText( p_window->GetRenderer(), p_font->GetFont(), m_labelText.c_str(), m_textColor );
+    m_textTexture.loadFromRenderedText( p_window->GetRenderer(), p_font->GetFont(), m_labelText.c_str(), (*m_textColor.GetColor()) );
         
 }
 

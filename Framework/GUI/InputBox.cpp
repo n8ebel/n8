@@ -11,7 +11,7 @@
 #include "InputBox.h"
 
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h){
-    m_textColor = { 0, 0, 0, 0xFF };
+    m_textColor.Set(0, 0, 0, 255);
     m_inputString = "";
     m_cursorShown = false;
     m_lastTime = 0;
@@ -24,8 +24,7 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
 }
 
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h){
-    
-    m_textColor = { 0, 0, 0, 0xFF };
+    m_textColor.Set(0, 0, 0, 255);
     m_hintString = p_hint;
     m_inputString = "";
     m_cursorShown = false;
@@ -165,18 +164,18 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     if( m_inputString.length() > 0)
     {
         //load input text to texture
-        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), m_textColor );
+        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), (*m_textColor.GetColor()) );
     }
     //Text is empty
     else
     {
         if (m_hintString != "" && !m_hasFocus) {
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, m_hintString, m_textColor );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, m_hintString, (*m_textColor.GetColor()) );
         }
         else{
             //load empty texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", m_textColor );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", (*m_textColor.GetColor()) );
         }
     }
 }

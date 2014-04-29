@@ -13,8 +13,8 @@
 
 #include "SDL2/SDL.h"
 
-/** @class Rectangle
- *  @brief Wraps SDL_Rect
+/** \class Rectangle
+ *  \brief Wraps SDL_Rect
  *
  *  Stores rectangular coordinates used to determine the shape of many elements
  */

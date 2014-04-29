@@ -39,7 +39,7 @@ namespace gui {
         const unsigned M_TEXT_OFFSET_Y = 10;
         const unsigned M_CURSOR_OFFSET_X = 2;
         //Set text color as black
-        SDL_Color m_textColor;
+        n8::Color m_textColor;
         LTexture m_textTexture;
         TTF_Font* m_font;
         
