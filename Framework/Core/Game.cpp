@@ -31,7 +31,7 @@ n8::Game::Game(const char* configFile){
 
 /** Destructor */
 n8::Game::~Game(){
-    
+    Log::Info(TAG, "Destructor");
 }
 
 /** ProcessConfigFile
@@ -118,9 +118,9 @@ void n8::Game::InitializeResourcesPath(){
 void n8::Game::Setup(){
     Log::Create();
     
-    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
-    
     m_serviceManager = ServiceManager::GetInstance();
+    
+    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();

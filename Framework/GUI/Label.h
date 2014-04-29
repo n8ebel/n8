@@ -25,9 +25,10 @@ class Label : public GUIElement{
     
         enum class EColor{Black,White};
     
-        Label(std::string p_text, n8::Font* p_font, EColor p_color, const n8::Window* p_window, int p_x, int p_y);
+        Label(std::string p_text, int p_x, int p_y);
         ~Label();
-        
+    
+        virtual void Build() override;
         virtual void Draw(n8::Window*) override;
         virtual bool CheckMouseClickDown(int p_x, int p_y)override;
         virtual bool CheckMouseClickUp(int p_x, int p_y)override;

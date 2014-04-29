@@ -11,41 +11,31 @@
 #include "InputBox.h"
 
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h){
-    m_textColor.Set(0, 0, 0, 255);
-    m_inputString = "";
-    m_cursorShown = false;
+    
     m_lastTime = 0;
+    m_inputString = "";
+    
+    m_cursorShown = false;
     m_hasFocus = false;
     m_updateTexture = true;
-    m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
-    if (m_font == nullptr) {
-        std::cout << SDL_GetError() << std::endl;
-    }
 }
 
-gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h){
-    m_textColor.Set(0, 0, 0, 255);
+gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h)
+{
+
+    m_lastTime = 0;
     m_hintString = p_hint;
     m_inputString = "";
+    
     m_cursorShown = false;
-    m_lastTime = 0;
     m_hasFocus = false;
     m_updateTexture = true;
-    m_font = TTF_OpenFont( "stocky/stocky.ttf", p_h - M_TEXT_OFFSET_Y*2 );
-    if (m_font == nullptr) {
-        std::cout << SDL_GetError() << std::endl;
-    }
 }
 
 gui::InputBox::~InputBox(){
     if (m_texture != nullptr) {
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
-    }
-    if (m_font != nullptr){
-        
-        TTF_CloseFont(m_font);
-        
     }
 }
 
@@ -105,6 +95,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
         SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
         SDL_RenderDrawLine(renderer, x, y1, x, y2);
     }
+    
 }
 
 void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
@@ -160,22 +151,28 @@ std::string gui::InputBox::GetText(){
 }
 
 void gui::InputBox::UpdateTexture(n8::Window* p_window){
+    
     //Text is not empty
     if( m_inputString.length() > 0)
     {
+        
         //load input text to texture
-        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_font, m_inputString.c_str(), (*m_textColor.GetColor()) );
+        m_textTexture.loadFromRenderedText( m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_inputString.c_str(), (*m_style->GetFontColor().GetColor()) );
+       
     }
     //Text is empty
     else
     {
         if (m_hintString != "" && !m_hasFocus) {
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, m_hintString, (*m_textColor.GetColor()) );
+            m_textTexture.loadFromRenderedText(m_style->GetWindow()->GetRenderer(),m_style->GetFont()->GetFont(),  m_hintString, (*m_style->GetFontColor().GetColor()) );
         }
         else{
             //load empty texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), m_font, " ", (*m_textColor.GetColor()) );
+            m_textTexture.loadFromRenderedText(m_style->GetWindow()->GetRenderer(),  m_style->GetFont()->GetFont()," ", (*m_style->GetFontColor().GetColor()) );
         }
+      
     }
+                                                         
+    
 }

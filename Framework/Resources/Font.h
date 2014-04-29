@@ -15,6 +15,7 @@
 #include <string>
 
 #include "Resource.h"
+#include "Log.h"
 
 namespace n8{
     
@@ -26,7 +27,7 @@ namespace n8{
         TTF_Font* GetFont();
         
     private:
-        
+        std::string m_id;
         TTF_Font* m_font;
         
         friend class RenderService;

@@ -59,7 +59,7 @@ private:
     
    
     
-    SDL_Event* m_event; /** < SDL_Event pointer to get dequeued events */
+    SDL_Event m_event; /** < SDL_Event pointer to get dequeued events */
     bool m_keysHeld[323];  /** < Array to store whether or not a key is being held down **/
     Command* m_registeredKeyDownCommands[323];
     Command* m_registeredKeyUpCommands[323];

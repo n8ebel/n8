@@ -22,19 +22,10 @@ n8::Window::Window(){
 }
 
 n8::Window::~Window(){
-    if(m_screenRenderer){
-        SDL_DestroyRenderer(m_screenRenderer);
-        m_screenRenderer = NULL;
-    }
     
     if(m_window){
         SDL_DestroyWindow(m_window);
         m_window = NULL;
-        
-        if(m_screenSurface){
-            SDL_FreeSurface(m_screenSurface);
-            m_screenSurface = NULL;
-        }
     }
 }
 

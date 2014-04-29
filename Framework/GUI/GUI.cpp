@@ -10,15 +10,32 @@
 
 #include "GUI.h"
 
-gui::GUI::GUI() : m_hasFocus(false){
+gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_window,p_font),
+                    m_hasFocus(false),
+                    m_built(false)
+{
     
 }
 
 gui::GUI::~GUI(){
-    
+    for (auto element : m_guiElements){
+        if (element) {
+            delete element;
+            element = nullptr;
+        }
+    }
 }
 
+void gui::GUI::Build(){
+    for (auto element : m_guiElements){
+        element->Build();
+    }
+    m_built = true;
+}
 void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
+    if (p_newWidget->GetStyle() == nullptr){
+        p_newWidget->SetStyle(&m_style);
+    }
     m_guiElements.push_back(p_newWidget);
 }
 

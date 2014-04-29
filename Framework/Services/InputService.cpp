@@ -21,7 +21,7 @@
  */
 n8::InputService::InputService(){
     Log::Info(TAG, "Constructor");
-    m_event = new SDL_Event;
+    //m_event = new SDL_Event;
     
     for (int i = 0; i < 323; i++) {
         m_registeredKeyDownCommands[i] = NULL;
@@ -49,39 +49,40 @@ n8::InputService::~InputService(){
  *      so they can be responded to by a game state
  */
 void n8::InputService::HandleInput(){
-    if (SDL_PollEvent(m_event))
+    if (SDL_PollEvent(&m_event))
     {
         bool guiHasFocus = false;
         if(m_gui){
-            m_gui->ProcessInput(m_event);
+            m_gui->ProcessInput(&m_event);
+            guiHasFocus = m_gui->HasFocus();
         }
-        guiHasFocus = m_gui->HasFocus();
         
-        if (m_event->type == SDL_QUIT)
+        
+        if (m_event.type == SDL_QUIT)
 		{
             Event event(EEvents::Values::Exit);
             Notify(&event);
 		}
         
         if (!guiHasFocus) {
-            if (m_event->type == SDL_KEYDOWN)
+            if (m_event.type == SDL_KEYDOWN)
             {
-                m_keysHeld[m_event->key.keysym.sym] = true;
-                if(m_registeredKeyDownCommands[m_event->key.keysym.sym] != NULL){
-                    m_registeredKeyDownCommands[m_event->key.keysym.sym]->execute();
+                m_keysHeld[m_event.key.keysym.sym] = true;
+                if(m_registeredKeyDownCommands[m_event.key.keysym.sym] != NULL){
+                    m_registeredKeyDownCommands[m_event.key.keysym.sym]->execute();
                 }
             }
-            if (m_event->type == SDL_KEYUP)
+            if (m_event.type == SDL_KEYUP)
             {
-                m_keysHeld[m_event->key.keysym.sym] = false;
-                if (m_registeredKeyUpCommands[m_event->key.keysym.sym] != NULL) {
-                    m_registeredKeyUpCommands[m_event->key.keysym.sym]->execute();
+                m_keysHeld[m_event.key.keysym.sym] = false;
+                if (m_registeredKeyUpCommands[m_event.key.keysym.sym] != NULL) {
+                    m_registeredKeyUpCommands[m_event.key.keysym.sym]->execute();
                 }
             }
 
         }
         
-        if( m_event->type == SDL_MOUSEMOTION  )
+        if( m_event.type == SDL_MOUSEMOTION  )
         {
             if(m_mouseMoveCommand){
                m_mouseMoveCommand->execute();
@@ -90,7 +91,7 @@ void n8::InputService::HandleInput(){
                 m_mouseMoveFunction();
             }
         }
-        if( m_event->type == SDL_MOUSEBUTTONDOWN){
+        if( m_event.type == SDL_MOUSEBUTTONDOWN){
             int x,y;
             SDL_GetMouseState(&x, &y);
             
@@ -101,7 +102,7 @@ void n8::InputService::HandleInput(){
                 m_mouseButtonDownFunction(x,y);
             }
         }
-        if( m_event->type == SDL_MOUSEBUTTONUP){
+        if( m_event.type == SDL_MOUSEBUTTONUP){
             int x,y;
             SDL_GetMouseState(&x, &y);
             
@@ -117,7 +118,7 @@ void n8::InputService::HandleInput(){
 
 /** @return True if there is an event in the queue */
 bool n8::InputService::HandleEvent(){
-    return SDL_PollEvent(m_event);
+    return SDL_PollEvent(&m_event);
 }
 
 /** Checks whether a key is pressed down
@@ -128,7 +129,7 @@ bool n8::InputService::HandleEvent(){
  *  @return True if the key was pressed down, False otherwise
  */
 bool n8::InputService::KeyIsDown(int key){
-    return KeyIsDown(m_event, key);
+    return KeyIsDown(&m_event, key);
 }
 
 /** Checks whether a key is up
@@ -140,7 +141,7 @@ bool n8::InputService::KeyIsDown(int key){
  */
 bool n8::InputService::KeyIsUp(int key){
     
-    return KeyIsUp(m_event, key);
+    return KeyIsUp(&m_event, key);
     
 }
 

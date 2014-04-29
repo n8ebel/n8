@@ -18,7 +18,7 @@ n8::AudioService::AudioService(){
 
 /** Destructor */
 n8::AudioService::~AudioService(){
-    
+    Log::Info(TAG, "Destructor");
 }
 
 void n8::AudioService::OnNotify(Event* p_event){

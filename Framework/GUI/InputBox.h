@@ -38,10 +38,9 @@ namespace gui {
         const unsigned M_TEXT_OFFSET_X = 10;
         const unsigned M_TEXT_OFFSET_Y = 10;
         const unsigned M_CURSOR_OFFSET_X = 2;
-        //Set text color as black
-        n8::Color m_textColor;
+        
         LTexture m_textTexture;
-        TTF_Font* m_font;
+        
         
         std::string m_hintString;
         std::string m_inputString;

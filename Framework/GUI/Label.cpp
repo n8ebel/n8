@@ -10,31 +10,39 @@
 
 #include "Label.h"
 
+#define TAG "Label"
 
-gui::Label::Label(std::string p_text, n8::Font* p_font, EColor p_color, const n8::Window* p_window, int p_x, int p_y) : GUIElement() {
+
+gui::Label::Label(std::string p_text, int p_x, int p_y) : GUIElement() {
     m_labelText = p_text;
     
     m_texture = nullptr;
     m_x = p_x;
     m_y = p_y;
     
-    if (p_color == EColor::Black) {
-        m_textColor.Set(0,0,0,255);
-    }
-    else{
-        m_textColor.Set(255, 255, 255,255);
-    }
-    
-    m_textTexture.loadFromRenderedText( p_window->GetRenderer(), p_font->GetFont(), m_labelText.c_str(), (*m_textColor.GetColor()) );
-        
 }
 
 gui::Label::~Label(){
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
+}
+
+void gui::Label::Build(){
     
+    if (m_style) {
+        m_built = m_textTexture.loadFromRenderedText(  m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_labelText.c_str(), (*m_style->GetFontColor().GetColor()) );
+    }
+    
+    if (!m_built) {
+        n8::Log::Error(TAG, "Label failed to build");
+    }
+     
 }
 
 void gui::Label::Draw(n8::Window* p_window){
-    m_textTexture.render(p_window->GetRenderer(), m_x, m_y);
+   m_textTexture.render(m_style->GetWindow()->GetRenderer(), m_x, m_y);
 }
 
 bool gui::Label::CheckMouseClickDown(int p_x, int p_y){

@@ -20,6 +20,13 @@ gui::Container::~Container(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
+    
+    for (auto element : m_guiElements){
+        if (element) {
+            delete element;
+            element = nullptr;
+        }
+    }
 }
 
 bool gui::Container::CheckMouseClickDown(int p_x, int p_y){

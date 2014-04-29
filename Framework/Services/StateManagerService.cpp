@@ -168,10 +168,8 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){
-    cout << "ahhh" << endl;
     if(event->GetType() == EEvents::Values::Exit){
         m_stateStack.clear();
-        cout << "clearin" << endl;
     }
     else if(event->GetType() == EEvents::Values::Test2){
         m_stateStack.push_back(m_registeredStates[EState::Test2]);
