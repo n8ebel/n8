@@ -90,17 +90,40 @@ bool gui::Button::CheckMouseClickUp(int p_x, int p_y){
 }
 
 void gui::Button::Draw(n8::Window* p_window){
+    if (!m_style) {
+        exit(EXIT_FAILURE);
+    }
+    std::stringstream ss;
+    ss << m_style->GetColor(Style::EStyleColor::Container).GetR();
+    
+    std::string msg = ss.str();
+    n8::Log::Debug(TAG, msg);
     SDL_Renderer* renderer= p_window->GetRenderer();
     if(m_pressed){
-        SDL_SetRenderDrawColor( renderer, 200, 200, 150, 255 );
+        SDL_SetRenderDrawColor( renderer,
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetA()
+                               );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
     else if (m_hover) {
-        SDL_SetRenderDrawColor( renderer, 0, 255, 0, 255 );
+        SDL_SetRenderDrawColor( renderer,
+                               m_style->GetColor(Style::EStyleColor::Hover).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Hover).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Hover).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Hover).GetA()
+                               );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
     else{
-        SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
+        SDL_SetRenderDrawColor( renderer,
+                               m_style->GetColor(Style::EStyleColor::Button).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Button).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Button).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Button).GetA()
+                               );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
 }

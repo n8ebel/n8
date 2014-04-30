@@ -32,7 +32,7 @@ gui::Label::~Label(){
 void gui::Label::Build(){
     
     if (m_style) {
-        m_built = m_textTexture.loadFromRenderedText(  m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_labelText.c_str(), (*m_style->GetFontColor().GetColor()) );
+        m_built = m_textTexture.loadFromRenderedText(  m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_labelText.c_str(), m_style->GetColor(Style::EStyleColor::Font).GetColor() );
     }
     
     if (!m_built) {

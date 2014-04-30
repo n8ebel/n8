@@ -130,6 +130,6 @@ int n8::Color::GetA(){
     return m_color.a;
 }
 
-SDL_Color* n8::Color::GetColor(){
-    return &m_color;
+SDL_Color n8::Color::GetColor(){
+    return m_color;
 }

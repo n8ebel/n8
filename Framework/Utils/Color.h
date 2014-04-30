@@ -38,7 +38,7 @@ namespace n8{
         int GetB();
         int GetA();
         
-        SDL_Color* GetColor();
+        SDL_Color GetColor();
         
     private:
         SDL_Color m_color; /** < SDL_Color object wrapped by this class.  Used for rendering operations. **/

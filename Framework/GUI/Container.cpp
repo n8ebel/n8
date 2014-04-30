@@ -65,10 +65,17 @@ bool gui::Container::CheckMouseMove(){/*
     return false;
 }
 
+void gui::Container::SetStyle(Style* p_style){
+    m_style = p_style;
+    for (auto element : m_guiElements){
+        element->SetStyle(p_style);
+    }
+}
+
 void gui::Container::Draw(n8::Window* p_window){
     SDL_Renderer* renderer= p_window->GetRenderer();
     
-    SDL_SetRenderDrawColor( renderer, 255, 0, 255, 255 );
+    SDL_SetRenderDrawColor( renderer, m_style->GetColor(Style::EStyleColor::Container).GetR(), m_style->GetColor(Style::EStyleColor::Container).GetG(), m_style->GetColor(Style::EStyleColor::Container).GetB(), m_style->GetColor(Style::EStyleColor::Container).GetA() );
     SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     
     for (const auto& widget : m_guiElements){

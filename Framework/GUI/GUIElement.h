@@ -41,7 +41,7 @@ class GUIElement{
         
         virtual void OffsetPosition(int p_x, int p_y);
     
-        void SetStyle(Style* p_style);
+        virtual void SetStyle(Style* p_style);
     
         Style* GetStyle()const{return m_style;}
     protected:
