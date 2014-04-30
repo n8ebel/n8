@@ -162,7 +162,7 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     else if(time <= 0){
         Log::Error(TAG , "ProcessState(): Game time not greater than 0");
     }
-    else if(screen == NULL){
+    else if(screen == nullptr){
         Log::Error(TAG , "ProcessState(): Screen pointer is NULL");
     }
 }

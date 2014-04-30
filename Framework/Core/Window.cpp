@@ -15,9 +15,9 @@
 #define TAG "Window"
 
 n8::Window::Window(){
-    m_screenSurface = NULL;
-    m_screenRenderer = NULL;
-    m_window = NULL;
+    m_screenSurface = nullptr;
+    m_screenRenderer = nullptr;
+    m_window = nullptr;
     ResizeWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 }
 
@@ -25,7 +25,7 @@ n8::Window::~Window(){
     
     if(m_window){
         SDL_DestroyWindow(m_window);
-        m_window = NULL;
+        m_window = nullptr;
     }
 }
 
@@ -61,7 +61,7 @@ void n8::Window::ResizeWindow(int w, int h){
                                            
            
                                 );
-    if( m_window == NULL )
+    if( m_window == nullptr )
     {
         std::string msg("Window could not be created: SDL Error: %s\n", SDL_GetError() );
         Log::Error(TAG, msg);
@@ -69,7 +69,7 @@ void n8::Window::ResizeWindow(int w, int h){
     }
     
     m_screenSurface = SDL_GetWindowSurface(m_window);
-    if( m_screenSurface == NULL )
+    if( m_screenSurface == nullptr )
     {
         std::string msg("Could not get screen surface: SDL Error: %s\n", SDL_GetError() );
         Log::Error(TAG, msg);
@@ -77,7 +77,7 @@ void n8::Window::ResizeWindow(int w, int h){
     }
     
     m_screenRenderer = SDL_GetRenderer(m_window);
-    if( m_screenRenderer == NULL )
+    if( m_screenRenderer == nullptr )
     {
         std::string msg("Could not get renderer: SDL Error: %s\n", SDL_GetError() );
         Log::Error(TAG, msg);

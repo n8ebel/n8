@@ -29,8 +29,8 @@ TestState::TestState() : m_gui(nullptr),m_exitEvent(EEvents::Test2){
     
     m_gui = new gui::GUI(const_cast<n8::Window*>(m_renderService->GetWindow()),m_font);
     m_gui->GetStyle().GetWindow()->GetWindow();
-    m_button1 = new gui::Button("button1", 25,5,100,20, NULL);
-    m_button2 = new gui::Button("button2", 275,5,100,20, NULL);
+    m_button1 = new gui::Button("button1", 25,5,100,20, nullptr);
+    m_button2 = new gui::Button("button2", 275,5,100,20, nullptr);
     m_inputBox = new gui::InputBox(50,300,300,50, "Enter Text");
     
     m_toolbar = new gui::Container(0,0,400,30);

@@ -18,5 +18,5 @@ n8::Texture::Texture(std::string p_id, SDL_Texture* p_texture, int p_w, int p_h)
 
 n8::Texture::~Texture(){
     SDL_DestroyTexture(m_texture);
-    m_texture = NULL;
+    m_texture = nullptr;
 }

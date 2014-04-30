@@ -24,8 +24,8 @@ n8::InputService::InputService(){
     //m_event = new SDL_Event;
     
     for (int i = 0; i < 323; i++) {
-        m_registeredKeyDownCommands[i] = NULL;
-        m_registeredKeyUpCommands[i] = NULL;
+        m_registeredKeyDownCommands[i] = nullptr;
+        m_registeredKeyUpCommands[i] = nullptr;
     }
     
     m_userInterface = nullptr;
@@ -68,14 +68,14 @@ void n8::InputService::HandleInput(){
             if (m_event.type == SDL_KEYDOWN)
             {
                 m_keysHeld[m_event.key.keysym.sym] = true;
-                if(m_registeredKeyDownCommands[m_event.key.keysym.sym] != NULL){
+                if(m_registeredKeyDownCommands[m_event.key.keysym.sym] != nullptr){
                     m_registeredKeyDownCommands[m_event.key.keysym.sym]->execute();
                 }
             }
             if (m_event.type == SDL_KEYUP)
             {
                 m_keysHeld[m_event.key.keysym.sym] = false;
-                if (m_registeredKeyUpCommands[m_event.key.keysym.sym] != NULL) {
+                if (m_registeredKeyUpCommands[m_event.key.keysym.sym] != nullptr) {
                     m_registeredKeyUpCommands[m_event.key.keysym.sym]->execute();
                 }
             }
@@ -159,8 +159,8 @@ void n8::InputService::RegisterKeyUpCommand(int key,Command* command){
 
 void n8::InputService::UnregisterKeyCommands(){
     for (int i = 0; i < 323; i++) {
-        m_registeredKeyUpCommands[i] = NULL;
-        m_registeredKeyDownCommands[i] = NULL;
+        m_registeredKeyUpCommands[i] = nullptr;
+        m_registeredKeyDownCommands[i] = nullptr;
     }
 }
 
@@ -205,7 +205,7 @@ void n8::InputService::RegisterMouseMoveAction(std::function<void()> func){
 }
 
 void n8::InputService::UnregisterMouseMoveAction(){
-    m_mouseMoveCommand = NULL;
+    m_mouseMoveCommand = nullptr;
     m_mouseMoveFunction = nullptr;
 }
 
@@ -218,7 +218,7 @@ void n8::InputService::RegisterMouseButtonDownAction(std::function<void(int,int)
 }
 
 void n8::InputService::UnregisterMouseButtonDownAction(){
-    m_mouseButtonDownCommand = NULL;
+    m_mouseButtonDownCommand = nullptr;
     m_mouseButtonDownFunction = nullptr;
 }
 

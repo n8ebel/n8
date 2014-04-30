@@ -21,7 +21,7 @@ n8::Font::~Font(){
     if (m_font) {
        // Log::Debug(TAG, "Deleting font: " + m_id);
         TTF_CloseFont(m_font);
-        m_font = NULL;
+        m_font = nullptr;
     }
 }
 

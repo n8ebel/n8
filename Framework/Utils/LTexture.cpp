@@ -11,7 +11,7 @@
 LTexture::LTexture()
 {
     //Initialize
-    mTexture = NULL;
+    mTexture = nullptr;
     mWidth = 0;
     mHeight = 0;
 }
@@ -28,11 +28,11 @@ bool LTexture::loadFromFile( SDL_Renderer* p_renderer,std::string path )
     free();
     
     //The final texture
-    SDL_Texture* newTexture = NULL;
+    SDL_Texture* newTexture = nullptr;
     
     //Load image at specified path
     SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-    if( loadedSurface == NULL )
+    if( loadedSurface == nullptr )
     {
         printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
     }
@@ -43,7 +43,7 @@ bool LTexture::loadFromFile( SDL_Renderer* p_renderer,std::string path )
         
         //Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface( p_renderer, loadedSurface );
-        if( newTexture == NULL )
+        if( newTexture == nullptr )
         {
             printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
         }
@@ -60,16 +60,16 @@ bool LTexture::loadFromFile( SDL_Renderer* p_renderer,std::string path )
     
     //Return success
     mTexture = newTexture;
-    return mTexture != NULL;
+    return mTexture != nullptr;
 }
 
 void LTexture::free()
 {
     //Free texture if it exists
-    if( mTexture != NULL )
+    if( mTexture != nullptr )
     {
         SDL_DestroyTexture( mTexture );
-        mTexture = NULL;
+        mTexture = nullptr;
         mWidth = 0;
         mHeight = 0;
     }
@@ -100,7 +100,7 @@ bool LTexture::loadFromRenderedText( SDL_Renderer* p_renderer,TTF_Font* p_font, 
     
     //Render text surface
     SDL_Surface* textSurface = TTF_RenderText_Solid( p_font, textureText.c_str(), textColor );
-    if( textSurface == NULL )
+    if( textSurface == nullptr )
     {
         printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
     }
@@ -108,7 +108,7 @@ bool LTexture::loadFromRenderedText( SDL_Renderer* p_renderer,TTF_Font* p_font, 
     {
         //Create texture from surface pixels
         mTexture = SDL_CreateTextureFromSurface( p_renderer, textSurface );
-        if( mTexture == NULL )
+        if( mTexture == nullptr )
         {
             printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
         }
@@ -124,5 +124,5 @@ bool LTexture::loadFromRenderedText( SDL_Renderer* p_renderer,TTF_Font* p_font, 
     }
     
     //Return success
-    return mTexture != NULL;
+    return mTexture != nullptr;
 }

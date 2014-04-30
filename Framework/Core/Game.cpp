@@ -16,7 +16,7 @@
 n8::Game::Game(const char* configFile){
     Log::Info(TAG, "Constructor");
     
-    m_serviceManager = NULL;
+    m_serviceManager = nullptr;
     m_windowWidth = 1;
     m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
