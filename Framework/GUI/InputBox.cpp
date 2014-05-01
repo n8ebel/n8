@@ -90,6 +90,15 @@ void gui::InputBox::Draw(n8::Window* p_window){
         
         SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
     }
+    else{
+        SDL_SetRenderDrawColor( renderer,    m_style->GetColor(Style::EStyleColor::Default).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Default).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Default).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Default).GetA()
+                               );
+        
+        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+    }
     
     //draw text
     if (m_hintString != "" || m_inputString != "") {
@@ -180,7 +189,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     {
         if (m_hintString != "" && !m_hasFocus) {
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(m_style->GetWindow()->GetRenderer(),m_style->GetFont()->GetFont(),  m_hintString, (m_style->GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture.loadFromRenderedText(m_style->GetWindow()->GetRenderer(),m_style->GetFont()->GetFont(),  m_hintString, (m_style->GetColor(Style::EStyleColor::Hint).GetColor()) );
         }
         else{
             //load empty texture

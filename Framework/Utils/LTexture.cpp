@@ -126,3 +126,12 @@ bool LTexture::loadFromRenderedText( SDL_Renderer* p_renderer,TTF_Font* p_font, 
     //Return success
     return mTexture != nullptr;
 }
+
+bool LTexture::HasTexture(){
+    if (mTexture) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}

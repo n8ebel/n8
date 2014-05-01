@@ -29,6 +29,12 @@ gui::Container::~Container(){
     }
 }
 
+void gui::Container::Build(){
+    for (auto widget : m_guiElements){
+        widget->Build();
+    }
+}
+
 bool gui::Container::CheckMouseClickDown(int p_x, int p_y){
     for (const auto& widget : m_guiElements){
         if ( widget->CheckMouseClickDown(p_x, p_y) ){

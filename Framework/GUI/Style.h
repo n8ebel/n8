@@ -26,8 +26,10 @@ namespace gui {
                                 Focus,
                                 Pressed,
                                 Font,
+                                Hint,
                                 InputBackground,
-                                Cursor
+                                Cursor,
+                                Default
         };
             
         
@@ -58,6 +60,7 @@ namespace gui {
         n8::Color m_pressedColor;
         
         n8::Color m_fontColor;
+        n8::Color m_hintColor;
         
         n8::Color m_focusColor;
         n8::Color m_inputBackgroundColor;

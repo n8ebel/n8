@@ -22,12 +22,13 @@ namespace gui {
         m_pressedColor.Set(190, 175, 20);
         
         m_fontColor.Set(0, 0, 0);
+        m_hintColor.Set(160, 160, 160,100);
         
         m_focusColor.Set(0, 50, 2550);
         m_inputBackgroundColor.Set(255, 255, 255);
         m_cursorColor.Set(0, 0, 0);
         
-        m_defaultColor.Set(255, 255, 255);
+        m_defaultColor.Set(0, 0, 0);
         
     }
     
@@ -64,6 +65,9 @@ namespace gui {
         else if(p_color == EStyleColor::Font){
             m_fontColor.Set(p_r, p_g, p_b,p_a);
         }
+        else if(p_color == EStyleColor::Hint){
+            m_hintColor.Set(p_r, p_g, p_b,p_a);
+        }
         else if(p_color == EStyleColor::Hover){
             m_hoverColor.Set(p_r, p_g, p_b,p_a);
         }
@@ -90,6 +94,9 @@ namespace gui {
         }
         else if(p_color == EStyleColor::Font){
             return m_fontColor;
+        }
+        else if(p_color == EStyleColor::Hint){
+            return m_hintColor;
         }
         else if(p_color == EStyleColor::Hover){
             return m_hoverColor;

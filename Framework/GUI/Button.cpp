@@ -12,9 +12,10 @@
 
 #define TAG "Button"
 
-gui::Button::Button( std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command) : GUIElement(p_x,p_y,p_w,p_h)
+gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_id = p_id;
+    m_text = p_text;
     m_hover = false;
     m_pressed = false;
     m_mouseClickedDown = false;
@@ -24,9 +25,10 @@ gui::Button::Button( std::string p_id, int p_x, int p_y, int p_w, int p_h, n8::C
     m_function = nullptr;
 }
 
-gui::Button::Button(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::function<void()> func) : GUIElement(p_x,p_y,p_w,p_h)
+gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> func) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_id = p_id;
+    m_text = p_text;
     m_hover = false;
     m_pressed = false;
     m_mouseClickedDown = false;
@@ -43,6 +45,18 @@ gui::Button::~Button(){
     }
     m_command = nullptr;
     m_function = nullptr;
+}
+
+void gui::Button::Build(){
+    
+    if (m_style) {
+        m_built = m_textTexture.loadFromRenderedText(  m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_text.c_str(), m_style->GetColor(Style::EStyleColor::Font).GetColor() );
+    }
+    
+    if (!m_built) {
+        n8::Log::Error(TAG, "Label failed to build");
+    }
+    
 }
 
 bool gui::Button::CheckMouseMove(){
@@ -125,6 +139,12 @@ void gui::Button::Draw(n8::Window* p_window){
                                m_style->GetColor(Style::EStyleColor::Button).GetA()
                                );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    }
+    
+    if(m_textTexture.HasTexture()){
+        int x = m_rectangle.GetX()+ (m_rectangle.GetW()-m_textTexture.getWidth())/2;
+        int y = m_rectangle.GetY()+ (m_rectangle.GetH()-m_textTexture.getHeight())/2;
+        m_textTexture.render(renderer, x,y);
     }
 }
 

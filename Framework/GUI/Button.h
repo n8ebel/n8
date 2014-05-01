@@ -29,15 +29,18 @@ namespace gui{
 class Button : public GUIElement{
     public:
         Button(std::string p_id,
+               std::string p_text,
                 int p_x, int p_y, int p_w, int p_h,
                 n8::Command* p_command);
     
         Button(std::string p_id,
+               std::string p_text,
                int p_x, int p_y, int p_w, int p_h,
                std::function<void()> func);
     
         ~Button();
     
+        virtual void Build() override;
         void Draw(n8::Window*) override;
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
@@ -51,7 +54,9 @@ class Button : public GUIElement{
         bool m_pressed; /** < whether button appears pressed down **/
         bool m_mouseClickedDown; /** < whether button is currently pressed down **/
         unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
-        
+    
+        std:: string m_text;
+        LTexture m_textTexture;
         n8::Command* m_command;
         std::function<void()> m_function;
 };
