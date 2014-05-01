@@ -148,6 +148,7 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
         if(m_stateStack.size() > 0){
             m_stateStack[m_stateStack.size()-1]->Update(time);
             m_stateStack[m_stateStack.size()-1]->Render(screen);
+            
         }
         
         if(m_stateStack.size() > 0){
@@ -161,16 +162,14 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     else if(time <= 0){
         Log::Error(TAG , "ProcessState(): Game time not greater than 0");
     }
-    else if(screen == NULL){
+    else if(screen == nullptr){
         Log::Error(TAG , "ProcessState(): Screen pointer is NULL");
     }
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){
-    cout << "ahhh" << endl;
     if(event->GetType() == EEvents::Values::Exit){
         m_stateStack.clear();
-        cout << "clearin" << endl;
     }
     else if(event->GetType() == EEvents::Values::Test2){
         m_stateStack.push_back(m_registeredStates[EState::Test2]);

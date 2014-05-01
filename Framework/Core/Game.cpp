@@ -16,7 +16,7 @@
 n8::Game::Game(const char* configFile){
     Log::Info(TAG, "Constructor");
     
-    m_serviceManager = NULL;
+    m_serviceManager = nullptr;
     m_windowWidth = 1;
     m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
@@ -31,7 +31,7 @@ n8::Game::Game(const char* configFile){
 
 /** Destructor */
 n8::Game::~Game(){
-    
+    Log::Info(TAG, "Destructor");
 }
 
 /** ProcessConfigFile
@@ -118,9 +118,9 @@ void n8::Game::InitializeResourcesPath(){
 void n8::Game::Setup(){
     Log::Create();
     
-    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
-    
     m_serviceManager = ServiceManager::GetInstance();
+    
+    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
@@ -144,8 +144,20 @@ void n8::Game::Setup(){
 void n8::Game::Start(){
     
     m_timer.UpdateCurrentTime();
+    unsigned lasttime = m_timer.GetTime();
+    unsigned curtime = m_timer.GetTime();
+    int frames = 0;
     while (m_quit == false) {
-        
+        frames++;
+        curtime = m_timer.GetTime();
+        if (curtime-lasttime >= 250) {
+            lasttime = curtime;
+            std::stringstream ss;
+            ss << (frames*4);
+            std::string msg("Frames: " + ss.str());
+            Log::Info(TAG, msg);
+            frames = 0;
+        }
         //process input
         static_cast<InputService*>(m_serviceManager->GetService(EService::Input))->HandleInput();
         
@@ -154,10 +166,10 @@ void n8::Game::Start(){
             break;
         }
         
+        
         //process state
         static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), &m_window);
-        
-        
+                
         m_timer.SyncGame(m_fps);  //ensures proper fps
         
     }

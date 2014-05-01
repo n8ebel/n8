@@ -8,6 +8,8 @@
 
 #include "RenderService.h"
 
+#define TAG "RenderService"
+
 /** Constructor
  *
  *  @param p_window Pointer the the game's window object
@@ -19,6 +21,7 @@ n8::RenderService::RenderService(Window* p_window){
 
 /** Destructor */
 n8::RenderService::~RenderService(){
+    Log::Info(TAG, "Destructor");
     m_gameWindow = NULL;
 }
 
@@ -108,6 +111,40 @@ void n8::RenderService::Draw(n8::Texture* p_texture, int p_x, int p_y, int p_w, 
     
     //Render texture to screen
     SDL_RenderCopy( m_gameWindow->GetRenderer(), p_texture->m_texture, NULL, &dest );
+}
+
+void n8::RenderService::DrawText(std::string p_text, Font* p_font, EColor p_color,int p_x, int p_y){
+    
+    if (p_font != nullptr) {
+        SDL_Color textColor;
+        LTexture textTexture;
+        
+        if (p_color == EColor::Black) {
+            textColor.r = 0;
+            textColor.g = 0;
+            textColor.b = 0;
+            textColor.a = 255;
+        }
+        else{
+            textColor.r = 255;
+            textColor.g = 255;
+            textColor.b = 255;
+            textColor.a = 255;
+            
+        }
+        
+        if( textTexture.loadFromRenderedText( m_gameWindow->GetRenderer(), p_font->m_font, p_text.c_str(), textColor ) ){
+        
+            textTexture.render(m_gameWindow->GetRenderer(), p_x, p_y);
+        }
+        else{
+            Log::Debug(TAG, "Couldn't load text texture");
+        }
+    }
+    else{
+        Log::Debug(TAG, "Font was null");
+    }
+    
 }
 
 /**

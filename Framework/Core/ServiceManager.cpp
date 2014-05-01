@@ -52,7 +52,7 @@ void n8::ServiceManager::RemoveAllServices(){
     
     for (ii = m_registeredServices.begin(); ii!=m_registeredServices.end(); ii++) {
         Service* tmp = ii->second;
-        ii->second = NULL;
+        ii->second = nullptr;
         delete tmp;
     }
     m_registeredServices.clear();
@@ -72,6 +72,6 @@ n8::Service* n8::ServiceManager::GetService(EService::Values key){
         return ii->second;
     }
     else{
-        return NULL;
+        return nullptr;
     }
 }

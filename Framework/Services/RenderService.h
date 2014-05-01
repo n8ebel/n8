@@ -16,6 +16,9 @@
 #include "Window.h"
 #include "Sprite.h"
 #include "Texture.h"
+#include "LTexture.h"
+#include "Font.h"
+#include "Log.h"
 
 namespace n8 {
     /** \class RenderService
@@ -36,6 +39,8 @@ namespace n8 {
                             ETexture /**< Indicates texture rendering mode with SDL_Texture **/
                         };
         
+        enum class EColor{Black,White};
+        
         RenderService(Window*);
         ~RenderService();
         
@@ -48,12 +53,16 @@ namespace n8 {
         //renders texture at position with default size
         void Draw(Texture* p_texture, int p_x, int p_y);
         //renders texture over a specified area
-        void Draw(Texture*, int p_x, int p_y, int p_w, int p_h);
+        void Draw(Texture* p_texture, int p_x, int p_y, int p_w, int p_h);
+        
+        void DrawText(std::string p_text, Font* p_font, EColor p_color,int p_x, int p_y);
         
         void SetDrawingColor(int p_r, int p_g, int p_b, int p_a);
         
         void ColorBackground();
         void PostToScreen();
+        
+        const Window* GetWindow(){return m_gameWindow;}
         
     private:
         

@@ -12,36 +12,53 @@
 #define BUTTON_H
 
 #include <iostream>
+#include <string>
+#include <sstream>
 
 #include <SDL2/SDL.h>
 #include "SDL2_image/SDL_image.h"
 #include "SDL2_ttf/SDL_ttf.h"
 
 #include "Window.h"
+#include "GUIElement.h"
+#include "Command.h"
+#include "Log.h"
 
 namespace gui{
 
-class Button{
-public:
-    Button(int p_x, int p_y, int p_w, int p_h);
-    ~Button();
+class Button : public GUIElement{
+    public:
+        Button(std::string p_id,
+               std::string p_text,
+                int p_x, int p_y, int p_w, int p_h,
+                n8::Command* p_command);
     
-    void Draw(n8::Window*);
-    void CheckMouse();
+        Button(std::string p_id,
+               std::string p_text,
+               int p_x, int p_y, int p_w, int p_h,
+               std::function<void()> func);
     
-private:
-    SDL_Texture* m_texture;
+        ~Button();
     
+        virtual void Build() override;
+        void Draw(n8::Window*) override;
+        virtual bool CheckMouseClickDown(int p_x, int p_y) override;
+        virtual bool CheckMouseClickUp(int p_x, int p_y) override;
+        virtual bool CheckMouseMove() override;
+        bool Update(Uint32 p_currentTime) override;
     
+    private:
+        std::string m_id;
     
-    int m_x;
-    int m_y;
-    int m_h;
-    int m_w;
+        bool m_hover; /** < mouse is hovering over the button **/
+        bool m_pressed; /** < whether button appears pressed down **/
+        bool m_mouseClickedDown; /** < whether button is currently pressed down **/
+        unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
     
-    SDL_Rect m_buttonShape;
-    
-    bool m_hover;
+        std:: string m_text;
+        LTexture m_textTexture;
+        n8::Command* m_command;
+        std::function<void()> m_function;
 };
     
 }

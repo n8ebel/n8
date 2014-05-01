@@ -46,7 +46,7 @@ bool Sprite::Draw( int p_x, int p_y, SDL_Surface* p_destination )
     assert(m_image);
     assert(p_destination);
     
-	if( m_image == NULL || p_destination == NULL){
+	if( m_image == nullptr || p_destination == nullptr){
 		return false;
 	}
 	
@@ -59,7 +59,7 @@ bool Sprite::Draw( int p_x, int p_y, SDL_Surface* p_destination )
 	
     
     //Blit the surface
-    SDL_BlitSurface( m_image, NULL, p_destination, &offset );
+    SDL_BlitSurface( m_image, nullptr, p_destination, &offset );
 	
 	return true;
 }
@@ -81,7 +81,7 @@ bool Sprite::Draw( int p_x, int p_y, int p_x2, int p_y2, int p_width, int p_heig
     assert(m_image);
     assert(p_destination);
 
-	if( m_image == NULL || p_destination == NULL){
+	if( m_image == nullptr || p_destination == nullptr){
 		return false;
 	}
 	
