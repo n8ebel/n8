@@ -18,5 +18,5 @@ n8::Music::Music(std::string p_id, Mix_Music* p_mixMusic) : Resource(p_id){
 
 n8::Music::~Music(){
     Mix_FreeMusic(m_music);
-    m_music = NULL;
+    m_music = nullptr;
 }

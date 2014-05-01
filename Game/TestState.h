@@ -12,6 +12,7 @@
 #define __goobar__GameState__
 
 #include <iostream>
+#include <vector>
 
 #include "State.h"
 #include "Event.h"
@@ -24,11 +25,15 @@
 #include "ServiceManager.h"
 #include "PopStateCommand.h"
 #include "PushStateCommand.h"
-#include "MouseMoveCommand.h"
+
 
 #include "Sprite.h"
 
+#include "GUI.h"
 #include "Button.h"
+#include "Container.h"
+#include "InputBox.h"
+#include "Label.h"
 
 class Entity;
 
@@ -55,7 +60,13 @@ private:
     
     n8::Event m_exitEvent;
     
-    gui::Button* m_button;
+    n8::Font* m_font;
+    gui::GUI* m_gui;
+    gui::Button* m_button1;
+    gui::Button* m_button2;
+    gui::Container* m_toolbar;
+    gui::InputBox* m_inputBox;
+    gui::Label* m_label;
     
 };
 #endif

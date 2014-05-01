@@ -23,7 +23,7 @@ public:
     PopStateCommand();
     
     ~PopStateCommand();
-    virtual void execute();
+    virtual bool execute();
     
 private:
     

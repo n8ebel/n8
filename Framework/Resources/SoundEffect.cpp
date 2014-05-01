@@ -18,5 +18,5 @@ n8::SoundEffect::SoundEffect(std::string p_id, Mix_Chunk* p_mixChunk) : Resource
 
 n8::SoundEffect::~SoundEffect(){
     Mix_FreeChunk(m_soundEffect);
-    m_soundEffect = NULL;
+    m_soundEffect = nullptr;
 }

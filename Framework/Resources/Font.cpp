@@ -8,13 +8,23 @@
 
 #include "Font.h"
 
-n8::Font::Font(std::string p_id, TTF_Font* p_ttfFont) : Resource(p_id){
-    
-    p_font = p_ttfFont;
-    
+#define TAG "Font"
+
+n8::Font::Font(std::string p_id, TTF_Font* p_ttfFont) : m_id(p_id),
+                                                        Resource(p_id),
+                                                        m_font(p_ttfFont)
+{
+
 }
 
 n8::Font::~Font(){
-    TTF_CloseFont(p_font);
-    p_font = NULL;
+    if (m_font) {
+       // Log::Debug(TAG, "Deleting font: " + m_id);
+        TTF_CloseFont(m_font);
+        m_font = nullptr;
+    }
+}
+
+TTF_Font* n8::Font::GetFont(){
+    return m_font;
 }

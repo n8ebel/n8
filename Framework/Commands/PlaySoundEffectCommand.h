@@ -19,7 +19,9 @@
 #include "SoundEffect.h"
 
 namespace n8{
-    
+    /** \class PlaySoundEffectCommand
+     *  \brief Plays sound effects on execution
+     */
     class PlaySoundEffectCommand : public Command {
         
     public:

@@ -10,39 +10,153 @@
 #include <iostream>
 #include "Button.h"
 
-gui::Button::Button( int p_x, int p_y, int p_w, int p_h)
+#define TAG "Button"
+
+gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command) : GUIElement(p_x,p_y,p_w,p_h)
 {
-    m_x = m_buttonShape.x = p_x;
-    m_y = m_buttonShape.y = p_y;
-    m_w = m_buttonShape.w = p_w;
-    m_h = m_buttonShape.h = p_h;
+    m_id = p_id;
+    m_text = p_text;
     m_hover = false;
+    m_pressed = false;
+    m_mouseClickedDown = false;
+    m_timeClickedDown = 0;
+    m_hasFocus = false;
+    m_command = p_command;
+    m_function = nullptr;
+}
+
+gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> func) : GUIElement(p_x,p_y,p_w,p_h)
+{
+    m_id = p_id;
+    m_text = p_text;
+    m_hover = false;
+    m_pressed = false;
+    m_mouseClickedDown = false;
+    m_timeClickedDown = 0;
+    m_hasFocus = false;
+    m_command = nullptr;
+    m_function = func;
 }
 
 gui::Button::~Button(){
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
+    m_command = nullptr;
+    m_function = nullptr;
+}
+
+void gui::Button::Build(){
+    
+    if (m_style) {
+        m_built = m_textTexture.loadFromRenderedText(  m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_text.c_str(), m_style->GetColor(Style::EStyleColor::Font).GetColor() );
+    }
+    
+    if (!m_built) {
+        n8::Log::Error(TAG, "Label failed to build");
+    }
     
 }
 
-void gui::Button::CheckMouse(){
+bool gui::Button::CheckMouseMove(){
     int x,y;
     SDL_GetMouseState(&x, &y);
     
     if( x >= m_x && x <=m_x+m_w && y>=m_y && y<=m_y+m_h){
         m_hover = true;
+        return true;
     }
     else{
         m_hover = false;
+        return false;
     }
 }
 
-void gui::Button::Draw(n8::Window* p_window){
-    SDL_Renderer* renderer= p_window->GetRenderer();
-    if (m_hover) {
-        SDL_SetRenderDrawColor( renderer, 0, 255, 0, 255 );
-        SDL_RenderFillRect( renderer, &m_buttonShape );
+bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
+    
+    if( p_x >= m_x && p_x <=m_x+m_w && p_y>=m_y && p_y<=m_y+m_h){
+        m_pressed = true;
+        m_mouseClickedDown = true;
+        m_timeClickedDown = SDL_GetTicks();
+        if (m_command) {
+            m_command->execute();
+        }
+        else if(m_function){
+            m_function();
+        }
+        return true;
     }
     else{
-        SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
-        SDL_RenderFillRect( renderer, &m_buttonShape );
+        return false;
     }
+    
+    return false;
+}
+
+bool gui::Button::CheckMouseClickUp(int p_x, int p_y){
+    
+    m_mouseClickedDown = false;
+    if(SDL_GetTicks() - m_timeClickedDown > 500){
+        m_pressed = false;
+    }
+    return false;
+}
+
+void gui::Button::Draw(n8::Window* p_window){
+    if (!m_style) {
+        exit(EXIT_FAILURE);
+    }
+    std::stringstream ss;
+    ss << m_style->GetColor(Style::EStyleColor::Container).GetR();
+    
+    std::string msg = ss.str();
+    n8::Log::Debug(TAG, msg);
+    SDL_Renderer* renderer= p_window->GetRenderer();
+    if(m_pressed){
+        SDL_SetRenderDrawColor( renderer,
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Pressed).GetA()
+                               );
+        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    }
+    else if (m_hover) {
+        SDL_SetRenderDrawColor( renderer,
+                               m_style->GetColor(Style::EStyleColor::Hover).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Hover).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Hover).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Hover).GetA()
+                               );
+        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    }
+    else{
+        SDL_SetRenderDrawColor( renderer,
+                               m_style->GetColor(Style::EStyleColor::Button).GetR(),
+                               m_style->GetColor(Style::EStyleColor::Button).GetG(),
+                               m_style->GetColor(Style::EStyleColor::Button).GetB(),
+                               m_style->GetColor(Style::EStyleColor::Button).GetA()
+                               );
+        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    }
+    
+    if(m_textTexture.HasTexture()){
+        int x = m_rectangle.GetX()+ (m_rectangle.GetW()-m_textTexture.getWidth())/2;
+        int y = m_rectangle.GetY()+ (m_rectangle.GetH()-m_textTexture.getHeight())/2;
+        m_textTexture.render(renderer, x,y);
+    }
+}
+
+bool gui::Button::Update(Uint32 p_currentTime){
+    if(SDL_GetTicks() - m_timeClickedDown > 100 && !m_mouseClickedDown){
+        m_pressed = false;
+    }
+    if(m_pressed){
+        m_hasFocus = true;
+    }
+    else{
+        m_hasFocus = false;
+    }
+    return m_hasFocus;
 }

@@ -16,8 +16,9 @@ n8::PopStateCommand::~PopStateCommand(){
     
 }
 
-void n8::PopStateCommand::execute(){
+bool n8::PopStateCommand::execute(){
     
     static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->PopState();
     
+    return true;
 }

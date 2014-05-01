@@ -18,7 +18,7 @@ class Command
 {
 public:
     virtual ~Command() {}
-    virtual void execute() = 0;
+    virtual bool execute() = 0;
 };
     
 }
