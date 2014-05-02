@@ -24,6 +24,7 @@ namespace gui {
         InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint);
         ~InputBox();
         
+        void Build();
         void Draw(n8::Window*) override;
         
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;

@@ -34,7 +34,16 @@ n8::Rectangle::~Rectangle(){
     
 }
 
-/** Resizes the rectangle to the specified coordinates
+/** Repositions the rectangle to the specified coordinates
+ *
+ *  @param p_x The new x position of the rectangle
+ *  @param p_y The new y position of the rectangle
+ */
+void n8::Rectangle::Reposition(int p_x, int p_y){
+    m_rectangle.x = p_x;
+    m_rectangle.y = p_y;
+}
+/** Resizes the rectangle to the specified sizes
  *
  *  @param p_w The new width of the rectangle
  *  @param p_h The new height of the rectangle
