@@ -61,23 +61,23 @@ namespace gui {
     private:
         const Uint8 DEFAULT_ALPHA = 255;
         
-        n8::Window* m_window;
+        n8::Window* m_window; /** < Pointer to window object */
         
-        n8::Font* m_font;
-        n8::Color m_containerColor;
+        n8::Font* m_font;  /** < Pointer to a Font resource object */
+        n8::Color m_containerColor;  /** < Color of gui container objects */
         
-        n8::Color m_buttonColor;
-        n8::Color m_hoverColor;
-        n8::Color m_pressedColor;
+        n8::Color m_buttonColor;  /** < Base color for buttons in default state */
+        n8::Color m_hoverColor;  /** < Color for buttons in the hover state */
+        n8::Color m_pressedColor;  /** < Color for buttons that are pressed down */
         
-        n8::Color m_fontColor;
-        n8::Color m_hintColor;
+        n8::Color m_fontColor;  /** < Color to render fonts */
+        n8::Color m_hintColor;  /** < Color to render hint text of input boxes */
         
-        n8::Color m_focusColor;
-        n8::Color m_inputBackgroundColor;
-        n8::Color m_cursorColor;
+        n8::Color m_focusColor;  /** < Color used to indicate an element has focus */
+        n8::Color m_inputBackgroundColor;  /** < Color used to render the text inputbox backgroudn */
+        n8::Color m_cursorColor;  /** < Color for input box cursor */
         
-        n8::Color m_defaultColor;
+        n8::Color m_defaultColor;  /** < Default element color */
         
     };
 }
