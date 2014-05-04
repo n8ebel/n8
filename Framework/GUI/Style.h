@@ -22,11 +22,15 @@ namespace gui {
     /** \class Style
      *  \brief Defines default styles for gui elements
      *
-     *  Defines default color and font styles for gui elements. 
+     *  Defines default color and font styles for gui elements.
      */
     
     class Style{
     public:
+        
+        /** Enum for Style color elements
+         *  Each enum represents an available color defined in the class.  These eneums are used to access particular color elements
+         */
         enum class EStyleColor{ Container,
                                 Button,
                                 Hover,
@@ -36,7 +40,7 @@ namespace gui {
                                 Hint,
                                 InputBackground,
                                 Cursor,
-                                Default
+                                Default /** < Default enum value corresponding to default color */
         };
             
         
