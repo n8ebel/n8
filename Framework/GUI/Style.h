@@ -18,6 +18,13 @@
 #include "Window.h"
 
 namespace gui {
+    
+    /** \class Style
+     *  \brief Defines default styles for gui elements
+     *
+     *  Defines default color and font styles for gui elements. 
+     */
+    
     class Style{
     public:
         enum class EStyleColor{ Container,
