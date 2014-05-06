@@ -148,6 +148,7 @@ void n8::Game::Start(){
     unsigned curtime = m_timer.GetTime();
     int frames = 0;
     while (m_quit == false) {
+        /*
         frames++;
         curtime = m_timer.GetTime();
         if (curtime-lasttime >= 250) {
@@ -158,6 +159,7 @@ void n8::Game::Start(){
             Log::Info(TAG, msg);
             frames = 0;
         }
+         */
         //process input
         static_cast<InputService*>(m_serviceManager->GetService(EService::Input))->HandleInput();
         

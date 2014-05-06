@@ -107,11 +107,7 @@ void gui::Button::Draw(n8::Window* p_window){
     if (!m_style) {
         exit(EXIT_FAILURE);
     }
-    std::stringstream ss;
-    ss << m_style->GetColor(Style::EStyleColor::Container).GetR();
     
-    std::string msg = ss.str();
-    n8::Log::Debug(TAG, msg);
     SDL_Renderer* renderer= p_window->GetRenderer();
     if(m_pressed){
         SDL_SetRenderDrawColor( renderer,
