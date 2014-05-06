@@ -39,12 +39,15 @@ gui::InputBox::~InputBox(){
     }
 }
 
+void gui::InputBox::Build(){
+    m_built = true;
+}
 bool gui::InputBox::CheckMouseMove(){
     return false;
 }
 
 bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
-    if( p_x >= m_x && p_x <=m_x+m_w && p_y>=m_y && p_y<=m_y+m_h){
+    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >= m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
         SDL_StartTextInput();
         m_hasFocus = true;
         return true;
@@ -102,15 +105,15 @@ void gui::InputBox::Draw(n8::Window* p_window){
     
     //draw text
     if (m_hintString != "" || m_inputString != "") {
-        m_textTexture.render(p_window->GetRenderer(),   m_x + M_TEXT_OFFSET_X,
-                             m_y + M_TEXT_OFFSET_Y);
+        m_textTexture.render(p_window->GetRenderer(),   m_rectangle.GetX() + M_TEXT_OFFSET_X,
+                             m_rectangle.GetY() + M_TEXT_OFFSET_Y);
     }
     
     //draw cursor
     if (m_cursorShown && m_hasFocus) {
-        int x = m_x + M_CURSOR_OFFSET_X + m_textTexture.getWidth() + M_TEXT_OFFSET_X;
-        int y1 = m_y+10;
-        int y2 = m_y + m_h - 10;
+        int x = m_rectangle.GetX() + M_CURSOR_OFFSET_X + m_textTexture.getWidth() + M_TEXT_OFFSET_X;
+        int y1 = m_rectangle.GetY() + 10;
+        int y2 = m_rectangle.GetY() + m_rectangle.GetH() - 10;
         SDL_SetRenderDrawColor(  renderer,    m_style->GetColor(Style::EStyleColor::Cursor).GetR(),
                                m_style->GetColor(Style::EStyleColor::Cursor).GetG(),
                                m_style->GetColor(Style::EStyleColor::Cursor).GetB(),

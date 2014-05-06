@@ -25,6 +25,7 @@ namespace n8 {
         Rectangle(int p_x, int p_y, int p_w, int p_h);
         ~Rectangle();
         
+        void Reposition(int p_x, int p_y);
         void Resize(int p_width, int p_height);
         void Offset(int p_xOffset, int p_yOffset);
         void RepositionAndResize(int p_x, int p_y, int p_w, int p_h);

@@ -63,7 +63,7 @@ bool gui::Button::CheckMouseMove(){
     int x,y;
     SDL_GetMouseState(&x, &y);
     
-    if( x >= m_x && x <=m_x+m_w && y>=m_y && y<=m_y+m_h){
+    if( x >= m_rectangle.GetX() && x <= m_rectangle.GetX() + m_rectangle.GetW() && y >= m_rectangle.GetY() && y <= m_rectangle.GetY() + m_rectangle.GetH()){
         m_hover = true;
         return true;
     }
@@ -75,7 +75,7 @@ bool gui::Button::CheckMouseMove(){
 
 bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
     
-    if( p_x >= m_x && p_x <=m_x+m_w && p_y>=m_y && p_y<=m_y+m_h){
+    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
         m_pressed = true;
         m_mouseClickedDown = true;
         m_timeClickedDown = SDL_GetTicks();
@@ -107,11 +107,7 @@ void gui::Button::Draw(n8::Window* p_window){
     if (!m_style) {
         exit(EXIT_FAILURE);
     }
-    std::stringstream ss;
-    ss << m_style->GetColor(Style::EStyleColor::Container).GetR();
     
-    std::string msg = ss.str();
-    n8::Log::Debug(TAG, msg);
     SDL_Renderer* renderer= p_window->GetRenderer();
     if(m_pressed){
         SDL_SetRenderDrawColor( renderer,
