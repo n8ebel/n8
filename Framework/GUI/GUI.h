@@ -20,6 +20,13 @@
 #include "Style.h"
 
 namespace gui{
+    
+    /** \class GUI
+     *  \brief Object used to define user interface
+     *
+     *  GUI allows gui elements to be added and interacted with.  Also maintains
+     *  a style object to define how objects should look.
+     */
     class GUI {
     public:
         GUI(n8::Window* p_window, n8::Font* p_font);
@@ -39,11 +46,12 @@ namespace gui{
         void ProcessInput(SDL_Event*);
         bool Update(Uint32 p_currentTime);
     private:
-        Style m_style;
-        std::vector<GUIElement*> m_guiElements;
+        Style m_style;  /** < Style object used to maintain common style between added elements.  When elements are added to the gui, if they don't have their own style this element is used.  */
         
-        bool m_built;
-        bool m_hasFocus;
+        std::vector<GUIElement*> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
+        
+        bool m_built;  /** < Flag to determine if the gui has been built by the user. */
+        bool m_hasFocus; /** < Flag to indicate if the gui has the user focus. */
     };
 }
 
