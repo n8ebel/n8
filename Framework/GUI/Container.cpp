@@ -10,11 +10,21 @@
 
 #include "Container.h"
 
+/** Constructor
+ *
+ *  @param p_x The x position of the container
+ *  @param p_y The y position of the container
+ *  @param p_w The width of the container
+ *  @param p_h The height of the container
+ */
 gui::Container::Container(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_hasFocus = false;
 }
 
+/** Destructor
+ *  Destroys texture memory for current background, and deletes all elements stored in the elements list.
+ */
 gui::Container::~Container(){
     if (m_texture) {
         SDL_DestroyTexture(m_texture);
