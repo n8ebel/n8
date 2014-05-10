@@ -86,9 +86,9 @@ bool gui::Container::CheckMouseClickUp(int p_x, int p_y){
  *
  *  @return True if any element handled the event
  */
-bool gui::Container::CheckMouseMove(){
+bool gui::Container::CheckMouseMove(int p_x, int p_y){
     for (const auto& widget : m_guiElements){
-        if ( widget->CheckMouseMove() ){
+        if ( widget->CheckMouseMove(p_x,p_y) ){
             return true;
         }
     }

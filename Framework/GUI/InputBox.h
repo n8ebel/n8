@@ -29,7 +29,7 @@ namespace gui {
         
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
-        virtual bool CheckMouseMove() override;
+        virtual bool CheckMouseMove(int p_x, int p_y) override;
         virtual void HandleKeyboardInput(SDL_Event*);
         virtual bool Update(Uint32 p_currentTime) override;
         

@@ -87,9 +87,9 @@ bool gui::GUI::CheckClickUp(int p_x, int p_y){
  *
  *  @return bool Returns True if any element was moved over
  */
-bool gui::GUI::CheckMove(){
+bool gui::GUI::CheckMove(int p_x, int p_y){
     for (int i = 0; i < m_guiElements.size(); i++) {
-        if( m_guiElements[i]->CheckMouseMove() ){
+        if( m_guiElements[i]->CheckMouseMove(p_x, p_y) ){
             return true;
         }
     }

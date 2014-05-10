@@ -59,11 +59,9 @@ void gui::Button::Build(){
     
 }
 
-bool gui::Button::CheckMouseMove(){
-    int x,y;
-    SDL_GetMouseState(&x, &y);
+bool gui::Button::CheckMouseMove(int p_x, int p_y){
     
-    if( x >= m_rectangle.GetX() && x <= m_rectangle.GetX() + m_rectangle.GetW() && y >= m_rectangle.GetY() && y <= m_rectangle.GetY() + m_rectangle.GetH()){
+    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >= m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
         m_hover = true;
         return true;
     }

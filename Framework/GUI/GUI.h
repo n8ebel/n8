@@ -36,7 +36,7 @@ namespace gui{
         
         bool CheckClickDown(int p_x, int p_y);
         bool CheckClickUp(int p_x, int p_y);
-        bool CheckMove();
+        bool CheckMove(int p_x, int p_y);
         bool HasFocus();
         
         Style GetStyle(){return m_style;}

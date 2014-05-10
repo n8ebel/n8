@@ -42,7 +42,7 @@ gui::InputBox::~InputBox(){
 void gui::InputBox::Build(){
     m_built = true;
 }
-bool gui::InputBox::CheckMouseMove(){
+bool gui::InputBox::CheckMouseMove(int p_x, int p_y){
     return false;
 }
 
