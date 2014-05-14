@@ -12,6 +12,10 @@
 
 namespace gui {
     
+    /** Constructor. 
+     *  Sets default color values, and stores pointers to the game window
+     *  and a font resources.
+     */
     Style::Style(n8::Window* p_window, n8::Font* p_font) :  m_window(p_window),
                                                             m_font(p_font)
     
@@ -32,26 +36,55 @@ namespace gui {
         
     }
     
+    /** Destructor */
     Style::~Style(){
         
     }
     
+    /** Sets the font pointer.
+     *
+     *  @param p_font The pointer to the new font
+     */
     void Style::SetFont(n8::Font* p_font){
-        
+        m_font = p_font;
     }
     
+    /** Returns a pointer to the game window
+     *
+     *  @return m_window Pointer to the game window
+     */
     n8::Window* Style::GetWindow(){
         return m_window;
     }
     
+    /** Returns a pointer to the font resource
+     *
+     *  @return m_font Pointer to the font resource
+     */
     n8::Font* Style::GetFont() const{
         return m_font;
     }
     
+    /** Sets a style color using the specified values and a default Alpha
+     *  value.
+     *
+     *  @param p_color An enum defined style thats color will be changed
+     *  @param p_r The new red value of the specified color
+     *  @param p_g The new green value of the specified color
+     *  @param p_b The new blue value of the specified color
+     */
     void Style::SetColor(EStyleColor p_color, int p_r, int p_g, int p_b){
         SetColor(p_color, p_r, p_g, p_b, DEFAULT_ALPHA);
     }
     
+    /** Sets a style color using the specified values      
+     *
+     *  @param p_color An enum defined style thats color will be changed
+     *  @param p_r The new red value of the specified color
+     *  @param p_g The new green value of the specified color
+     *  @param p_b The new blue value of the specified color
+     *  @param p_a The new alpha value of the specified color
+     */
     void Style::SetColor(EStyleColor p_color, int p_r, int p_g, int p_b, int p_a){
         if (p_color == EStyleColor::Button) {
             m_buttonColor.Set(p_r, p_g, p_b,p_a);
@@ -82,6 +115,12 @@ namespace gui {
         }
     }
     
+    /** Returns the specified style color object.
+     *
+     *  @param p_color The enum defined style whose color should be returned
+     *
+     *  @return The specified color if it is valid, or a default color
+     */
     n8::Color Style::GetColor(EStyleColor p_color){
         if (p_color == EStyleColor::Button) {
             return m_buttonColor;
