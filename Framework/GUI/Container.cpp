@@ -84,6 +84,9 @@ bool gui::Container::CheckMouseClickUp(int p_x, int p_y){
 
 /** Handles mouse move event for all added elements
  *
+ *  @param p_x The x position of the mouse move
+ *  @param p_y The y position of the mouse move
+ *
  *  @return True if any element handled the event
  */
 bool gui::Container::CheckMouseMove(int p_x, int p_y){
