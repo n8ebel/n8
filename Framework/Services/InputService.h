@@ -44,7 +44,7 @@ public:
     void UnregisterKeyCommands();
     
     void RegisterMouseMoveAction(Command*);
-    void RegisterMouseMoveAction(std::function<void()> func);
+    void RegisterMouseMoveAction(std::function<void(int, int)> func);
     void UnregisterMouseMoveAction();
     
     void RegisterMouseButtonDownAction(PositionCommand*);
@@ -75,7 +75,7 @@ private:
     Command* m_mouseMoveCommand;
     PositionCommand* m_mouseButtonDownCommand;
     PositionCommand* m_mouseButtonUpCommand;
-    std::function<void()> m_mouseMoveFunction;
+    std::function<void(int,int)> m_mouseMoveFunction;
     std::function<void(int,int)> m_mouseButtonDownFunction;
     std::function<void(int,int)> m_mouseButtonUpFunction;
     

@@ -12,6 +12,19 @@
 
 #define TAG "Button"
 
+/** Constructor
+ *  Initializes parent class of GUIElement.
+ *  Sets the button text
+ *  Stores a command object to be run when the button is clicked down.
+ *
+ *  @param p_id The identifier of the button
+ *  @param p_text The button text
+ *  @param p_x The x position of the button
+ *  @param p_y The y position of the button
+ *  @param p_w The width of the button
+ *  @param p_h The height of the button
+ *  @param p_command The command to execute when button is clicked down
+ */
 gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_id = p_id;
@@ -25,7 +38,20 @@ gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int 
     m_function = nullptr;
 }
 
-gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> func) : GUIElement(p_x,p_y,p_w,p_h)
+/** Constructor
+ *  Initializes parent class of GUIElement.
+ *  Sets the button text
+ *  Stores a lambda function to be run when the button is clicked down.
+ *
+ *  @param p_id The identifier of the button
+ *  @param p_text The button text
+ *  @param p_x The x position of the button
+ *  @param p_y The y position of the button
+ *  @param p_w The width of the button
+ *  @param p_h The height of the button
+ *  @param p_func The lambda function to execute when button is clicked down
+ */
+gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_id = p_id;
     m_text = p_text;
@@ -35,9 +61,13 @@ gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p
     m_timeClickedDown = 0;
     m_hasFocus = false;
     m_command = nullptr;
-    m_function = func;
+    m_function = p_func;
 }
 
+/** Destructor
+ *  Destroys texture
+ *  Sets command and lambda to nullptr
+ */
 gui::Button::~Button(){
     if (m_texture) {
         SDL_DestroyTexture(m_texture);
@@ -47,6 +77,10 @@ gui::Button::~Button(){
     m_function = nullptr;
 }
 
+/** Builds the button.
+ * Loads the rendered text texture using the game window pointer from 
+ *  style pointer.
+ */
 void gui::Button::Build(){
     
     if (m_style) {
@@ -59,11 +93,16 @@ void gui::Button::Build(){
     
 }
 
-bool gui::Button::CheckMouseMove(){
-    int x,y;
-    SDL_GetMouseState(&x, &y);
+/** Handles mouse move event
+ *
+ *  @param p_x The x position of the mouse move
+ *  @param p_y The y position of the mouse move
+ *
+ *  @return True if mouse if moving within the button
+ */
+bool gui::Button::CheckMouseMove(int p_x, int p_y){
     
-    if( x >= m_rectangle.GetX() && x <= m_rectangle.GetX() + m_rectangle.GetW() && y >= m_rectangle.GetY() && y <= m_rectangle.GetY() + m_rectangle.GetH()){
+    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >= m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
         m_hover = true;
         return true;
     }
@@ -73,6 +112,14 @@ bool gui::Button::CheckMouseMove(){
     }
 }
 
+/** Checks whether the button was clicked down
+ *
+ *
+ *  @param p_x The x coordinate of the mouse click
+ *  @param p_y The y coordinate of the mouse click
+ *
+ *  @return bool Returns true if button was clicked up
+ */
 bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
     
     if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
@@ -94,6 +141,14 @@ bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
     return false;
 }
 
+/** Checks whether the button was clicked
+ *
+ *
+ *  @param p_x The x coordinate of the mouse click
+ *  @param p_y The y coordinate of the mouse click
+ *
+ *  @return bool Returns true if button was clicked up
+ */
 bool gui::Button::CheckMouseClickUp(int p_x, int p_y){
     
     m_mouseClickedDown = false;
@@ -103,6 +158,10 @@ bool gui::Button::CheckMouseClickUp(int p_x, int p_y){
     return false;
 }
 
+/** Draws the button based on its current state
+ *
+ *  @param p_window Pointer to the game window object
+ */
 void gui::Button::Draw(n8::Window* p_window){
     if (!m_style) {
         exit(EXIT_FAILURE);
@@ -144,6 +203,12 @@ void gui::Button::Draw(n8::Window* p_window){
     }
 }
 
+/** Updates the button every frame.
+ *  Handles state transitions, and ensures that click events appear to user
+ *   even if the click was too short to see.
+ *
+ *  @param p_currentTime Current game time
+ */
 bool gui::Button::Update(Uint32 p_currentTime){
     if(SDL_GetTicks() - m_timeClickedDown > 100 && !m_mouseClickedDown){
         m_pressed = false;

@@ -88,9 +88,9 @@ void TestState::OnResume(){
     m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
     
     //register mouse actions
-    m_inputService->RegisterMouseMoveAction( [this](){
+    m_inputService->RegisterMouseMoveAction( [this](int x, int y){
         if (m_gui) {
-             m_gui->CheckMove();
+             m_gui->CheckMove(x,y);
         }
     });
     

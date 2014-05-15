@@ -26,6 +26,9 @@
 
 namespace gui{
 
+    /** \class Button
+     *  \brief A gui element that can be clicked, and will perform some action.
+     */
 class Button : public GUIElement{
     public:
         Button(std::string p_id,
@@ -44,7 +47,7 @@ class Button : public GUIElement{
         void Draw(n8::Window*) override;
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
-        virtual bool CheckMouseMove() override;
+        virtual bool CheckMouseMove(int p_x, int p_y) override;
         bool Update(Uint32 p_currentTime) override;
     
     private:
@@ -55,10 +58,10 @@ class Button : public GUIElement{
         bool m_mouseClickedDown; /** < whether button is currently pressed down **/
         unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
     
-        std:: string m_text;
-        LTexture m_textTexture;
-        n8::Command* m_command;
-        std::function<void()> m_function;
+        std:: string m_text;  /** < The test displayed on the button */
+        LTexture m_textTexture; /** < Texture used to display the text */
+        n8::Command* m_command; /** < Command object to be executed when button is clicked down */
+        std::function<void()> m_function;  /** < Lambda function to be called when button is clicked down */
 };
     
 }

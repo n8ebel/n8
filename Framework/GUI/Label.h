@@ -20,9 +20,11 @@
 
 namespace gui {
     
+    /** \class Label
+     *  \brief A drawable text element
+     */
 class Label : public GUIElement{
     public:
-    
         enum class EColor{Black,White};
     
         Label(std::string p_text, int p_x, int p_y);
@@ -32,25 +34,14 @@ class Label : public GUIElement{
         virtual void Draw(n8::Window*) override;
         virtual bool CheckMouseClickDown(int p_x, int p_y)override;
         virtual bool CheckMouseClickUp(int p_x, int p_y)override;
-        virtual bool CheckMouseMove()override;
+        virtual bool CheckMouseMove(int p_x, int p_y) override;
         virtual bool Update(Uint32 p_currentTime)override;
         
         void OffsetPosition(int p_x, int p_y) override;
     protected:
-        const unsigned M_TEXT_OFFSET_Y = 10;
+        LTexture m_textTexture; /** < Texture used to store text */
+        std::string m_labelText; /** < String holding the text to render */
     
-        SDL_Rect m_shape;
-        SDL_Texture* m_texture;
-        n8::Color m_textColor;
-        LTexture m_textTexture;
-    
-        std::string m_labelText;
-        int m_x;
-        int m_y;
-        int m_h;
-        int m_w;
-        
-        bool m_hasFocus;
     };
 }
 

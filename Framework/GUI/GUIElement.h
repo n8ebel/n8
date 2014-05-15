@@ -53,7 +53,7 @@ public:
     
     virtual bool CheckMouseClickUp(int p_x, int p_y) = 0;  /** Checks if a mouse click up action took place within the element and responds appropriately.  **/
     
-    virtual bool CheckMouseMove() = 0;  /** Responds to a mouse move action.  **/
+    virtual bool CheckMouseMove(int p_x, int p_y) = 0;  /** Responds to a mouse move action.  **/
 
     virtual bool Update(Uint32 p_currentTime) = 0;  /** Handles any updating of the element that needs to happen during every frame.  **/
 

@@ -84,11 +84,14 @@ void n8::InputService::HandleInput(){
         
         if( m_event.type == SDL_MOUSEMOTION  )
         {
+            int x,y;
+            SDL_GetMouseState(&x, &y);
+            
             if(m_mouseMoveCommand){
                m_mouseMoveCommand->execute();
             }
             if (m_mouseMoveFunction) {
-                m_mouseMoveFunction();
+                m_mouseMoveFunction(x,y);
             }
         }
         if( m_event.type == SDL_MOUSEBUTTONDOWN){
@@ -200,7 +203,7 @@ void n8::InputService::RegisterMouseMoveAction(Command* p_command){
     m_mouseMoveCommand = p_command;
 }
 
-void n8::InputService::RegisterMouseMoveAction(std::function<void()> func){
+void n8::InputService::RegisterMouseMoveAction(std::function<void(int, int)> func){
     m_mouseMoveFunction = func;
 }
 
