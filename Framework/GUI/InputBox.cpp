@@ -10,9 +10,19 @@
 
 #include "InputBox.h"
 
+/** Constructor
+ *  Inititlizes parent class {@link GUIElement}
+ *  Initializes flags, and strings
+ *
+ *  @param p_x The x position of the inputbox
+ *  @param p_y The y position of the inputbox
+ *  @param p_w The width of the inputbox
+ *  @param p_h The height of the inputbox
+ */
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h){
     
     m_lastTime = 0;
+    m_hintString = "";
     m_inputString = "";
     
     m_cursorShown = false;
@@ -20,6 +30,16 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
     m_updateTexture = true;
 }
 
+/** Constructor
+ *  Inititlizes parent class {@link GUIElement}
+ *  Initializes flags, and strings
+ *
+ *  @param p_x The x position of the inputbox
+ *  @param p_y The y position of the inputbox
+ *  @param p_w The width of the inputbox
+ *  @param p_h The height of the inputbox
+ *  @param p_hint The hint string for the input box
+ */
 gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h)
 {
 
@@ -32,6 +52,9 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) 
     m_updateTexture = true;
 }
 
+/** Destructor
+ *  Frees texture
+ */
 gui::InputBox::~InputBox(){
     if (m_texture != nullptr) {
         SDL_DestroyTexture(m_texture);
@@ -39,13 +62,34 @@ gui::InputBox::~InputBox(){
     }
 }
 
+/** Builds the inputbox.
+ *  Currently building does nothing but change the build flag
+ */
 void gui::InputBox::Build(){
     m_built = true;
 }
+
+/** Cheks mouse move event
+ *  Currently, mouse move events don't affect the inputbox
+ *
+ *  @return False
+ */
 bool gui::InputBox::CheckMouseMove(int p_x, int p_y){
     return false;
 }
 
+/** Checks whether the inputbox was clicked down
+ *  If the user clicked within the inputbox, the box gains the focus
+ *   and input can then be entered into the inputbox.
+ *  To allow input to be entered, SDL_StartTextInput() is called if the input
+ *   box was clicked.
+ *
+ *
+ *  @param p_x The x coordinate of the mouse click
+ *  @param p_y The y coordinate of the mouse click
+ *
+ *  @return bool Returns true if the inputbox was clicked
+ */
 bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
     if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >= m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
         SDL_StartTextInput();
@@ -61,11 +105,24 @@ bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
     return false;
 }
 
+/** Checks whether the inputbox was clicked up
+ *  Currently mouse click up events don't affect inputbox
+ *
+ *  @param p_x The x coordinate of the mouse click
+ *  @param p_y The y coordinate of the mouse click
+ *
+ *  @return bool False
+ */
 bool gui::InputBox::CheckMouseClickUp(int p_x, int p_y){
     
     return false;
 }
 
+/** Draws the inputbox based on its current state
+ *
+ *  @param p_window Pointer to the game window passed from
+ *   {@link State#Render(n8::Window*) State.Render(n8::Window*)}
+ */
 void gui::InputBox::Draw(n8::Window* p_window){
     
     if(m_updateTexture){
@@ -125,6 +182,13 @@ void gui::InputBox::Draw(n8::Window* p_window){
     
 }
 
+/** Handles keyboard text input for user input
+ *  When the inputbox has the focus, keyboard events
+ *   are routed to this method so text input can be
+ *   stored and drawn.
+ *
+ *  @param p_event A pointer to an SDL_Event object
+ */
 void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
     
     if(m_hasFocus){
@@ -164,6 +228,11 @@ void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
     }
 }
 
+/** Updates inputbox every frame.
+ *  Updates whether cursor is on or off
+ *
+ *  @return m_hasFocus
+ */
 bool gui::InputBox::Update(Uint32 p_currentTime){
     if ( (p_currentTime - m_lastTime) > 500) {
         m_cursorShown = !m_cursorShown;
@@ -173,10 +242,17 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
     return m_hasFocus;
 }
 
+/** Gets the text currently in the inputbox
+ *
+ *  @return m_inputString The string entered into the inputbox
+ */
 std::string gui::InputBox::GetText(){
     return m_inputString;
 }
 
+/** Updates the text texture based on the current
+ *   input within the inputbox
+ */
 void gui::InputBox::UpdateTexture(n8::Window* p_window){
     
     //Text is not empty

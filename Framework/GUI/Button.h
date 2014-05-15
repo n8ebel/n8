@@ -26,6 +26,9 @@
 
 namespace gui{
 
+    /** \class Button
+     *  \brief A gui element that can be clicked, and will perform some action.
+     */
 class Button : public GUIElement{
     public:
         Button(std::string p_id,
