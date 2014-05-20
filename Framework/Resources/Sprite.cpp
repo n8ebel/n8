@@ -13,7 +13,7 @@
 
 namespace n8{
 
-/** Default Destructor <p>
+/** Default Destructor
  *  Frees the loaded SDL_Surface which is pointed to by image_
  */
 Sprite::~Sprite() {
@@ -21,7 +21,7 @@ Sprite::~Sprite() {
     
 }
 
-/** Constructor <p>
+/** Constructor
  *  Initializes id_ and image_ to passed values
  *
  *  @param id The unique identifier for the sprite.

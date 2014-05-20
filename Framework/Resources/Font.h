@@ -19,6 +19,11 @@
 
 namespace n8{
     
+    /** \class Font
+     *  \brief Font resource used to render text.
+     *
+     *  Font wraps TTF.Font.  Used to render text to the screen.
+     */
     class Font : public Resource{
     public:
         Font(std::string p_id, TTF_Font* p_ttfFont);
@@ -27,8 +32,8 @@ namespace n8{
         TTF_Font* GetFont();
         
     private:
-        std::string m_id;
-        TTF_Font* m_font;
+        std::string m_id; /** < Identifier of the font */
+        TTF_Font* m_font; /** < The loaded font data */
         
         friend class RenderService;
     };

@@ -17,7 +17,11 @@
 
 namespace n8{
     
-    /** An object to hold an optimzed SDL_Surface image and provide access to it **/
+    /** \class Texture
+     *  \brief Texture resource to be rendered to game screen.
+     *
+     *  Wraps SDL_Texture.
+     */
     class Texture :public Resource{
     public:
         ~Texture();
@@ -34,4 +38,4 @@ namespace n8{
     };
     
 }
-#endif (TEXTURE_H)
+#endif /*TEXTURE_H*/
