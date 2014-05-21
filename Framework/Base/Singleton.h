@@ -7,6 +7,9 @@
 using namespace std;
 
 template<class T>
+    /** \class Singleton
+     *  \brief Template for singleton classes
+     */
 class Singleton{
 
 public:

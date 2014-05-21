@@ -15,7 +15,9 @@
 
 namespace n8 {
     
-/** Class to pass events between observable systems */
+/** \class Event
+ *  \brief Class to pass events between observable systems
+ */
 class Event{
 public:
     Event(EEvents::Values);

@@ -14,7 +14,9 @@
 #include <iostream>
 using namespace std;
 
-/** Handles id abstraction */
+    /** \class ID
+     *  \brief Handles id abstraction 
+     */
 class ID{
 public:
     ID() { m_id = -1; };

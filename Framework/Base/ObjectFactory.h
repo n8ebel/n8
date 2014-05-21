@@ -13,6 +13,11 @@
 
 namespace n8{
     
+    /** \class ObjectFactory
+     *  \brief Abstract base class for a game's object factory.
+     *
+     *  ObjectFactory acts as a base class for creating a game's object factory.  The object factory tracks available object ID's.
+     */
 class ObjectFactory{
 public:
     static int m_nextId; /** < Static counter to get available id values for created entities **/

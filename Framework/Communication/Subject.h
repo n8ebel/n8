@@ -17,7 +17,11 @@
 
 namespace n8{
     
-/** Subjects inform other systems that an event has occured */
+/** \class Subject
+ *  \brief Subjects inform other systems that an event has occured 
+ *
+ *  Subject acts as part of the observer pattern and allows other Observer objects to respond to events from a Subject.
+ */
 class Subject{
 public:
     void AddObserver(Observer* observer);

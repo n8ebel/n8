@@ -13,7 +13,11 @@
 
 namespace n8{
     
-    
+    /** \class PositionCommand
+     *  \brief Abstract base command taking coordinates to its execute method.
+     *
+     *  This command object can be used for responding to positional events such as a mouse click.
+     */
     class PositionCommand : public Command
     {
     public:

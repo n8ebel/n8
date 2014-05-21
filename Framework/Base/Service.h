@@ -18,6 +18,11 @@
 
 namespace n8 {
 
+    /** \class Service
+     *  \brief Abstract base class for Services.
+     *
+     *  Service implements both Subject and Observer allowing derived classes to act as both.
+     */
 class Service : public Subject, public Observer{
 public:
     Service(){}
