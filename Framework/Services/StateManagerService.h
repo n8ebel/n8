@@ -41,6 +41,7 @@ public:
     
     bool PushState(EState::Values identifier);
     void PopState();
+    void Clear();
     
     int GetStackSize();
     ID GetCurrentStateId();

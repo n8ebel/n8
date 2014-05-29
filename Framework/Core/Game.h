@@ -71,9 +71,9 @@ private:
     unsigned m_windowWidth;  /** < Width of the game window */
     unsigned m_windowHeight; /** < Height of the game window */
     
-    std::string m_configPath;
-    std::string m_directoryPath;
-    std::string m_resourcesListPath;
+   // std::string m_configPath;
+    std::string m_directoryPath;  /** < Path to the working directory of the project */
+    std::string m_resourcesListPath; /** < Full path to the resources directory */
     
     void ProcessConfigFile();
     

@@ -112,6 +112,12 @@ void n8::StateManagerService::PopState(){
     }
 }
 
+/** Removes all states from the stack
+ */
+void n8::StateManagerService::Clear(){
+    m_stateStack.clear();
+}
+
 /** Returns the size of the state stack
  *
  *  @return The integer size of the state stack

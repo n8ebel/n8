@@ -12,7 +12,10 @@
 
 #define TAG "Game"
 
-/** Default Constructor */
+/** Default Constructor 
+ *  Initializes member variables, and constructs path variables.
+ *  Process configuration file
+ */
 n8::Game::Game(const char* configFile){
     Log::Info(TAG, "Constructor");
     
@@ -22,7 +25,7 @@ n8::Game::Game(const char* configFile){
     m_fps = DEFAULT_FPS;
     m_quit = false;
     
-    m_configPath = configFile;
+    //m_configPath = configFile;
     
     InitializeDirectoryPath();
     ProcessConfigFile();
@@ -35,15 +38,16 @@ n8::Game::~Game(){
 }
 
 /** ProcessConfigFile
+ *  NOT CURRENTLY IMPLEMENTED
  *  Reads and processes the configuration file
  *  Needed information is saved to member variables so they can be used later
  */
  void n8::Game::ProcessConfigFile(){
-     
-}
+     // nothing currently implemented
+ }
 
 /** Shutdown
- *  Deletes registers game systems which in turn delete all other game data
+ *  Stops all SDL subsystems
  */
 void n8::Game::Shutdown(){
     
@@ -53,6 +57,9 @@ void n8::Game::Shutdown(){
     SDL_Quit();
 }
 
+/** Init
+ *  Initializes SDL and SDL subsystems for images, sound, font
+ */
 void n8::Game::Init(){
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         // Unrecoverable error, exit here.
@@ -95,6 +102,8 @@ void n8::Game::Init(){
     }
 }
 
+/** Gets and stores the path for the working project directory
+ */
 void n8::Game::InitializeDirectoryPath() {
     char* base_path = SDL_GetBasePath();
     
@@ -107,6 +116,9 @@ void n8::Game::InitializeDirectoryPath() {
     }
 }
 
+/** Creates and stores the path for resources directory
+ *  WILL CHANGE WHEN DIRECTORY HEIRARCHY IS IMPLEMENTED
+ */
 void n8::Game::InitializeResourcesPath(){
     m_resourcesListPath = m_directoryPath + RESOURCE_FILE_SUFFIX;
     Log::Debug(TAG, "Resource list file path:" + m_resourcesListPath);
@@ -213,12 +225,25 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
     m_window.ResizeWindow(m_windowWidth,m_windowHeight);
 }
 
-void n8::Game::RegisterState(EState::Values key, n8::State* newState){
-    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->RegisterState(key,newState);
+/** Registers a game state to be used
+ *
+ *  @param p_key The identifier for the state
+ *  @param p_newState A pointer to the state object to be registered for future use
+ *
+ */
+void n8::Game::RegisterState(EState::Values p_key, n8::State* p_newState){
+    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->RegisterState(p_key, p_newState);
     
 }
 
-void n8::Game::SetStartState(EState::Values key){
-    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);
+/** Clears all states from the stack, and pushes a specified state onto the state stack
+ *
+ *  @param p_key The identifier for the state to be pushed onto the stack
+ */
+void n8::Game::SetStartState(EState::Values p_key){
+    StateManagerService* stateManager = static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager));
+    stateManager->Clear();
+    stateManager->PushState(p_key);
+    //static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);
     
 }
