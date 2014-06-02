@@ -18,7 +18,13 @@
 
 namespace n8{
 
-/** Provides a global access point to registered services.  This gives a less coupled way of providing access to game systems.  Services are registered with the ServiceManager during the game's initialization.
+/** \class ServiceManager
+ *  \brief Global access point for game services.
+ *
+ *  Provides a global access point to registered services.
+ *  This gives a less coupled way of providing access to 
+ *  game systems.  Services are registered with the 
+ *  ServiceManager during the game's initialization.
  */
 class ServiceManager : public Singleton<ServiceManager>{ 
 public:
@@ -33,7 +39,7 @@ public:
     Service* GetService(EService::Values);
     
 private:
-    std::map<EService::Values,Service*> m_registeredServices;
+    std::map<EService::Values,Service*> m_registeredServices; /** < Map of registered services */
 };
     
 }

@@ -13,14 +13,19 @@
 
 #define TAG "ResourceManager"
 
-n8::ResourceManager::ResourceManager(Window* p_window, std::string path) {
+/** Constructor
+ *  
+ *  @param p_window Pointer to game window.  Used to load image resources.
+ *  @param p_path Path to resources directory
+ */
+n8::ResourceManager::ResourceManager(Window* p_window, std::string p_path) {
 	// TODO Auto-generated constructor stub
     
     
     m_gameWindow = p_window;
     //m_screenSurface = screen;
     
-    m_resourcesListPath = path;
+    m_resourcesListPath = p_path;
     
     /*
     m_imagesDirectoryPath = path +IMAGES_DIRECTORY_SUFFIX;
