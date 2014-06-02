@@ -11,24 +11,19 @@
 
 #include <iostream>
 #include <sstream>
-/*
-#include "SDL/SDL.h"
-#include "SDL_image/SDL_image.h"
-#include "SDL_mixer/SDL_mixer.h"
-*/
+
 #include <SDL2/SDL.h>
 #include "SDL2_image/SDL_image.h"
 #include "SDL2_mixer/SDL_mixer.h"
 #include "SDL2_ttf/SDL_ttf.h"
 #include "tinyxml2.h"
 
-#include "ServiceManager.h"
 #include "Log.h"
+#include "ServiceManager.h"
 #include "RenderService.h"
 #include "AudioService.h"
 #include "InputService.h"
 #include "StateManagerService.h"
-//#include "ResourceManager.h"
 #include "ResourceManager.h"
 #include "State.h"
 #include "Timer.h"
@@ -38,9 +33,14 @@
 
 namespace n8 {
     
+    /** \class Game
+     *  \brief Core class for n8 game framework.
+     *
+     *  Game is the core class for the n8 game framework.  It controls timing, setup, shutdown, and the game loop.  This class also initializes core game services using configuration files.
+     */
 class Game{
 public:
-    static const int DEFAULT_FPS = 200;
+    static const int DEFAULT_FPS = 200; /** < Defaul fps value */
     
     static void Init();
     static void Shutdown();
@@ -58,22 +58,22 @@ public:
     void RegisterState(EState::Values, State*);
     void SetStartState(EState::Values);
 private:
-    const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;
+    const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;  /** < Default resource file name */
     
-    ServiceManager* m_serviceManager;
-    n8::Window m_window;
-    n8::Timer m_timer;
+    ServiceManager* m_serviceManager; /** < Game service manager */
+    n8::Window m_window; /** < Game window */
+    n8::Timer m_timer; /** < Game timer */
      
     
     int m_fps;  /** < value to control game loop speed **/
     bool m_quit;  /** < flag to control when game loop ends **/
     
-    unsigned m_windowWidth;
-    unsigned m_windowHeight;
+    unsigned m_windowWidth;  /** < Width of the game window */
+    unsigned m_windowHeight; /** < Height of the game window */
     
-    std::string m_configPath;
-    std::string m_directoryPath;
-    std::string m_resourcesListPath;
+   // std::string m_configPath;
+    std::string m_directoryPath;  /** < Path to the working directory of the project */
+    std::string m_resourcesListPath; /** < Full path to the resources directory */
     
     void ProcessConfigFile();
     

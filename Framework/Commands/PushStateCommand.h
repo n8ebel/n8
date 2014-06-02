@@ -18,16 +18,19 @@
 
 namespace n8{
 
+    /** \class PushStateCommand
+     *  \brief Reusable command to push a state onto the state stack
+     */
 class PushStateCommand : public Command {
     
 public:
     PushStateCommand(EState::Values);
     
     ~PushStateCommand();
-    virtual bool execute();
+    virtual bool execute() override;
     
 private:
-    EState::Values m_state;
+    EState::Values m_state; /** < Enumerated state identifier */
     
     
 };

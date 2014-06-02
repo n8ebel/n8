@@ -119,7 +119,10 @@ void n8::InputService::HandleInput(){
     }
 }
 
-/** @return True if there is an event in the queue */
+/**  Gets the next event from the SDL event queue
+ *
+ *  @return True if there is an event in the queue 
+ */
 bool n8::InputService::HandleEvent(){
     return SDL_PollEvent(&m_event);
 }
@@ -143,23 +146,38 @@ bool n8::InputService::KeyIsDown(int key){
  *  @return True if the key is up, False otherwise
  */
 bool n8::InputService::KeyIsUp(int key){
-    
     return KeyIsUp(&m_event, key);
-    
 }
 
+/** Stores a pointer to a user interface so inputs can be routed to the interface
+ *  and handled.
+ *
+ *  @param p_gui Pointer to a user interface
+ */
 void n8::InputService::RegisterUserInterface(gui::GUI* p_gui){
     m_userInterface = p_gui;
 }
 
+/** Stores a pointer to a command that will be executed when the specified key is pressed down.
+ *
+ *  @param key The integer keyboard key identifier
+ *  @param command Pointer to command object to execute when specified key is pressed down.
+ */
 void n8::InputService::RegisterKeyDownCommand(int key,Command* command){
     m_registeredKeyDownCommands[key] = command;
 }
 
+/** Stores a pointer to a command that will be executed when the specified key is release up.
+ *
+ *  @param key The integer keyboard key identifier
+ *  @param command Pointer to command object to execute when specified key is released up.
+ */
 void n8::InputService::RegisterKeyUpCommand(int key,Command* command){
     m_registeredKeyUpCommands[key] = command;
 }
 
+/** Removes all command pointers so nothing is executed when a key is pressed.
+ */
 void n8::InputService::UnregisterKeyCommands(){
     for (int i = 0; i < 323; i++) {
         m_registeredKeyUpCommands[i] = nullptr;
@@ -199,45 +217,79 @@ bool n8::InputService::KeyIsUp(SDL_Event* event,int key){
     
 }
 
+/** Stores a pointer to a command object to execture when the mouse is moved
+ *
+ *  @param p_command Pointer to a command object to execture when the mouse is moved
+ */
 void n8::InputService::RegisterMouseMoveAction(Command* p_command){
     m_mouseMoveCommand = p_command;
 }
 
+/** Stores a functor to run when the mouse is moved
+ *
+ *  @param func The functor to run when the mouse is moved
+ */
 void n8::InputService::RegisterMouseMoveAction(std::function<void(int, int)> func){
     m_mouseMoveFunction = func;
 }
 
+/** Removes any registered command or functor that was registered to be executed when the mouse is moved.
+ */
 void n8::InputService::UnregisterMouseMoveAction(){
     m_mouseMoveCommand = nullptr;
     m_mouseMoveFunction = nullptr;
 }
 
+/** Stores a pointer to a command object to execute when the left mouse button is clicked
+ *
+ *  @param p_command Pointer to the command object to exectue when the left mouse button is clicked.
+ */
 void n8::InputService::RegisterMouseButtonDownAction(PositionCommand* p_command){
     m_mouseButtonDownCommand = p_command;
 }
 
+/** Stores a functor to run when the left mouse button is clicked
+ *
+ *  @param func Functor to run when the left mouse button is clicked.
+ */
 void n8::InputService::RegisterMouseButtonDownAction(std::function<void(int,int)> func){
     m_mouseButtonDownFunction = func;
 }
 
+/** Removes any registered command or functor that was registered to be executed when the left mouse button is clicked.
+ */
 void n8::InputService::UnregisterMouseButtonDownAction(){
     m_mouseButtonDownCommand = nullptr;
     m_mouseButtonDownFunction = nullptr;
 }
 
+/** Stores a pointer to a command object to execute when the left mouse button is released up
+ *
+ *  @param p_command Pointer to the command object to exectue when the left mouse button is released up.
+ */
 void n8::InputService::RegisterMouseButtonUpAction(PositionCommand* p_command){
     m_mouseButtonUpCommand = p_command;
 }
 
+/** Stores a functor to run when the left mouse button is released up
+ *
+ *  @param func Functor to run when the left mouse button is released up.
+ */
 void n8::InputService::RegisterMouseButtonUpAction(std::function<void(int,int)> func){
     m_mouseButtonUpFunction = func;
 }
 
+/** Removes any registered command or functor that was registered to be executed when the left mouse button is released up.
+ */
 void n8::InputService::UnregisterMouseButtonUpAction(){
     m_mouseButtonUpCommand = nullptr;
     m_mouseButtonUpFunction = nullptr;
 }
 
+/** Responds to notifications from registered subjects
+ *
+ *  @param event The event that was broadcast by a registered subject
+ */
 void n8::InputService::OnNotify(Event* event){
     
 }

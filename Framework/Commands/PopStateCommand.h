@@ -16,14 +16,17 @@
 #include "ServiceManager.h"
 
 namespace n8{
-
+    
+    /** \class PopStateCommand
+     *  \brief  A reusable command to pop a state off the game's state stack
+     */
     class PopStateCommand : public Command {
     
 public:
     PopStateCommand();
     
     ~PopStateCommand();
-    virtual bool execute();
+    virtual bool execute() override;
     
 private:
     

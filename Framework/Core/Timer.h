@@ -27,7 +27,7 @@ public:
     unsigned int GetTime();
     
 private:
-    Uint32 m_startTime;
+    Uint32 m_startTime;  /** < Time when the timer was created */
     Uint32 m_currentTime;  /** < current game time **/
 };
 

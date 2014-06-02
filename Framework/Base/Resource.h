@@ -19,7 +19,9 @@
 
 namespace n8 {
 
-
+    /** \class Resource
+     *  \brief Base class for resource objects.
+     */
 class Resource{
 public:
     Resource(std::string p_id){m_id = p_id;}

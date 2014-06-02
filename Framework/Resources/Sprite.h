@@ -17,7 +17,9 @@
 
 namespace n8{
 
-/** An object to hold an optimzed SDL_Surface image and provide access to it **/
+/** \class Sprinte
+ *  \brief An object to hold an optimzed SDL_Surface image and provide access to it
+ **/
 class Sprite :public Resource{
 public:
 	~Sprite();
@@ -49,8 +51,8 @@ public:
 private:
     
 	SDL_Surface* m_image;  /** < The image that can be drawn to a canvas  **/
-    int m_width;
-    int m_height;
+    int m_width;  /** < Width of the sprite image */
+    int m_height; /** < Height of the sprite image */
     
     friend class RenderService;
 };

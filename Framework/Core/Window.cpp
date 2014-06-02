@@ -14,6 +14,9 @@
 
 #define TAG "Window"
 
+/** Constructor 
+ *  Creates SDL window, gets pointers to screen surface and renderer, and sets inital drawing render color
+ */
 n8::Window::Window(){
     m_screenSurface = nullptr;
     m_screenRenderer = nullptr;
@@ -21,12 +24,19 @@ n8::Window::Window(){
     ResizeWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 }
 
+/** Destructor
+ *  Destroys SDL window object
+ */
 n8::Window::~Window(){
     
     if(m_window){
         SDL_DestroyWindow(m_window);
         m_window = nullptr;
     }
+    
+    m_screenSurface = nullptr;
+    m_screenRenderer = nullptr;
+    m_window = nullptr;
 }
 
 /** Resizes the screen to the specified dimensions
@@ -92,25 +102,37 @@ void n8::Window::ResizeWindow(int w, int h){
 
 }
 
-/**
- *  @return a pointer to the background surface
+/** Gets a pointer to the window surface
+ *
+ *  @return a pointer to the window surface
  */
 SDL_Surface* n8::Window::GetSurface() const{
     assert(m_window);
     return m_screenSurface;
 }
 
+/** Gets a pointer to the window renderer
+ *
+ *  @return Pointer to the screen renderer
+ */
 SDL_Renderer* n8::Window::GetRenderer() const{
     assert(m_screenRenderer);
     return m_screenRenderer;
 }
 
+/** Gets a pointer to the window object
+ *
+ *  @return Pointer to the SDL_Window object
+ */
 SDL_Window* n8::Window::GetWindow() const{
     assert(m_window);
     return m_window;
 }
 
-/** Sets the window caption */
-void n8::Window::SetTitle(char* caption){
-    SDL_SetWindowTitle(m_window, caption);
+/** Sets the window caption 
+ *
+ *  @param p_caption Text for window title
+ */
+void n8::Window::SetTitle(char* p_caption){
+    SDL_SetWindowTitle(m_window, p_caption);
 }

@@ -25,8 +25,8 @@ class SDL_Window;
 
 namespace n8{
 
-/**
- *  Base class for game states
+/** \class State
+ *  \brief Abstract base class for game states
  *
  */
 class State{

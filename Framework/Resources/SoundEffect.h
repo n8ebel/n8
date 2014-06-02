@@ -18,6 +18,11 @@
 
 namespace n8{
     
+    /** \class SoundEffect
+     *  \brief SoundEffect resource that can be played
+     *
+     *  SoundEffect wraps Mixer.Mix_Chunk struct
+     */
 class SoundEffect : public Resource{
 public:
     SoundEffect(std::string p_id, Mix_Chunk* p_mixChunk);
@@ -25,7 +30,7 @@ public:
     
 private:
     
-    Mix_Chunk* m_soundEffect;
+    Mix_Chunk* m_soundEffect; /** < The sound effect data */
     
     friend class AudioService;
 };
