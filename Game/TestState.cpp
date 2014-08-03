@@ -14,7 +14,7 @@
 
 using namespace std;
 
-TestState::TestState() : m_gui(nullptr),m_exitEvent(EEvents::Test2){
+TestState::TestState() : m_gui(nullptr),m_exitEvent(EEvents::Test2), m_pushStateCommand(EState::Test2){
     
     m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
     m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(EService::Render));
@@ -84,8 +84,8 @@ TestState::~TestState(){
 void TestState::OnResume(){
     
     //register keyboard commands
-    m_inputService->RegisterKeyDownCommand(SDLK_SPACE, new n8::PushStateCommand(EState::Test2));
-    m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, new n8::PopStateCommand());
+    m_inputService->RegisterKeyDownCommand(SDLK_SPACE, &m_pushStateCommand);
+    m_inputService->RegisterKeyDownCommand(SDLK_ESCAPE, &m_popStateCommand);
     
     //register mouse actions
     m_inputService->RegisterMouseMoveAction( [this](int x, int y){
