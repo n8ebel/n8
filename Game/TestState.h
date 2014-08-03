@@ -68,5 +68,8 @@ private:
     gui::InputBox* m_inputBox;
     gui::Label* m_label;
     
+    n8::PushStateCommand m_pushStateCommand;
+    n8::PopStateCommand m_popStateCommand;
+    
 };
 #endif

@@ -36,6 +36,8 @@ private:
     
     n8::InputService* m_inputService;
     
+    n8::PopStateCommand m_popStateCommand;
+    
 };
 
 #endif /* defined(__goobar__TestState2__) */
