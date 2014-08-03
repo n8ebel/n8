@@ -231,7 +231,7 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
  *  @param p_newState A pointer to the state object to be registered for future use
  *
  */
-void n8::Game::RegisterState(EState::Values p_key, n8::State* p_newState){
+void n8::Game::RegisterState(EState p_key, n8::State* p_newState){
     static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->RegisterState(p_key, p_newState);
     
 }
@@ -240,7 +240,7 @@ void n8::Game::RegisterState(EState::Values p_key, n8::State* p_newState){
  *
  *  @param p_key The identifier for the state to be pushed onto the stack
  */
-void n8::Game::SetStartState(EState::Values p_key){
+void n8::Game::SetStartState(EState p_key){
     StateManagerService* stateManager = static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager));
     stateManager->Clear();
     stateManager->PushState(p_key);

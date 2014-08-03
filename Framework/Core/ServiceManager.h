@@ -31,15 +31,15 @@ public:
     ServiceManager();
     ~ServiceManager();
     
-    void RegisterService(EService::Values, Service*);
-    void UnregisterService(EService::Values);
+    void RegisterService(EService, Service*);
+    void UnregisterService(EService);
     
     void RemoveAllServices();
     
-    Service* GetService(EService::Values);
+    Service* GetService(EService);
     
 private:
-    std::map<EService::Values,Service*> m_registeredServices; /** < Map of registered services */
+    std::map<EService,Service*> m_registeredServices; /** < Map of registered services */
 };
     
 }

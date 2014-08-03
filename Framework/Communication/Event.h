@@ -20,12 +20,12 @@ namespace n8 {
  */
 class Event{
 public:
-    Event(EEvents::Values);
+    Event(EEvents);
     
-    EEvents::Values GetType();
+    EEvents GetType();
     
 private:
-    EEvents::Values m_type; /** < The type of event.  Uses an enumerated type to differentiate event types > */
+    EEvents m_type; /** < The type of event.  Uses an enumerated type to differentiate event types > */
     
     
 };

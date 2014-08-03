@@ -55,8 +55,8 @@ public:
     void SetFPS(unsigned);
     void DefineWindowSize(unsigned, unsigned);
     
-    void RegisterState(EState::Values, State*);
-    void SetStartState(EState::Values);
+    void RegisterState(EState, State*);
+    void SetStartState(EState);
 private:
     const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;  /** < Default resource file name */
     

@@ -13,7 +13,7 @@
  *
  *  @param state The state identifer to push onto the stack
  */
-n8::PushStateCommand::PushStateCommand(EState::Values state) : m_state(state){
+n8::PushStateCommand::PushStateCommand(EState state) : m_state(state){
     
 }
 

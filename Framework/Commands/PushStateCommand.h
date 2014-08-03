@@ -24,13 +24,13 @@ namespace n8{
 class PushStateCommand : public Command {
     
 public:
-    PushStateCommand(EState::Values);
+    PushStateCommand(EState);
     
     ~PushStateCommand();
     virtual bool execute() override;
     
 private:
-    EState::Values m_state; /** < Enumerated state identifier */
+    EState m_state; /** < Enumerated state identifier */
     
     
 };
