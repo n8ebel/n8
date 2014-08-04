@@ -37,9 +37,9 @@ public:
     ~StateManagerService();
     
     
-    bool RegisterState(EState::Values identifier, State* state);
+    bool RegisterState(int identifier, State* state);
     
-    bool PushState(EState::Values identifier);
+    bool PushState(int identifier);
     void PopState();
     void Clear();
     
@@ -53,7 +53,7 @@ public:
 private:
     
     
-    map<EState::Values, State*> m_registeredStates; /** < map of identifiers and game state objects */
+    map<int, State*> m_registeredStates; /** < map of identifiers and game state objects */
     vector<State*> m_stateStack; /** < stack of state objects */
     
 };

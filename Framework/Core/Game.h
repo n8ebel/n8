@@ -18,6 +18,7 @@
 #include "SDL2_ttf/SDL_ttf.h"
 #include "tinyxml2.h"
 
+#include "Values.h"
 #include "Log.h"
 #include "ServiceManager.h"
 #include "RenderService.h"
@@ -55,8 +56,8 @@ public:
     void SetFPS(unsigned);
     void DefineWindowSize(unsigned, unsigned);
     
-    void RegisterState(EState::Values, State*);
-    void SetStartState(EState::Values);
+    void RegisterState(int, State*);
+    void SetStartState(int);
 private:
     const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;  /** < Default resource file name */
     

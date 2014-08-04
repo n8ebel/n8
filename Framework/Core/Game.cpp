@@ -142,11 +142,11 @@ void n8::Game::Setup(){
     
     inputService->AddObserver(stateManagerService);
     
-    m_serviceManager->RegisterService(EService::Input, inputService);
-    m_serviceManager->RegisterService(EService::StateManager, stateManagerService);
-    m_serviceManager->RegisterService(EService::Resources, resourceManagerService);
-    m_serviceManager->RegisterService(EService::Render, renderService);
-    m_serviceManager->RegisterService(EService::Audio, audioService);
+    m_serviceManager->RegisterService(ServiceManager::INPUT, inputService);
+    m_serviceManager->RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
+    m_serviceManager->RegisterService(ServiceManager::RESOURCES, resourceManagerService);
+    m_serviceManager->RegisterService(ServiceManager::RENDER, renderService);
+    m_serviceManager->RegisterService(ServiceManager::AUDIO, audioService);
     
 }
 
@@ -173,16 +173,16 @@ void n8::Game::Start(){
         }
          */
         //process input
-        static_cast<InputService*>(m_serviceManager->GetService(EService::Input))->HandleInput();
+        static_cast<InputService*>(m_serviceManager->GetService(ServiceManager::INPUT))->HandleInput();
         
         //make sure there is a state on the stack
-        if(static_cast<StateManagerService*>(ServiceManager::GetInstance()->GetService(EService::StateManager))->GetStackSize() == 0){
+        if(static_cast<StateManagerService*>(ServiceManager::GetInstance()->GetService(ServiceManager::STATE_MANAGER))->GetStackSize() == 0){
             break;
         }
         
         
         //process state
-        static_cast<StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->ProcessState(m_timer.GetTime(), &m_window);
+        static_cast<StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER))->ProcessState(m_timer.GetTime(), &m_window);
                 
         m_timer.SyncGame(m_fps);  //ensures proper fps
         
@@ -231,8 +231,8 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
  *  @param p_newState A pointer to the state object to be registered for future use
  *
  */
-void n8::Game::RegisterState(EState::Values p_key, n8::State* p_newState){
-    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->RegisterState(p_key, p_newState);
+void n8::Game::RegisterState(int p_key, n8::State* p_newState){
+    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER))->RegisterState(p_key, p_newState);
     
 }
 
@@ -240,8 +240,8 @@ void n8::Game::RegisterState(EState::Values p_key, n8::State* p_newState){
  *
  *  @param p_key The identifier for the state to be pushed onto the stack
  */
-void n8::Game::SetStartState(EState::Values p_key){
-    StateManagerService* stateManager = static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager));
+void n8::Game::SetStartState(int p_key){
+    StateManagerService* stateManager = static_cast<n8::StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER));
     stateManager->Clear();
     stateManager->PushState(p_key);
     //static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);

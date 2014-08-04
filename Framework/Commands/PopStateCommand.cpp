@@ -21,7 +21,7 @@ n8::PopStateCommand::~PopStateCommand(){
 /** Pops the top state off of the game's state stack */
 bool n8::PopStateCommand::execute(){
     
-    static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->PopState();
+    static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::STATE_MANAGER))->PopState();
     
     return true;
 }
