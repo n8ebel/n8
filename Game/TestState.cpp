@@ -14,18 +14,18 @@
 
 using namespace std;
 
-TestState::TestState() : m_gui(nullptr),m_exitEvent(EEvents::Test2), m_pushStateCommand(EState::Test2){
+TestState::TestState() : m_gui(nullptr),m_exitEvent(Test2), m_pushStateCommand(Test2){
     
-    m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
-    m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(EService::Render));
-    m_audioService = static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(EService::Audio));
+    m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::INPUT));
+    m_renderService = static_cast<n8::RenderService*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::RENDER));
+    m_audioService = static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::AUDIO));
     
     CreateSystems();
     CreateEntities();
     
     
     //build user interface
-    m_font = (n8::Font*)((n8::ResourceManager*)n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("stocky24");
+    m_font = (n8::Font*)((n8::ResourceManager*)n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::RESOURCES))->GetResource("stocky24");
     
     m_gui = new gui::GUI(const_cast<n8::Window*>(m_renderService->GetWindow()),m_font);
     m_gui->GetStyle().GetWindow()->GetWindow();
@@ -108,7 +108,7 @@ void TestState::OnResume(){
     
 //start music
 
-    m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("scratch")));
+    m_audioService->PlayMusic(static_cast<n8::Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::RESOURCES))->GetResource("scratch")));
     
     //m_audioService->PlaySoundEffect(static_cast<n8::SoundEffect*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource("beat")));
 }

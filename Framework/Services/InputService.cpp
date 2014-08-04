@@ -60,7 +60,7 @@ void n8::InputService::HandleInput(){
         
         if (m_event.type == SDL_QUIT)
 		{
-            Event event(EEvents::Exit);
+            Event event(ExitEvent);
             Notify(&event);
 		}
         

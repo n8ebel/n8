@@ -14,7 +14,7 @@
 #include "Command.h"
 #include "StateManagerService.h"
 #include "ServiceManager.h"
-#include "Enums.h"
+#include "Values.h"
 
 namespace n8{
 
@@ -24,13 +24,13 @@ namespace n8{
 class PushStateCommand : public Command {
     
 public:
-    PushStateCommand(EState);
+    PushStateCommand(int);
     
     ~PushStateCommand();
     virtual bool execute() override;
     
 private:
-    EState m_state; /** < Enumerated state identifier */
+    int m_state; /** < Enumerated state identifier */
     
     
 };

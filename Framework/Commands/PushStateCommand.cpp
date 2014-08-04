@@ -13,7 +13,7 @@
  *
  *  @param state The state identifer to push onto the stack
  */
-n8::PushStateCommand::PushStateCommand(EState state) : m_state(state){
+n8::PushStateCommand::PushStateCommand(int state) : m_state(state){
     
 }
 
@@ -27,7 +27,7 @@ n8::PushStateCommand::~PushStateCommand(){
  */
 bool n8::PushStateCommand::execute(){
     
-    static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(EService::StateManager))->PushState(m_state);
+    static_cast<n8::StateManagerService*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::STATE_MANAGER))->PushState(m_state);
     
     return true;
 }

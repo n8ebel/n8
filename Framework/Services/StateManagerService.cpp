@@ -40,8 +40,8 @@ n8::StateManagerService::~StateManagerService(){
  *
  *  @return True if the state was succesffuly stored in the map; False otherwise.
  */
-bool n8::StateManagerService::RegisterState(EState identifier, State* state){
-    map<EState, State*>::iterator ii = m_registeredStates.find(identifier);
+bool n8::StateManagerService::RegisterState(int identifier, State* state){
+    map<int, State*>::iterator ii = m_registeredStates.find(identifier);
     
     if(ii == m_registeredStates.end()){
         m_registeredStates[identifier] = state;
@@ -66,8 +66,8 @@ bool n8::StateManagerService::RegisterState(EState identifier, State* state){
  *  @return True if a State was pushed onto the stack, false otherwise.
  *
  */
-bool n8::StateManagerService::PushState(EState identifier){
-    map<EState, State*>::iterator ii = m_registeredStates.find(identifier);
+bool n8::StateManagerService::PushState(int identifier){
+    map<int, State*>::iterator ii = m_registeredStates.find(identifier);
     
     //if there is a matching state to push
     if(ii != m_registeredStates.end()){
@@ -174,10 +174,10 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){
-    if(event->GetType() == EEvents::Exit){
+    if(event->GetType() == ExitEvent){
         m_stateStack.clear();
     }
-    else if(event->GetType() == EEvents::Test2){
-        m_stateStack.push_back(m_registeredStates[EState::Test2]);
+    else if(event->GetType() == Test2){
+        m_stateStack.push_back(m_registeredStates[Test2]);
     }
 }

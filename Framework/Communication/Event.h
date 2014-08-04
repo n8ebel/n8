@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "../Core/Enums.h"
+#include "../Core/Values.h"
 
 namespace n8 {
     
@@ -20,12 +20,12 @@ namespace n8 {
  */
 class Event{
 public:
-    Event(EEvents);
+    Event(int);
     
-    EEvents GetType();
+    int GetType();
     
 private:
-    EEvents m_type; /** < The type of event.  Uses an enumerated type to differentiate event types > */
+    int m_type; /** < The type of event.  Uses an enumerated type to differentiate event types > */
     
     
 };

@@ -16,7 +16,7 @@ TestState2::TestState2() {
     CreateSystems();
     CreateEntities();
     
-    m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(EService::Input));
+    m_inputService = static_cast<n8::InputService*>(n8::ServiceManager::GetInstance()->GetService(n8::ServiceManager::INPUT));
 }
 
 TestState2::~TestState2(){
