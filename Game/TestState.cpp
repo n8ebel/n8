@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "TestState.h"
+#include "GameValues.h"
 
 using namespace std;
 

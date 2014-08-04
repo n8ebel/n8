@@ -11,6 +11,7 @@
 
 #include "StateManagerService.h"
 #include "Log.h"
+#include "../../Game/GameValues.h"
 
 #define TAG "StateManagerService"
 

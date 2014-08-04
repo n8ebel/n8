@@ -3,7 +3,4 @@
 
 #define ExitEvent 0
 
-#define Test 1
-#define Test2 2
-
 #endif
