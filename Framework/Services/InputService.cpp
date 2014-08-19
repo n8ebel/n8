@@ -56,11 +56,9 @@ void n8::InputService::HandleInput(){
             m_userInterface->ProcessInput(&m_event);
             guiHasFocus = m_userInterface->HasFocus();
         }
-        Log::Debug(TAG, std::to_string(m_event.type));
         
         if (m_event.type == SDL_QUIT || m_event.type == SDL_WINDOWEVENT_CLOSE)
 		{
-            Log::Debug(TAG, "quit");
             Event event(ExitEvent);
             Notify(&event);
 		}
