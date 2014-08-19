@@ -16,8 +16,8 @@ n8::PlaySoundEffectCommand::~PlaySoundEffectCommand(){
     
 }
 
-void n8::PlaySoundEffectCommand::execute(){
-    static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(EService::Audio))->PlaySoundEffect(static_cast<SoundEffect*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource(m_effectID)));
+bool n8::PlaySoundEffectCommand::execute(){
+    static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(ServiceManager::AUDIO))->PlaySoundEffect(static_cast<SoundEffect*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(ServiceManager::RESOURCES))->GetResource(m_effectID)));
     
-    
+    return true;
 }

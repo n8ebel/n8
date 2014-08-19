@@ -53,6 +53,8 @@ void n8::Window::ResizeWindow(int w, int h){
     m_screenWidth = w;
     m_screenHeight = h;
     
+    SDL_DestroyWindow(m_window);
+    
     // create a window
     
     m_window = SDL_CreateWindow(

@@ -28,7 +28,7 @@ namespace n8{
         PlaySoundEffectCommand(std::string p_effectID);
         
         ~PlaySoundEffectCommand();
-        virtual void execute();
+        virtual bool execute();
         
     private:
         std::string m_effectID;

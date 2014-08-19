@@ -16,8 +16,8 @@ n8::PlayMusicCommand::~PlayMusicCommand(){
     
 }
 
-void n8::PlayMusicCommand::execute(){
-    static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(EService::Audio))->PlayMusic(static_cast<Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(EService::Resources))->GetResource(m_musicID)));
+bool n8::PlayMusicCommand::execute(){
+    static_cast<n8::AudioService*>(n8::ServiceManager::GetInstance()->GetService(ServiceManager::AUDIO))->PlayMusic(static_cast<Music*>(static_cast<n8::ResourceManager*>(n8::ServiceManager::GetInstance()->GetService(ServiceManager::RESOURCES))->GetResource(m_musicID)));
     
-    
+    return true;
 }

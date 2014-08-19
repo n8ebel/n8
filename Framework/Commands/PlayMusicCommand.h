@@ -26,7 +26,7 @@ namespace n8{
         PlayMusicCommand(std::string p_musID);
         
         ~PlayMusicCommand();
-        virtual void execute();
+        virtual bool execute();
         
     private:
         std::string m_musicID;
