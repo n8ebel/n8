@@ -12,15 +12,31 @@
 *.la
 *.a
 
-*n8.xcodeproj
-*n8.xcscheme
+*n8_Game.xcodeproj
+*n8_Game.xcscheme
 *UserInterfaceState.xcuserstate
 *project.pbxproj
 
 .DS_Store
 
-.DS_Store
+n8_Game.xcodeproj/project.pbxproj
 
-n8.xcodeproj/project.pbxproj
+n8_Game/.DS_Store
 
-n8/.DS_Store
+xcuserdata
+
+n8_Game/DerivedData/
+
+n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb-shm
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb-wal
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-cmp
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-dir
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-file
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-res
+	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-sym
+	new file:   n8_Game/DerivedData/n8_Game/info.plist
+	new file:   n8_Game/n8_Game.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+	new file:   n8_Game/n8_Game.xcodeproj/xcuserdata/lcballa44.xcuserdatad/xcschemes/n8_Game.xcscheme
+	new file:   n8_Game/n8_Game.xcodeproj/xcuserdata/lcballa44.xcuserdatad/xcschemes/xcschememanagement.plist
+

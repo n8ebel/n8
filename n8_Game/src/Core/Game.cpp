@@ -25,7 +25,7 @@ n8::Game::Game(const char* configFile){
     m_fps = DEFAULT_FPS;
     m_quit = false;
     
-    //m_configPath = configFile;
+    m_resourceConfigPath = configFile;
     
     InitializeDirectoryPath();
     ProcessConfigFile();
@@ -120,8 +120,7 @@ void n8::Game::InitializeDirectoryPath() {
  *  WILL CHANGE WHEN DIRECTORY HEIRARCHY IS IMPLEMENTED
  */
 void n8::Game::InitializeResourcesPath(){
-    m_resourcesListPath = m_directoryPath + RESOURCE_FILE_SUFFIX;
-    Log::Debug(TAG, "Resource list file path:" + m_resourcesListPath);
+    Log::Debug(TAG, "Resource config file path:" + m_resourceConfigPath);
 }
 
 /** Setup
@@ -132,7 +131,7 @@ void n8::Game::Setup(){
     
     m_serviceManager = ServiceManager::GetInstance();
     
-    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourcesListPath.c_str());
+    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourceConfigPath.c_str());
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();

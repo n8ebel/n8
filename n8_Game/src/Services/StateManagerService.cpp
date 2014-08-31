@@ -11,7 +11,7 @@
 
 #include "StateManagerService.h"
 #include "Log.h"
-#include "../../Game/GameValues.h"
+//#include "../../Game/GameValues.h"
 
 #define TAG "StateManagerService"
 
@@ -174,11 +174,4 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     }
 }
 
-void n8::StateManagerService::OnNotify(n8::Event* event){
-    if(event->GetType() == ExitEvent){
-        m_stateStack.clear();
-    }
-    else if(event->GetType() == Test2){
-        m_stateStack.push_back(m_registeredStates[Test2]);
-    }
-}
+void n8::StateManagerService::OnNotify(n8::Event* event){ }
