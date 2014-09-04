@@ -12,6 +12,7 @@
 
 #define TAG "Button"
 
+
 /** Constructor
  *  Initializes parent class of GUIElement.
  *  Sets the button text
@@ -23,19 +24,11 @@
  *  @param p_y The y position of the button
  *  @param p_w The width of the button
  *  @param p_h The height of the button
- *  @param p_command The command to execute when button is clicked down
  */
-gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, n8::Command* p_command) : GUIElement(p_x,p_y,p_w,p_h)
+gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_x,p_y,p_w,p_h)
 {
     m_id = p_id;
     m_text = p_text;
-    m_hover = false;
-    m_pressed = false;
-    m_mouseClickedDown = false;
-    m_timeClickedDown = 0;
-    m_hasFocus = false;
-    m_command = p_command;
-    m_function = nullptr;
 }
 
 /** Constructor
@@ -51,16 +44,8 @@ gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int 
  *  @param p_h The height of the button
  *  @param p_func The lambda function to execute when button is clicked down
  */
-gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : GUIElement(p_x,p_y,p_w,p_h)
+gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : Button(p_id,p_text,p_x,p_y,p_w,p_h)
 {
-    m_id = p_id;
-    m_text = p_text;
-    m_hover = false;
-    m_pressed = false;
-    m_mouseClickedDown = false;
-    m_timeClickedDown = 0;
-    m_hasFocus = false;
-    m_command = nullptr;
     m_function = p_func;
 }
 
@@ -73,7 +58,6 @@ gui::Button::~Button(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
-    m_command = nullptr;
     m_function = nullptr;
 }
 
@@ -110,52 +94,6 @@ bool gui::Button::CheckMouseMove(int p_x, int p_y){
         m_hover = false;
         return false;
     }
-}
-
-/** Checks whether the button was clicked down
- *
- *
- *  @param p_x The x coordinate of the mouse click
- *  @param p_y The y coordinate of the mouse click
- *
- *  @return bool Returns true if button was clicked up
- */
-bool gui::Button::CheckMouseClickDown(int p_x, int p_y){
-    
-    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
-        m_pressed = true;
-        m_mouseClickedDown = true;
-        m_timeClickedDown = SDL_GetTicks();
-        if (m_command) {
-            m_command->execute();
-        }
-        else if(m_function){
-            m_function();
-        }
-        return true;
-    }
-    else{
-        return false;
-    }
-    
-    return false;
-}
-
-/** Checks whether the button was clicked
- *
- *
- *  @param p_x The x coordinate of the mouse click
- *  @param p_y The y coordinate of the mouse click
- *
- *  @return bool Returns true if button was clicked up
- */
-bool gui::Button::CheckMouseClickUp(int p_x, int p_y){
-    
-    m_mouseClickedDown = false;
-    if(SDL_GetTicks() - m_timeClickedDown > 500){
-        m_pressed = false;
-    }
-    return false;
 }
 
 /** Draws the button based on its current state

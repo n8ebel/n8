@@ -103,6 +103,13 @@ bool LTexture::loadFromRenderedText( SDL_Renderer* p_renderer,TTF_Font* p_font, 
     if( textSurface == nullptr )
     {
         printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+        if(p_font == nullptr)
+            printf( "   font was null");
+        else
+            printf( "   font wasn't null");
+        
+        printf( "   texture text was: %s", textureText.c_str());
+        printf( "   texture color was %i,%i,%i", textColor.r, textColor.g, textColor.b);
     }
     else
     {

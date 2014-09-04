@@ -24,7 +24,13 @@ gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
                                                                     m_texture(nullptr)
 {
-    
+    std::cout << "GUIElement Constructor" << std::endl;
+    m_hover = false;
+    m_pressed = false;
+    m_mouseClickedDown = false;
+    m_timeClickedDown = 0;
+    m_hasFocus = false;
+    m_function = nullptr;
 }
 
 gui::GUIElement::~GUIElement(){
@@ -63,4 +69,54 @@ void gui::GUIElement::SetStyle(Style* p_style){
  */
 gui::Style* gui::GUIElement::GetStyle() const{
     return m_style;
+}
+
+/** Checks whether the element was clicked down
+ *
+ *
+ *  @param p_x The x coordinate of the mouse click
+ *  @param p_y The y coordinate of the mouse click
+ *
+ *  @return bool Returns true if element was clicked up
+ */
+bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
+    
+    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
+        m_pressed = true;
+        m_mouseClickedDown = true;
+        m_timeClickedDown = SDL_GetTicks();
+        if(m_function){
+            m_function();
+        }
+        return true;
+    }
+    else{
+        return false;
+    }
+    
+    return false;
+}
+
+/** Checks whether the element was clicked
+ *
+ *
+ *  @param p_x The x coordinate of the mouse click
+ *  @param p_y The y coordinate of the mouse click
+ *
+ *  @return bool Returns true if element was clicked up
+ */
+bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
+    
+    m_mouseClickedDown = false;
+    if(SDL_GetTicks() - m_timeClickedDown > 500){
+        m_pressed = false;
+    }
+    return false;
+}
+
+/**
+ *  Sets a function to be called on click
+ */
+void gui::GUIElement::setClickHandler(std::function<void()> function){
+    m_function = function;
 }

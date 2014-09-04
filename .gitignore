@@ -27,16 +27,4 @@ xcuserdata
 
 n8_Game/DerivedData/
 
-n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb-shm
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb-wal
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-cmp
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-dir
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-file
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-res
-	new file:   n8_Game/DerivedData/n8_Game/Index/Debug/macosx10.9-x86_64/n8_Game.xcindex/db.xcindexdb.strings-sym
-	new file:   n8_Game/DerivedData/n8_Game/info.plist
-	new file:   n8_Game/n8_Game.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-	new file:   n8_Game/n8_Game.xcodeproj/xcuserdata/lcballa44.xcuserdatad/xcschemes/n8_Game.xcscheme
-	new file:   n8_Game/n8_Game.xcodeproj/xcuserdata/lcballa44.xcuserdatad/xcschemes/xcschememanagement.plist
-
+n8_Game/Build/Intermediates/

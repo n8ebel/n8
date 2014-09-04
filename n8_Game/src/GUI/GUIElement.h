@@ -24,6 +24,8 @@
 #include "Color.h"
 #include "Style.h"
 
+#include "Command.h"
+
 namespace gui {
     
 /** \class GUIElement
@@ -49,13 +51,15 @@ public:
     
     virtual void Draw(n8::Window*) = 0;  /** < Renders the element to the screen. **/
     
-    virtual bool CheckMouseClickDown(int p_x, int p_y) = 0;  /** Checks if a mouse click down action took place within the element and responds appropriately.  **/
-    
-    virtual bool CheckMouseClickUp(int p_x, int p_y) = 0;  /** Checks if a mouse click up action took place within the element and responds appropriately.  **/
+    virtual bool CheckMouseClickDown(int p_x, int p_y);  /** Checks if a mouse click down action took place within the element and responds appropriately.  **/
+    virtual bool CheckMouseClickUp(int p_x, int p_y);  /** Checks if a mouse click up action took place within the element and responds appropriately.  **/
     
     virtual bool CheckMouseMove(int p_x, int p_y) = 0;  /** Responds to a mouse move action.  **/
 
     virtual bool Update(Uint32 p_currentTime) = 0;  /** Handles any updating of the element that needs to happen during every frame.  **/
+    
+    void setClickHandler(std::function<void()> function);
+    
 
 protected:
     Style* m_style; /** < Pointer to a Style object that determeins the color style of the element **/
@@ -64,6 +68,14 @@ protected:
 
     bool m_built;  /** < Flag to determine if the element was successfully built.  Some elements must be built using current state information before the can be rendered.  This flag allows elements that weren't built to not perform destructive operations. **/
     bool m_hasFocus; /** < Flag to determine if an element has the current focus of the gui.  For example, if an input box has been clicked it will receive the focust **/
+    
+    bool m_hover; /** < mouse is hovering over the button **/
+    bool m_pressed; /** < whether button appears pressed down **/
+    bool m_mouseClickedDown; /** < whether button is currently pressed down **/
+    unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
+    
+    std::function<void()> m_function;  /** < Lambda function to be called when button is clicked down */
+    
 };
     
 }
