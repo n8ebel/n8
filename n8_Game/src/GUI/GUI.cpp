@@ -47,7 +47,13 @@ void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
 }
 
 void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
-    
+    vector<GUIElement*>::iterator ii = m_guiElements.begin();
+    for (int i = 0; i < m_guiElements.size(); i++) {
+        if (m_guiElements[i] == p_widget) {
+            m_guiElements.erase(m_guiElements.begin() + i);
+            break;
+        }
+    }
 }
 
 /** Passes a mouse button down event to all added gui elements.

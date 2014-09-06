@@ -37,6 +37,7 @@ namespace gui{
         ~GUI();
         
         void AddElement(GUIElement*);
+        void RemoveElement(GUIElement*);
         
         bool CheckClickDown(int p_x, int p_y);
         bool CheckClickUp(int p_x, int p_y);
