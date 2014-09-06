@@ -12,7 +12,12 @@
 
 namespace gui {
     
-    /** Constructor. 
+    Style::Style(){
+        m_window = nullptr;
+        m_font = nullptr;
+    }
+    
+    /** Constructor.
      *  Sets default color values, and stores pointers to the game window
      *  and a font resources.
      */
@@ -39,6 +44,27 @@ namespace gui {
     /** Destructor */
     Style::~Style(){
         
+    }
+    
+    Style& Style::operator=( const Style& other ){
+        m_window = other.m_window;
+        m_font = other.m_font;
+        
+        m_containerColor = other.m_containerColor;
+        m_buttonColor = other.m_buttonColor;
+        m_hoverColor = other.m_hoverColor;
+        m_pressedColor = other.m_pressedColor;
+        
+        m_fontColor = other.m_fontColor;
+        m_hintColor = other.m_hintColor;
+        
+        m_focusColor = other.m_focusColor;
+        m_inputBackgroundColor = other.m_inputBackgroundColor;
+        m_cursorColor = other.m_cursorColor;
+        
+        m_defaultColor = other.m_defaultColor;
+        
+        return *this;
     }
     
     /** Sets the font pointer.
@@ -113,6 +139,8 @@ namespace gui {
         else if(p_color == EStyleColor::Cursor){
             m_cursorColor.Set(p_r,p_g,p_b,p_a);
         }
+        
+        std::cout << "button color R: " << m_buttonColor.GetR() << std::endl;
     }
     
     /** Returns the specified style color object.

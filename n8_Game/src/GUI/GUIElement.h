@@ -43,8 +43,11 @@ public:
 //Implemented methods
     virtual void ChangePosition(int p_x, int p_y);
     virtual void OffsetPosition(int p_xOffset, int p_yOffset);
-    virtual void SetStyle(Style* p_style);
-    Style* GetStyle() const;
+    virtual void SetStyle(Style p_style);
+    //Style GetStyle() const;
+    
+    void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b);
+    void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
     
 //Pure virtual methods
     virtual void Build() = 0;  /** < Performs any state-based initialization that can't be done at object construction.  Called from GUI object or on individual element basis. **/
@@ -62,7 +65,7 @@ public:
     
 
 protected:
-    Style* m_style; /** < Pointer to a Style object that determeins the color style of the element **/
+    Style m_style; /** < Pointer to a Style object that determeins the color style of the element **/
     n8::Rectangle m_rectangle; /** < Stores the positions and size of the element **/
     SDL_Texture* m_texture; /** < Pointer to texture used render the element **/
 

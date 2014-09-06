@@ -27,6 +27,7 @@ namespace gui {
     
     class Style{
     public:
+        static const Uint8 DEFAULT_ALPHA = 255;
         
         /** Enum for Style color elements
          *  Each enum represents an available color defined in the class.  These eneums are used to access particular color elements
@@ -43,9 +44,11 @@ namespace gui {
                                 Default /** < Default enum value corresponding to default color */
         };
             
-        
+        Style();
         Style(n8::Window* p_window, n8::Font* p_font);
         ~Style();
+        
+        Style& operator=( const Style& other );
         
         void SetFont(n8::Font* p_font);
         
@@ -59,7 +62,6 @@ namespace gui {
         
     
     private:
-        const Uint8 DEFAULT_ALPHA = 255;
         
         n8::Window* m_window; /** < Pointer to window object */
         

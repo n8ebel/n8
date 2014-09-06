@@ -40,6 +40,15 @@ n8::Color::Color(int p_r, int p_g, int p_b, int p_a){
     m_color.a = p_a;
 }
 
+n8::Color& n8::Color::operator = (const Color& color){
+    m_color.r = color.GetR();
+    m_color.g = color.GetG();
+    m_color.b = color.GetB();
+    m_color.a = color.GetA();
+    
+    return *this;
+}
+
 /** Changes the color to the specified values
  *
  *  @param p_r The new red value
@@ -102,7 +111,7 @@ void n8::Color::SetA(int p_a){
  *
  *  @return m_r The red value of the color
  */
-int n8::Color::GetR(){
+int n8::Color::GetR() const{
     return m_color.r;
 }
 
@@ -110,7 +119,7 @@ int n8::Color::GetR(){
  *
  *  @return m_g The green value of the color
  */
-int n8::Color::GetG(){
+int n8::Color::GetG() const{
     return m_color.g;
 }
 
@@ -118,7 +127,7 @@ int n8::Color::GetG(){
  *
  *  @return m_b The blue value of the color
  */
-int n8::Color::GetB(){
+int n8::Color::GetB() const{
     return m_color.b;
 }
 
@@ -126,7 +135,7 @@ int n8::Color::GetB(){
  *
  *  @return m_a The alpha value of the color
  */
-int n8::Color::GetA(){
+int n8::Color::GetA() const{
     return m_color.a;
 }
 

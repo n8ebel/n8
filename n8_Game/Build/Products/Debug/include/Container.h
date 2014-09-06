@@ -44,7 +44,7 @@ namespace gui{
         
         virtual void OffsetPosition(int p_x, int p_y) override;
         
-        virtual void SetStyle(Style* p_style) override;
+        virtual void SetStyle(Style p_style) override;
         
     protected:
         std::vector<GUIElement*> m_guiElements; /** < List of elements contained by the container.  All elements will be drawn relative to the container's position */

@@ -41,10 +41,13 @@ void gui::GUI::Build(){
  *  @param p_newWidget The new element to add to the gui
  */
 void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
-    if (p_newWidget->GetStyle() == nullptr){
-        p_newWidget->SetStyle(&m_style);
-    }
+    p_newWidget->SetStyle(m_style);
+    
     m_guiElements.push_back(p_newWidget);
+}
+
+void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
+    
 }
 
 /** Passes a mouse button down event to all added gui elements.

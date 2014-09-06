@@ -11,8 +11,7 @@
 #include "GUIElement.h"
 
 
-gui::GUIElement::GUIElement() : m_style(nullptr),
-                                m_texture(nullptr),
+gui::GUIElement::GUIElement() : m_texture(nullptr),
                                 m_rectangle(0,0,1,1),
                                 m_built(false)
 {
@@ -20,7 +19,6 @@ gui::GUIElement::GUIElement() : m_style(nullptr),
 }
 
 gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
-                                                                    m_style(nullptr),
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
                                                                     m_texture(nullptr)
 {
@@ -59,16 +57,16 @@ void gui::GUIElement::OffsetPosition(int p_xOffset, int p_yOffset){
  *
  *  @param p_style A pointer to the new sytle object for the element.
  */
-void gui::GUIElement::SetStyle(Style* p_style){
+void gui::GUIElement::SetStyle(Style p_style){
     m_style = p_style;
 }
 
-/** Gets a pointer to the style object of the element.
- *
- *  @return m_style The style object pointer
- */
-gui::Style* gui::GUIElement::GetStyle() const{
-    return m_style;
+void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b){
+    SetColor(p_color, p_r, p_g, p_b, Style::DEFAULT_ALPHA);
+}
+
+void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a){
+    m_style.SetColor(p_color, p_r, p_g, p_b, p_a);
 }
 
 /** Checks whether the element was clicked down

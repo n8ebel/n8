@@ -67,9 +67,8 @@ gui::Button::~Button(){
  */
 void gui::Button::Build(){
     
-    if (m_style) {
-        m_built = m_textTexture.loadFromRenderedText(  m_style->GetWindow()->GetRenderer(), m_style->GetFont()->GetFont(), m_text.c_str(), m_style->GetColor(Style::EStyleColor::Font).GetColor() );
-    }
+    
+    m_built = m_textTexture.loadFromRenderedText(  m_style.GetWindow()->GetRenderer(), m_style.GetFont()->GetFont(), m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
     if (!m_built) {
         n8::Log::Error(TAG, "Label failed to build");
@@ -101,35 +100,32 @@ bool gui::Button::CheckMouseMove(int p_x, int p_y){
  *  @param p_window Pointer to the game window object
  */
 void gui::Button::Draw(n8::Window* p_window){
-    if (!m_style) {
-        exit(EXIT_FAILURE);
-    }
     
     SDL_Renderer* renderer= p_window->GetRenderer();
     if(m_pressed){
         SDL_SetRenderDrawColor( renderer,
-                               m_style->GetColor(Style::EStyleColor::Pressed).GetR(),
-                               m_style->GetColor(Style::EStyleColor::Pressed).GetG(),
-                               m_style->GetColor(Style::EStyleColor::Pressed).GetB(),
-                               m_style->GetColor(Style::EStyleColor::Pressed).GetA()
+                               m_style.GetColor(Style::EStyleColor::Pressed).GetR(),
+                               m_style.GetColor(Style::EStyleColor::Pressed).GetG(),
+                               m_style.GetColor(Style::EStyleColor::Pressed).GetB(),
+                               m_style.GetColor(Style::EStyleColor::Pressed).GetA()
                                );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
     else if (m_hover) {
         SDL_SetRenderDrawColor( renderer,
-                               m_style->GetColor(Style::EStyleColor::Hover).GetR(),
-                               m_style->GetColor(Style::EStyleColor::Hover).GetG(),
-                               m_style->GetColor(Style::EStyleColor::Hover).GetB(),
-                               m_style->GetColor(Style::EStyleColor::Hover).GetA()
+                               m_style.GetColor(Style::EStyleColor::Hover).GetR(),
+                               m_style.GetColor(Style::EStyleColor::Hover).GetG(),
+                               m_style.GetColor(Style::EStyleColor::Hover).GetB(),
+                               m_style.GetColor(Style::EStyleColor::Hover).GetA()
                                );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }
     else{
         SDL_SetRenderDrawColor( renderer,
-                               m_style->GetColor(Style::EStyleColor::Button).GetR(),
-                               m_style->GetColor(Style::EStyleColor::Button).GetG(),
-                               m_style->GetColor(Style::EStyleColor::Button).GetB(),
-                               m_style->GetColor(Style::EStyleColor::Button).GetA()
+                               m_style.GetColor(Style::EStyleColor::Button).GetR(),
+                               m_style.GetColor(Style::EStyleColor::Button).GetG(),
+                               m_style.GetColor(Style::EStyleColor::Button).GetB(),
+                               m_style.GetColor(Style::EStyleColor::Button).GetA()
                                );
         SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     }

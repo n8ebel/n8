@@ -25,6 +25,8 @@ namespace n8{
         Color(int p_r, int p_g, int p_b);
         Color(int p_r, int p_g, int p_b, int p_a);
         
+        Color& operator = (const Color&);
+        
         void Set(int p_r, int p_g, int p_b);
         void Set(int p_r, int p_g, int p_b, int p_a);
         
@@ -33,10 +35,10 @@ namespace n8{
         void SetB(int p_b);
         void SetA(int p_a);
         
-        int GetR();
-        int GetG();
-        int GetB();
-        int GetA();
+        int GetR() const;
+        int GetG() const;
+        int GetB() const;
+        int GetA() const;
         
         SDL_Color GetColor();
         
