@@ -32,10 +32,10 @@ gui::Label::~Label(){
 /** Builds the label.
  *  Uses the window pointer from style object to build the text texture
  */
-void gui::Label::Build(){
+void gui::Label::Build(n8::Window* window){
     
     
-    m_built = m_textTexture.loadFromRenderedText(  m_style.GetWindow()->GetRenderer(), m_style.GetFont()->GetFont(), m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
     
     if (!m_built) {
@@ -49,7 +49,7 @@ void gui::Label::Build(){
  *  @param p_window Pointer to the game window object
  */
 void gui::Label::Draw(n8::Window* p_window){
-   m_textTexture.render(m_style.GetWindow()->GetRenderer(), m_rectangle.GetX(), m_rectangle.GetY());
+   m_textTexture.render(p_window->GetRenderer(), m_rectangle.GetX(), m_rectangle.GetY());
 }
 
 /** Handles mouse click down for the label

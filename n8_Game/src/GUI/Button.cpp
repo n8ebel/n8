@@ -65,10 +65,10 @@ gui::Button::~Button(){
  * Loads the rendered text texture using the game window pointer from 
  *  style pointer.
  */
-void gui::Button::Build(){
+void gui::Button::Build(n8::Window* window){
     
     
-    m_built = m_textTexture.loadFromRenderedText(  m_style.GetWindow()->GetRenderer(), m_style.GetFont()->GetFont(), m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
     if (!m_built) {
         n8::Log::Error(TAG, "Label failed to build");

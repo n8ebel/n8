@@ -40,9 +40,9 @@ gui::Container::~Container(){
 }
 
 /** Builds gui elements in the elements list */
-void gui::Container::Build(){
+void gui::Container::Build(n8::Window* window){
     for (auto element : m_guiElements){
-        element->Build();
+        element->Build(window);
     }
 }
 

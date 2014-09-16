@@ -65,7 +65,7 @@ gui::InputBox::~InputBox(){
 /** Builds the inputbox.
  *  Currently building does nothing but change the build flag
  */
-void gui::InputBox::Build(){
+void gui::InputBox::Build(n8::Window* window){
     m_built = true;
 }
 
@@ -260,7 +260,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     {
         
         //load input text to texture
-        m_textTexture.loadFromRenderedText( m_style.GetWindow()->GetRenderer(), m_style.GetFont()->GetFont(), m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_style.GetFont()->GetFont(), m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
        
     }
     //Text is empty
@@ -268,11 +268,11 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     {
         if (m_hintString != "" && !m_hasFocus) {
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(m_style.GetWindow()->GetRenderer(),m_style.GetFont()->GetFont(),  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(),m_style.GetFont()->GetFont(),  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
         }
         else{
             //load empty texture
-            m_textTexture.loadFromRenderedText(m_style.GetWindow()->GetRenderer(),  m_style.GetFont()->GetFont()," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(),  m_style.GetFont()->GetFont()," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
         }
       
     }

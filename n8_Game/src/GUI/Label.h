@@ -30,7 +30,7 @@ class Label : public GUIElement{
         Label(std::string p_text, int p_x, int p_y);
         ~Label();
     
-        virtual void Build() override;
+        virtual void Build(n8::Window*) override;
         virtual void Draw(n8::Window*) override;
         virtual bool CheckMouseClickDown(int p_x, int p_y)override;
         virtual bool CheckMouseClickUp(int p_x, int p_y)override;

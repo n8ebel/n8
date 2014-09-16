@@ -11,7 +11,8 @@
 #include "GUI.h"
 
 /** Constructor */
-gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_window,p_font),
+gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_font),
+                    m_window(p_window),
                     m_hasFocus(false),
                     m_built(false)
 {
@@ -31,7 +32,7 @@ gui::GUI::~GUI(){
 /** Builds all elements in the GUI */
 void gui::GUI::Build(){
     for (auto element : m_guiElements){
-        element->Build();
+        element->Build(m_window);
     }
     m_built = true;
 }
@@ -47,7 +48,6 @@ void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
 }
 
 void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
-    vector<GUIElement*>::iterator ii = m_guiElements.begin();
     for (int i = 0; i < m_guiElements.size(); i++) {
         if (m_guiElements[i] == p_widget) {
             m_guiElements.erase(m_guiElements.begin() + i);

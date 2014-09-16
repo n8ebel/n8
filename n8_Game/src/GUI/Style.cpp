@@ -13,7 +13,6 @@
 namespace gui {
     
     Style::Style(){
-        m_window = nullptr;
         m_font = nullptr;
     }
     
@@ -21,8 +20,7 @@ namespace gui {
      *  Sets default color values, and stores pointers to the game window
      *  and a font resources.
      */
-    Style::Style(n8::Window* p_window, n8::Font* p_font) :  m_window(p_window),
-                                                            m_font(p_font)
+    Style::Style(n8::Font* p_font) :  m_font(p_font)
     
     {
         m_containerColor.Set(50, 50, 50);
@@ -47,7 +45,6 @@ namespace gui {
     }
     
     Style& Style::operator=( const Style& other ){
-        m_window = other.m_window;
         m_font = other.m_font;
         
         m_containerColor = other.m_containerColor;
@@ -75,13 +72,13 @@ namespace gui {
         m_font = p_font;
     }
     
-    /** Returns a pointer to the game window
-     *
-     *  @return m_window Pointer to the game window
-     */
-    n8::Window* Style::GetWindow(){
-        return m_window;
-    }
+//    /** Returns a pointer to the game window
+//     *
+//     *  @return m_window Pointer to the game window
+//     */
+//    n8::Window* Style::GetWindow(){
+//        return m_window;
+//    }
     
     /** Returns a pointer to the font resource
      *

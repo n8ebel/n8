@@ -51,6 +51,7 @@ namespace gui{
         void ProcessInput(SDL_Event*);
         bool Update(Uint32 p_currentTime);
     private:
+        n8::Window* m_window;
         Style m_style;  /** < Style object used to maintain common style between added elements.  When elements are added to the gui, if they don't have their own style this element is used.  */
         
         std::vector<GUIElement*> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
