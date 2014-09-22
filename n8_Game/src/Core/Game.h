@@ -36,6 +36,8 @@
 #include "GUI.h"
 
 
+class State;
+class StateManagerService;
 
 
 namespace n8 {
@@ -64,6 +66,12 @@ public:
     
     void RegisterState(int, State*);
     void SetStartState(int);
+    
+    ResourceManager* getResourceManager();
+    InputService* getInputService();
+    StateManagerService* getStateManagerService();
+    RenderService* getRenderService();
+    AudioService* getAudioService();
 private:
     const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;  /** < Default resource file name */
     

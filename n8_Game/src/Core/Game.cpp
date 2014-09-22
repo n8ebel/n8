@@ -135,7 +135,6 @@ void n8::Game::Setup(){
     
     InputService* inputService = new InputService();
     StateManagerService* stateManagerService = new StateManagerService();
-   // ResourceManagerService* resourceManagerService = new ResourceManagerService(m_window.GetSurface());
     RenderService* renderService = new RenderService(&m_window);
     AudioService* audioService = new AudioService();
     
@@ -245,4 +244,24 @@ void n8::Game::SetStartState(int p_key){
     stateManager->PushState(p_key);
     //static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);
     
+}
+
+n8::ResourceManager* n8::Game::getResourceManager(){
+    return static_cast<ResourceManager*>(m_serviceManager->GetService(ServiceManager::RESOURCES));
+}
+
+n8::InputService* n8::Game::getInputService(){
+    return static_cast<InputService*>(m_serviceManager->GetService(ServiceManager::INPUT));
+}
+
+n8::StateManagerService* n8::Game::getStateManagerService(){
+    return static_cast<StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER));
+}
+
+n8::RenderService* n8::Game::getRenderService(){
+    return static_cast<RenderService*>(m_serviceManager->GetService(ServiceManager::RENDER));
+}
+
+n8::AudioService* n8::Game::getAudioService(){
+    return static_cast<AudioService*>(m_serviceManager->GetService(ServiceManager::AUDIO));
 }

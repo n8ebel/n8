@@ -20,10 +20,13 @@
 
 #include "ID.h"
 #include "Window.h"
+#include "Game.h"
 
 class SDL_Window;
 
 namespace n8{
+    
+class Game;
 
 /** \class State
  *  \brief Abstract base class for game states
@@ -31,6 +34,8 @@ namespace n8{
  */
 class State{
 public:
+    
+    State(n8::Game* game){ m_game = game; }
     
     ID GetId() {return *m_id;};
     
@@ -46,6 +51,7 @@ protected:
     ID* m_id;  /** < unique identifier for the state oobject > */
     //vector<n8::entities::Entity*> m_stateEntities;
     
+    n8::Game* m_game;
     
 private:
     
