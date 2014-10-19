@@ -83,9 +83,7 @@ bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
         m_pressed = true;
         m_mouseClickedDown = true;
         m_timeClickedDown = SDL_GetTicks();
-        if(m_function){
-            m_function();
-        }
+        
         return true;
     }
     else{
@@ -108,6 +106,9 @@ bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
     m_mouseClickedDown = false;
     if(SDL_GetTicks() - m_timeClickedDown > 500){
         m_pressed = false;
+        if(m_function){
+            m_function();
+        }
     }
     return false;
 }

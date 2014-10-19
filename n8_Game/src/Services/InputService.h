@@ -16,7 +16,6 @@
 #include "SDL2/SDL.h"
 #include "Service.h"
 #include "Command.h"
-#include "PositionCommand.h"
 #include "GUI.h"
 #include <map>
 
@@ -47,11 +46,9 @@ public:
     void RegisterMouseMoveAction(std::function<void(int, int)> func);
     void UnregisterMouseMoveAction();
     
-    void RegisterMouseButtonDownAction(PositionCommand*);
     void RegisterMouseButtonDownAction(std::function<void(int,int)> func);
     void UnregisterMouseButtonDownAction();
     
-    void RegisterMouseButtonUpAction(PositionCommand*);
     void RegisterMouseButtonUpAction(std::function<void(int,int)> func);
     void UnregisterMouseButtonUpAction();
     
@@ -72,9 +69,6 @@ private:
     bool KeyIsDown(SDL_Event* event, int key);
     bool KeyIsUp(SDL_Event* event, int key);
     
-    Command* m_mouseMoveCommand;
-    PositionCommand* m_mouseButtonDownCommand;
-    PositionCommand* m_mouseButtonUpCommand;
     std::function<void(int,int)> m_mouseMoveFunction;
     std::function<void(int,int)> m_mouseButtonDownFunction;
     std::function<void(int,int)> m_mouseButtonUpFunction;
