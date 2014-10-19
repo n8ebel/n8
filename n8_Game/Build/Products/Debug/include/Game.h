@@ -64,8 +64,8 @@ public:
     void SetFPS(unsigned);
     void DefineWindowSize(unsigned, unsigned);
     
-    void RegisterState(int, State*);
-    void SetStartState(int);
+    void StartState(State*);
+    void EndState();
     
     ResourceManager* getResourceManager();
     InputService* getInputService();

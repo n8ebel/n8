@@ -157,8 +157,11 @@ void n8::Game::Start(){
     unsigned lasttime = m_timer.GetTime();
     unsigned curtime = m_timer.GetTime();
     int frames = 0;
+    
+    InputService* inputService = getInputService();
+    StateManagerService* stateManager = getStateManagerService();
     while (m_quit == false) {
-        /*
+        
         frames++;
         curtime = m_timer.GetTime();
         if (curtime-lasttime >= 250) {
@@ -169,18 +172,18 @@ void n8::Game::Start(){
             Log::Info(TAG, msg);
             frames = 0;
         }
-         */
+         
         //process input
-        static_cast<InputService*>(m_serviceManager->GetService(ServiceManager::INPUT))->HandleInput();
+        inputService->HandleInput();
         
         //make sure there is a state on the stack
-        if(static_cast<StateManagerService*>(ServiceManager::GetInstance()->GetService(ServiceManager::STATE_MANAGER))->GetStackSize() == 0){
+        if(stateManager->GetStackSize() == 0){
             break;
         }
         
         
         //process state
-        static_cast<StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER))->ProcessState(m_timer.GetTime(), &m_window);
+        stateManager->ProcessState(m_timer.GetTime(), &m_window);
                 
         m_timer.SyncGame(m_fps);  //ensures proper fps
         
@@ -223,27 +226,13 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
     m_window.ResizeWindow(m_windowWidth,m_windowHeight);
 }
 
-/** Registers a game state to be used
- *
- *  @param p_key The identifier for the state
- *  @param p_newState A pointer to the state object to be registered for future use
- *
- */
-void n8::Game::RegisterState(int p_key, n8::State* p_newState){
-    static_cast<n8::StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER))->RegisterState(p_key, p_newState);
-    
+
+void n8::Game::StartState(n8::State* newState){
+    getStateManagerService()->PushState(newState);
 }
 
-/** Clears all states from the stack, and pushes a specified state onto the state stack
- *
- *  @param p_key The identifier for the state to be pushed onto the stack
- */
-void n8::Game::SetStartState(int p_key){
-    StateManagerService* stateManager = static_cast<n8::StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER));
-    stateManager->Clear();
-    stateManager->PushState(p_key);
-    //static_cast<n8::StateManagerService*>(m_serviceManager->GetService(EService::StateManager))->PushState(key);
-    
+void n8::Game::EndState(){
+    getStateManagerService()->PopState();
 }
 
 n8::ResourceManager* n8::Game::getResourceManager(){

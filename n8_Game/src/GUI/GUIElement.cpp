@@ -22,7 +22,6 @@ gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
                                                                     m_texture(nullptr)
 {
-    std::cout << "GUIElement Constructor" << std::endl;
     m_hover = false;
     m_pressed = false;
     m_mouseClickedDown = false;
@@ -106,10 +105,11 @@ bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
     m_mouseClickedDown = false;
     if(SDL_GetTicks() - m_timeClickedDown > 500){
         m_pressed = false;
-        if(m_function){
-            m_function();
-        }
     }
+    if(m_function && p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
+        m_function();
+    }
+    
     return false;
 }
 

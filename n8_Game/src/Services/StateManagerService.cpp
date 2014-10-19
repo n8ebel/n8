@@ -67,19 +67,17 @@ bool n8::StateManagerService::RegisterState(int identifier, State* state){
  *  @return True if a State was pushed onto the stack, false otherwise.
  *
  */
-bool n8::StateManagerService::PushState(int identifier){
-    map<int, State*>::iterator ii = m_registeredStates.find(identifier);
-    
-    //if there is a matching state to push
-    if(ii != m_registeredStates.end()){
+bool n8::StateManagerService::PushState(n8::State* state){
+    //if there is a state to push
+    if(state != nullptr){
         
         //if there is a current state pause it
         if(m_stateStack.size() > 0){
-            m_stateStack[m_stateStack.size()-1]->OnPause();
+            m_stateStack.top()->OnPause();
         }
         
-        m_stateStack.push_back(ii->second);
-        m_stateStack[m_stateStack.size()-1]->OnResume();
+        m_stateStack.push(state);
+        state->OnResume();
         
         return true;
     }
@@ -95,28 +93,37 @@ bool n8::StateManagerService::PushState(int identifier){
  */
  
 void n8::StateManagerService::PopState(){
-    if (m_stateStack.size() > 1) {
-        vector<State*>::iterator ii = m_stateStack.end();
-        ii--;
-        (*ii)->OnPause();
-        m_stateStack.erase(ii);
-        
-        ii = m_stateStack.end();
-        ii--;
-        (*ii)->OnResume();
+//    if (m_stateStack.size() > 1) {
+//        vector<State*>::iterator ii = m_stateStack.end();
+//        ii--;
+//        (*ii)->OnPause();
+//        m_stateStack.erase(ii);
+//        
+//        ii = m_stateStack.end();
+//        ii--;
+//        (*ii)->OnResume();
+//    }
+//    else if(m_stateStack.size() == 1){
+//        vector<State*>::iterator ii = m_stateStack.end();
+//        ii--;
+//        (*ii)->OnPause();
+//        m_stateStack.erase(ii);
+//    }
+    
+    if(m_stateStack.size() > 0){
+        m_stateStack.top()->OnPause();
+        m_stateStack.pop();
     }
-    else if(m_stateStack.size() == 1){
-        vector<State*>::iterator ii = m_stateStack.end();
-        ii--;
-        (*ii)->OnPause();
-        m_stateStack.erase(ii);
+    
+    if(m_stateStack.size() > 0){
+        m_stateStack.top()->OnResume();
     }
 }
 
 /** Removes all states from the stack
  */
 void n8::StateManagerService::Clear(){
-    m_stateStack.clear();
+    m_stateStack.empty();
 }
 
 /** Returns the size of the state stack
@@ -153,9 +160,8 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     if(time > 0 && screen){
     
         if(m_stateStack.size() > 0){
-            m_stateStack[m_stateStack.size()-1]->Update(time);
-            m_stateStack[m_stateStack.size()-1]->Render(screen);
-            
+            m_stateStack.top()->Update(time);
+            m_stateStack.top()->Render(screen);
         }
         
         if(m_stateStack.size() > 0){

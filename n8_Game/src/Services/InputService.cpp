@@ -26,6 +26,8 @@ n8::InputService::InputService(){
     for (int i = 0; i < 323; i++) {
         m_registeredKeyDownCommands[i] = nullptr;
         m_registeredKeyUpCommands[i] = nullptr;
+        m_registeredKeyDownActions[i] = nullptr;
+        m_registeredKeyUpActions[i] = nullptr;
     }
     
     m_userInterface = nullptr;
@@ -66,12 +68,18 @@ void n8::InputService::HandleInput(){
                 if(m_registeredKeyDownCommands[m_event.key.keysym.sym] != nullptr){
                     m_registeredKeyDownCommands[m_event.key.keysym.sym]->execute();
                 }
+                if(m_registeredKeyDownActions[m_event.key.keysym.sym] != nullptr){
+                    m_registeredKeyDownActions[m_event.key.keysym.sym]();
+                }
             }
             if (m_event.type == SDL_KEYUP)
             {
                 m_keysHeld[m_event.key.keysym.sym] = false;
                 if (m_registeredKeyUpCommands[m_event.key.keysym.sym] != nullptr) {
                     m_registeredKeyUpCommands[m_event.key.keysym.sym]->execute();
+                }
+                if (m_registeredKeyUpActions[m_event.key.keysym.sym] != nullptr) {
+                    m_registeredKeyUpActions[m_event.key.keysym.sym]();
                 }
             }
 
@@ -153,6 +161,10 @@ void n8::InputService::RegisterKeyDownCommand(int key,Command* command){
     m_registeredKeyDownCommands[key] = command;
 }
 
+void n8::InputService::RegisterKeyDownAction(int key, std::function<void()> func){
+    m_registeredKeyDownActions[key] = func;
+}
+
 /** Stores a pointer to a command that will be executed when the specified key is release up.
  *
  *  @param key The integer keyboard key identifier
@@ -162,12 +174,23 @@ void n8::InputService::RegisterKeyUpCommand(int key,Command* command){
     m_registeredKeyUpCommands[key] = command;
 }
 
+void n8::InputService::RegisterKeyUpAction(int key, std::function<void()> func){
+    m_registeredKeyUpActions[key] = func;
+}
+
 /** Removes all command pointers so nothing is executed when a key is pressed.
  */
 void n8::InputService::UnregisterKeyCommands(){
     for (int i = 0; i < 323; i++) {
         m_registeredKeyUpCommands[i] = nullptr;
         m_registeredKeyDownCommands[i] = nullptr;
+    }
+}
+
+void n8::InputService::UnregisterKeyActions(){
+    for (int i = 0; i < 323; i++) {
+        m_registeredKeyUpActions[i] = nullptr;
+        m_registeredKeyDownActions[i] = nullptr;
     }
 }
 
