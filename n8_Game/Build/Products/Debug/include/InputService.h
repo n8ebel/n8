@@ -16,7 +16,6 @@
 #include "SDL2/SDL.h"
 #include "Service.h"
 #include "Command.h"
-#include "PositionCommand.h"
 #include "GUI.h"
 #include <map>
 
@@ -39,19 +38,20 @@ public:
     void RegisterUserInterface(gui::GUI* p_gui);
     
     void RegisterKeyUpCommand(int,Command*);
+    void RegisterKeyUpAction(int, std::function<void()> func);
     void RegisterKeyDownCommand(int,Command*);
+    void RegisterKeyDownAction(int, std::function<void()> func);
     
     void UnregisterKeyCommands();
+    void UnregisterKeyActions();
     
     void RegisterMouseMoveAction(Command*);
     void RegisterMouseMoveAction(std::function<void(int, int)> func);
     void UnregisterMouseMoveAction();
     
-    void RegisterMouseButtonDownAction(PositionCommand*);
     void RegisterMouseButtonDownAction(std::function<void(int,int)> func);
     void UnregisterMouseButtonDownAction();
     
-    void RegisterMouseButtonUpAction(PositionCommand*);
     void RegisterMouseButtonUpAction(std::function<void(int,int)> func);
     void UnregisterMouseButtonUpAction();
     
@@ -68,13 +68,12 @@ private:
     bool m_keysHeld[323];  /** < Array to store whether or not a key is being held down **/
     Command* m_registeredKeyDownCommands[323];
     Command* m_registeredKeyUpCommands[323];
+    std::function<void()> m_registeredKeyDownActions[323];
+    std::function<void()> m_registeredKeyUpActions[323];
     
     bool KeyIsDown(SDL_Event* event, int key);
     bool KeyIsUp(SDL_Event* event, int key);
     
-    Command* m_mouseMoveCommand;
-    PositionCommand* m_mouseButtonDownCommand;
-    PositionCommand* m_mouseButtonUpCommand;
     std::function<void(int,int)> m_mouseMoveFunction;
     std::function<void(int,int)> m_mouseButtonDownFunction;
     std::function<void(int,int)> m_mouseButtonUpFunction;

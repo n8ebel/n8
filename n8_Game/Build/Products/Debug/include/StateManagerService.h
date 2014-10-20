@@ -13,6 +13,7 @@
 
 #include <map>
 #include <vector>
+#include <stack>
 
 #include "SDL2/SDL.h"
 #include "ID.h"
@@ -42,7 +43,7 @@ public:
     
     bool RegisterState(int identifier, State* state);
     
-    bool PushState(int identifier);
+    bool PushState(n8::State*);
     void PopState();
     void Clear();
     
@@ -57,7 +58,7 @@ private:
     
     
     map<int, State*> m_registeredStates; /** < map of identifiers and game state objects */
-    vector<State*> m_stateStack; /** < stack of state objects */
+    stack<State*> m_stateStack; /** < stack of state objects */
     
 };
 
