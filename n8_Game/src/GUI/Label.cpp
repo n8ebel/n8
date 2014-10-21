@@ -41,7 +41,9 @@ void gui::Label::Build(n8::Window* window){
     if (!m_built) {
         n8::Log::Error(TAG, "Label failed to build");
     }
-     
+    
+    GUIElement::Build(window);
+    
 }
 
 /** Draws the label element

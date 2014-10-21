@@ -85,37 +85,30 @@ void gui::Button::Build(n8::Window* window){
 void gui::Button::Draw(n8::Window* p_window){
     
     SDL_Renderer* renderer= p_window->GetRenderer();
+    n8::Color drawColor;
     if(m_pressed){
-        SDL_SetRenderDrawColor( renderer,
-                               m_style.GetColor(Style::EStyleColor::Pressed).GetR(),
-                               m_style.GetColor(Style::EStyleColor::Pressed).GetG(),
-                               m_style.GetColor(Style::EStyleColor::Pressed).GetB(),
-                               m_style.GetColor(Style::EStyleColor::Pressed).GetA()
-                               );
-        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+        drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
+        
     }
     else if (m_hover) {
-        SDL_SetRenderDrawColor( renderer,
-                               m_style.GetColor(Style::EStyleColor::Hover).GetR(),
-                               m_style.GetColor(Style::EStyleColor::Hover).GetG(),
-                               m_style.GetColor(Style::EStyleColor::Hover).GetB(),
-                               m_style.GetColor(Style::EStyleColor::Hover).GetA()
-                               );
-        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+        drawColor = m_style.GetColor(Style::EStyleColor::Hover);
+        
     }
     else{
-        SDL_SetRenderDrawColor( renderer,
-                               m_style.GetColor(Style::EStyleColor::Button).GetR(),
-                               m_style.GetColor(Style::EStyleColor::Button).GetG(),
-                               m_style.GetColor(Style::EStyleColor::Button).GetB(),
-                               m_style.GetColor(Style::EStyleColor::Button).GetA()
-                               );
-        SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+        drawColor = m_style.GetColor(Style::EStyleColor::Button);
     }
     
+    SDL_SetRenderDrawColor( renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    
     if(m_textTexture.HasTexture()){
-        int x = m_rectangle.GetX()+ (m_rectangle.GetW()-m_textTexture.getWidth())/2;
-        int y = m_rectangle.GetY()+ (m_rectangle.GetH()-m_textTexture.getHeight())/2;
+        int x = m_x + (m_w - m_textTexture.getWidth())/2;
+        int y = m_y + (m_h - m_textTexture.getHeight())/2;
         m_textTexture.render(renderer, x,y);
     }
 }

@@ -67,6 +67,7 @@ gui::InputBox::~InputBox(){
  */
 void gui::InputBox::Build(n8::Window* window){
     m_built = true;
+    GUIElement::Build(window);
 }
 
 /** Checks whether the inputbox was clicked down
