@@ -74,25 +74,8 @@ void gui::Button::Build(n8::Window* window){
         n8::Log::Error(TAG, "Label failed to build");
     }
     
-}
-
-/** Handles mouse move event
- *
- *  @param p_x The x position of the mouse move
- *  @param p_y The y position of the mouse move
- *
- *  @return True if mouse if moving within the button
- */
-bool gui::Button::CheckMouseMove(int p_x, int p_y){
+    GUIElement::Build(window);
     
-    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >= m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
-        m_hover = true;
-        return true;
-    }
-    else{
-        m_hover = false;
-        return false;
-    }
 }
 
 /** Draws the button based on its current state

@@ -50,14 +50,14 @@ public:
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
     
 //Pure virtual methods
-    virtual void Build(n8::Window*) = 0;  /** < Performs any state-based initialization that can't be done at object construction.  Called from GUI object or on individual element basis. **/
+    virtual void Build(n8::Window*);  /** < Performs any state-based initialization that can't be done at object construction.  Called from GUI object or on individual element basis. **/
     
     virtual void Draw(n8::Window*) = 0;  /** < Renders the element to the screen. **/
     
     virtual bool CheckMouseClickDown(int p_x, int p_y);  /** Checks if a mouse click down action took place within the element and responds appropriately.  **/
     virtual bool CheckMouseClickUp(int p_x, int p_y);  /** Checks if a mouse click up action took place within the element and responds appropriately.  **/
     
-    virtual bool CheckMouseMove(int p_x, int p_y) = 0;  /** Responds to a mouse move action.  **/
+    virtual bool CheckMouseMove(int p_x, int p_y);  /** Responds to a mouse move action.  **/
 
     virtual bool Update(Uint32 p_currentTime) = 0;  /** Handles any updating of the element that needs to happen during every frame.  **/
     
@@ -78,6 +78,13 @@ protected:
     unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
     
     std::function<void()> m_function;  /** < Lambda function to be called when button is clicked down */
+    
+    int m_x;
+    int m_y;
+    int m_w;
+    int m_h;
+    
+    bool positionWithinElement(int x, int y);
     
 };
     
