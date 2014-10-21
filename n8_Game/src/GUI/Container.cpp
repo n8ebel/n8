@@ -41,6 +41,7 @@ gui::Container::~Container(){
 
 /** Builds gui elements in the elements list */
 void gui::Container::Build(n8::Window* window){
+    GUIElement::Build(window);
     for (auto element : m_guiElements){
         element->Build(window);
     }
@@ -95,11 +96,7 @@ bool gui::Container::CheckMouseMove(int p_x, int p_y){
             return true;
         }
     }
-    /*
-    for_each(m_guiElements.begin(), m_guiElements.end(), [](GUIElement* x){
-        x->CheckMouseMove();
-    } );
-      */
+    
     return false;
 }
 

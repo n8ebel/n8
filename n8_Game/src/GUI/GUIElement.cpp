@@ -34,6 +34,13 @@ gui::GUIElement::~GUIElement(){
     
 }
 
+void gui::GUIElement::Build(n8::Window* window){
+    m_x = m_rectangle.GetX();
+    m_y = m_rectangle.GetY();
+    m_w = m_rectangle.GetW();
+    m_h = m_rectangle.GetH();
+}
+
 /** Moves an element to the new specified position.
  *
  *  @param p_x The new x position of the element
@@ -68,6 +75,17 @@ void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int
     m_style.SetColor(p_color, p_r, p_g, p_b, p_a);
 }
 
+/** Handles mouse move event
+ *
+ *  @param p_x The x position of the mouse move
+ *  @param p_y The y position of the mouse move
+ *
+ *  @return True if mouse if moving within the button
+ */
+bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
+    return m_hover = positionWithinElement(p_x, p_y);
+}
+
 /** Checks whether the element was clicked down
  *
  *
@@ -78,14 +96,16 @@ void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int
  */
 bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
     
-    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
+    if( positionWithinElement(p_x, p_y)){
         m_pressed = true;
+        m_hasFocus = true;
         m_mouseClickedDown = true;
         m_timeClickedDown = SDL_GetTicks();
         
         return true;
     }
     else{
+        m_hasFocus = false;
         return false;
     }
     
@@ -106,7 +126,7 @@ bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
     if(SDL_GetTicks() - m_timeClickedDown > 500){
         m_pressed = false;
     }
-    if(m_function && p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >=m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
+    if(positionWithinElement(p_x, p_y)){
         m_function();
     }
     
@@ -118,4 +138,15 @@ bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
  */
 void gui::GUIElement::setClickHandler(std::function<void()> function){
     m_function = function;
+}
+
+/**
+ *  Checks whether a specified location is within the bounds of the element.
+ */
+bool gui::GUIElement::positionWithinElement(int p_x, int p_y){
+    if( p_x >= m_x && p_x < m_x + m_w && p_y >= m_y && p_y < m_y + m_h){
+        return true;
+    }else{
+        return false;
+    }
 }

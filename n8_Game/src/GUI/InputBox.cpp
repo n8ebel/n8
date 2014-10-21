@@ -67,15 +67,7 @@ gui::InputBox::~InputBox(){
  */
 void gui::InputBox::Build(n8::Window* window){
     m_built = true;
-}
-
-/** Cheks mouse move event
- *  Currently, mouse move events don't affect the inputbox
- *
- *  @return False
- */
-bool gui::InputBox::CheckMouseMove(int p_x, int p_y){
-    return false;
+    GUIElement::Build(window);
 }
 
 /** Checks whether the inputbox was clicked down
@@ -91,30 +83,15 @@ bool gui::InputBox::CheckMouseMove(int p_x, int p_y){
  *  @return bool Returns true if the inputbox was clicked
  */
 bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
-    if( p_x >= m_rectangle.GetX() && p_x <= m_rectangle.GetX() + m_rectangle.GetW() && p_y >= m_rectangle.GetY() && p_y <= m_rectangle.GetY() + m_rectangle.GetH()){
+    if( GUIElement::CheckMouseClickDown(p_x, p_y)){
         SDL_StartTextInput();
-        m_hasFocus = true;
         return true;
     }
     else{
-        m_hasFocus = false;
         SDL_StopTextInput();
         return false;
     }
     m_updateTexture = true;
-    return false;
-}
-
-/** Checks whether the inputbox was clicked up
- *  Currently mouse click up events don't affect inputbox
- *
- *  @param p_x The x coordinate of the mouse click
- *  @param p_y The y coordinate of the mouse click
- *
- *  @return bool False
- */
-bool gui::InputBox::CheckMouseClickUp(int p_x, int p_y){
-    
     return false;
 }
 

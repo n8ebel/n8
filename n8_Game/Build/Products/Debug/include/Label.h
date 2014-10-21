@@ -32,9 +32,6 @@ class Label : public GUIElement{
     
         virtual void Build(n8::Window*) override;
         virtual void Draw(n8::Window*) override;
-        virtual bool CheckMouseClickDown(int p_x, int p_y)override;
-        virtual bool CheckMouseClickUp(int p_x, int p_y)override;
-        virtual bool CheckMouseMove(int p_x, int p_y) override;
         virtual bool Update(Uint32 p_currentTime)override;
         
         void OffsetPosition(int p_x, int p_y) override;

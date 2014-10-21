@@ -41,7 +41,9 @@ void gui::Label::Build(n8::Window* window){
     if (!m_built) {
         n8::Log::Error(TAG, "Label failed to build");
     }
-     
+    
+    GUIElement::Build(window);
+    
 }
 
 /** Draws the label element
@@ -50,39 +52,6 @@ void gui::Label::Build(n8::Window* window){
  */
 void gui::Label::Draw(n8::Window* p_window){
    m_textTexture.render(p_window->GetRenderer(), m_rectangle.GetX(), m_rectangle.GetY());
-}
-
-/** Handles mouse click down for the label
- *
- *  @param p_x The x coordinate of the mouse click
- *  @param p_y The y coordinate of the mouse click
- *
- *  @return bool True if the label was clicked and that click was responded to
- */
-bool gui::Label::CheckMouseClickDown(int p_x, int p_y){
-    return false;
-}
-
-/** Handles mouse click up for the label
- *
- *  @param p_x The x coordinate of the mouse click
- *  @param p_y The y coordinate of the mouse click
- *
- *  @return bool True if the label was clicked up and that click was responded to
- */
-bool gui::Label::CheckMouseClickUp(int p_x, int p_y){
-    return false;
-}
-
-/** Handles mouse move for the label
- *
- *  @param p_x The x coordinate of the mouse move
- *  @param p_y The y coordinate of the mouse move
- *
- *  @return bool True if the label was moved over and responded to
- */
-bool gui::Label::CheckMouseMove(int p_x, int p_y){
-    return false;
 }
 
 /** Updates the Label
