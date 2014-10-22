@@ -86,15 +86,18 @@ void gui::Button::Draw(n8::Window* p_window){
     
     SDL_Renderer* renderer= p_window->GetRenderer();
     n8::Color drawColor;
-    if(m_pressed){
+    if(m_state == State::Pressed){
         drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
         
     }
-    else if (m_hover) {
+    else if (m_state == State::Hovered) {
         drawColor = m_style.GetColor(Style::EStyleColor::Hover);
         
     }
-    else{
+    else if (m_state == State::Focused){
+        drawColor = m_style.GetColor(Style::EStyleColor::Focus);
+    }
+    else {
         drawColor = m_style.GetColor(Style::EStyleColor::Button);
     }
     
@@ -121,13 +124,16 @@ void gui::Button::Draw(n8::Window* p_window){
  */
 bool gui::Button::Update(Uint32 p_currentTime){
     if(SDL_GetTicks() - m_timeClickedDown > 100 && !m_mouseClickedDown){
-        m_pressed = false;
+        if (m_state == State::Pressed) {
+            m_state = State::Selected;
+        }
     }
-    if(m_pressed){
-        m_hasFocus = true;
+    bool hasFocus = false;
+    if(m_state == State::Pressed || m_state == State::Selected){
+        hasFocus = true;
     }
     else{
-        m_hasFocus = false;
+        hasFocus = false;
     }
-    return m_hasFocus;
+    return hasFocus;
 }

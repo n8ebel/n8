@@ -22,11 +22,12 @@ gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
                                                                     m_texture(nullptr)
 {
-    m_hover = false;
-    m_pressed = false;
+    m_state = State::Neutral;
+    //m_hover = false;
+    //m_pressed = false;
     m_mouseClickedDown = false;
     m_timeClickedDown = 0;
-    m_hasFocus = false;
+    //m_hasFocus = false;
     m_function = nullptr;
 }
 
@@ -83,7 +84,17 @@ void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int
  *  @return True if mouse if moving within the button
  */
 bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
-    return m_hover = positionWithinElement(p_x, p_y);
+    if (positionWithinElement(p_x, p_y)) {
+        if(m_state <= State::Hovered){
+            m_state = State::Hovered;
+        }
+        return true;
+    }else{
+        if(m_state <= State::Hovered){
+            m_state = State::Neutral;
+        }
+        return false;
+    }
 }
 
 /** Checks whether the element was clicked down
@@ -97,15 +108,16 @@ bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
 bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
     
     if( positionWithinElement(p_x, p_y)){
-        m_pressed = true;
-        m_hasFocus = true;
+        m_state = State::Pressed;
+        //m_pressed = true;
+        //m_hasFocus = true;
         m_mouseClickedDown = true;
         m_timeClickedDown = SDL_GetTicks();
         
         return true;
     }
     else{
-        m_hasFocus = false;
+        //m_hasFocus = false;
         return false;
     }
     
@@ -122,11 +134,21 @@ bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
  */
 bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
     
-    m_mouseClickedDown = false;
-    if(SDL_GetTicks() - m_timeClickedDown > 500){
-        m_pressed = false;
+    if (!m_mouseClickedDown) {
+        return false;
     }
-    if(positionWithinElement(p_x, p_y)){
+    
+    m_mouseClickedDown = false;
+    bool mouseUpInElement = positionWithinElement(p_x, p_y);
+    
+    if(mouseUpInElement && SDL_GetTicks() - m_timeClickedDown > 500){
+        //m_pressed = false;
+        m_state = State::Selected;
+    }else if(!mouseUpInElement){
+        m_state = State::Neutral;
+    }
+    
+    if(mouseUpInElement){
         m_function();
     }
     

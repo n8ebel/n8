@@ -19,7 +19,7 @@
  */
 gui::Container::Container(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h)
 {
-    m_hasFocus = false;
+    
 }
 
 /** Destructor
@@ -144,14 +144,14 @@ void gui::Container::AddElement(GUIElement* p_widget){
  *  @return True if the container, or any of its added elements has the focus
  */
 bool gui::Container::Update(Uint32 p_currentTime){
-    m_hasFocus = false;
+    bool hasFocus = false;
     for(auto element : m_guiElements){
         if(element->Update(p_currentTime)){
-            m_hasFocus = true;
+            hasFocus = true;
         }
     }
     
-    return m_hasFocus;
+    return hasFocus;
 }
 
 /**  Offsets the position of the container and all of its added

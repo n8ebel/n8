@@ -24,7 +24,7 @@ namespace gui {
     
     {
         m_containerColor.Set(50, 50, 50);
-        m_buttonColor.Set(100, 100, 255);
+        m_buttonColor.Set(50, 50, 50);
         m_hoverColor.Set(20, 20, 190);
         m_pressedColor.Set(190, 175, 20);
         
@@ -137,7 +137,7 @@ namespace gui {
             m_cursorColor.Set(p_r,p_g,p_b,p_a);
         }
         
-        std::cout << "button color R: " << m_buttonColor.GetR() << std::endl;
+        std::cout << "button color g: " << m_buttonColor.GetG() << std::endl;
     }
     
     /** Returns the specified style color object.

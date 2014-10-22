@@ -26,7 +26,7 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
     m_inputString = "";
     
     m_cursorShown = false;
-    m_hasFocus = false;
+    //m_hasFocus = false;
     m_updateTexture = true;
 }
 
@@ -48,7 +48,7 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) 
     m_inputString = "";
     
     m_cursorShown = false;
-    m_hasFocus = false;
+    //m_hasFocus = false;
     m_updateTexture = true;
 }
 
@@ -118,7 +118,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
     SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     
     //draw outline if has focus
-    if (m_hasFocus) {
+    if (m_state == State::Focused) {
         SDL_SetRenderDrawColor( renderer,    m_style.GetColor(Style::EStyleColor::Focus).GetR(),
                                             m_style.GetColor(Style::EStyleColor::Focus).GetG(),
                                             m_style.GetColor(Style::EStyleColor::Focus).GetB(),
@@ -144,7 +144,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
     }
     
     //draw cursor
-    if (m_cursorShown && m_hasFocus) {
+    if (m_cursorShown && m_state == State::Focused) {
         int x = m_rectangle.GetX() + M_CURSOR_OFFSET_X + m_textTexture.getWidth() + M_TEXT_OFFSET_X;
         int y1 = m_rectangle.GetY() + 10;
         int y2 = m_rectangle.GetY() + m_rectangle.GetH() - 10;
@@ -168,7 +168,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
  */
 void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
     
-    if(m_hasFocus){
+    if(m_state == State::Focused){
         SDL_Event e = *p_event;
         if( e.type == SDL_KEYDOWN )
         {
@@ -216,7 +216,7 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
         m_lastTime = p_currentTime;
     }
     
-    return m_hasFocus;
+    return m_state == State::Focused;
 }
 
 /** Gets the text currently in the inputbox
@@ -243,7 +243,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     //Text is empty
     else
     {
-        if (m_hintString != "" && !m_hasFocus) {
+        if (m_hintString != "" && m_state != State::Focused) {
             //load hint text to texture
             m_textTexture.loadFromRenderedText(p_window->GetRenderer(),m_style.GetFont()->GetFont(),  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
         }
