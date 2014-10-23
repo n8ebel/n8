@@ -25,13 +25,14 @@ namespace gui {
     {
         m_containerColor.Set(50, 50, 50);
         m_buttonColor.Set(50, 50, 50);
-        m_hoverColor.Set(20, 20, 190);
+        m_hoverColor.Set(150, 150, 150, 200);
         m_pressedColor.Set(190, 175, 20);
+        m_selectedColor.Set(50,50,200);
         
         m_fontColor.Set(0, 0, 0);
         m_hintColor.Set(160, 160, 160,100);
         
-        m_focusColor.Set(0, 50, 2550);
+        m_focusColor.Set(0, 50, 255);
         m_inputBackgroundColor.Set(255, 255, 255);
         m_cursorColor.Set(0, 0, 0);
         
@@ -51,6 +52,7 @@ namespace gui {
         m_buttonColor = other.m_buttonColor;
         m_hoverColor = other.m_hoverColor;
         m_pressedColor = other.m_pressedColor;
+        m_selectedColor = other.m_selectedColor;
         
         m_fontColor = other.m_fontColor;
         m_hintColor = other.m_hintColor;
@@ -136,6 +138,9 @@ namespace gui {
         else if(p_color == EStyleColor::Cursor){
             m_cursorColor.Set(p_r,p_g,p_b,p_a);
         }
+        else if(p_color == EStyleColor::Selected){
+            m_selectedColor.Set(p_r,p_g,p_b,p_a);
+        }
         
         std::cout << "button color g: " << m_buttonColor.GetG() << std::endl;
     }
@@ -173,6 +178,9 @@ namespace gui {
         }
         else if(p_color == EStyleColor::Cursor){
             return m_cursorColor;
+        }
+        else if(p_color == EStyleColor::Selected){
+            return m_selectedColor;
         }
         else{
             return m_defaultColor;

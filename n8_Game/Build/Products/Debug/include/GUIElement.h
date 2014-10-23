@@ -36,7 +36,7 @@ namespace gui {
 class GUIElement{
 
 public:
-    enum class State{Neutral, Focused, Hovered, Pressed, Selected };
+    enum class State{Neutral, Focused, Hovered, Pressed, PressedAndHovered, Selected, SelectedAndHovered };
     
     GUIElement();
     GUIElement(int p_x, int p_y, int p_w, int p_h);

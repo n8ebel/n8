@@ -51,6 +51,14 @@ class Button : public GUIElement{
     
         std:: string m_text;  /** < The test displayed on the button */
         LTexture m_textTexture; /** < Texture used to display the text */
+    
+        void drawHovered(SDL_Renderer*);
+        void drawNeutral(SDL_Renderer*);
+    void drawFocused(SDL_Renderer*);
+    void drawPressed(SDL_Renderer*);
+    void drawPressedAndHovered(SDL_Renderer*);
+    void drawSelected(SDL_Renderer*);
+    void drawSelectedAndHovered(SDL_Renderer*);
 };
     
 }

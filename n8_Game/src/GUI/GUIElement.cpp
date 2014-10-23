@@ -85,11 +85,23 @@ void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int
  */
 bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
     if (positionWithinElement(p_x, p_y)) {
-        if(m_state <= State::Hovered){
+        if (m_state == State::Pressed) {
+            m_state = State::PressedAndHovered;
+        }
+        else if(m_state == State::Selected){
+            m_state = State::SelectedAndHovered;
+        }
+        else if(m_state <= State::Hovered){
             m_state = State::Hovered;
         }
         return true;
     }else{
+        if (m_state == State::PressedAndHovered) {
+            m_state = State::Pressed;
+        }
+        else if(m_state == State::SelectedAndHovered){
+            m_state = State::Selected;
+        }
         if(m_state <= State::Hovered){
             m_state = State::Neutral;
         }
@@ -108,7 +120,7 @@ bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
 bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
     
     if( positionWithinElement(p_x, p_y)){
-        m_state = State::Pressed;
+        m_state = State::PressedAndHovered;
         //m_pressed = true;
         //m_hasFocus = true;
         m_mouseClickedDown = true;
@@ -141,15 +153,13 @@ bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
     m_mouseClickedDown = false;
     bool mouseUpInElement = positionWithinElement(p_x, p_y);
     
-    if(mouseUpInElement && SDL_GetTicks() - m_timeClickedDown > 500){
-        //m_pressed = false;
-        m_state = State::Selected;
+    if(mouseUpInElement){
+        m_state = State::SelectedAndHovered;
+        m_function();
+        return true;
     }else if(!mouseUpInElement){
         m_state = State::Neutral;
-    }
-    
-    if(mouseUpInElement){
-        m_function();
+        return false;
     }
     
     return false;
