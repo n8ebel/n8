@@ -54,11 +54,11 @@ class Button : public GUIElement{
     
         void drawHovered(SDL_Renderer*);
         void drawNeutral(SDL_Renderer*);
-    void drawFocused(SDL_Renderer*);
-    void drawPressed(SDL_Renderer*);
-    void drawPressedAndHovered(SDL_Renderer*);
-    void drawSelected(SDL_Renderer*);
-    void drawSelectedAndHovered(SDL_Renderer*);
+        void drawFocused(SDL_Renderer*);
+        void drawPressed(SDL_Renderer*);
+        void drawPressedAndHovered(SDL_Renderer*);
+        void drawSelected(SDL_Renderer*);
+        void drawSelectedAndHovered(SDL_Renderer*);
 };
     
 }

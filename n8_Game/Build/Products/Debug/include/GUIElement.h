@@ -46,7 +46,6 @@ public:
     virtual void ChangePosition(int p_x, int p_y);
     virtual void OffsetPosition(int p_xOffset, int p_yOffset);
     virtual void SetStyle(Style p_style);
-    //Style GetStyle() const;
     
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b);
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
@@ -75,10 +74,6 @@ protected:
     
     State m_state;
     
-//    bool m_hasFocus; /** < Flag to determine if an element has the current focus of the gui.  For example, if an input box has been clicked it will receive the focust **/
-//    
-//    bool m_hover; /** < mouse is hovering over the button **/
-//    bool m_pressed; /** < whether button appears pressed down **/
     bool m_mouseClickedDown; /** < whether button is currently pressed down **/
     unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
     
