@@ -149,7 +149,9 @@ bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
     
     if(mouseUpInElement){
         m_state = State::SelectedAndHovered;
-        m_function();
+        if (m_function != nullptr) {
+            m_function();
+        }
         return true;
     }else if(!mouseUpInElement){
         m_state = State::Neutral;
