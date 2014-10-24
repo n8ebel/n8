@@ -172,7 +172,7 @@ void n8::Game::Start(){
             Log::Info(TAG, msg);
             frames = 0;
         }
-         
+        
         //process input
         inputService->HandleInput();
         

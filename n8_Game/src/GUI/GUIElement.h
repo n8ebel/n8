@@ -39,7 +39,7 @@ public:
     enum class State{Neutral, Focused, Hovered, Pressed, PressedAndHovered, Selected, SelectedAndHovered };
     
     GUIElement();
-    GUIElement(int p_x, int p_y, int p_w, int p_h);
+    GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h);
     virtual ~GUIElement();
     
 //Implemented methods
@@ -78,6 +78,8 @@ protected:
     unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
     
     std::function<void()> m_function;  /** < Lambda function to be called when button is clicked down */
+    
+    std::string m_id;
     
     int m_x;
     int m_y;

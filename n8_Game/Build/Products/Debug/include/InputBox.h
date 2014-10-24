@@ -24,8 +24,8 @@ namespace gui {
      */
     class InputBox : public GUIElement{
     public:
-        InputBox(int p_x, int p_y, int p_w, int p_h);
-        InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint);
+        InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h);
+        InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint);
         ~InputBox();
         
         void Build(n8::Window*) override;

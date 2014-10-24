@@ -65,13 +65,14 @@ void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
  *  @return bool Returns true if any element was clicked
  */
 bool gui::GUI::CheckClickDown(int p_x, int p_y){
+    bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseClickDown(p_x,p_y) ){
-            return true;
+            returnValue = true;
         }
     }
     
-    return false;
+    return returnValue;
 }
 
 /** Passes a mouse button up event to all added gui elements.
@@ -83,13 +84,14 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
  *  @return bool Returns true if any element was clicked up
  */
 bool gui::GUI::CheckClickUp(int p_x, int p_y){
+    bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseClickUp(p_x,p_y) ){
-            return true;
+            returnValue = true;
         }
     }
     
-    return false;
+    return returnValue;
 }
 
 /** Handles the mouse move event for all elements in the gui
@@ -97,13 +99,14 @@ bool gui::GUI::CheckClickUp(int p_x, int p_y){
  *  @return bool Returns True if any element was moved over
  */
 bool gui::GUI::CheckMove(int p_x, int p_y){
+    bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseMove(p_x, p_y) ){
-            return true;
+            returnValue = true;
         }
     }
     
-    return false;
+    return returnValue;
 }
 
 /** Draws the gui to the given window
@@ -142,7 +145,7 @@ bool gui::GUI::Update(Uint32 p_currentTime){
             m_hasFocus = true;
         }
     }
-    
+    //cout << "*** done ***" << endl;
     return m_hasFocus;
 }
 

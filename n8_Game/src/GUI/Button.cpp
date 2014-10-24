@@ -25,9 +25,8 @@
  *  @param p_w The width of the button
  *  @param p_h The height of the button
  */
-gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_x,p_y,p_w,p_h)
+gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_id,p_x,p_y,p_w,p_h)
 {
-    m_id = p_id;
     m_text = p_text;
 }
 
@@ -122,7 +121,7 @@ void gui::Button::Draw(n8::Window* p_window){
  *  @param p_currentTime Current game time
  */
 bool gui::Button::Update(Uint32 p_currentTime){
-    if(SDL_GetTicks() - m_timeClickedDown > 100 && !m_mouseClickedDown){
+    if(!m_mouseClickedDown){
         if (m_state == State::Pressed) {
             m_state = State::Selected;
         }
