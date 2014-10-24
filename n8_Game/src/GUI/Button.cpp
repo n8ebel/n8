@@ -85,26 +85,28 @@ void gui::Button::Build(n8::Window* window){
 void gui::Button::Draw(n8::Window* p_window){
     
     SDL_Renderer* renderer= p_window->GetRenderer();
-    n8::Color drawColor;
-    if(m_pressed){
-        drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
-        
-    }
-    else if (m_hover) {
-        drawColor = m_style.GetColor(Style::EStyleColor::Hover);
-        
-    }
-    else{
-        drawColor = m_style.GetColor(Style::EStyleColor::Button);
-    }
     
-    SDL_SetRenderDrawColor( renderer,
-                           drawColor.GetR(),
-                           drawColor.GetG(),
-                           drawColor.GetB(),
-                           drawColor.GetA()
-                           );
-    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    if (m_state == State::Hovered) {
+        drawHovered(renderer);
+    }
+    else if (m_state == State::Focused){
+        drawFocused(renderer);
+    }
+    else if(m_state == State::Pressed){
+        drawPressed(renderer);
+    }
+    else if(m_state == State::PressedAndHovered){
+        drawPressedAndHovered(renderer);
+    }
+    else if (m_state == State::Selected){
+        drawSelected(renderer);
+    }
+    else if (m_state == State::SelectedAndHovered){
+        drawSelectedAndHovered(renderer);
+    }
+    else {
+        drawNeutral(renderer);
+    }
     
     if(m_textTexture.HasTexture()){
         int x = m_x + (m_w - m_textTexture.getWidth())/2;
@@ -121,13 +123,156 @@ void gui::Button::Draw(n8::Window* p_window){
  */
 bool gui::Button::Update(Uint32 p_currentTime){
     if(SDL_GetTicks() - m_timeClickedDown > 100 && !m_mouseClickedDown){
-        m_pressed = false;
+        if (m_state == State::Pressed) {
+            m_state = State::Selected;
+        }
     }
-    if(m_pressed){
-        m_hasFocus = true;
+    bool hasFocus = false;
+    if(m_state == State::Pressed || m_state == State::Selected){
+        hasFocus = true;
     }
     else{
-        m_hasFocus = false;
+        hasFocus = false;
     }
-    return m_hasFocus;
+    
+    return hasFocus;
+}
+
+void gui::Button::drawHovered(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Button);
+    n8::Color filterColor = m_style.GetColor(Style::EStyleColor::Hover);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           filterColor.GetR(),
+                           filterColor.GetG(),
+                           filterColor.GetB(),
+                           filterColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
+    
+    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+    
+}
+
+void gui::Button::drawNeutral(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Button);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+}
+void gui::Button::drawFocused(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Focus);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+}
+void gui::Button::drawPressed(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+}
+
+void gui::Button::drawPressedAndHovered(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
+    n8::Color filterColor = m_style.GetColor(Style::EStyleColor::Hover);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           filterColor.GetR(),
+                           filterColor.GetG(),
+                           filterColor.GetB(),
+                           filterColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
+    
+    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+}
+
+void gui::Button::drawSelected(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Selected);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+}
+
+void gui::Button::drawSelectedAndHovered(SDL_Renderer* p_renderer){
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Selected);
+    n8::Color filterColor = m_style.GetColor(Style::EStyleColor::Hover);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           filterColor.GetR(),
+                           filterColor.GetG(),
+                           filterColor.GetB(),
+                           filterColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
+    
+    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+
 }

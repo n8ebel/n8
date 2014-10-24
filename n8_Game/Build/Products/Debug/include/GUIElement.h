@@ -36,6 +36,8 @@ namespace gui {
 class GUIElement{
 
 public:
+    enum class State{Neutral, Focused, Hovered, Pressed, PressedAndHovered, Selected, SelectedAndHovered };
+    
     GUIElement();
     GUIElement(int p_x, int p_y, int p_w, int p_h);
     virtual ~GUIElement();
@@ -44,7 +46,6 @@ public:
     virtual void ChangePosition(int p_x, int p_y);
     virtual void OffsetPosition(int p_xOffset, int p_yOffset);
     virtual void SetStyle(Style p_style);
-    //Style GetStyle() const;
     
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b);
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
@@ -70,10 +71,9 @@ protected:
     SDL_Texture* m_texture; /** < Pointer to texture used render the element **/
 
     bool m_built;  /** < Flag to determine if the element was successfully built.  Some elements must be built using current state information before the can be rendered.  This flag allows elements that weren't built to not perform destructive operations. **/
-    bool m_hasFocus; /** < Flag to determine if an element has the current focus of the gui.  For example, if an input box has been clicked it will receive the focust **/
     
-    bool m_hover; /** < mouse is hovering over the button **/
-    bool m_pressed; /** < whether button appears pressed down **/
+    State m_state;
+    
     bool m_mouseClickedDown; /** < whether button is currently pressed down **/
     unsigned m_timeClickedDown; /** < how long the button has appeared pressed down **/
     

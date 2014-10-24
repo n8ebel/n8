@@ -41,6 +41,7 @@ namespace gui {
                                 Hint,
                                 InputBackground,
                                 Cursor,
+                                Selected,
                                 Default /** < Default enum value corresponding to default color */
         };
             
@@ -72,6 +73,8 @@ namespace gui {
         
         n8::Color m_fontColor;  /** < Color to render fonts */
         n8::Color m_hintColor;  /** < Color to render hint text of input boxes */
+        
+        n8::Color m_selectedColor;
         
         n8::Color m_focusColor;  /** < Color used to indicate an element has focus */
         n8::Color m_inputBackgroundColor;  /** < Color used to render the text inputbox backgroudn */
