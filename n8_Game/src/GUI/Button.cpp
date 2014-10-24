@@ -135,16 +135,6 @@ bool gui::Button::Update(Uint32 p_currentTime){
         hasFocus = false;
     }
     
-    if (m_state == State::Selected) {
-        cout << "selected" << endl;
-    }else if(m_state == State::Hovered){
-        cout << "hovered" << endl;
-    }else if (m_state == State::Neutral){
-        cout << "neutral" << endl;
-    }else{
-        cout << "something else" << endl;
-    }
-    
     return hasFocus;
 }
 

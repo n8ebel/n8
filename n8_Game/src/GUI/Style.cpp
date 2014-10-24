@@ -74,14 +74,6 @@ namespace gui {
         m_font = p_font;
     }
     
-//    /** Returns a pointer to the game window
-//     *
-//     *  @return m_window Pointer to the game window
-//     */
-//    n8::Window* Style::GetWindow(){
-//        return m_window;
-//    }
-    
     /** Returns a pointer to the font resource
      *
      *  @return m_font Pointer to the font resource
@@ -141,8 +133,6 @@ namespace gui {
         else if(p_color == EStyleColor::Selected){
             m_selectedColor.Set(p_r,p_g,p_b,p_a);
         }
-        
-        std::cout << "button color g: " << m_buttonColor.GetG() << std::endl;
     }
     
     /** Returns the specified style color object.

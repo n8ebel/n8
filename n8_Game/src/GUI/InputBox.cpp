@@ -26,7 +26,6 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
     m_inputString = "";
     
     m_cursorShown = false;
-    //m_hasFocus = false;
     m_updateTexture = true;
 }
 
@@ -48,7 +47,6 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) 
     m_inputString = "";
     
     m_cursorShown = false;
-    //m_hasFocus = false;
     m_updateTexture = true;
 }
 

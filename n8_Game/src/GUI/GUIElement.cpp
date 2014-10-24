@@ -23,11 +23,8 @@ gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
                                                                     m_texture(nullptr)
 {
     m_state = State::Neutral;
-    //m_hover = false;
-    //m_pressed = false;
     m_mouseClickedDown = false;
     m_timeClickedDown = 0;
-    //m_hasFocus = false;
     m_function = nullptr;
 }
 
@@ -121,15 +118,12 @@ bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
     
     if( positionWithinElement(p_x, p_y)){
         m_state = State::PressedAndHovered;
-        //m_pressed = true;
-        //m_hasFocus = true;
         m_mouseClickedDown = true;
         m_timeClickedDown = SDL_GetTicks();
         
         return true;
     }
     else{
-        //m_hasFocus = false;
         return false;
     }
     
