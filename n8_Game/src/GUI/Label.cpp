@@ -13,7 +13,7 @@
 #define TAG "Label"
 
 /** Constructor */
-gui::Label::Label(std::string p_text, int p_x, int p_y) : GUIElement(p_x,p_y,1,1) {
+gui::Label::Label(std::string p_id,std::string p_text, int p_x, int p_y) : GUIElement(p_id,p_x,p_y,1,1) {
     
     m_labelText = p_text;
     m_texture = nullptr;

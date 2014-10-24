@@ -19,7 +19,7 @@
  *  @param p_w The width of the inputbox
  *  @param p_h The height of the inputbox
  */
-gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h){
+gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_id,p_x,p_y,p_w,p_h){
     
     m_lastTime = 0;
     m_hintString = "";
@@ -39,7 +39,7 @@ gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y
  *  @param p_h The height of the inputbox
  *  @param p_hint The hint string for the input box
  */
-gui::InputBox::InputBox(int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_x,p_y,p_w,p_h)
+gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_id,p_x,p_y,p_w,p_h)
 {
 
     m_lastTime = 0;

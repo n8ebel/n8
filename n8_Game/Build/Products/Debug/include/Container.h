@@ -30,7 +30,7 @@ namespace gui{
      */
     class Container : public GUIElement{
     public:
-        Container(int p_x, int p_y, int p_w, int p_h);
+        Container(std::string p_id, int p_x, int p_y, int p_w, int p_h);
         virtual ~Container();
         
         virtual void Build(n8::Window*) override;

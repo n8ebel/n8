@@ -17,7 +17,7 @@
  *  @param p_w The width of the container
  *  @param p_h The height of the container
  */
-gui::Container::Container(int p_x, int p_y, int p_w, int p_h) : GUIElement(p_x,p_y,p_w,p_h)
+gui::Container::Container(std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_id,p_x,p_y,p_w,p_h)
 {
     
 }

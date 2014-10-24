@@ -47,7 +47,7 @@ n8::InputService::~InputService(){
  *      so they can be responded to by a game state
  */
 void n8::InputService::HandleInput(){
-    if (SDL_PollEvent(&m_event))
+    while (SDL_PollEvent(&m_event))
     {
         bool guiHasFocus = false;
         if(m_userInterface){

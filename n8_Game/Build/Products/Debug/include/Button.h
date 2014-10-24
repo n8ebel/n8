@@ -47,8 +47,6 @@ class Button : public GUIElement{
         bool Update(Uint32 p_currentTime) override;
     
     private:
-        std::string m_id;
-    
         std:: string m_text;  /** < The test displayed on the button */
         LTexture m_textTexture; /** < Texture used to display the text */
     

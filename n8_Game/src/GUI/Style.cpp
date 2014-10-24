@@ -25,7 +25,7 @@ namespace gui {
     {
         m_containerColor.Set(50, 50, 50);
         m_buttonColor.Set(50, 50, 50);
-        m_hoverColor.Set(150, 150, 150, 200);
+        m_hoverColor.Set(150, 150, 150, 100);
         m_pressedColor.Set(190, 175, 20);
         m_selectedColor.Set(50,50,200);
         

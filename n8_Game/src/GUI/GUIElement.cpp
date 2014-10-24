@@ -18,10 +18,11 @@ gui::GUIElement::GUIElement() : m_texture(nullptr),
 
 }
 
-gui::GUIElement::GUIElement(int p_x, int p_y, int p_w, int p_h) :
+gui::GUIElement::GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
                                                                     m_texture(nullptr)
 {
+    m_id = p_id;
     m_state = State::Neutral;
     m_mouseClickedDown = false;
     m_timeClickedDown = 0;
@@ -88,7 +89,7 @@ bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
         else if(m_state == State::Selected){
             m_state = State::SelectedAndHovered;
         }
-        else if(m_state <= State::Hovered){
+        else if(m_state == State::Neutral || m_state == State::Focused){
             m_state = State::Hovered;
         }
         return true;
@@ -99,7 +100,7 @@ bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
         else if(m_state == State::SelectedAndHovered){
             m_state = State::Selected;
         }
-        if(m_state <= State::Hovered){
+        else if(m_state == State::Hovered || m_state == State::Focused){
             m_state = State::Neutral;
         }
         return false;
