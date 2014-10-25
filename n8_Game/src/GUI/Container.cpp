@@ -131,9 +131,10 @@ void gui::Container::Draw(n8::Window* p_window){
  *
  *  @param p_widget The gui element to add
  */
-void gui::Container::AddElement(GUIElement* p_widget){
-    if (p_widget) {
-        m_guiElements.push_back(p_widget);
+void gui::Container::AddElement(GUIElement* pElement){
+    if (pElement) {
+        pElement->OffsetPosition(m_x, m_y);
+        m_guiElements.push_back(pElement);
     }
 }
 

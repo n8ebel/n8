@@ -23,7 +23,7 @@ namespace gui {
     Style::Style(n8::Font* p_font) :  m_font(p_font)
     
     {
-        m_containerColor.Set(50, 50, 50);
+        m_containerColor.Set(175, 150, 175);
         m_buttonColor.Set(50, 50, 50);
         m_hoverColor.Set(150, 150, 150, 100);
         m_pressedColor.Set(190, 175, 20);

@@ -23,6 +23,10 @@ gui::GUIElement::GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h
                                                                     m_texture(nullptr)
 {
     m_id = p_id;
+    m_x = p_x;
+    m_y = p_y;
+    m_w = p_w;
+    m_h = p_h;
     m_state = State::Neutral;
     m_mouseClickedDown = false;
     m_timeClickedDown = 0;
@@ -55,7 +59,12 @@ void gui::GUIElement::ChangePosition(int p_x, int p_y){
  *  @param p_yOffset The amount to move the element in the y direction.
  */
 void gui::GUIElement::OffsetPosition(int p_xOffset, int p_yOffset){
+    cout << "offsetting position" << endl;
+    cout << "starting x = " << m_x << endl;
     m_rectangle.Offset(p_xOffset, p_yOffset);
+    m_x = m_rectangle.GetX();
+    m_y = m_rectangle.GetY();
+    cout << "ending x = " << m_x << endl;
 }
 
 /** Sets the style pointer of the element.

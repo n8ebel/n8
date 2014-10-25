@@ -47,6 +47,10 @@ void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
     m_guiElements.push_back(p_newWidget);
 }
 
+void gui::GUI::ShowDialog(gui::Dialog * pDialog){
+    mDialogStack.push(pDialog);
+}
+
 void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
     for (int i = 0; i < m_guiElements.size(); i++) {
         if (m_guiElements[i] == p_widget) {
@@ -65,6 +69,13 @@ void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
  *  @return bool Returns true if any element was clicked
  */
 bool gui::GUI::CheckClickDown(int p_x, int p_y){
+    if(!mDialogStack.empty()){
+        bool clickedDown = mDialogStack.top()->CheckMouseClickDown(p_x, p_y);
+        if (!clickedDown) {
+            mDialogStack.top()->Dismiss();
+        }
+    }
+    
     bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseClickDown(p_x,p_y) ){
@@ -84,6 +95,10 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
  *  @return bool Returns true if any element was clicked up
  */
 bool gui::GUI::CheckClickUp(int p_x, int p_y){
+    if(!mDialogStack.empty()){
+        return mDialogStack.top()->CheckMouseClickUp(p_x, p_y);
+    }
+    
     bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseClickUp(p_x,p_y) ){
@@ -99,6 +114,10 @@ bool gui::GUI::CheckClickUp(int p_x, int p_y){
  *  @return bool Returns True if any element was moved over
  */
 bool gui::GUI::CheckMove(int p_x, int p_y){
+    if(!mDialogStack.empty()){
+        return mDialogStack.top()->CheckMouseMove(p_x, p_y);
+    }
+    
     bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseMove(p_x, p_y) ){
@@ -114,6 +133,10 @@ bool gui::GUI::CheckMove(int p_x, int p_y){
  *  @param p_window The game's window that can be drawn to
  */
 void gui::GUI::Draw(n8::Window* p_window){
+    if(!mDialogStack.empty()){
+        mDialogStack.top()->Draw(p_window);
+    }
+    
     for (int i = 0; i < m_guiElements.size(); i++) {
         m_guiElements[i]->Draw(p_window);
     }
@@ -140,6 +163,10 @@ void gui::GUI::ProcessInput(SDL_Event* e){
  */
 bool gui::GUI::Update(Uint32 p_currentTime){
     m_hasFocus = false;
+    if(!mDialogStack.empty()){
+        return mDialogStack.top()->Update(p_currentTime);
+    }
+    
     for(auto element : m_guiElements){
         if(element->Update(p_currentTime)){
             m_hasFocus = true;

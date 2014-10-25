@@ -15,9 +15,6 @@
 #include <vector>
 
 #include "GUIElement.h"
-#include "Widget.h"
-
-
 
 namespace gui{
     
@@ -40,13 +37,13 @@ namespace gui{
         virtual bool CheckMouseMove(int p_x, int p_y) override;
         
         bool Update(Uint32 p_currentTime) override;
+    protected:
         void AddElement(GUIElement*);
         
         virtual void OffsetPosition(int p_x, int p_y) override;
         
         virtual void SetStyle(Style p_style) override;
         
-    protected:
         std::vector<GUIElement*> m_guiElements; /** < List of elements contained by the container.  All elements will be drawn relative to the container's position */
         
     };
