@@ -21,6 +21,10 @@ gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_font),
 
 /** Destructor */
 gui::GUI::~GUI(){
+    while (!mDialogStack.empty()) {
+        mDialogStack.pop();
+    }
+    
     for (auto element : m_guiElements){
         if (element) {
             delete element;
@@ -43,11 +47,12 @@ void gui::GUI::Build(){
  */
 void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
     p_newWidget->SetStyle(m_style);
-    
     m_guiElements.push_back(p_newWidget);
 }
 
 void gui::GUI::ShowDialog(gui::Dialog * pDialog){
+    pDialog->SetStyle(m_style);
+    pDialog->Build(m_window);
     mDialogStack.push(pDialog);
 }
 
@@ -72,8 +77,13 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
     if(!mDialogStack.empty()){
         bool clickedDown = mDialogStack.top()->CheckMouseClickDown(p_x, p_y);
         if (!clickedDown) {
+            cout << "check click down was false" << endl;
             mDialogStack.top()->Dismiss();
+            mDialogStack.pop();
+        }else{
+            cout << "check click down was true" << endl;
         }
+        return clickedDown;
     }
     
     bool returnValue = false;

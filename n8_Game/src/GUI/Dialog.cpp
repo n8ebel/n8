@@ -14,14 +14,13 @@ namespace gui {
         mTitle = p_text;
         mDismissedListener = nullptr;
         
-        AddElement(new Button("a", "OK", 10,10,50,15));
+        AddElement(new Button("positive", "OK", 10, m_y-40,50,30));
+        AddElement(new Button("negative", "NO", m_w/2-25, m_y-40,50,30));
+        AddElement(new Button("neutral", "CANCEL", m_w-60, m_y-40,50,30));
     }
     
     gui::Dialog::~Dialog(){
-        if (m_texture) {
-            SDL_DestroyTexture(m_texture);
-            m_texture = nullptr;
-        }
+        Container::~Container();
         m_function = nullptr;
     }
     
@@ -34,13 +33,13 @@ namespace gui {
         
         m_built = mTitleTextTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
         
-        GUIElement::Build(window);
+        Container::Build(window);
         
     }
     
-    bool gui::Dialog::CheckMouseClickDown(int pX, int py){
-        
-        return Container::CheckMouseClickDown(pX, py);
+    bool gui::Dialog::CheckMouseClickDown(int pX, int pY){
+        Container::CheckMouseClickDown(pX, pY);
+        return positionWithinElement(pX, pY);
     }
     
     bool gui::Dialog::CheckMouseClickUp(int pX, int pY){
@@ -72,6 +71,17 @@ namespace gui {
                                drawColor.GetB(),
                                drawColor.GetA()
                                );
+        
+        // Set draw color for dialog outline
+        drawColor = m_style.GetColor(Style::EStyleColor::Focus);
+        SDL_SetRenderDrawColor( renderer,
+                               drawColor.GetR(),
+                               drawColor.GetG(),
+                               drawColor.GetB(),
+                               drawColor.GetA()
+                               );
+        
+        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
         
         if(mTitleTextTexture.HasTexture()){
             int x = m_x + (m_w - mTitleTextTexture.getWidth())/2;
