@@ -9,9 +9,29 @@
 #include "Dialog.h"
 
 namespace gui {
-    gui::Dialog::Dialog( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : Container(p_id,p_x,p_y,p_w,p_h)
+    int gui::Dialog::DEFAULT_WIDTH = 300;
+    
+    int gui::Dialog::DEFAULT_HEIGHT = 250;
+    
+    Dialog::Builder::Builder(n8::Window* pWindow){
+        int x = pWindow->GetWidth()/2 - DEFAULT_WIDTH/2;
+        int y = pWindow->GetHeight()/2 - DEFAULT_HEIGHT/2;
+        mDialog = new Dialog(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+    
+    Dialog* Dialog::Builder::Create(){
+        return mDialog;
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetTitle(std::string pString){
+        mDialog->mTitle = pString;
+        return this;
+    }
+    
+    
+    gui::Dialog::Dialog(int p_x, int p_y, int p_w, int p_h ) : Container("",p_x,p_y,p_w,p_h)
     {
-        mTitle = p_text;
+        mTitle = "";
         mDismissedListener = nullptr;
         
         AddElement(new Button("positive", "OK", 10, m_y-40,50,30));

@@ -36,6 +36,9 @@ public:
     SDL_Window* GetWindow() const;
     SDL_Renderer* GetRenderer() const;
     
+    unsigned GetWidth(){ return m_screenWidth; }
+    unsigned GetHeight(){ return m_screenHeight; }
+    
 private:
     
     const unsigned m_rendererR = 255; /** < Default red value for renderer draw clolor */
