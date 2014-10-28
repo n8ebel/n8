@@ -20,9 +20,10 @@ namespace gui {
      *  Sets default color values, and stores pointers to the game window
      *  and a font resources.
      */
-    Style::Style(n8::Font* p_font) :  m_font(p_font)
+    Style::Style(std::string fontFilepath) :  m_fontFilepath(fontFilepath)
     
     {
+        m_font = nullptr;
         m_containerColor.Set(175, 150, 175);
         m_buttonColor.Set(50, 50, 50);
         m_hoverColor.Set(150, 150, 150, 100);
@@ -47,6 +48,7 @@ namespace gui {
     
     Style& Style::operator=( const Style& other ){
         m_font = other.m_font;
+        m_fontFilepath = other.m_fontFilepath;
         
         m_containerColor = other.m_containerColor;
         m_buttonColor = other.m_buttonColor;
@@ -78,9 +80,9 @@ namespace gui {
      *
      *  @return m_font Pointer to the font resource
      */
-    n8::Font* Style::GetFont() const{
-        return m_font;
-    }
+//    n8::Font* Style::GetFont() const{
+//        return m_font;
+//    }
     
     /** Sets a style color using the specified values and a default Alpha
      *  value.

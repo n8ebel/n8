@@ -65,12 +65,18 @@ gui::Button::~Button(){
  *  style pointer.
  */
 void gui::Button::Build(n8::Window* window){
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+    if (!font) {
+        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+        return;
+    }
     
+    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
-    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    TTF_CloseFont(font);
     
     if (!m_built) {
-        n8::Log::Error(TAG, "Label failed to build");
+        n8::Log::Error(TAG, "Button failed to build");
     }
     
     GUIElement::Build(window);

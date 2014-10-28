@@ -28,17 +28,22 @@ namespace gui{
         static int DEFAULT_WIDTH;
         
         static int DEFAULT_HEIGHT;
+        
+        static int DEFAULT_TITLE_HEIGHT;
 
         class Builder{
             public:
-                Builder(n8::Window*);
+            Builder(n8::Window*);
             
-                Dialog* Create();
+            Dialog* Create();
             
-                Builder* SetTitle(std::string);
+            Builder* SetTitle(std::string);
+            Builder* SetPositiveButton(std::string, std::function<void()>);
+            Builder* SetNegativeButton(std::string, std::function<void()>);
+            Builder* SetNeutralButton(std::string, std::function<void()>);
             
             private:
-                Dialog* mDialog;
+            Dialog* mDialog;
         };
         
         ~Dialog();
@@ -60,7 +65,14 @@ namespace gui{
         std::string mTitle;
         LTexture mTitleTextTexture; /** < Texture used to display the text */
         
+        gui::Button* mPositiveButton;
+        gui::Button* mNegativeButton;
+        gui::Button* mNeutralButton;
+        
         std::function<void()> mDismissedListener;
+        std::function<void()> mPositiveListener;
+        std::function<void()> mNegativeListener;
+        std::function<void()> mNeutralListener;
         
         Dialog(int p_x, int p_y, int p_w, int p_h);
     };

@@ -13,6 +13,8 @@ namespace gui {
     
     int gui::Dialog::DEFAULT_HEIGHT = 250;
     
+    int gui::Dialog::DEFAULT_TITLE_HEIGHT = 24;
+    
     Dialog::Builder::Builder(n8::Window* pWindow){
         int x = pWindow->GetWidth()/2 - DEFAULT_WIDTH/2;
         int y = pWindow->GetHeight()/2 - DEFAULT_HEIGHT/2;
@@ -28,20 +30,46 @@ namespace gui {
         return this;
     }
     
+    Dialog::Builder* Dialog::Builder::SetPositiveButton(std::string text, std::function<void()> function){
+        mDialog->mPositiveButton = new Button("positive", text, 0, 0,80,30);
+        mDialog->mPositiveButton->setClickHandler(function);
+        return this;
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetNegativeButton(std::string text, std::function<void()> function){
+        mDialog->mNegativeButton = new Button("negative", text, 0, 0,80,30);
+        mDialog->mNegativeButton->setClickHandler(function);
+        return this;
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetNeutralButton(std::string text, std::function<void()> function){
+        mDialog->mNeutralButton = new Button("neutral", text, 0, 0,80,30);
+        mDialog->mNeutralButton->setClickHandler(function);
+        return this;
+    }
+    
     
     gui::Dialog::Dialog(int p_x, int p_y, int p_w, int p_h ) : Container("",p_x,p_y,p_w,p_h)
     {
         mTitle = "";
         mDismissedListener = nullptr;
-        
-        AddElement(new Button("positive", "OK", 10, m_y-40,50,30));
-        AddElement(new Button("negative", "NO", m_w/2-25, m_y-40,50,30));
-        AddElement(new Button("neutral", "CANCEL", m_w-60, m_y-40,50,30));
+        mPositiveButton = nullptr;
+        mNegativeButton = nullptr;
+        mNeutralButton = nullptr;
     }
     
     gui::Dialog::~Dialog(){
         Container::~Container();
         m_function = nullptr;
+        if (mPositiveButton) {
+            delete mPositiveButton;
+        }
+        if (mNegativeButton) {
+            delete mNegativeButton;
+        }
+        if (mNeutralButton) {
+            delete mNeutralButton;
+        }
     }
     
     /** Builds the button.
@@ -49,11 +77,59 @@ namespace gui {
      *  style pointer.
      */
     void gui::Dialog::Build(n8::Window* window){
-        
-        
-        m_built = mTitleTextTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
-        
         Container::Build(window);
+        
+        std::cout << m_style.GetFontPath() << std::endl;
+        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), DEFAULT_TITLE_HEIGHT);
+        
+        m_built = mTitleTextTexture.loadFromRenderedText(  window->GetRenderer(), font, mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+        
+        TTF_CloseFont(font);
+        
+        
+        if (mPositiveButton && mNegativeButton && mNeutralButton) {
+            mPositiveButton->ChangePosition(10, m_h - 40);
+            mNegativeButton->ChangePosition(m_w-90, m_h - 40);
+            mNeutralButton->ChangePosition(m_w/2-40, m_h - 40);
+        }
+        else if (mPositiveButton && mNegativeButton) {
+            mPositiveButton->ChangePosition((m_x+m_w)/2-80/2-10, m_h-40);
+            mNegativeButton->ChangePosition((m_x+m_w)/2 + 10, m_h-40);
+        }
+        else if(mPositiveButton && mNeutralButton){
+            mPositiveButton->ChangePosition((m_x+m_w)/2-80/2-10, m_h-40);
+            mNeutralButton->ChangePosition((m_x+m_w)/2 + 10, m_h-40);
+        }
+        else if(mNegativeButton && mNeutralButton){
+            mNegativeButton->ChangePosition((m_x+m_w)/2-80/2-10, m_h-40);
+            mNeutralButton->ChangePosition((m_x+m_w)/2 + 10, m_h-40);
+        }
+        else if(mPositiveButton){
+            mPositiveButton->ChangePosition( (m_x+m_w)/2 - 80/2, m_h-40);
+        }
+        else if(mNegativeButton){
+            mNegativeButton->ChangePosition( (m_x+m_w)/2 - 80/2, m_h-40);
+        }
+        else if(mNeutralButton){
+            mNeutralButton->ChangePosition( (m_x+m_w)/2 - 80/2, m_h-40);
+        }
+        
+        AddElement(mPositiveButton);
+        AddElement(mNegativeButton);
+        AddElement(mNeutralButton);
+        
+        if (mPositiveButton) {
+            mPositiveButton->SetStyle(m_style);
+            mPositiveButton->Build(window);
+        }
+        if (mNegativeButton) {
+            mNegativeButton->SetStyle(m_style);
+            mNegativeButton->Build(window);
+        }
+        if (mNeutralButton) {
+            mNeutralButton->SetStyle(m_style);
+            mNeutralButton->Build(window);
+        }
         
     }
     

@@ -296,6 +296,7 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
         
         Log::Error(TAG, "  Failed to load font: " + p_filename + "  " + TTF_GetError());
     }
+    TTF_CloseFont(font);
 }
 
 /** GetResource

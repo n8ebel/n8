@@ -34,9 +34,15 @@ gui::Label::~Label(){
  */
 void gui::Label::Build(n8::Window* window){
     
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
+    if (!font) {
+        n8::Log::Error(TAG, "Label failed to load font");
+        return;
+    }
     
-    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
+    TTF_CloseFont(font);
     
     if (!m_built) {
         n8::Log::Error(TAG, "Label failed to build");

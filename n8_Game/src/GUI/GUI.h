@@ -34,7 +34,7 @@ namespace gui{
      */
     class GUI {
     public:
-        GUI(n8::Window* p_window, n8::Font* p_font);
+        GUI(n8::Window* p_window);
         ~GUI();
         
         void AddElement(GUIElement*);

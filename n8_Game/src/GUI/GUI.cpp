@@ -11,7 +11,7 @@
 #include "GUI.h"
 
 /** Constructor */
-gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_font),
+gui::GUI::GUI(n8::Window* p_window) :   m_style("Roboto.ttf"),
                     m_window(p_window),
                     m_hasFocus(false),
                     m_built(false)

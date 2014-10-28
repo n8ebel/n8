@@ -28,8 +28,6 @@ n8::Font::Font(std::string p_id, TTF_Font* p_ttfFont) : m_id(p_id),
  */
 n8::Font::~Font(){
     if (m_font) {
-       // Log::Debug(TAG, "Deleting font: " + m_id);
-        TTF_CloseFont(m_font);
         m_font = nullptr;
     }
 }

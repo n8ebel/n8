@@ -10,6 +10,8 @@
 
 #include "InputBox.h"
 
+#define TAG "InputBox"
+
 /** Constructor
  *  Inititlizes parent class {@link GUIElement}
  *  Initializes flags, and strings
@@ -233,21 +235,46 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     //Text is not empty
     if( m_inputString.length() > 0)
     {
+        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+        if (!font) {
+            n8::Log::Error(TAG, "InputBox failed to load font for non-empty text");
+            return;
+        }
         
         //load input text to texture
-        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_style.GetFont()->GetFont(), m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        
+        TTF_CloseFont(font);
        
     }
     //Text is empty
     else
     {
         if (m_hintString != "" && m_state != State::Focused) {
+            
+            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+            if (!font) {
+                n8::Log::Error(TAG, "InputBox failed to load font for hint string");
+                return;
+            }
+            
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(),m_style.GetFont()->GetFont(),  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            
+            TTF_CloseFont(font);
         }
         else{
+            
+            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+            if (!font) {
+                n8::Log::Error(TAG, "InputBox failed to load font for empty text");
+                return;
+            }
+            
             //load empty texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(),  m_style.GetFont()->GetFont()," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            
+            TTF_CloseFont(font);
         }
       
     }
