@@ -48,6 +48,10 @@ void n8::ServiceManager::UnregisterService(int key){
  *  Removes and deletes all services from the map
  */
 void n8::ServiceManager::RemoveAllServices(){
+    if (m_registeredServices.size() == 0) {
+        return;
+    }
+    
     std::map<int,n8::Service*>::iterator ii ;
     
     for (ii = m_registeredServices.begin(); ii!=m_registeredServices.end(); ii++) {

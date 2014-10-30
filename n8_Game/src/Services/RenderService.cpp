@@ -22,7 +22,7 @@ n8::RenderService::RenderService(Window* p_window){
 /** Destructor */
 n8::RenderService::~RenderService(){
     Log::Info(TAG, "Destructor");
-    m_gameWindow = NULL;
+    m_gameWindow = nullptr;
 }
 
 /**

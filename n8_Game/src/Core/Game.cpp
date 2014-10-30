@@ -35,6 +35,10 @@ n8::Game::Game(const char* configFile){
 /** Destructor */
 n8::Game::~Game(){
     Log::Info(TAG, "Destructor");
+    if(m_serviceManager){
+        delete m_serviceManager;
+        m_serviceManager = nullptr;
+    }
 }
 
 /** ProcessConfigFile
@@ -198,6 +202,7 @@ void n8::Game::Stop(){
     m_serviceManager->RemoveAllServices();
     
     ServiceManager::Destroy();
+    m_serviceManager = nullptr;
     
     Log::Destroy();
 }

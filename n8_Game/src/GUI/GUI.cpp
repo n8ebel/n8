@@ -31,6 +31,8 @@ gui::GUI::~GUI(){
             element = nullptr;
         }
     }
+    
+    m_window = nullptr;
 }
 
 /** Builds all elements in the GUI */

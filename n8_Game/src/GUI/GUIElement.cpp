@@ -34,7 +34,10 @@ gui::GUIElement::GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h
 }
 
 gui::GUIElement::~GUIElement(){
-    
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
 }
 
 void gui::GUIElement::Build(n8::Window* window){

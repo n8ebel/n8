@@ -40,6 +40,7 @@ n8::InputService::InputService(){
 /** Default destructor */
 n8::InputService::~InputService(){
     Log::Info(TAG, "Destructor");
+    m_userInterface = nullptr;
 }
 
 

@@ -43,7 +43,7 @@ namespace gui {
     
     /** Destructor */
     Style::~Style(){
-        
+        m_font = nullptr;
     }
     
     Style& Style::operator=( const Style& other ){
