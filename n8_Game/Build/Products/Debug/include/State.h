@@ -20,14 +20,14 @@
 
 #include "ID.h"
 #include "Window.h"
-#include "Game.h"
+#include "GUI.h"
 
 class SDL_Window;
 
 namespace n8{
-    
-class Game;
 
+    class Game;
+    
 /** \class State
  *  \brief Abstract base class for game states
  *
@@ -35,9 +35,10 @@ class Game;
 class State{
 public:
     
-    State(n8::Game* game){ m_game = game; }
+    State(n8::Game* game);
+    ~State();
     
-    ID GetId() {return *m_id;};
+    ID GetId();
     
     
     virtual void OnResume() = 0;
@@ -53,7 +54,10 @@ protected:
     
     n8::Game* m_game;
     
+    gui::GUI* GetGUI();
+    
 private:
+    gui::GUI* m_gui;
     
 };
     
