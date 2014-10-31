@@ -23,7 +23,9 @@
 
 
 namespace gui{
+    
     class Dialog : public Container {
+             
     public:
         static int DEFAULT_WIDTH;
         
@@ -32,6 +34,7 @@ namespace gui{
         static int DEFAULT_TITLE_HEIGHT;
 
         class Builder{
+            
             public:
             Builder(n8::Window*);
             
@@ -44,11 +47,10 @@ namespace gui{
             
             private:
             Dialog* mDialog;
+            n8::Window* m_window;
         };
         
         ~Dialog();
-        
-        void Build(n8::Window*) override;
         
         bool CheckMouseClickDown(int, int) override;
         bool CheckMouseClickUp(int, int) override;
@@ -60,6 +62,9 @@ namespace gui{
         
         void SetOnDismissedListener(std::function<void()>);
         void Dismiss();
+        
+    protected:
+        void Build(n8::Window*);
         
     private:
         std::string mTitle;
@@ -74,7 +79,8 @@ namespace gui{
         std::function<void()> mNegativeListener;
         std::function<void()> mNeutralListener;
         
-        Dialog(int p_x, int p_y, int p_w, int p_h);
+        Dialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h);
+        
     };
 }
 

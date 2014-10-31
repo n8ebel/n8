@@ -33,8 +33,6 @@
 #include "Timer.h"
 #include "Window.h"
 
-#include "GUI.h"
-
 
 class State;
 class StateManagerService;

@@ -38,14 +38,15 @@ class GUIElement{
 public:
     enum class State{Neutral, Focused, Hovered, Pressed, PressedAndHovered, Selected, SelectedAndHovered };
     
-    GUIElement();
-    GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h);
+    GUIElement(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h);
     virtual ~GUIElement();
     
 //Implemented methods
     virtual void ChangePosition(int p_x, int p_y);
     virtual void OffsetPosition(int p_xOffset, int p_yOffset);
-    virtual void SetStyle(Style p_style);
+    
+    Style GetStyle(){return m_style;}
+    void SetStyle(Style p_style);
     
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b);
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);

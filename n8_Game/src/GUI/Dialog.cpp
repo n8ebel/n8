@@ -16,12 +16,14 @@ namespace gui {
     int gui::Dialog::DEFAULT_TITLE_HEIGHT = 24;
     
     Dialog::Builder::Builder(n8::Window* pWindow){
+        m_window = pWindow;
         int x = pWindow->GetWidth()/2 - DEFAULT_WIDTH/2;
         int y = pWindow->GetHeight()/2 - DEFAULT_HEIGHT/2;
-        mDialog = new Dialog(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        mDialog = new Dialog(m_window, x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
     
     Dialog* Dialog::Builder::Create(){
+        mDialog->Build(m_window);
         return mDialog;
     }
     
@@ -31,25 +33,25 @@ namespace gui {
     }
     
     Dialog::Builder* Dialog::Builder::SetPositiveButton(std::string text, std::function<void()> function){
-        mDialog->mPositiveButton = new Button("positive", text, 0, 0,80,30);
+        mDialog->mPositiveButton = new Button(m_window, "positive", text, 0, 0,80,30);
         mDialog->mPositiveButton->setClickHandler(function);
         return this;
     }
     
     Dialog::Builder* Dialog::Builder::SetNegativeButton(std::string text, std::function<void()> function){
-        mDialog->mNegativeButton = new Button("negative", text, 0, 0,80,30);
+        mDialog->mNegativeButton = new Button(m_window, "negative", text, 0, 0,80,30);
         mDialog->mNegativeButton->setClickHandler(function);
         return this;
     }
     
     Dialog::Builder* Dialog::Builder::SetNeutralButton(std::string text, std::function<void()> function){
-        mDialog->mNeutralButton = new Button("neutral", text, 0, 0,80,30);
+        mDialog->mNeutralButton = new Button(m_window, "neutral", text, 0, 0,80,30);
         mDialog->mNeutralButton->setClickHandler(function);
         return this;
     }
     
     
-    gui::Dialog::Dialog(int p_x, int p_y, int p_w, int p_h ) : Container("",p_x,p_y,p_w,p_h)
+    gui::Dialog::Dialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
     {
         mTitle = "";
         mDismissedListener = nullptr;

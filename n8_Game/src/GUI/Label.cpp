@@ -13,10 +13,25 @@
 #define TAG "Label"
 
 /** Constructor */
-gui::Label::Label(std::string p_id,std::string p_text, int p_x, int p_y) : GUIElement(p_id,p_x,p_y,1,1) {
+gui::Label::Label(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y) : GUIElement(p_window, p_id,p_x,p_y,1,1) {
     
     m_labelText = p_text;
     m_texture = nullptr;
+    
+    // Build
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
+    if (!font) {
+        n8::Log::Error(TAG, "Label failed to load font");
+        return;
+    }
+    
+    m_built = m_textTexture.loadFromRenderedText(  p_window->GetRenderer(), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    
+    TTF_CloseFont(font);
+    
+    if (!m_built) {
+        n8::Log::Error(TAG, "Label failed to build");
+    }
 }
 
 /** Destructor
@@ -34,21 +49,21 @@ gui::Label::~Label(){
  */
 void gui::Label::Build(n8::Window* window){
     
-    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
-    if (!font) {
-        n8::Log::Error(TAG, "Label failed to load font");
-        return;
-    }
-    
-    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
-    
-    TTF_CloseFont(font);
-    
-    if (!m_built) {
-        n8::Log::Error(TAG, "Label failed to build");
-    }
-    
-    GUIElement::Build(window);
+//    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
+//    if (!font) {
+//        n8::Log::Error(TAG, "Label failed to load font");
+//        return;
+//    }
+//    
+//    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+//    
+//    TTF_CloseFont(font);
+//    
+//    if (!m_built) {
+//        n8::Log::Error(TAG, "Label failed to build");
+//    }
+//    
+//    GUIElement::Build(window);
     
 }
 

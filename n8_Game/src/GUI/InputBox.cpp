@@ -21,7 +21,7 @@
  *  @param p_w The width of the inputbox
  *  @param p_h The height of the inputbox
  */
-gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_id,p_x,p_y,p_w,p_h){
+gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h){
     
     m_lastTime = 0;
     m_hintString = "";
@@ -41,7 +41,7 @@ gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h) : 
  *  @param p_h The height of the inputbox
  *  @param p_hint The hint string for the input box
  */
-gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_id,p_x,p_y,p_w,p_h)
+gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
 
     m_lastTime = 0;
@@ -50,6 +50,9 @@ gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h, st
     
     m_cursorShown = false;
     m_updateTexture = true;
+    
+    // Build
+    m_built = true;
 }
 
 /** Destructor
@@ -66,8 +69,8 @@ gui::InputBox::~InputBox(){
  *  Currently building does nothing but change the build flag
  */
 void gui::InputBox::Build(n8::Window* window){
-    m_built = true;
-    GUIElement::Build(window);
+//    m_built = true;
+//    GUIElement::Build(window);
 }
 
 /** Checks whether the inputbox was clicked down

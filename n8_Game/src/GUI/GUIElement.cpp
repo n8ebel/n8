@@ -11,22 +11,16 @@
 #include "GUIElement.h"
 
 
-gui::GUIElement::GUIElement() : m_texture(nullptr),
-                                m_rectangle(0,0,1,1),
-                                m_built(false)
-{
-
-}
-
-gui::GUIElement::GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h) :
+gui::GUIElement::GUIElement(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
-                                                                    m_texture(nullptr)
+                                                                    m_texture(nullptr),
+                                                                    m_style("Roboto.ttf")
 {
     m_id = p_id;
-    m_x = p_x;
-    m_y = p_y;
-    m_w = p_w;
-    m_h = p_h;
+    m_x = m_rectangle.GetX();
+    m_y = m_rectangle.GetY();
+    m_w = m_rectangle.GetW();
+    m_h = m_rectangle.GetH();
     m_state = State::Neutral;
     m_mouseClickedDown = false;
     m_timeClickedDown = 0;
@@ -41,10 +35,7 @@ gui::GUIElement::~GUIElement(){
 }
 
 void gui::GUIElement::Build(n8::Window* window){
-    m_x = m_rectangle.GetX();
-    m_y = m_rectangle.GetY();
-    m_w = m_rectangle.GetW();
-    m_h = m_rectangle.GetH();
+    
 }
 
 /** Moves an element to the new specified position.

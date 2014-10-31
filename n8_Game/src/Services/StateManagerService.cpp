@@ -93,22 +93,6 @@ bool n8::StateManagerService::PushState(n8::State* state){
  */
  
 void n8::StateManagerService::PopState(){
-//    if (m_stateStack.size() > 1) {
-//        vector<State*>::iterator ii = m_stateStack.end();
-//        ii--;
-//        (*ii)->OnPause();
-//        m_stateStack.erase(ii);
-//        
-//        ii = m_stateStack.end();
-//        ii--;
-//        (*ii)->OnResume();
-//    }
-//    else if(m_stateStack.size() == 1){
-//        vector<State*>::iterator ii = m_stateStack.end();
-//        ii--;
-//        (*ii)->OnPause();
-//        m_stateStack.erase(ii);
-//    }
     
     if(m_stateStack.size() > 0){
         m_stateStack.top()->OnPause();

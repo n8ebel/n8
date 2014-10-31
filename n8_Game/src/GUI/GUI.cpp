@@ -12,7 +12,6 @@
 
 /** Constructor */
 gui::GUI::GUI(n8::Window* p_window) :
-                    m_style("Roboto.ttf"),
                     m_window(p_window),
                     m_hasFocus(false),
                     m_built(false)
@@ -49,13 +48,10 @@ void gui::GUI::Build(){
  *  @param p_newWidget The new element to add to the gui
  */
 void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
-    p_newWidget->SetStyle(m_style);
     m_guiElements.push_back(p_newWidget);
 }
 
 void gui::GUI::ShowDialog(gui::Dialog * pDialog){
-    pDialog->SetStyle(m_style);
-    pDialog->Build(m_window);
     mDialogStack.push(pDialog);
 }
 

@@ -27,7 +27,7 @@ namespace gui{
      */
     class Container : public GUIElement{
     public:
-        Container(std::string p_id, int p_x, int p_y, int p_w, int p_h);
+        Container(n8::Window* p_window,std::string p_id, int p_x, int p_y, int p_w, int p_h);
         virtual ~Container();
         
         virtual void Build(n8::Window*) override;
@@ -36,7 +36,7 @@ namespace gui{
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
         virtual bool CheckMouseMove(int p_x, int p_y) override;
         
-        virtual void SetStyle(Style p_style) override;
+        virtual void SetStyle(Style p_style);
         
         bool Update(Uint32 p_currentTime) override;
     protected:
