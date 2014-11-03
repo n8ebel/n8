@@ -78,8 +78,7 @@ bool n8::StateManagerService::PushState(n8::State* state){
         }
         
         m_stateStack.push(state);
-        m_game->getInputService()->RegisterUserInterface(state->GetGUI());
-        state->OnResume();
+        ResumeState(state);
         
         return true;
     }
@@ -103,7 +102,7 @@ void n8::StateManagerService::PopState(){
     
     if(m_stateStack.size() > 0){
          m_game->getInputService()->RegisterUserInterface(m_stateStack.top()->GetGUI());
-        m_stateStack.top()->OnResume();
+        ResumeState(m_stateStack.top());
     }
 }
 
@@ -168,3 +167,26 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){ }
+
+void n8::StateManagerService::ResumeState(n8::State * state){
+    InputService* inputService = m_game->getInputService();
+    if(inputService == nullptr){
+        return;
+    }
+    
+    inputService->RegisterUserInterface(state->GetGUI());
+    inputService->RegisterMouseMoveAction( [state](int x, int y){
+        state->GetGUI()->CheckMove(x,y);
+    });
+    
+    inputService->RegisterMouseButtonUpAction( [state](int x, int y){
+        state->GetGUI()->CheckClickUp(x, y);
+        
+    });
+    
+    inputService->RegisterMouseButtonDownAction( [state](int x, int y){
+        state->GetGUI()->CheckClickDown(x, y);
+    });
+    
+    state->OnResume();
+}

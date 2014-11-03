@@ -58,6 +58,8 @@ private:
     map<int, State*> m_registeredStates; /** < map of identifiers and game state objects */
     stack<State*> m_stateStack; /** < stack of state objects */
     
+    void ResumeState(State*);
+    
 };
 
 }
