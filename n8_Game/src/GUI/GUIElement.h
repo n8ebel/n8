@@ -42,8 +42,11 @@ public:
     virtual ~GUIElement();
     
 //Implemented methods
-    virtual void ChangePosition(int p_x, int p_y);
+    virtual void SetPosition(int p_x, int p_y);
     virtual void OffsetPosition(int p_xOffset, int p_yOffset);
+    virtual void SetSize(int width, int height);
+    virtual void SetWidth(int width);
+    virtual void SetHeight(int height);
     
     Style GetStyle(){return m_style;}
     void SetStyle(Style p_style);

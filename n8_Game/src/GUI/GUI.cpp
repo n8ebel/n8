@@ -142,12 +142,17 @@ bool gui::GUI::CheckMove(int p_x, int p_y){
  *  @param p_window The game's window that can be drawn to
  */
 void gui::GUI::Draw(n8::Window* p_window){
-    if(!mDialogStack.empty()){
-        mDialogStack.top()->Draw(p_window);
-    }
     
+    // Draw the gui elements to the screen
     for (int i = 0; i < m_guiElements.size(); i++) {
         m_guiElements[i]->Draw(p_window);
+    }
+    
+    // Draw dialogs after rest of gui elements because there is an implicit z-order
+    // with dialogs on top of other elements
+    //
+    if(!mDialogStack.empty()){
+        mDialogStack.top()->Draw(p_window);
     }
 }
 

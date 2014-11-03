@@ -45,7 +45,7 @@ public:
     virtual void OnPause() = 0;
     
     virtual void Update(Uint32 currentTime) = 0;
-    virtual void Render(Window* window) = 0;
+    virtual void Render(Window* window);
     
     gui::GUI* GetGUI();
     

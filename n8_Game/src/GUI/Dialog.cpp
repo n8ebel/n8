@@ -27,6 +27,16 @@ namespace gui {
         return mDialog;
     }
     
+    Dialog::Builder* Dialog::Builder::SetWidth(int width){
+        mDialog->SetWidth(width);
+        return this;
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetHeight(int height){
+        mDialog->SetHeight(height);
+        return this;
+    }
+    
     Dialog::Builder* Dialog::Builder::SetTitle(std::string pString){
         mDialog->mTitle = pString;
         return this;
@@ -95,30 +105,30 @@ namespace gui {
         
         
         if (mPositiveButton && mNegativeButton && mNeutralButton) {
-            mPositiveButton->ChangePosition(10, m_h - 40);
-            mNegativeButton->ChangePosition(m_w-90, m_h - 40);
-            mNeutralButton->ChangePosition(m_w/2-40, m_h - 40);
+            mPositiveButton->SetPosition(10, m_h - 40);
+            mNegativeButton->SetPosition(m_w-90, m_h - 40);
+            mNeutralButton->SetPosition(m_w/2-40, m_h - 40);
         }
         else if (mPositiveButton && mNegativeButton) {
-            mPositiveButton->ChangePosition((m_x+m_w)/2-80/2-10, m_h-40);
-            mNegativeButton->ChangePosition((m_x+m_w)/2 + 10, m_h-40);
+            mPositiveButton->SetPosition((m_x+m_w)/2-80/2-10, m_h-40);
+            mNegativeButton->SetPosition((m_x+m_w)/2 + 10, m_h-40);
         }
         else if(mPositiveButton && mNeutralButton){
-            mPositiveButton->ChangePosition((m_x+m_w)/2-80/2-10, m_h-40);
-            mNeutralButton->ChangePosition((m_x+m_w)/2 + 10, m_h-40);
+            mPositiveButton->SetPosition((m_x+m_w)/2-80/2-10, m_h-40);
+            mNeutralButton->SetPosition((m_x+m_w)/2 + 10, m_h-40);
         }
         else if(mNegativeButton && mNeutralButton){
-            mNegativeButton->ChangePosition((m_x+m_w)/2-80/2-10, m_h-40);
-            mNeutralButton->ChangePosition((m_x+m_w)/2 + 10, m_h-40);
+            mNegativeButton->SetPosition((m_x+m_w)/2-80/2-10, m_h-40);
+            mNeutralButton->SetPosition((m_x+m_w)/2 + 10, m_h-40);
         }
         else if(mPositiveButton){
-            mPositiveButton->ChangePosition( (m_x+m_w)/2 - 80/2, m_h-40);
+            mPositiveButton->SetPosition( (m_x+m_w)/2 - 80/2, m_h-40);
         }
         else if(mNegativeButton){
-            mNegativeButton->ChangePosition( (m_x+m_w)/2 - 80/2, m_h-40);
+            mNegativeButton->SetPosition( (m_x+m_w)/2 - 80/2, m_h-40);
         }
         else if(mNeutralButton){
-            mNeutralButton->ChangePosition( (m_x+m_w)/2 - 80/2, m_h-40);
+            mNeutralButton->SetPosition( (m_x+m_w)/2 - 80/2, m_h-40);
         }
         
         AddElement(mPositiveButton);

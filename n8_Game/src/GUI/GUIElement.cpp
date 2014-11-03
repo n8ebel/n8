@@ -43,7 +43,7 @@ void gui::GUIElement::Build(n8::Window* window){
  *  @param p_x The new x position of the element
  *  @param p_y The new y position of the element
  */
-void gui::GUIElement::ChangePosition(int p_x, int p_y){
+void gui::GUIElement::SetPosition(int p_x, int p_y){
     m_rectangle.Reposition(p_x, p_y);
 }
 
@@ -59,6 +59,18 @@ void gui::GUIElement::OffsetPosition(int p_xOffset, int p_yOffset){
     m_x = m_rectangle.GetX();
     m_y = m_rectangle.GetY();
     cout << "ending x = " << m_x << endl;
+}
+
+void gui::GUIElement::SetSize(int width, int height){
+    m_rectangle.Resize(width, height);
+}
+
+void gui::GUIElement::SetWidth(int width){
+    m_rectangle.Resize(width, m_rectangle.GetH());
+}
+
+void gui::GUIElement::SetHeight(int height){
+    m_rectangle.Resize(m_rectangle.GetW(), height);
 }
 
 /** Sets the style pointer of the element.

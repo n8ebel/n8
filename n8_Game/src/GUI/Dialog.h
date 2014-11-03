@@ -40,6 +40,9 @@ namespace gui{
             
             Dialog* Create();
             
+            Builder* SetHeight(int height);
+            Builder* SetWidth(int width);
+            
             Builder* SetTitle(std::string);
             Builder* SetPositiveButton(std::string, std::function<void()>);
             Builder* SetNegativeButton(std::string, std::function<void()>);
