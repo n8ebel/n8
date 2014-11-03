@@ -34,10 +34,6 @@ gui::GUIElement::~GUIElement(){
     }
 }
 
-void gui::GUIElement::Build(n8::Window* window){
-    
-}
-
 /** Moves an element to the new specified position.
  *
  *  @param p_x The new x position of the element

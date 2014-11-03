@@ -55,7 +55,6 @@ public:
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
     
 //Pure virtual methods
-    virtual void Build(n8::Window*);  /** < Performs any state-based initialization that can't be done at object construction.  Called from GUI object or on individual element basis. **/
     
     virtual void Draw(n8::Window*) = 0;  /** < Renders the element to the screen. **/
     

@@ -45,7 +45,6 @@ class Button : public GUIElement{
     
         ~Button();
     
-        virtual void Build(n8::Window*) override;
         void Draw(n8::Window*) override;
         bool Update(Uint32 p_currentTime) override;
     

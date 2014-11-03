@@ -94,7 +94,6 @@ namespace gui {
      *  style pointer.
      */
     void gui::Dialog::Build(n8::Window* window){
-        Container::Build(window);
         
         std::cout << m_style.GetFontPath() << std::endl;
         TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), DEFAULT_TITLE_HEIGHT);
@@ -137,15 +136,12 @@ namespace gui {
         
         if (mPositiveButton) {
             mPositiveButton->SetStyle(m_style);
-            mPositiveButton->Build(window);
         }
         if (mNegativeButton) {
             mNegativeButton->SetStyle(m_style);
-            mNegativeButton->Build(window);
         }
         if (mNeutralButton) {
             mNeutralButton->SetStyle(m_style);
-            mNeutralButton->Build(window);
         }
         
     }

@@ -65,14 +65,6 @@ gui::InputBox::~InputBox(){
     }
 }
 
-/** Builds the inputbox.
- *  Currently building does nothing but change the build flag
- */
-void gui::InputBox::Build(n8::Window* window){
-//    m_built = true;
-//    GUIElement::Build(window);
-}
-
 /** Checks whether the inputbox was clicked down
  *  If the user clicked within the inputbox, the box gains the focus
  *   and input can then be entered into the inputbox.

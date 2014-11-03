@@ -35,14 +35,6 @@ gui::GUI::~GUI(){
     m_window = nullptr;
 }
 
-/** Builds all elements in the GUI */
-void gui::GUI::Build(){
-    for (auto element : m_guiElements){
-        element->Build(m_window);
-    }
-    m_built = true;
-}
-
 /** Adds a new element to the gui.
  *
  *  @param p_newWidget The new element to add to the gui

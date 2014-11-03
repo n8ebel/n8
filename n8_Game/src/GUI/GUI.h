@@ -48,7 +48,6 @@ namespace gui{
         bool HasFocus();
         
         
-        void Build();
         void Draw(n8::Window*);
         void ProcessInput(SDL_Event*);
         bool Update(Uint32 p_currentTime);

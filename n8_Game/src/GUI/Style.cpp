@@ -76,14 +76,6 @@ namespace gui {
         m_font = p_font;
     }
     
-    /** Returns a pointer to the font resource
-     *
-     *  @return m_font Pointer to the font resource
-     */
-//    n8::Font* Style::GetFont() const{
-//        return m_font;
-//    }
-    
     /** Sets a style color using the specified values and a default Alpha
      *  value.
      *

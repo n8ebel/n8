@@ -44,29 +44,6 @@ gui::Label::~Label(){
     }
 }
 
-/** Builds the label.
- *  Uses the window pointer from style object to build the text texture
- */
-void gui::Label::Build(n8::Window* window){
-    
-//    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
-//    if (!font) {
-//        n8::Log::Error(TAG, "Label failed to load font");
-//        return;
-//    }
-//    
-//    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
-//    
-//    TTF_CloseFont(font);
-//    
-//    if (!m_built) {
-//        n8::Log::Error(TAG, "Label failed to build");
-//    }
-//    
-//    GUIElement::Build(window);
-    
-}
-
 /** Draws the label element
  *
  *  @param p_window Pointer to the game window object
