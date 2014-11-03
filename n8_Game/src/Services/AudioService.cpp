@@ -11,7 +11,7 @@
 #define TAG "AudioService"
 
 /** Constructor */
-n8::AudioService::AudioService(){
+n8::AudioService::AudioService(Game* game) : Service(game){
     m_musicPlaying = false;
     m_musicPaused = false;
 }

@@ -31,7 +31,7 @@ namespace n8 {
      */
     class AudioService : public Service{
     public:
-        AudioService();
+        AudioService(Game*);
         ~AudioService();
         
         void OnNotify(Event*);

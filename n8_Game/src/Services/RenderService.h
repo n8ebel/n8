@@ -41,7 +41,7 @@ namespace n8 {
         
         enum class EColor{Black,White};
         
-        RenderService(Window*);
+        RenderService(Game*, Window*);
         ~RenderService();
         
         void SetRenderMode(ERenderMode);

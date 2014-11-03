@@ -50,6 +50,11 @@ namespace gui {
         return this;
     }
     
+    Dialog::Builder* Dialog::Builder::SetOnDismissedListener(std::function<void()> function){
+        mDialog->SetOnDismissedListener(function);
+        return this;
+    }
+    
     
     gui::Dialog::Dialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
     {

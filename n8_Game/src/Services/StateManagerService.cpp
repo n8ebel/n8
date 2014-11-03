@@ -8,15 +8,16 @@
  *
  */
 
-
+#include "Game.h"
 #include "StateManagerService.h"
+#include "InputService.h"
 #include "Log.h"
 //#include "../../Game/GameValues.h"
 
 #define TAG "StateManagerService"
 
 
-n8::StateManagerService::StateManagerService(){
+n8::StateManagerService::StateManagerService(Game* game) : Service(game){
     Log::Info(TAG, "Constructor");
 }
 
@@ -77,6 +78,7 @@ bool n8::StateManagerService::PushState(n8::State* state){
         }
         
         m_stateStack.push(state);
+        m_game->getInputService()->RegisterUserInterface(state->GetGUI());
         state->OnResume();
         
         return true;
@@ -100,6 +102,7 @@ void n8::StateManagerService::PopState(){
     }
     
     if(m_stateStack.size() > 0){
+         m_game->getInputService()->RegisterUserInterface(m_stateStack.top()->GetGUI());
         m_stateStack.top()->OnResume();
     }
 }

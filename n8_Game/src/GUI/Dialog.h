@@ -44,6 +44,7 @@ namespace gui{
             Builder* SetPositiveButton(std::string, std::function<void()>);
             Builder* SetNegativeButton(std::string, std::function<void()>);
             Builder* SetNeutralButton(std::string, std::function<void()>);
+            Builder* SetOnDismissedListener(std::function<void()>);
             
             private:
             Dialog* mDialog;

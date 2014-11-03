@@ -47,14 +47,14 @@ public:
     virtual void Update(Uint32 currentTime) = 0;
     virtual void Render(Window* window) = 0;
     
+    gui::GUI* GetGUI();
+    
 protected:
     Uint32 m_time;  /** < holds current game time > */
     ID* m_id;  /** < unique identifier for the state oobject > */
     //vector<n8::entities::Entity*> m_stateEntities;
     
     n8::Game* m_game;
-    
-    gui::GUI* GetGUI();
     
 private:
     gui::GUI* m_gui;

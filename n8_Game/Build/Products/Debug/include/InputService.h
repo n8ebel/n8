@@ -24,9 +24,9 @@
 namespace n8{
 
 class InputService :public Service {
-
+    friend class StateManagerService;
 public:
-    InputService();
+    InputService(Game*);
     
     ~InputService();
     
@@ -34,8 +34,6 @@ public:
     bool HandleEvent();
     bool KeyIsDown(int key);
     bool KeyIsUp(int key);
-    
-    void RegisterUserInterface(gui::GUI* p_gui);
     
     void RegisterKeyUpCommand(int,Command*);
     void RegisterKeyUpAction(int, std::function<void()> func);
@@ -77,6 +75,8 @@ private:
     std::function<void(int,int)> m_mouseMoveFunction;
     std::function<void(int,int)> m_mouseButtonDownFunction;
     std::function<void(int,int)> m_mouseButtonUpFunction;
+    
+    void RegisterUserInterface(gui::GUI* p_gui);
     
     
 };

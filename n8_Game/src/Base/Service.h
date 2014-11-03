@@ -17,6 +17,7 @@
 #include "Subject.h"
 
 namespace n8 {
+    class Game;
 
     /** \class Service
      *  \brief Abstract base class for Services.
@@ -25,12 +26,13 @@ namespace n8 {
      */
 class Service : public Subject, public Observer{
 public:
-    Service(){}
+    Service(Game* game){m_game = game;}
     virtual ~Service() {};
         
     virtual void OnNotify(Event* event) = 0;
     
 protected:
+    Game* m_game;
 
 };
     

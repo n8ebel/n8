@@ -33,9 +33,9 @@ namespace n8{
  *    state stack and access point to state information.
  */
 class StateManagerService : public Service{
-
+    
 public:
-    StateManagerService();
+    StateManagerService(Game*);
     ~StateManagerService();
     
     

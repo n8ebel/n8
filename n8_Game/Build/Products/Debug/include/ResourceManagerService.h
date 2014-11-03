@@ -22,7 +22,7 @@
 namespace n8{
     class ResourceManagerService : public Service{
     public:
-        ResourceManagerService(SDL_Surface* screen);
+        ResourceManagerService(Game*, SDL_Surface* screen);
         ~ResourceManagerService();
         
         void LoadImagesFromFile(std::string filepath);
