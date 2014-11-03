@@ -43,7 +43,7 @@ namespace n8{
      */
     class ResourceManager : public Service{
     public:
-        ResourceManager(Window* p_window, std::string p_path);
+        ResourceManager(Game*, Window* p_window, std::string p_path);
         ~ResourceManager();
         
         Resource* GetResource(std::string);

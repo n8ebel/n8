@@ -10,6 +10,8 @@
 
 #include "InputBox.h"
 
+#define TAG "InputBox"
+
 /** Constructor
  *  Inititlizes parent class {@link GUIElement}
  *  Initializes flags, and strings
@@ -19,7 +21,7 @@
  *  @param p_w The width of the inputbox
  *  @param p_h The height of the inputbox
  */
-gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_id,p_x,p_y,p_w,p_h){
+gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h){
     
     m_lastTime = 0;
     m_hintString = "";
@@ -39,7 +41,7 @@ gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h) : 
  *  @param p_h The height of the inputbox
  *  @param p_hint The hint string for the input box
  */
-gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_id,p_x,p_y,p_w,p_h)
+gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
 
     m_lastTime = 0;
@@ -48,6 +50,9 @@ gui::InputBox::InputBox(std::string p_id, int p_x, int p_y, int p_w, int p_h, st
     
     m_cursorShown = false;
     m_updateTexture = true;
+    
+    // Build
+    m_built = true;
 }
 
 /** Destructor
@@ -58,14 +63,6 @@ gui::InputBox::~InputBox(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
-}
-
-/** Builds the inputbox.
- *  Currently building does nothing but change the build flag
- */
-void gui::InputBox::Build(n8::Window* window){
-    m_built = true;
-    GUIElement::Build(window);
 }
 
 /** Checks whether the inputbox was clicked down
@@ -233,21 +230,46 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     //Text is not empty
     if( m_inputString.length() > 0)
     {
+        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+        if (!font) {
+            n8::Log::Error(TAG, "InputBox failed to load font for non-empty text");
+            return;
+        }
         
         //load input text to texture
-        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), m_style.GetFont()->GetFont(), m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        
+        TTF_CloseFont(font);
        
     }
     //Text is empty
     else
     {
         if (m_hintString != "" && m_state != State::Focused) {
+            
+            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+            if (!font) {
+                n8::Log::Error(TAG, "InputBox failed to load font for hint string");
+                return;
+            }
+            
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(),m_style.GetFont()->GetFont(),  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            
+            TTF_CloseFont(font);
         }
         else{
+            
+            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+            if (!font) {
+                n8::Log::Error(TAG, "InputBox failed to load font for empty text");
+                return;
+            }
+            
             //load empty texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(),  m_style.GetFont()->GetFont()," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            
+            TTF_CloseFont(font);
         }
       
     }

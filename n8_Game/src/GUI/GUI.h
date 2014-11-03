@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 #include "Window.h"
 #include "Container.h"
@@ -21,7 +22,7 @@
 #include "Button.h"
 #include "GUIElement.h"
 #include "Label.h"
-#include "Widget.h"
+#include "Dialog.h"
 
 namespace gui{
     
@@ -33,28 +34,28 @@ namespace gui{
      */
     class GUI {
     public:
-        GUI(n8::Window* p_window, n8::Font* p_font);
+        GUI(n8::Window* p_window);
         ~GUI();
         
         void AddElement(GUIElement*);
         void RemoveElement(GUIElement*);
+        
+        void ShowDialog(Dialog*);
         
         bool CheckClickDown(int p_x, int p_y);
         bool CheckClickUp(int p_x, int p_y);
         bool CheckMove(int p_x, int p_y);
         bool HasFocus();
         
-        Style GetStyle(){return m_style;}
         
-        void Build();
         void Draw(n8::Window*);
         void ProcessInput(SDL_Event*);
         bool Update(Uint32 p_currentTime);
     private:
         n8::Window* m_window;
-        Style m_style;  /** < Style object used to maintain common style between added elements.  When elements are added to the gui, if they don't have their own style this element is used.  */
         
         std::vector<GUIElement*> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
+        std::stack<Dialog*> mDialogStack;
         
         bool m_built;  /** < Flag to determine if the gui has been built by the user. */
         bool m_hasFocus; /** < Flag to indicate if the gui has the user focus. */

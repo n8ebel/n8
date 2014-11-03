@@ -11,7 +11,7 @@
 #include "GUI.h"
 
 /** Constructor */
-gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_font),
+gui::GUI::GUI(n8::Window* p_window) :
                     m_window(p_window),
                     m_hasFocus(false),
                     m_built(false)
@@ -21,20 +21,18 @@ gui::GUI::GUI(n8::Window* p_window, n8::Font* p_font) :   m_style(p_font),
 
 /** Destructor */
 gui::GUI::~GUI(){
+    while (!mDialogStack.empty()) {
+        mDialogStack.pop();
+    }
+    
     for (auto element : m_guiElements){
         if (element) {
             delete element;
             element = nullptr;
         }
     }
-}
-
-/** Builds all elements in the GUI */
-void gui::GUI::Build(){
-    for (auto element : m_guiElements){
-        element->Build(m_window);
-    }
-    m_built = true;
+    
+    m_window = nullptr;
 }
 
 /** Adds a new element to the gui.
@@ -42,9 +40,11 @@ void gui::GUI::Build(){
  *  @param p_newWidget The new element to add to the gui
  */
 void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
-    p_newWidget->SetStyle(m_style);
-    
     m_guiElements.push_back(p_newWidget);
+}
+
+void gui::GUI::ShowDialog(gui::Dialog * pDialog){
+    mDialogStack.push(pDialog);
 }
 
 void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
@@ -65,6 +65,18 @@ void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
  *  @return bool Returns true if any element was clicked
  */
 bool gui::GUI::CheckClickDown(int p_x, int p_y){
+    if(!mDialogStack.empty()){
+        bool clickedDown = mDialogStack.top()->CheckMouseClickDown(p_x, p_y);
+        if (!clickedDown) {
+            cout << "check click down was false" << endl;
+            mDialogStack.top()->Dismiss();
+            mDialogStack.pop();
+        }else{
+            cout << "check click down was true" << endl;
+        }
+        return clickedDown;
+    }
+    
     bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseClickDown(p_x,p_y) ){
@@ -84,6 +96,10 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
  *  @return bool Returns true if any element was clicked up
  */
 bool gui::GUI::CheckClickUp(int p_x, int p_y){
+    if(!mDialogStack.empty()){
+        return mDialogStack.top()->CheckMouseClickUp(p_x, p_y);
+    }
+    
     bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseClickUp(p_x,p_y) ){
@@ -99,6 +115,10 @@ bool gui::GUI::CheckClickUp(int p_x, int p_y){
  *  @return bool Returns True if any element was moved over
  */
 bool gui::GUI::CheckMove(int p_x, int p_y){
+    if(!mDialogStack.empty()){
+        return mDialogStack.top()->CheckMouseMove(p_x, p_y);
+    }
+    
     bool returnValue = false;
     for (int i = 0; i < m_guiElements.size(); i++) {
         if( m_guiElements[i]->CheckMouseMove(p_x, p_y) ){
@@ -114,8 +134,17 @@ bool gui::GUI::CheckMove(int p_x, int p_y){
  *  @param p_window The game's window that can be drawn to
  */
 void gui::GUI::Draw(n8::Window* p_window){
+    
+    // Draw the gui elements to the screen
     for (int i = 0; i < m_guiElements.size(); i++) {
         m_guiElements[i]->Draw(p_window);
+    }
+    
+    // Draw dialogs after rest of gui elements because there is an implicit z-order
+    // with dialogs on top of other elements
+    //
+    if(!mDialogStack.empty()){
+        mDialogStack.top()->Draw(p_window);
     }
 }
 
@@ -140,6 +169,10 @@ void gui::GUI::ProcessInput(SDL_Event* e){
  */
 bool gui::GUI::Update(Uint32 p_currentTime){
     m_hasFocus = false;
+    if(!mDialogStack.empty()){
+        return mDialogStack.top()->Update(p_currentTime);
+    }
+    
     for(auto element : m_guiElements){
         if(element->Update(p_currentTime)){
             m_hasFocus = true;

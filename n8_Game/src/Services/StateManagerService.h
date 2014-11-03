@@ -21,8 +21,6 @@
 #include "State.h"
 #include "Window.h"
 
-#include "PushStateCommand.h"
-#include "PopStateCommand.h"
 
 
 namespace n8{
@@ -35,9 +33,9 @@ namespace n8{
  *    state stack and access point to state information.
  */
 class StateManagerService : public Service{
-
+    
 public:
-    StateManagerService();
+    StateManagerService(Game*);
     ~StateManagerService();
     
     
@@ -59,6 +57,8 @@ private:
     
     map<int, State*> m_registeredStates; /** < map of identifiers and game state objects */
     stack<State*> m_stateStack; /** < stack of state objects */
+    
+    void ResumeState(State*);
     
 };
 

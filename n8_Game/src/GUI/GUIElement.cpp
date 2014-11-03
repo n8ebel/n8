@@ -11,18 +11,16 @@
 #include "GUIElement.h"
 
 
-gui::GUIElement::GUIElement() : m_texture(nullptr),
-                                m_rectangle(0,0,1,1),
-                                m_built(false)
-{
-
-}
-
-gui::GUIElement::GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h) :
+gui::GUIElement::GUIElement(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
-                                                                    m_texture(nullptr)
+                                                                    m_texture(nullptr),
+                                                                    m_style("Roboto.ttf")
 {
     m_id = p_id;
+    m_x = m_rectangle.GetX();
+    m_y = m_rectangle.GetY();
+    m_w = m_rectangle.GetW();
+    m_h = m_rectangle.GetH();
     m_state = State::Neutral;
     m_mouseClickedDown = false;
     m_timeClickedDown = 0;
@@ -30,14 +28,10 @@ gui::GUIElement::GUIElement(std::string p_id, int p_x, int p_y, int p_w, int p_h
 }
 
 gui::GUIElement::~GUIElement(){
-    
-}
-
-void gui::GUIElement::Build(n8::Window* window){
-    m_x = m_rectangle.GetX();
-    m_y = m_rectangle.GetY();
-    m_w = m_rectangle.GetW();
-    m_h = m_rectangle.GetH();
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
+        m_texture = nullptr;
+    }
 }
 
 /** Moves an element to the new specified position.
@@ -45,7 +39,7 @@ void gui::GUIElement::Build(n8::Window* window){
  *  @param p_x The new x position of the element
  *  @param p_y The new y position of the element
  */
-void gui::GUIElement::ChangePosition(int p_x, int p_y){
+void gui::GUIElement::SetPosition(int p_x, int p_y){
     m_rectangle.Reposition(p_x, p_y);
 }
 
@@ -55,7 +49,24 @@ void gui::GUIElement::ChangePosition(int p_x, int p_y){
  *  @param p_yOffset The amount to move the element in the y direction.
  */
 void gui::GUIElement::OffsetPosition(int p_xOffset, int p_yOffset){
+    cout << "offsetting position" << endl;
+    cout << "starting x = " << m_x << endl;
     m_rectangle.Offset(p_xOffset, p_yOffset);
+    m_x = m_rectangle.GetX();
+    m_y = m_rectangle.GetY();
+    cout << "ending x = " << m_x << endl;
+}
+
+void gui::GUIElement::SetSize(int width, int height){
+    m_rectangle.Resize(width, height);
+}
+
+void gui::GUIElement::SetWidth(int width){
+    m_rectangle.Resize(width, m_rectangle.GetH());
+}
+
+void gui::GUIElement::SetHeight(int height){
+    m_rectangle.Resize(m_rectangle.GetW(), height);
 }
 
 /** Sets the style pointer of the element.

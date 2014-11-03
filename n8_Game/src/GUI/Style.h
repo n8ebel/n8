@@ -46,7 +46,7 @@ namespace gui {
         };
             
         Style();
-        Style(n8::Font* p_font);
+        Style(std::string);
         ~Style();
         
         Style& operator=( const Style& other );
@@ -56,14 +56,14 @@ namespace gui {
         void SetColor(EStyleColor p_color, int p_r, int p_g, int p_b);
         void SetColor(EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
         
-        //n8::Window* GetWindow();
-        n8::Font* GetFont() const;
+        std::string GetFontPath() { return m_fontFilepath; }
         
         n8::Color GetColor(EStyleColor p_color);
         
     
     private:
         
+        std::string m_fontFilepath;
         n8::Font* m_font;  /** < Pointer to a Font resource object */
         n8::Color m_containerColor;  /** < Color of gui container objects */
         

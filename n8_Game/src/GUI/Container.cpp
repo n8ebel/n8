@@ -17,7 +17,7 @@
  *  @param p_w The width of the container
  *  @param p_h The height of the container
  */
-gui::Container::Container(std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_id,p_x,p_y,p_w,p_h)
+gui::Container::Container(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
     
 }
@@ -36,14 +36,6 @@ gui::Container::~Container(){
             delete element;
             element = nullptr;
         }
-    }
-}
-
-/** Builds gui elements in the elements list */
-void gui::Container::Build(n8::Window* window){
-    GUIElement::Build(window);
-    for (auto element : m_guiElements){
-        element->Build(window);
     }
 }
 
@@ -131,9 +123,10 @@ void gui::Container::Draw(n8::Window* p_window){
  *
  *  @param p_widget The gui element to add
  */
-void gui::Container::AddElement(GUIElement* p_widget){
-    if (p_widget) {
-        m_guiElements.push_back(p_widget);
+void gui::Container::AddElement(GUIElement* pElement){
+    if (pElement) {
+        pElement->OffsetPosition(m_x, m_y);
+        m_guiElements.push_back(pElement);
     }
 }
 

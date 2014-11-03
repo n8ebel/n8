@@ -8,15 +8,15 @@
  *
  */
 
-
+#include "Game.h"
 #include "StateManagerService.h"
+#include "InputService.h"
 #include "Log.h"
-//#include "../../Game/GameValues.h"
 
 #define TAG "StateManagerService"
 
 
-n8::StateManagerService::StateManagerService(){
+n8::StateManagerService::StateManagerService(Game* game) : Service(game){
     Log::Info(TAG, "Constructor");
 }
 
@@ -77,7 +77,7 @@ bool n8::StateManagerService::PushState(n8::State* state){
         }
         
         m_stateStack.push(state);
-        state->OnResume();
+        ResumeState(state);
         
         return true;
     }
@@ -93,22 +93,6 @@ bool n8::StateManagerService::PushState(n8::State* state){
  */
  
 void n8::StateManagerService::PopState(){
-//    if (m_stateStack.size() > 1) {
-//        vector<State*>::iterator ii = m_stateStack.end();
-//        ii--;
-//        (*ii)->OnPause();
-//        m_stateStack.erase(ii);
-//        
-//        ii = m_stateStack.end();
-//        ii--;
-//        (*ii)->OnResume();
-//    }
-//    else if(m_stateStack.size() == 1){
-//        vector<State*>::iterator ii = m_stateStack.end();
-//        ii--;
-//        (*ii)->OnPause();
-//        m_stateStack.erase(ii);
-//    }
     
     if(m_stateStack.size() > 0){
         m_stateStack.top()->OnPause();
@@ -116,7 +100,8 @@ void n8::StateManagerService::PopState(){
     }
     
     if(m_stateStack.size() > 0){
-        m_stateStack.top()->OnResume();
+         m_game->getInputService()->RegisterUserInterface(m_stateStack.top()->GetGUI());
+        ResumeState(m_stateStack.top());
     }
 }
 
@@ -181,3 +166,26 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
 }
 
 void n8::StateManagerService::OnNotify(n8::Event* event){ }
+
+void n8::StateManagerService::ResumeState(n8::State * state){
+    InputService* inputService = m_game->getInputService();
+    if(inputService == nullptr){
+        return;
+    }
+    
+    inputService->RegisterUserInterface(state->GetGUI());
+    inputService->RegisterMouseMoveAction( [state](int x, int y){
+        state->GetGUI()->CheckMove(x,y);
+    });
+    
+    inputService->RegisterMouseButtonUpAction( [state](int x, int y){
+        state->GetGUI()->CheckClickUp(x, y);
+        
+    });
+    
+    inputService->RegisterMouseButtonDownAction( [state](int x, int y){
+        state->GetGUI()->CheckClickDown(x, y);
+    });
+    
+    state->OnResume();
+}

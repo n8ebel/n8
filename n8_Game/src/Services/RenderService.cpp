@@ -14,7 +14,7 @@
  *
  *  @param p_window Pointer the the game's window object
  */
-n8::RenderService::RenderService(Window* p_window){
+n8::RenderService::RenderService(Game* game, Window* p_window) : Service(game){
     m_gameWindow = p_window;
     m_renderMode = ETexture;
 }
@@ -22,7 +22,7 @@ n8::RenderService::RenderService(Window* p_window){
 /** Destructor */
 n8::RenderService::~RenderService(){
     Log::Info(TAG, "Destructor");
-    m_gameWindow = NULL;
+    m_gameWindow = nullptr;
 }
 
 /**

@@ -27,10 +27,9 @@ class Label : public GUIElement{
     public:
         enum class EColor{Black,White};
     
-        Label(std::string p_id,std::string p_text, int p_x, int p_y);
+        Label(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y);
         ~Label();
     
-        virtual void Build(n8::Window*) override;
         virtual void Draw(n8::Window*) override;
         virtual bool Update(Uint32 p_currentTime)override;
         

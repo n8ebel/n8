@@ -35,6 +35,10 @@ n8::Game::Game(const char* configFile){
 /** Destructor */
 n8::Game::~Game(){
     Log::Info(TAG, "Destructor");
+    if(m_serviceManager){
+        delete m_serviceManager;
+        m_serviceManager = nullptr;
+    }
 }
 
 /** ProcessConfigFile
@@ -131,12 +135,12 @@ void n8::Game::Setup(){
     
     m_serviceManager = ServiceManager::GetInstance();
     
-    ResourceManager* resourceManagerService = new ResourceManager(&m_window, m_resourceConfigPath.c_str());
+    ResourceManager* resourceManagerService = new ResourceManager(this, &m_window, m_resourceConfigPath.c_str());
     
-    InputService* inputService = new InputService();
-    StateManagerService* stateManagerService = new StateManagerService();
-    RenderService* renderService = new RenderService(&m_window);
-    AudioService* audioService = new AudioService();
+    InputService* inputService = new InputService(this);
+    StateManagerService* stateManagerService = new StateManagerService(this);
+    RenderService* renderService = new RenderService(this, &m_window);
+    AudioService* audioService = new AudioService(this);
     
     inputService->AddObserver(stateManagerService);
     
@@ -198,6 +202,7 @@ void n8::Game::Stop(){
     m_serviceManager->RemoveAllServices();
     
     ServiceManager::Destroy();
+    m_serviceManager = nullptr;
     
     Log::Destroy();
 }

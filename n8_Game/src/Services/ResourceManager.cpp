@@ -18,7 +18,7 @@
  *  @param p_window Pointer to game window.  Used to load image resources.
  *  @param p_path Path to resources directory
  */
-n8::ResourceManager::ResourceManager(Window* p_window, std::string p_path) {
+n8::ResourceManager::ResourceManager(Game* game, Window* p_window, std::string p_path) : Service(game){
 	// TODO Auto-generated constructor stub
     
     
@@ -296,6 +296,7 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
         
         Log::Error(TAG, "  Failed to load font: " + p_filename + "  " + TTF_GetError());
     }
+    TTF_CloseFont(font);
 }
 
 /** GetResource

@@ -25,9 +25,25 @@
  *  @param p_w The width of the button
  *  @param p_h The height of the button
  */
-gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_id,p_x,p_y,p_w,p_h)
+gui::Button::Button(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
     m_text = p_text;
+    
+    // Build
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+    if (!font) {
+        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+        return;
+    }
+    
+    m_built = m_textTexture.loadFromRenderedText(  p_window->GetRenderer(), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    
+    TTF_CloseFont(font);
+    
+    if (!m_built) {
+        n8::Log::Error(TAG, "Button failed to build");
+    }
+
 }
 
 /** Constructor
@@ -43,9 +59,10 @@ gui::Button::Button( std::string p_id,std::string p_text, int p_x, int p_y, int 
  *  @param p_h The height of the button
  *  @param p_func The lambda function to execute when button is clicked down
  */
-gui::Button::Button(std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : Button(p_id,p_text,p_x,p_y,p_w,p_h)
+gui::Button::Button(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : Button(p_window, p_id,p_text,p_x,p_y,p_w,p_h)
 {
     m_function = p_func;
+    
 }
 
 /** Destructor
@@ -58,23 +75,6 @@ gui::Button::~Button(){
         m_texture = nullptr;
     }
     m_function = nullptr;
-}
-
-/** Builds the button.
- * Loads the rendered text texture using the game window pointer from 
- *  style pointer.
- */
-void gui::Button::Build(n8::Window* window){
-    
-    
-    m_built = m_textTexture.loadFromRenderedText(  window->GetRenderer(), m_style.GetFont()->GetFont(), m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
-    
-    if (!m_built) {
-        n8::Log::Error(TAG, "Label failed to build");
-    }
-    
-    GUIElement::Build(window);
-    
 }
 
 /** Draws the button based on its current state

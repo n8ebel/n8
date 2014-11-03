@@ -13,7 +13,7 @@
 
 #define TAG "ResourceManagerService"
 
-n8::ResourceManagerService::ResourceManagerService(SDL_Surface* screen) {
+n8::ResourceManagerService::ResourceManagerService(Game* game, SDL_Surface* screen) : Service(game){
 	// TODO Auto-generated constructor stub
     
     m_screenSurface = screen;

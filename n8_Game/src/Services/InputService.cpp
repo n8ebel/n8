@@ -19,7 +19,7 @@
 /** Default constructor
  *  Initializes event_
  */
-n8::InputService::InputService(){
+n8::InputService::InputService(Game* game) : Service(game){
     Log::Info(TAG, "Constructor");
     //m_event = new SDL_Event;
     
@@ -40,6 +40,7 @@ n8::InputService::InputService(){
 /** Default destructor */
 n8::InputService::~InputService(){
     Log::Info(TAG, "Destructor");
+    m_userInterface = nullptr;
 }
 
 
