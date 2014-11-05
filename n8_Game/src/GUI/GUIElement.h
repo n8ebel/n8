@@ -51,6 +51,9 @@ public:
     Style GetStyle(){return m_style;}
     void SetStyle(Style p_style);
     
+    void SetState(State newState);
+    State GetState();
+    
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b);
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
     

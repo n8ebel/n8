@@ -85,6 +85,14 @@ void gui::GUIElement::SetColor(Style::EStyleColor p_color, int p_r, int p_g, int
     m_style.SetColor(p_color, p_r, p_g, p_b, p_a);
 }
 
+void gui::GUIElement::SetState(gui::GUIElement::State newState){
+    m_state = newState;
+}
+
+gui::GUIElement::State gui::GUIElement::GetState(){
+    return m_state;
+}
+
 /** Handles mouse move event
  *
  *  @param p_x The x position of the mouse move
