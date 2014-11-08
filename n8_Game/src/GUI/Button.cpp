@@ -29,16 +29,7 @@ gui::Button::Button(n8::Window* p_window, std::string p_id,std::string p_text, i
 {
     m_text = p_text;
     
-    // Build
-    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
-    if (!font) {
-        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
-        return;
-    }
-    
-    m_built = m_textTexture.loadFromRenderedText(  p_window->GetRenderer(), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
-    
-    TTF_CloseFont(font);
+    loadFontTexture(Style::DEFAULT_FONT_SIZE);
     
     if (!m_built) {
         n8::Log::Error(TAG, "Button failed to build");
@@ -75,6 +66,10 @@ gui::Button::~Button(){
         m_texture = nullptr;
     }
     m_function = nullptr;
+}
+
+void gui::Button::SetTextSize(int textSize){
+    loadFontTexture(textSize);
 }
 
 /** Draws the button based on its current state
@@ -274,4 +269,17 @@ void gui::Button::drawSelectedAndHovered(SDL_Renderer* p_renderer){
     
     SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
 
+}
+
+void gui::Button::loadFontTexture(int textSize){
+    // Build
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), textSize);
+    if (!font) {
+        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+        return;
+    }
+    
+    m_built = m_textTexture.loadFromRenderedText(  m_window->GetRenderer(), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    
+    TTF_CloseFont(font);
 }

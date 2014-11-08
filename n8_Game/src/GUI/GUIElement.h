@@ -47,6 +47,10 @@ public:
     virtual void SetSize(int width, int height);
     virtual void SetWidth(int width);
     virtual void SetHeight(int height);
+    int GetWidth();
+    int GetHeight();
+    int GetX();
+    int GetY();
     
     Style GetStyle(){return m_style;}
     void SetStyle(Style p_style);
@@ -72,6 +76,7 @@ public:
     
 
 protected:
+    n8::Window* m_window;
     Style m_style; /** < Pointer to a Style object that determeins the color style of the element **/
     n8::Rectangle m_rectangle; /** < Stores the positions and size of the element **/
     SDL_Texture* m_texture; /** < Pointer to texture used render the element **/

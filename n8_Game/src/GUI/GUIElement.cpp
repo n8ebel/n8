@@ -16,6 +16,7 @@ gui::GUIElement::GUIElement(n8::Window* p_window, std::string p_id, int p_x, int
                                                                     m_texture(nullptr),
                                                                     m_style("Roboto.ttf")
 {
+    m_window = p_window;
     m_id = p_id;
     m_x = m_rectangle.GetX();
     m_y = m_rectangle.GetY();
@@ -68,6 +69,14 @@ void gui::GUIElement::SetWidth(int width){
 void gui::GUIElement::SetHeight(int height){
     m_rectangle.Resize(m_rectangle.GetW(), height);
 }
+
+int gui::GUIElement::GetWidth(){ return m_w; }
+
+int gui::GUIElement::GetHeight(){ return m_h; }
+
+int gui::GUIElement::GetX(){ return m_x; }
+
+int gui::GUIElement::GetY(){ return m_y; }
 
 /** Sets the style pointer of the element.
  *

@@ -12,6 +12,23 @@
 
 namespace gui {
     
+    int gui::Style::DEFAULT_DIALOG_WIDTH = 300;
+    
+    int gui::Style::DEFAULT_DIALOG_HEIGHT = 250;
+    
+    int gui::Style::DEFAULT_TITLE_HEIGHT = 24;
+    
+    int gui::Style::DEFAULT_BUTTON_WIDTH = 80;
+    
+    int gui::Style::DEFAULT_BUTTON_HEIGHT = 30;
+    
+    int gui::Style::DEFAULT_MARGIN = 10;
+    
+    int gui::Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE = 18;
+    
+    int gui::Style::DEFAULT_FONT_SIZE = 14;
+
+    
     Style::Style(){
         m_font = nullptr;
     }

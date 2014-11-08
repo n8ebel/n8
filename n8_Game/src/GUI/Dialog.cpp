@@ -9,17 +9,12 @@
 #include "Dialog.h"
 
 namespace gui {
-    int gui::Dialog::DEFAULT_WIDTH = 300;
-    
-    int gui::Dialog::DEFAULT_HEIGHT = 250;
-    
-    int gui::Dialog::DEFAULT_TITLE_HEIGHT = 24;
     
     Dialog::Builder::Builder(n8::Window* pWindow){
         m_window = pWindow;
-        int x = pWindow->GetWidth()/2 - DEFAULT_WIDTH/2;
-        int y = pWindow->GetHeight()/2 - DEFAULT_HEIGHT/2;
-        mDialog = new Dialog(m_window, x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        int x = pWindow->GetWidth()/2 - Style::DEFAULT_DIALOG_WIDTH/2;
+        int y = pWindow->GetHeight()/2 - Style::DEFAULT_DIALOG_HEIGHT/2;
+        mDialog = new Dialog(m_window, x, y, Style::DEFAULT_DIALOG_WIDTH, Style::DEFAULT_DIALOG_HEIGHT);
     }
     
     Dialog* Dialog::Builder::Create(){
@@ -43,20 +38,53 @@ namespace gui {
     }
     
     Dialog::Builder* Dialog::Builder::SetPositiveButton(std::string text, std::function<void()> function){
-        mDialog->mPositiveButton = new Button(m_window, "positive", text, 0, 0,80,30);
-        mDialog->mPositiveButton->setClickHandler(function);
+        return SetPositiveButton(text, Style::DEFAULT_BUTTON_WIDTH, Style::DEFAULT_BUTTON_HEIGHT, function);
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetPositiveButton(std::string text, int width, int height, std::function<void()> function){
+        mDialog->mPositiveButton = new Button(m_window, "positive", text, 0, 0, width, height);
+        mDialog->mPositiveButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
+        mDialog->mPositiveListener = function;
+        mDialog->mPositiveButton->setClickHandler([this](){
+            if (mDialog->mPositiveListener) {
+                mDialog->mPositiveListener();
+            }
+            mDialog->mIsOpen = false;
+        });
         return this;
     }
     
     Dialog::Builder* Dialog::Builder::SetNegativeButton(std::string text, std::function<void()> function){
-        mDialog->mNegativeButton = new Button(m_window, "negative", text, 0, 0,80,30);
-        mDialog->mNegativeButton->setClickHandler(function);
+        return SetNegativeButton(text, Style::DEFAULT_BUTTON_WIDTH, Style::DEFAULT_BUTTON_HEIGHT, function);
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetNegativeButton(std::string text, int width, int height, std::function<void()> function){
+        mDialog->mNegativeButton = new Button(m_window, "negative", text, 0, 0, width, height);
+        mDialog->mNegativeButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
+        mDialog->mNegativeListener = function;
+        mDialog->mNegativeButton->setClickHandler([this](){
+            if (mDialog->mNegativeListener) {
+                mDialog->mNegativeListener();
+            }
+            mDialog->mIsOpen = false;
+        });
         return this;
     }
     
     Dialog::Builder* Dialog::Builder::SetNeutralButton(std::string text, std::function<void()> function){
-        mDialog->mNeutralButton = new Button(m_window, "neutral", text, 0, 0,80,30);
-        mDialog->mNeutralButton->setClickHandler(function);
+        return SetNeutralButton(text, Style::DEFAULT_BUTTON_WIDTH, Style::DEFAULT_BUTTON_HEIGHT, function);
+    }
+    
+    Dialog::Builder* Dialog::Builder::SetNeutralButton(std::string text, int width, int height, std::function<void()> function){
+        mDialog->mNeutralButton = new Button(m_window, "neutral", text, 0, 0, width, height);
+        mDialog->mNeutralButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
+        mDialog->mNeutralListener = function;
+        mDialog->mNeutralButton->setClickHandler([this](){
+            if (mDialog->mNeutralListener) {
+                mDialog->mNeutralListener();
+            }
+            mDialog->mIsOpen = false;
+        });
         return this;
     }
     
@@ -69,6 +97,7 @@ namespace gui {
     gui::Dialog::Dialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
     {
         mTitle = "";
+        mIsOpen = false;
         mDismissedListener = nullptr;
         mPositiveButton = nullptr;
         mNegativeButton = nullptr;
@@ -89,45 +118,47 @@ namespace gui {
         }
     }
     
+    void gui::Dialog::SetIsOpen(){
+        mIsOpen = true;
+    }
+    
     /** Builds the button.
      * Loads the rendered text texture using the game window pointer from
      *  style pointer.
      */
     void gui::Dialog::Build(n8::Window* window){
         
-        std::cout << m_style.GetFontPath() << std::endl;
-        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), DEFAULT_TITLE_HEIGHT);
+        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), Style::DEFAULT_TITLE_HEIGHT);
         
         m_built = mTitleTextTexture.loadFromRenderedText(  window->GetRenderer(), font, mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
         
         TTF_CloseFont(font);
         
-        
         if (mPositiveButton && mNegativeButton && mNeutralButton) {
-            mPositiveButton->SetPosition(10, m_h - 40);
-            mNegativeButton->SetPosition(m_w-90, m_h - 40);
-            mNeutralButton->SetPosition(m_w/2-40, m_h - 40);
+            mPositiveButton->SetPosition(Style::DEFAULT_MARGIN, m_h - mPositiveButton->GetHeight());
+            mNegativeButton->SetPosition(m_w - mNegativeButton->GetWidth() - Style::DEFAULT_MARGIN, m_h - mNegativeButton->GetHeight());
+            mNeutralButton->SetPosition(m_w/2 - mNeutralButton->GetWidth()/2, m_h - mNeutralButton->GetHeight());
         }
         else if (mPositiveButton && mNegativeButton) {
-            mPositiveButton->SetPosition((m_x+m_w)/2-80/2-10, m_h-40);
-            mNegativeButton->SetPosition((m_x+m_w)/2 + 10, m_h-40);
+            mPositiveButton->SetPosition(m_w/4 - mPositiveButton->GetWidth()/2, m_h - mPositiveButton->GetHeight());
+            mNegativeButton->SetPosition(m_w - m_w/4 - mNegativeButton->GetWidth()/2, m_h - mNegativeButton->GetHeight());
         }
         else if(mPositiveButton && mNeutralButton){
-            mPositiveButton->SetPosition((m_x+m_w)/2-80/2-10, m_h-40);
-            mNeutralButton->SetPosition((m_x+m_w)/2 + 10, m_h-40);
+            mPositiveButton->SetPosition(m_w/4 - mPositiveButton->GetWidth()/2, m_h - mPositiveButton->GetHeight());
+            mNeutralButton->SetPosition(m_w - m_w/4 - mNeutralButton->GetWidth()/2, m_h - mNeutralButton->GetHeight());
         }
         else if(mNegativeButton && mNeutralButton){
-            mNegativeButton->SetPosition((m_x+m_w)/2-80/2-10, m_h-40);
-            mNeutralButton->SetPosition((m_x+m_w)/2 + 10, m_h-40);
+            mNeutralButton->SetPosition(m_w/4 - mNeutralButton->GetWidth()/2, m_h - mNeutralButton->GetHeight());
+            mNegativeButton->SetPosition(m_w - m_w/4 - mNegativeButton->GetWidth()/2, m_h - mNegativeButton->GetHeight());
         }
         else if(mPositiveButton){
-            mPositiveButton->SetPosition( (m_x+m_w)/2 - 80/2, m_h-40);
+            mPositiveButton->SetPosition(m_w/2 - mPositiveButton->GetWidth()/2, m_h - mPositiveButton->GetHeight());
         }
         else if(mNegativeButton){
-            mNegativeButton->SetPosition( (m_x+m_w)/2 - 80/2, m_h-40);
+            mNegativeButton->SetPosition(m_w/2 - mNegativeButton->GetWidth()/2, m_h - mNegativeButton->GetHeight());
         }
         else if(mNeutralButton){
-            mNeutralButton->SetPosition( (m_x+m_w)/2 - 80/2, m_h-40);
+            mNeutralButton->SetPosition(m_w/2 - mNeutralButton->GetWidth()/2, m_h - mNeutralButton->GetHeight());
         }
         
         AddElement(mPositiveButton);
@@ -164,7 +195,7 @@ namespace gui {
     }
     
     bool gui::Dialog::Update(Uint32 p_currentTime){
-        return true;
+        return mIsOpen;
     }
     
     void gui::Dialog::Draw(n8::Window* pWindow){
@@ -194,7 +225,7 @@ namespace gui {
         
         if(mTitleTextTexture.HasTexture()){
             int x = m_x + (m_w - mTitleTextTexture.getWidth())/2;
-            int y = m_y + 10;
+            int y = m_y + Style::DEFAULT_MARGIN;
             mTitleTextTexture.render(renderer, x,y);
         }
     }

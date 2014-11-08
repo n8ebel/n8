@@ -27,11 +27,6 @@ namespace gui{
     class Dialog : public Container {
              
     public:
-        static int DEFAULT_WIDTH;
-        
-        static int DEFAULT_HEIGHT;
-        
-        static int DEFAULT_TITLE_HEIGHT;
 
         class Builder{
             
@@ -44,9 +39,16 @@ namespace gui{
             Builder* SetWidth(int width);
             
             Builder* SetTitle(std::string);
+            
             Builder* SetPositiveButton(std::string, std::function<void()>);
+            Builder* SetPositiveButton(std::string, int, int, std::function<void()>);
+            
             Builder* SetNegativeButton(std::string, std::function<void()>);
+            Builder* SetNegativeButton(std::string, int, int, std::function<void()>);
+            
             Builder* SetNeutralButton(std::string, std::function<void()>);
+            Builder* SetNeutralButton(std::string, int, int, std::function<void()>);
+            
             Builder* SetOnDismissedListener(std::function<void()>);
             
             private:
@@ -67,12 +69,17 @@ namespace gui{
         void SetOnDismissedListener(std::function<void()>);
         void Dismiss();
         
+        void SetIsOpen();
+        
     protected:
         void Build(n8::Window*);
         
     private:
+        
         std::string mTitle;
         LTexture mTitleTextTexture; /** < Texture used to display the text */
+        
+        bool mIsOpen;
         
         gui::Button* mPositiveButton;
         gui::Button* mNegativeButton;

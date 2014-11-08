@@ -27,6 +27,22 @@ namespace gui {
     
     class Style{
     public:
+        static int DEFAULT_BUTTON_WIDTH;
+        
+        static int DEFAULT_BUTTON_HEIGHT;
+        
+        static int DEFAULT_MARGIN;
+        
+        static int DEFAULT_DIALOG_WIDTH;
+        
+        static int DEFAULT_DIALOG_HEIGHT;
+        
+        static int DEFAULT_TITLE_HEIGHT;
+        
+        static int DEFAULT_FONT_SIZE;
+        
+        static int DEFAULT_DIALOG_BUTTON_FONT_SIZE;
+        
         static const Uint8 DEFAULT_ALPHA = 255;
         
         /** Enum for Style color elements

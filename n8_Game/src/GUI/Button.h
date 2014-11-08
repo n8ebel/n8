@@ -45,10 +45,13 @@ class Button : public GUIElement{
     
         ~Button();
     
+        void SetTextSize(int);
+    
         void Draw(n8::Window*) override;
         bool Update(Uint32 p_currentTime) override;
     
     private:
+    
         std:: string m_text;  /** < The test displayed on the button */
         LTexture m_textTexture; /** < Texture used to display the text */
     
@@ -59,6 +62,8 @@ class Button : public GUIElement{
         void drawPressedAndHovered(SDL_Renderer*);
         void drawSelected(SDL_Renderer*);
         void drawSelectedAndHovered(SDL_Renderer*);
+    
+        void loadFontTexture(int);
 };
     
 }

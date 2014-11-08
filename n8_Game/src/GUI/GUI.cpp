@@ -44,6 +44,7 @@ void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
 }
 
 void gui::GUI::ShowDialog(gui::Dialog * pDialog){
+    pDialog->SetIsOpen();
     mDialogStack.push(pDialog);
 }
 
@@ -170,7 +171,11 @@ void gui::GUI::ProcessInput(SDL_Event* e){
 bool gui::GUI::Update(Uint32 p_currentTime){
     m_hasFocus = false;
     if(!mDialogStack.empty()){
-        return mDialogStack.top()->Update(p_currentTime);
+        bool dialogUpdate = mDialogStack.top()->Update(p_currentTime);
+        if (!dialogUpdate) {
+            mDialogStack.top()->Dismiss();
+            mDialogStack.pop();
+        }
     }
     
     for(auto element : m_guiElements){
@@ -178,7 +183,7 @@ bool gui::GUI::Update(Uint32 p_currentTime){
             m_hasFocus = true;
         }
     }
-    //cout << "*** done ***" << endl;
+
     return m_hasFocus;
 }
 
