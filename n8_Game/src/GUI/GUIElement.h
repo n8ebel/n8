@@ -75,7 +75,7 @@ public:
     void setClickHandler(std::function<void()> function);
     
 
-protected:
+//protected:
     n8::Window* m_window;
     Style m_style; /** < Pointer to a Style object that determeins the color style of the element **/
     n8::Rectangle m_rectangle; /** < Stores the positions and size of the element **/

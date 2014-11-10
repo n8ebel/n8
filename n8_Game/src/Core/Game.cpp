@@ -173,7 +173,7 @@ void n8::Game::Start(){
             std::stringstream ss;
             ss << (frames*4);
             std::string msg("Frames: " + ss.str());
-            Log::Info(TAG, msg);
+            //Log::Info(TAG, msg);
             frames = 0;
         }
         

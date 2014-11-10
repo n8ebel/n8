@@ -30,6 +30,8 @@ namespace gui{
         Container(n8::Window* p_window,std::string p_id, int p_x, int p_y, int p_w, int p_h);
         virtual ~Container();
         
+        void AddElement(GUIElement*);
+        
         virtual void Draw(n8::Window*) override;
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
@@ -39,7 +41,6 @@ namespace gui{
         
         bool Update(Uint32 p_currentTime) override;
     protected:
-        void AddElement(GUIElement*);
         
         virtual void OffsetPosition(int p_x, int p_y) override;
         

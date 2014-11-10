@@ -12,21 +12,23 @@
 
 namespace gui {
     
-    int gui::Style::DEFAULT_DIALOG_WIDTH = 300;
+    const Uint16 gui::Style::DEFAULT_DIALOG_WIDTH = 300;
     
-    int gui::Style::DEFAULT_DIALOG_HEIGHT = 250;
+    const Uint16 gui::Style::DEFAULT_DIALOG_HEIGHT = 250;
     
-    int gui::Style::DEFAULT_TITLE_HEIGHT = 24;
+    const Uint16 gui::Style::DEFAULT_TITLE_HEIGHT = 24;
     
-    int gui::Style::DEFAULT_BUTTON_WIDTH = 80;
+    const Uint16 gui::Style::DEFAULT_BUTTON_WIDTH = 80;
     
-    int gui::Style::DEFAULT_BUTTON_HEIGHT = 30;
+    const Uint16 gui::Style::DEFAULT_BUTTON_HEIGHT = 30;
     
-    int gui::Style::DEFAULT_MARGIN = 10;
+    const Sint16 gui::Style::DEFAULT_MARGIN = 10;
     
-    int gui::Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE = 18;
+    const Uint16 gui::Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE = 18;
     
-    int gui::Style::DEFAULT_FONT_SIZE = 14;
+    const Uint16 gui::Style::DEFAULT_FONT_SIZE = 14;
+    
+    const Uint8 gui::Style::DEFAULT_ALPHA = 255;
 
     
     Style::Style(){
@@ -42,10 +44,11 @@ namespace gui {
     {
         m_font = nullptr;
         m_containerColor.Set(175, 150, 175);
-        m_buttonColor.Set(50, 50, 50);
-        m_hoverColor.Set(150, 150, 150, 100);
+        m_buttonColor.Set(150, 150, 150);
+        m_hoverColor.Set(75, 75, 75, 100);
         m_pressedColor.Set(190, 175, 20);
         m_selectedColor.Set(50,50,200);
+        m_buttonOutlineColor.Set(50,50,50);
         
         m_fontColor.Set(0, 0, 0);
         m_hintColor.Set(160, 160, 160,100);
@@ -72,6 +75,7 @@ namespace gui {
         m_hoverColor = other.m_hoverColor;
         m_pressedColor = other.m_pressedColor;
         m_selectedColor = other.m_selectedColor;
+        m_buttonOutlineColor = other.m_buttonOutlineColor;
         
         m_fontColor = other.m_fontColor;
         m_hintColor = other.m_hintColor;
@@ -144,6 +148,9 @@ namespace gui {
         else if(p_color == EStyleColor::Selected){
             m_selectedColor.Set(p_r,p_g,p_b,p_a);
         }
+        else if(p_color == EStyleColor::ButtonOutline){
+            m_buttonOutlineColor.Set(p_r,p_g,p_b,p_a);
+        }
     }
     
     /** Returns the specified style color object.
@@ -182,6 +189,9 @@ namespace gui {
         }
         else if(p_color == EStyleColor::Selected){
             return m_selectedColor;
+        }
+        else if(p_color == EStyleColor::ButtonOutline){
+            return m_buttonOutlineColor;
         }
         else{
             return m_defaultColor;

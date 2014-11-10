@@ -34,12 +34,14 @@ namespace gui {
         virtual void HandleKeyboardInput(SDL_Event*);
         virtual bool Update(Uint32 p_currentTime) override;
         
+        void SetHintText(std::string);
+        
         std::string GetText();
     
     private:
-        const unsigned M_TEXT_OFFSET_X = 10;  /** < X offset for drawing text within the input region of the element */
-        const unsigned M_TEXT_OFFSET_Y = 10;  /** < Y offset for drawing text within the input region of the element */
-        const unsigned M_CURSOR_OFFSET_X = 2; /** < X offset for drawing cursor after drawn text */
+        static const Uint16 TEXT_OFFSET_X;  /** < X offset for drawing text within the input region of the element */
+        static const Uint16 TEXT_OFFSET_Y;  /** < Y offset for drawing text within the input region of the element */
+        static const Uint16 CURSOR_OFFSET_X; /** < X offset for drawing cursor after drawn text */
         
         LTexture m_textTexture; /** < Texture used to draw input text */
         

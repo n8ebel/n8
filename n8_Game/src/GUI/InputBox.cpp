@@ -12,6 +12,10 @@
 
 #define TAG "InputBox"
 
+const Uint16 gui::InputBox::TEXT_OFFSET_X = 10;
+const Uint16 gui::InputBox::TEXT_OFFSET_Y = 2;
+const Uint16 gui::InputBox::CURSOR_OFFSET_X = 2;
+
 /** Constructor
  *  Inititlizes parent class {@link GUIElement}
  *  Initializes flags, and strings
@@ -29,6 +33,8 @@ gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y
     
     m_cursorShown = false;
     m_updateTexture = true;
+    
+    m_built = true;
 }
 
 /** Constructor
@@ -65,6 +71,10 @@ gui::InputBox::~InputBox(){
     }
 }
 
+void gui::InputBox::SetHintText(std::string hintString){
+    m_hintString = hintString;
+}
+
 /** Checks whether the inputbox was clicked down
  *  If the user clicked within the inputbox, the box gains the focus
  *   and input can then be entered into the inputbox.
@@ -78,6 +88,7 @@ gui::InputBox::~InputBox(){
  *  @return bool Returns true if the inputbox was clicked
  */
 bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
+    m_updateTexture = true;
     if( GUIElement::CheckMouseClickDown(p_x, p_y)){
         SDL_StartTextInput();
         return true;
@@ -86,7 +97,7 @@ bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
         SDL_StopTextInput();
         return false;
     }
-    m_updateTexture = true;
+    
     return false;
 }
 
@@ -113,7 +124,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
     SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
     
     //draw outline if has focus
-    if (m_state == State::Focused) {
+    if (m_state >= State::Pressed) {
         SDL_SetRenderDrawColor( renderer,    m_style.GetColor(Style::EStyleColor::Focus).GetR(),
                                             m_style.GetColor(Style::EStyleColor::Focus).GetG(),
                                             m_style.GetColor(Style::EStyleColor::Focus).GetB(),
@@ -134,15 +145,15 @@ void gui::InputBox::Draw(n8::Window* p_window){
     
     //draw text
     if (m_hintString != "" || m_inputString != "") {
-        m_textTexture.render(p_window->GetRenderer(),   m_rectangle.GetX() + M_TEXT_OFFSET_X,
-                             m_rectangle.GetY() + M_TEXT_OFFSET_Y);
+        m_textTexture.render(p_window->GetRenderer(),   m_rectangle.GetX() + TEXT_OFFSET_X,
+                             m_rectangle.GetY());
     }
     
     //draw cursor
-    if (m_cursorShown && m_state == State::Focused) {
-        int x = m_rectangle.GetX() + M_CURSOR_OFFSET_X + m_textTexture.getWidth() + M_TEXT_OFFSET_X;
-        int y1 = m_rectangle.GetY() + 10;
-        int y2 = m_rectangle.GetY() + m_rectangle.GetH() - 10;
+    if (m_cursorShown && m_state >= State::Pressed) {
+        int x = m_rectangle.GetX() + CURSOR_OFFSET_X + m_textTexture.getWidth() + TEXT_OFFSET_X;
+        int y1 = m_rectangle.GetY() + 2 * TEXT_OFFSET_Y;
+        int y2 = m_rectangle.GetY() + m_rectangle.GetH() - 2 * TEXT_OFFSET_Y;
         SDL_SetRenderDrawColor(  renderer,    m_style.GetColor(Style::EStyleColor::Cursor).GetR(),
                                m_style.GetColor(Style::EStyleColor::Cursor).GetG(),
                                m_style.GetColor(Style::EStyleColor::Cursor).GetB(),
@@ -163,7 +174,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
  */
 void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
     
-    if(m_state == State::Focused){
+    if(m_state >= State::Pressed){
         SDL_Event e = *p_event;
         if( e.type == SDL_KEYDOWN )
         {
@@ -211,7 +222,7 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
         m_lastTime = p_currentTime;
     }
     
-    return m_state == State::Focused;
+    return m_state >= State::Pressed;
 }
 
 /** Gets the text currently in the inputbox
@@ -219,7 +230,12 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
  *  @return m_inputString The string entered into the inputbox
  */
 std::string gui::InputBox::GetText(){
-    return m_inputString;
+    if (m_inputString.length() > 0) {
+        return m_inputString;
+    }else{
+        return "";
+    }
+    
 }
 
 /** Updates the text texture based on the current
@@ -230,7 +246,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     //Text is not empty
     if( m_inputString.length() > 0)
     {
-        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+        TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h - 3 * TEXT_OFFSET_Y);
         if (!font) {
             n8::Log::Error(TAG, "InputBox failed to load font for non-empty text");
             return;
@@ -245,9 +261,9 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
     //Text is empty
     else
     {
-        if (m_hintString != "" && m_state != State::Focused) {
+        if (m_hintString != "" && m_state < State::Pressed) {
             
-            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h - 3 * TEXT_OFFSET_Y);
             if (!font) {
                 n8::Log::Error(TAG, "InputBox failed to load font for hint string");
                 return;
@@ -260,7 +276,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
         }
         else{
             
-            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h-8);
+            TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), m_h - 3 * TEXT_OFFSET_Y);
             if (!font) {
                 n8::Log::Error(TAG, "InputBox failed to load font for empty text");
                 return;

@@ -27,23 +27,23 @@ namespace gui {
     
     class Style{
     public:
-        static int DEFAULT_BUTTON_WIDTH;
+        static const Uint16 DEFAULT_BUTTON_WIDTH;
         
-        static int DEFAULT_BUTTON_HEIGHT;
+        static const Uint16 DEFAULT_BUTTON_HEIGHT;
         
-        static int DEFAULT_MARGIN;
+        static const Sint16 DEFAULT_MARGIN;
         
-        static int DEFAULT_DIALOG_WIDTH;
+        static const Uint16 DEFAULT_DIALOG_WIDTH;
         
-        static int DEFAULT_DIALOG_HEIGHT;
+        static const Uint16 DEFAULT_DIALOG_HEIGHT;
         
-        static int DEFAULT_TITLE_HEIGHT;
+        static const Uint16 DEFAULT_TITLE_HEIGHT;
         
-        static int DEFAULT_FONT_SIZE;
+        static const Uint16 DEFAULT_FONT_SIZE;
         
-        static int DEFAULT_DIALOG_BUTTON_FONT_SIZE;
+        static const Uint16 DEFAULT_DIALOG_BUTTON_FONT_SIZE;
         
-        static const Uint8 DEFAULT_ALPHA = 255;
+        static const Uint8 DEFAULT_ALPHA;
         
         /** Enum for Style color elements
          *  Each enum represents an available color defined in the class.  These eneums are used to access particular color elements
@@ -58,6 +58,7 @@ namespace gui {
                                 InputBackground,
                                 Cursor,
                                 Selected,
+                                ButtonOutline,
                                 Default /** < Default enum value corresponding to default color */
         };
             
@@ -86,6 +87,7 @@ namespace gui {
         n8::Color m_buttonColor;  /** < Base color for buttons in default state */
         n8::Color m_hoverColor;  /** < Color for buttons in the hover state */
         n8::Color m_pressedColor;  /** < Color for buttons that are pressed down */
+        n8::Color m_buttonOutlineColor; /** < Color for the outline of a button */
         
         n8::Color m_fontColor;  /** < Color to render fonts */
         n8::Color m_hintColor;  /** < Color to render hint text of input boxes */

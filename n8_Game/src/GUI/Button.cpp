@@ -164,6 +164,7 @@ void gui::Button::drawHovered(SDL_Renderer* p_renderer){
 
 void gui::Button::drawNeutral(SDL_Renderer* p_renderer){
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Button);
+    n8::Color outlineColor = m_style.GetColor(Style::EStyleColor::ButtonOutline);
     
     SDL_SetRenderDrawColor( p_renderer,
                            drawColor.GetR(),
@@ -173,6 +174,15 @@ void gui::Button::drawNeutral(SDL_Renderer* p_renderer){
                            );
     
     SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    
+    SDL_SetRenderDrawColor( p_renderer,
+                           outlineColor.GetR(),
+                           outlineColor.GetG(),
+                           outlineColor.GetB(),
+                           outlineColor.GetA()
+                           );
+    
+    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
 }
 void gui::Button::drawFocused(SDL_Renderer* p_renderer){
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Focus);

@@ -23,6 +23,7 @@
 #include "GUIElement.h"
 #include "Label.h"
 #include "Dialog.h"
+#include "InputDialog.h"
 
 namespace gui{
     

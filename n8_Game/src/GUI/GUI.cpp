@@ -69,12 +69,10 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
     if(!mDialogStack.empty()){
         bool clickedDown = mDialogStack.top()->CheckMouseClickDown(p_x, p_y);
         if (!clickedDown) {
-            cout << "check click down was false" << endl;
             mDialogStack.top()->Dismiss();
             mDialogStack.pop();
-        }else{
-            cout << "check click down was true" << endl;
         }
+        
         return clickedDown;
     }
     
@@ -154,6 +152,14 @@ void gui::GUI::Draw(n8::Window* p_window){
  *  @param e The event to check
  */
 void gui::GUI::ProcessInput(SDL_Event* e){
+    if (!mDialogStack.empty()) {
+        InputDialog* inputDialog = dynamic_cast<InputDialog*>(mDialogStack.top());
+        if (inputDialog) {
+            inputDialog->HandleKeyboardInput(e);
+        }
+        return;
+    }
+    
     for(GUIElement* element : m_guiElements){
         if (dynamic_cast<InputBox*>(element) != nullptr) {
             dynamic_cast<InputBox*>(element)->HandleKeyboardInput(e);

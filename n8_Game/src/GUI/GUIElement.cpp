@@ -10,6 +10,8 @@
 
 #include "GUIElement.h"
 
+#define TAG "GUIElement"
+
 
 gui::GUIElement::GUIElement(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
