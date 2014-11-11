@@ -30,6 +30,25 @@ n8::Game::Game(const char* configFile){
     InitializeDirectoryPath();
     ProcessConfigFile();
     InitializeResourcesPath();
+    
+    Log::Create();
+    
+    m_serviceManager = ServiceManager::GetInstance();
+    
+    ResourceManager* resourceManagerService = new ResourceManager(this, &m_window, m_resourceConfigPath.c_str());
+    
+    InputService* inputService = new InputService(this);
+    StateManagerService* stateManagerService = new StateManagerService(this);
+    RenderService* renderService = new RenderService(this, &m_window);
+    AudioService* audioService = new AudioService(this);
+    
+    inputService->AddObserver(stateManagerService);
+    
+    m_serviceManager->RegisterService(ServiceManager::INPUT, inputService);
+    m_serviceManager->RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
+    m_serviceManager->RegisterService(ServiceManager::RESOURCES, resourceManagerService);
+    m_serviceManager->RegisterService(ServiceManager::RENDER, renderService);
+    m_serviceManager->RegisterService(ServiceManager::AUDIO, audioService);
 }
 
 /** Destructor */
@@ -125,31 +144,6 @@ void n8::Game::InitializeDirectoryPath() {
  */
 void n8::Game::InitializeResourcesPath(){
     Log::Debug(TAG, "Resource config file path:" + m_resourceConfigPath);
-}
-
-/** Setup
- *  Initializes default game systems and member variables
- */
-void n8::Game::Setup(){
-    Log::Create();
-    
-    m_serviceManager = ServiceManager::GetInstance();
-    
-    ResourceManager* resourceManagerService = new ResourceManager(this, &m_window, m_resourceConfigPath.c_str());
-    
-    InputService* inputService = new InputService(this);
-    StateManagerService* stateManagerService = new StateManagerService(this);
-    RenderService* renderService = new RenderService(this, &m_window);
-    AudioService* audioService = new AudioService(this);
-    
-    inputService->AddObserver(stateManagerService);
-    
-    m_serviceManager->RegisterService(ServiceManager::INPUT, inputService);
-    m_serviceManager->RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
-    m_serviceManager->RegisterService(ServiceManager::RESOURCES, resourceManagerService);
-    m_serviceManager->RegisterService(ServiceManager::RENDER, renderService);
-    m_serviceManager->RegisterService(ServiceManager::AUDIO, audioService);
-    
 }
 
 /** Start

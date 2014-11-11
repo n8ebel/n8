@@ -55,7 +55,6 @@ public:
     Game(const char*);
     ~Game();
     
-    void Setup();
     void Start();
     void Stop();
     
