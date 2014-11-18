@@ -28,6 +28,10 @@ ID n8::State::GetId() {return *m_id;};
 
 gui::GUI* n8::State::GetGUI() { return m_gui; }
 
+void n8::State::Update(Uint32 currentTime){
+    m_gui->Update(currentTime);
+}
+
 void n8::State::Render(n8::Window *window){
     m_gui->Draw(window);
     m_game->getRenderService()->PostToScreen();
