@@ -64,17 +64,20 @@ public:
     void StartState(State*);
     void EndState();
     
+    void ShowDebugInfo(bool);
+    
     ResourceManager* getResourceManager();
     InputService* getInputService();
     StateManagerService* getStateManagerService();
     RenderService* getRenderService();
     AudioService* getAudioService();
 private:
-    const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";;  /** < Default resource file name */
+    const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";  /** < Default resource file name */
     
     ServiceManager* m_serviceManager; /** < Game service manager */
     n8::Window m_window; /** < Game window */
     n8::Timer m_timer; /** < Game timer */
+    bool m_showDebugInfo;
      
     
     int m_fps;  /** < value to control game loop speed **/
@@ -83,10 +86,8 @@ private:
     unsigned m_windowWidth;  /** < Width of the game window */
     unsigned m_windowHeight; /** < Height of the game window */
     
-   // std::string m_configPath;
     std::string m_directoryPath;  /** < Path to the working directory of the project */
     std::string m_resourceConfigPath;
-    //std::string m_resourcesListPath; /** < Full path to the resources directory */
     
     void ProcessConfigFile();
     

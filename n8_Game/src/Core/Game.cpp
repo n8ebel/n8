@@ -24,6 +24,7 @@ n8::Game::Game(const char* configFile){
     m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
     m_quit = false;
+    m_showDebugInfo = false;
     
     m_resourceConfigPath = configFile;
     
@@ -160,15 +161,17 @@ void n8::Game::Start(){
     StateManagerService* stateManager = getStateManagerService();
     while (m_quit == false) {
         
-        frames++;
-        curtime = m_timer.GetTime();
-        if (curtime-lasttime >= 250) {
-            lasttime = curtime;
-            std::stringstream ss;
-            ss << (frames*4);
-            std::string msg("Frames: " + ss.str());
-            Log::Info(TAG, msg);
-            frames = 0;
+        if (m_showDebugInfo) {
+            frames++;
+            curtime = m_timer.GetTime();
+            if (curtime-lasttime >= 250) {
+                lasttime = curtime;
+                std::stringstream ss;
+                ss << (frames*4);
+                std::string msg("Frames: " + ss.str());
+                std::cout << msg << std::endl;
+                frames = 0;
+            }
         }
         
         //process input
@@ -209,6 +212,10 @@ void n8::Game::Stop(){
  */
 void n8::Game::SetFPS(unsigned newFPS){
     m_fps = newFPS;
+}
+
+void n8::Game::ShowDebugInfo(bool showDebugInfo){
+    m_showDebugInfo = showDebugInfo;
 }
 
 /** ResizeWindow
