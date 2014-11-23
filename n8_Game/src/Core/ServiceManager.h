@@ -12,7 +12,6 @@
 #include <iostream>
 #include <map>
 
-#include "Singleton.h"
 #include "Service.h"
 #include "Values.h"
 
@@ -26,7 +25,7 @@ namespace n8{
  *  game systems.  Services are registered with the 
  *  ServiceManager during the game's initialization.
  */
-class ServiceManager : public Singleton<ServiceManager>{ 
+class ServiceManager { 
 public:
     
     static const int RESOURCES = 0;
@@ -40,15 +39,15 @@ public:
     ServiceManager();
     ~ServiceManager();
     
-    void RegisterService(int, Service*);
+    void RegisterService(int, std::shared_ptr<Service>);
     void UnregisterService(int);
     
     void RemoveAllServices();
     
-    Service* GetService(int);
+    const std::shared_ptr<Service> GetService(int) const;
     
 private:
-    std::map<int,Service*> m_registeredServices; /** < Map of registered services */
+    std::map<int,std::shared_ptr<Service>> m_registeredServices; /** < Map of registered services */
 };
     
 }

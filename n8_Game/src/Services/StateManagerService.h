@@ -25,13 +25,6 @@
 
 namespace n8{
     
-/**
- *  State_Manager handles the state stack and holds pointers
- *    to each registered game state.
- *
- *  The singleton pattern is used so there is a single
- *    state stack and access point to state information.
- */
 class StateManagerService : public Service{
     
 public:

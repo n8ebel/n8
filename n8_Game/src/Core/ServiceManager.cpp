@@ -27,7 +27,7 @@ n8::ServiceManager::~ServiceManager(){
  *  @param EService An enum value to use as a map key
  *  @param Service* A pointer to a new service
  */
-void n8::ServiceManager::RegisterService(int key, Service* newService){
+void n8::ServiceManager::RegisterService(int key, std::shared_ptr<Service> newService){
     m_registeredServices[key] = newService;
 }
 
@@ -37,7 +37,7 @@ void n8::ServiceManager::RegisterService(int key, Service* newService){
  *  @param EService An enum value to use as a map key
  */
 void n8::ServiceManager::UnregisterService(int key){
-    std::map<int,n8::Service*>::iterator ii = m_registeredServices.find(key);
+    std::map<int, std::shared_ptr<Service>>::iterator ii = m_registeredServices.find(key);
     
     if(ii != m_registeredServices.end()){
         m_registeredServices.erase(ii);
@@ -48,17 +48,6 @@ void n8::ServiceManager::UnregisterService(int key){
  *  Removes and deletes all services from the map
  */
 void n8::ServiceManager::RemoveAllServices(){
-    if (m_registeredServices.size() == 0) {
-        return;
-    }
-    
-    std::map<int,n8::Service*>::iterator ii ;
-    
-    for (ii = m_registeredServices.begin(); ii!=m_registeredServices.end(); ii++) {
-        Service* tmp = ii->second;
-        ii->second = nullptr;
-        delete tmp;
-    }
     m_registeredServices.clear();
 }
 
@@ -69,8 +58,8 @@ void n8::ServiceManager::RemoveAllServices(){
  *
  *  @param EService An enum value to use as the lookup key for the map
  */
-n8::Service* n8::ServiceManager::GetService(int key){
-    std::map<int,n8::Service*>::iterator ii = m_registeredServices.find(key);
+const std::shared_ptr<n8::Service> n8::ServiceManager::GetService(int key) const{
+    std::map<int, std::shared_ptr<Service>>::const_iterator ii = m_registeredServices.find(key);
     
     if(ii != m_registeredServices.end()){
         return ii->second;

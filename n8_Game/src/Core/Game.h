@@ -66,15 +66,16 @@ public:
     
     void ShowDebugInfo(bool);
     
-    ResourceManager* getResourceManager();
-    InputService* getInputService();
-    StateManagerService* getStateManagerService();
-    RenderService* getRenderService();
-    AudioService* getAudioService();
+    const std::shared_ptr<ResourceManager> getResourceManager() const;
+    const std::shared_ptr<InputService> getInputService() const;
+    const std::shared_ptr<StateManagerService> getStateManagerService() const;
+    const std::shared_ptr<RenderService> getRenderService() const;
+    const std::shared_ptr<AudioService> getAudioService() const;
+    
 private:
     const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";  /** < Default resource file name */
     
-    ServiceManager* m_serviceManager; /** < Game service manager */
+    ServiceManager m_serviceManager; /** < Game service manager */
     n8::Window m_window; /** < Game window */
     n8::Timer m_timer; /** < Game timer */
     bool m_showDebugInfo;

@@ -7,6 +7,7 @@
 */
 
 #include <assert.h>
+#include <memory>
 
 #include "Game.h"
 
@@ -16,10 +17,9 @@
  *  Initializes member variables, and constructs path variables.
  *  Process configuration file
  */
-n8::Game::Game(const char* configFile){
+n8::Game::Game(const char* configFile) : m_serviceManager(){
     Log::Info(TAG, "Constructor");
     
-    m_serviceManager = nullptr;
     m_windowWidth = 1;
     m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
@@ -32,33 +32,26 @@ n8::Game::Game(const char* configFile){
     ProcessConfigFile();
     InitializeResourcesPath();
     
-    Log::Create();
+    Log::GetInstance();
     
-    m_serviceManager = ServiceManager::GetInstance();
+    auto resourceManagerService = std::make_shared<ResourceManager>(this, &m_window, m_resourceConfigPath.c_str());
+    auto inputService = std::make_shared<InputService>(this);
+    auto stateManagerService = std::make_shared<StateManagerService>(this);
+    auto renderService = std::make_shared<RenderService>(this, &m_window);
+    auto audioService = std::make_shared<AudioService>(this);
     
-    ResourceManager* resourceManagerService = new ResourceManager(this, &m_window, m_resourceConfigPath.c_str());
+    inputService->AddObserver(stateManagerService.get());
     
-    InputService* inputService = new InputService(this);
-    StateManagerService* stateManagerService = new StateManagerService(this);
-    RenderService* renderService = new RenderService(this, &m_window);
-    AudioService* audioService = new AudioService(this);
-    
-    inputService->AddObserver(stateManagerService);
-    
-    m_serviceManager->RegisterService(ServiceManager::INPUT, inputService);
-    m_serviceManager->RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
-    m_serviceManager->RegisterService(ServiceManager::RESOURCES, resourceManagerService);
-    m_serviceManager->RegisterService(ServiceManager::RENDER, renderService);
-    m_serviceManager->RegisterService(ServiceManager::AUDIO, audioService);
+    m_serviceManager.RegisterService(ServiceManager::INPUT, inputService);
+    m_serviceManager.RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
+    m_serviceManager.RegisterService(ServiceManager::RESOURCES, resourceManagerService);
+    m_serviceManager.RegisterService(ServiceManager::RENDER, renderService);
+    m_serviceManager.RegisterService(ServiceManager::AUDIO, audioService);
 }
 
 /** Destructor */
 n8::Game::~Game(){
     Log::Info(TAG, "Destructor");
-    if(m_serviceManager){
-        delete m_serviceManager;
-        m_serviceManager = nullptr;
-    }
 }
 
 /** ProcessConfigFile
@@ -157,8 +150,8 @@ void n8::Game::Start(){
     unsigned curtime = m_timer.GetTime();
     int frames = 0;
     
-    InputService* inputService = getInputService();
-    StateManagerService* stateManager = getStateManagerService();
+    auto inputService = getInputService();
+    auto stateManager = getStateManagerService();
     while (m_quit == false) {
         
         if (m_showDebugInfo) {
@@ -196,12 +189,7 @@ void n8::Game::Start(){
  *  Stops the running game loop
  */
 void n8::Game::Stop(){
-    m_serviceManager->RemoveAllServices();
-    
-    ServiceManager::Destroy();
-    m_serviceManager = nullptr;
-    
-    Log::Destroy();
+    m_serviceManager.RemoveAllServices();
 }
 
 /** Changes the frame per second value for the game loop
@@ -241,22 +229,22 @@ void n8::Game::EndState(){
     getStateManagerService()->PopState();
 }
 
-n8::ResourceManager* n8::Game::getResourceManager(){
-    return static_cast<ResourceManager*>(m_serviceManager->GetService(ServiceManager::RESOURCES));
+const std::shared_ptr<n8::ResourceManager> n8::Game::getResourceManager() const{
+    return std::static_pointer_cast<ResourceManager>(m_serviceManager.GetService(ServiceManager::RESOURCES));
 }
 
-n8::InputService* n8::Game::getInputService(){
-    return static_cast<InputService*>(m_serviceManager->GetService(ServiceManager::INPUT));
+const std::shared_ptr<n8::InputService> n8::Game::getInputService() const{
+    return std::static_pointer_cast<InputService>(m_serviceManager.GetService(ServiceManager::INPUT));
 }
 
-n8::StateManagerService* n8::Game::getStateManagerService(){
-    return static_cast<StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER));
+const std::shared_ptr<n8::StateManagerService> n8::Game::getStateManagerService() const{
+    return std::static_pointer_cast<StateManagerService>(m_serviceManager.GetService(ServiceManager::STATE_MANAGER));
 }
 
-n8::RenderService* n8::Game::getRenderService(){
-    return static_cast<RenderService*>(m_serviceManager->GetService(ServiceManager::RENDER));
+const std::shared_ptr<n8::RenderService> n8::Game::getRenderService() const{
+    return std::static_pointer_cast<RenderService>(m_serviceManager.GetService(ServiceManager::RENDER));
 }
 
-n8::AudioService* n8::Game::getAudioService(){
-    return static_cast<AudioService*>(m_serviceManager->GetService(ServiceManager::AUDIO));
+const std::shared_ptr<n8::AudioService> n8::Game::getAudioService() const{
+    return std::static_pointer_cast<AudioService>(m_serviceManager.GetService(ServiceManager::AUDIO));
 }
