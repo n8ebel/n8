@@ -30,8 +30,6 @@ n8::InputService::InputService(Game* game) : Service(game){
         m_registeredKeyUpActions[i] = nullptr;
     }
     
-    m_userInterface = nullptr;
-    
     m_mouseMoveFunction = nullptr;
     m_mouseButtonDownFunction = nullptr;
     m_mouseButtonUpFunction = nullptr;
@@ -40,7 +38,6 @@ n8::InputService::InputService(Game* game) : Service(game){
 /** Default destructor */
 n8::InputService::~InputService(){
     Log::Info(TAG, "Destructor");
-    m_userInterface = nullptr;
 }
 
 
@@ -149,7 +146,7 @@ bool n8::InputService::KeyIsUp(int key){
  *
  *  @param p_gui Pointer to a user interface
  */
-void n8::InputService::RegisterUserInterface(gui::GUI* p_gui){
+void n8::InputService::RegisterUserInterface(const std::shared_ptr<gui::GUI> p_gui){
     m_userInterface = p_gui;
 }
 

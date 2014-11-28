@@ -175,7 +175,7 @@ SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
     else
 	{
         //Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_gameWindow->GetSurface()->format, NULL );
+		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_gameWindow->GetSurface().format, NULL );
 		if( optimizedSurface == nullptr )
 		{
 			Log::Error(TAG, "  Failed to load optimized version of: " + filename);
@@ -225,7 +225,7 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     else
     {
         //Create texture from surface pixels
-        texture = SDL_CreateTextureFromSurface( m_gameWindow->GetRenderer(), loadedSurface );
+        texture = SDL_CreateTextureFromSurface( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), loadedSurface );
         if( texture == nullptr )
         {
             std::string msg( "  Unable to create texture from " + p_filename + "SDL Error: " +SDL_GetError() );

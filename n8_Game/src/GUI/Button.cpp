@@ -78,7 +78,7 @@ void gui::Button::SetTextSize(int textSize){
  */
 void gui::Button::Draw(n8::Window* p_window){
     
-    SDL_Renderer* renderer= p_window->GetRenderer();
+    SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     
     if (m_state == State::Hovered) {
         drawHovered(renderer);
@@ -143,7 +143,7 @@ void gui::Button::drawHovered(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
     
@@ -154,11 +154,11 @@ void gui::Button::drawHovered(SDL_Renderer* p_renderer){
                            filterColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
     
-    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
     
 }
 
@@ -173,7 +173,7 @@ void gui::Button::drawNeutral(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawColor( p_renderer,
                            outlineColor.GetR(),
@@ -182,7 +182,7 @@ void gui::Button::drawNeutral(SDL_Renderer* p_renderer){
                            outlineColor.GetA()
                            );
     
-    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
 }
 void gui::Button::drawFocused(SDL_Renderer* p_renderer){
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Focus);
@@ -194,7 +194,7 @@ void gui::Button::drawFocused(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
 }
 void gui::Button::drawPressed(SDL_Renderer* p_renderer){
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
@@ -206,7 +206,7 @@ void gui::Button::drawPressed(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
 }
 
 void gui::Button::drawPressedAndHovered(SDL_Renderer* p_renderer){
@@ -220,7 +220,7 @@ void gui::Button::drawPressedAndHovered(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
     
@@ -231,11 +231,11 @@ void gui::Button::drawPressedAndHovered(SDL_Renderer* p_renderer){
                            filterColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
     
-    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
 }
 
 void gui::Button::drawSelected(SDL_Renderer* p_renderer){
@@ -248,7 +248,7 @@ void gui::Button::drawSelected(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
 }
 
 void gui::Button::drawSelectedAndHovered(SDL_Renderer* p_renderer){
@@ -262,7 +262,7 @@ void gui::Button::drawSelectedAndHovered(SDL_Renderer* p_renderer){
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
     
@@ -273,11 +273,11 @@ void gui::Button::drawSelectedAndHovered(SDL_Renderer* p_renderer){
                            filterColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
     
     SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
     
-    SDL_RenderDrawRect(p_renderer, m_rectangle.GetRect());
+    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
 
 }
 
@@ -289,7 +289,7 @@ void gui::Button::loadFontTexture(int textSize){
         return;
     }
     
-    m_built = m_textTexture.loadFromRenderedText(  m_window->GetRenderer(), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
     TTF_CloseFont(font);
 }

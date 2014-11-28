@@ -46,4 +46,4 @@ private:
     
 }
 
-#endif (N8_GUI_DIALOG_BUILDER_INTERFACE)
+#endif //(N8_GUI_DIALOG_BUILDER_INTERFACE)

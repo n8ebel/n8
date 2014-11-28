@@ -23,7 +23,7 @@
 
 namespace n8{
 
-class InputService :public Service {
+class InputService : public Service {
     friend class StateManagerService;
 public:
     InputService(Game*);
@@ -61,7 +61,7 @@ private:
     
     SDL_Event m_event; /** < SDL_Event pointer to get dequeued events */
     
-    gui::GUI* m_userInterface;
+    std::shared_ptr<gui::GUI> m_userInterface;
     
     bool m_keysHeld[323];  /** < Array to store whether or not a key is being held down **/
     Command* m_registeredKeyDownCommands[323];
@@ -76,7 +76,7 @@ private:
     std::function<void(int,int)> m_mouseButtonDownFunction;
     std::function<void(int,int)> m_mouseButtonUpFunction;
     
-    void RegisterUserInterface(gui::GUI* p_gui);
+    void RegisterUserInterface(const std::shared_ptr<gui::GUI> p_gui);
     
     
 };

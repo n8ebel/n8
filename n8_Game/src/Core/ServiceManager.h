@@ -47,7 +47,7 @@ public:
     const std::shared_ptr<Service> GetService(int) const;
     
 private:
-    std::map<int,std::shared_ptr<Service>> m_registeredServices; /** < Map of registered services */
+    std::map<int, std::shared_ptr<Service>> m_registeredServices; /** < Map of registered services */
 };
     
 }

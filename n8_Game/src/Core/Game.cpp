@@ -34,6 +34,7 @@ n8::Game::Game(const char* configFile) : m_serviceManager(){
     
     Log::GetInstance();
     
+        
     auto resourceManagerService = std::make_shared<ResourceManager>(this, &m_window, m_resourceConfigPath.c_str());
     auto inputService = std::make_shared<InputService>(this);
     auto stateManagerService = std::make_shared<StateManagerService>(this);

@@ -164,7 +164,7 @@ void gui::Dialog::Draw(n8::Window* pWindow){
     Container::Draw(pWindow);
     
     // Set draw color for text
-    SDL_Renderer* renderer = pWindow->GetRenderer();
+    SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&pWindow->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Font);
     SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
@@ -182,7 +182,7 @@ void gui::Dialog::Draw(n8::Window* pWindow){
                            drawColor.GetA()
                            );
     
-    SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+    SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     
     if(mTitleTextTexture.HasTexture()){
         int x = m_x + (m_w - mTitleTextTexture.getWidth())/2;

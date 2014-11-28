@@ -51,7 +51,6 @@ void n8::RenderService::OnNotify(Event* event){
  */
 void n8::RenderService::Draw(Sprite* p_sprite, int p_x, int p_y){
     assert(p_sprite);
-    assert(m_gameWindow->GetSurface());
     
 	
 	//Make a temporary rectangle to hold the offsets
@@ -63,8 +62,7 @@ void n8::RenderService::Draw(Sprite* p_sprite, int p_x, int p_y){
 	
     
     //Blit the surface
-    SDL_BlitSurface( p_sprite->m_image, NULL, m_gameWindow->GetSurface(), &offset );
-    
+    SDL_BlitSurface( p_sprite->m_image, NULL, const_cast<SDL_Surface*>(&m_gameWindow->GetSurface()), &offset );
 }
 
 /**
@@ -86,7 +84,7 @@ void n8::RenderService::Draw(n8::Texture* p_texture, int p_x, int p_y){
     dest.h = p_texture->m_height;
     
     //Render texture to screen
-    SDL_RenderCopy( m_gameWindow->GetRenderer(), p_texture->m_texture, NULL, &dest );
+    SDL_RenderCopy( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_texture->m_texture, NULL, &dest );
 }
 
 /**
@@ -110,7 +108,7 @@ void n8::RenderService::Draw(n8::Texture* p_texture, int p_x, int p_y, int p_w, 
     dest.h = p_h;
     
     //Render texture to screen
-    SDL_RenderCopy( m_gameWindow->GetRenderer(), p_texture->m_texture, NULL, &dest );
+    SDL_RenderCopy( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_texture->m_texture, NULL, &dest );
 }
 
 void n8::RenderService::DrawText(std::string p_text, Font* p_font, EColor p_color,int p_x, int p_y){
@@ -133,9 +131,9 @@ void n8::RenderService::DrawText(std::string p_text, Font* p_font, EColor p_colo
             
         }
         
-        if( textTexture.loadFromRenderedText( m_gameWindow->GetRenderer(), p_font->m_font, p_text.c_str(), textColor ) ){
+        if( textTexture.loadFromRenderedText( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_font->m_font, p_text.c_str(), textColor ) ){
         
-            textTexture.render(m_gameWindow->GetRenderer(), p_x, p_y);
+            textTexture.render(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_x, p_y);
         }
         else{
             Log::Debug(TAG, "Couldn't load text texture");
@@ -163,7 +161,7 @@ void n8::RenderService::SetDrawingColor(int p_r, int p_g, int p_b, int p_a){
     m_alpha = p_a;
     
     if(m_renderMode == ETexture){
-        SDL_SetRenderDrawColor(m_gameWindow->GetRenderer(), m_red , m_green, m_blue, m_alpha);
+        SDL_SetRenderDrawColor(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), m_red , m_green, m_blue, m_alpha);
     }
 }
 
@@ -173,10 +171,11 @@ void n8::RenderService::SetDrawingColor(int p_r, int p_g, int p_b, int p_a){
  */
 void n8::RenderService::ColorBackground(){
     if (m_renderMode == ESprite) {
-        SDL_FillRect(m_gameWindow->GetSurface(), NULL, SDL_MapRGBA(SDL_GetWindowSurface(m_gameWindow->GetWindow())->format, m_red,m_green,m_blue,m_alpha));
+        SDL_Surface* surface = SDL_GetWindowSurface(const_cast<SDL_Window*>(&m_gameWindow->GetWindow()));
+        SDL_FillRect(const_cast<SDL_Surface*>(&m_gameWindow->GetSurface()), NULL, SDL_MapRGBA(surface->format, m_red,m_green,m_blue,m_alpha));
     }
     else{
-        SDL_RenderClear(m_gameWindow->GetRenderer());
+        SDL_RenderClear(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()));
     }
 }
 
@@ -185,9 +184,9 @@ void n8::RenderService::ColorBackground(){
  */
 void n8::RenderService::PostToScreen(){
     if (m_renderMode == ESprite) {
-        SDL_UpdateWindowSurface( m_gameWindow->GetWindow() );
+        SDL_UpdateWindowSurface( const_cast<SDL_Window*>(&m_gameWindow->GetWindow()) );
     }
     else{
-        SDL_RenderPresent(m_gameWindow->GetRenderer());
+        SDL_RenderPresent(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()));
     }
 }

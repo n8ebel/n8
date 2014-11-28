@@ -112,7 +112,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
         UpdateTexture(p_window);
     }
     
-    SDL_Renderer* renderer= p_window->GetRenderer();
+    SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     
     //draw box background
     SDL_SetRenderDrawColor( renderer,   m_style.GetColor(Style::EStyleColor::InputBackground).GetR(),
@@ -121,7 +121,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
                                         m_style.GetColor(Style::EStyleColor::InputBackground).GetA()
                            );
     
-    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
     //draw outline if has focus
     if (m_state >= State::Pressed) {
@@ -131,7 +131,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
                                             m_style.GetColor(Style::EStyleColor::Focus).GetA()
         );
         
-        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+        SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     }
     else{
         SDL_SetRenderDrawColor( renderer,    m_style.GetColor(Style::EStyleColor::Default).GetR(),
@@ -140,12 +140,12 @@ void gui::InputBox::Draw(n8::Window* p_window){
                                m_style.GetColor(Style::EStyleColor::Default).GetA()
                                );
         
-        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+        SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     }
     
     //draw text
     if (m_hintString != "" || m_inputString != "") {
-        m_textTexture.render(p_window->GetRenderer(),   m_rectangle.GetX() + TEXT_OFFSET_X,
+        m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()),   m_rectangle.GetX() + TEXT_OFFSET_X,
                              m_rectangle.GetY());
     }
     
@@ -253,7 +253,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
         }
         
         //load input text to texture
-        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        m_textTexture.loadFromRenderedText( const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
         
         TTF_CloseFont(font);
        
@@ -270,7 +270,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
             }
             
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
             
             TTF_CloseFont(font);
         }
@@ -283,7 +283,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
             }
             
             //load empty texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
             
             TTF_CloseFont(font);
         }

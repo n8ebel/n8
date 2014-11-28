@@ -11,22 +11,16 @@
 #include "Game.h"
 #include "State.h"
 
-n8::State::State(n8::Game* game){
+n8::State::State(std::shared_ptr<n8::Game> game){
     m_game = game;
-    m_gui = new gui::GUI(const_cast<n8::Window*>(game->getRenderService()->GetWindow()));
+    m_gui = std::make_shared<gui::GUI>(const_cast<n8::Window*>(game->getRenderService()->GetWindow()));
 }
 
-n8::State::~State(){
-    m_game = nullptr;
-    if (m_gui) {
-        delete m_gui;
-        m_gui = nullptr;
-    }
-}
+n8::State::~State(){ m_game = nullptr; }
 
-ID n8::State::GetId() {return *m_id;};
+const ID& n8::State::GetId() const { return *m_id; };
 
-gui::GUI* n8::State::GetGUI() { return m_gui; }
+const std::shared_ptr<gui::GUI> n8::State::GetGUI() const { return m_gui; }
 
 void n8::State::Update(Uint32 currentTime){
     m_gui->Update(currentTime);

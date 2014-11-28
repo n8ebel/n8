@@ -25,7 +25,7 @@ gui::Label::Label(n8::Window* p_window, std::string p_id,std::string p_text, int
         return;
     }
     
-    m_built = m_textTexture.loadFromRenderedText(  p_window->GetRenderer(), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture.loadFromRenderedText(  const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     
     TTF_CloseFont(font);
     
@@ -49,7 +49,7 @@ gui::Label::~Label(){
  *  @param p_window Pointer to the game window object
  */
 void gui::Label::Draw(n8::Window* p_window){
-   m_textTexture.render(p_window->GetRenderer(), m_rectangle.GetX(), m_rectangle.GetY());
+   m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), m_rectangle.GetX(), m_rectangle.GetY());
 }
 
 /** Updates the Label
