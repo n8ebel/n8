@@ -13,7 +13,7 @@
 #define TAG "GUIElement"
 
 
-gui::GUIElement::GUIElement(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) :
+gui::GUIElement::GUIElement(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) :
                                                                     m_rectangle(p_x,p_y,p_w,p_h),
                                                                     m_texture(nullptr),
                                                                     m_style("Roboto.ttf")

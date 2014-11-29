@@ -25,7 +25,7 @@
  *  @param p_w The width of the button
  *  @param p_h The height of the button
  */
-gui::Button::Button(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
+gui::Button::Button(std::shared_ptr<n8::Window> p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
     m_text = p_text;
     
@@ -50,7 +50,7 @@ gui::Button::Button(n8::Window* p_window, std::string p_id,std::string p_text, i
  *  @param p_h The height of the button
  *  @param p_func The lambda function to execute when button is clicked down
  */
-gui::Button::Button(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : Button(p_window, p_id,p_text,p_x,p_y,p_w,p_h)
+gui::Button::Button(std::shared_ptr<n8::Window> p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h, std::function<void()> p_func) : Button(p_window, p_id,p_text,p_x,p_y,p_w,p_h)
 {
     m_function = p_func;
     

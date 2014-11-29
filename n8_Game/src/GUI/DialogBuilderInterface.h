@@ -17,7 +17,7 @@ class DialogBuilderInterface{
     
 public:
     
-    DialogBuilderInterface(n8::Window*);
+    DialogBuilderInterface(std::shared_ptr<n8::Window>);
     
     virtual Dialog* Create();
     

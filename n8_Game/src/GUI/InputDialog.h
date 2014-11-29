@@ -25,7 +25,7 @@ public:
     class Builder : public DialogBuilderInterface{
         
     public:
-        Builder(n8::Window*);
+        Builder(std::shared_ptr<n8::Window>);
         ~Builder();
         
         void SetHintText(std::string);
@@ -39,7 +39,7 @@ public:
     std::string GetInput();
     void HandleKeyboardInput(SDL_Event*);
     
-    InputDialog(n8::Window* p_window, std::string, int p_x, int p_y, int p_w, int p_h);
+    InputDialog(std::shared_ptr<n8::Window> p_window, std::string, int p_x, int p_y, int p_w, int p_h);
     ~InputDialog();
     
 private:

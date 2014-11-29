@@ -27,7 +27,7 @@ namespace gui{
      */
     class Container : public GUIElement{
     public:
-        Container(n8::Window* p_window,std::string p_id, int p_x, int p_y, int p_w, int p_h);
+        Container(std::shared_ptr<n8::Window> p_window,std::string p_id, int p_x, int p_y, int p_w, int p_h);
         virtual ~Container();
         
         void AddElement(GUIElement*);

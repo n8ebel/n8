@@ -21,7 +21,7 @@ namespace gui{
     
 class ImageView : public GUIElement{
 public:
-    ImageView(n8::Window* p_window, std::string, n8::Texture*, int p_x, int p_y, int p_w, int p_h);
+    ImageView(std::shared_ptr<n8::Window> p_window, std::string, n8::Texture*, int p_x, int p_y, int p_w, int p_h);
     
     ~ImageView();
     

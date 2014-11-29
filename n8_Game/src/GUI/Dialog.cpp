@@ -8,7 +8,7 @@
 
 #include "Dialog.h"
 
-gui::Dialog::Dialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
+gui::Dialog::Dialog(std::shared_ptr<n8::Window> p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
 {
     mTitle = "";
     mIsOpen = false;

@@ -33,14 +33,14 @@ namespace gui{
         class Builder : public DialogBuilderInterface{
             
             public:
-            Builder(n8::Window*);
+            Builder(std::shared_ptr<n8::Window>);
             ~Builder();
             
             Builder* SetOnDismissedListener(std::function<void(Dialog::EResultCode)>);
         };
     
      protected:
-        AlertDialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h);
+        AlertDialog(std::shared_ptr<n8::Window> p_window, int p_x, int p_y, int p_w, int p_h);
         ~AlertDialog();
         void Build();
         

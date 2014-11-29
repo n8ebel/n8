@@ -31,13 +31,13 @@ namespace gui{
 class Button : public GUIElement{
     public:
     
-        Button(n8::Window* p_window,
+        Button(std::shared_ptr<n8::Window> p_window,
                std::string p_id,
                std::string p_text,
                int p_x, int p_y,
                int p_w, int p_h);
     
-        Button(n8::Window* p_window,
+        Button(std::shared_ptr<n8::Window> p_window,
                std::string p_id,
                std::string p_text,
                int p_x, int p_y, int p_w, int p_h,

@@ -24,8 +24,8 @@ namespace gui {
      */
     class InputBox : public GUIElement{
     public:
-        InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h);
-        InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint);
+        InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h);
+        InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint);
         ~InputBox();
         
         void Draw(const std::shared_ptr<n8::Window>) override;

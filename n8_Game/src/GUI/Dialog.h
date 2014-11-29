@@ -31,7 +31,7 @@ class Dialog : public Container {
 public:
     enum class EResultCode{POSITIVE, NEUTRAL, NEGATIVE};
     
-    Dialog(n8::Window*, int, int, int, int );
+    Dialog(std::shared_ptr<n8::Window>, int, int, int, int );
     ~Dialog();
     
     void SetIsOpen();
