@@ -53,21 +53,7 @@ void n8::ResourceManager::LoadResources(){
     
     root = resourcesListFile.FirstChildElement( RESOURCES_TAG.c_str() );
     
-    if(root){
-        // Get Images
-        tinyxml2::XMLElement* imageElements = root->FirstChildElement( IMAGE_RESOURCES_TAG.c_str() );
-        
-        tinyxml2::XMLElement* imageElement = imageElements->FirstChildElement(IMAGE_TAG.c_str());
-        for( imageElement; imageElement; imageElement = imageElement->NextSiblingElement()){
-            
-            idElement = imageElement->FirstChildElement(ID_TAG.c_str());
-            std::string imagePath = imageElement->GetText();
-            std::string imageID = idElement->GetText();
-            
-            Log::Debug( TAG,"Loading Image: " + imagePath + " with ID: " + imageID );
-            LoadSprite(imagePath,imageID);
-        }
-        
+    if(root){        
         // Get Textures
         tinyxml2::XMLElement* textureElements = root->FirstChildElement( TEXTURE_RESOURCES_TAG.c_str() );
         
@@ -138,62 +124,6 @@ void n8::ResourceManager::LoadResources(){
     }
     else{
         Log::Error(TAG, "Couldn't load root element of resources file list");
-    }
-    
-    
-}
-
-/**
- *  Loads an image from a specified filepath, then creates an optimzed copy of the image
- *
- *  @param filename the filename of the image to load and optimize
- *  @return a pointer to the optimized copy of the image
- */
-SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
-{
-    
-    //The final optimized image
-	SDL_Surface* optimizedSurface = nullptr;
-    
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( filename.c_str() );
-	if( loadedSurface == nullptr )
-	{
-        std::string msg = "  IMG_Load failed." + filename;
-		Log::Error(TAG, msg);
-	}
-    else
-	{
-        //Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_gameWindow->GetSurface().format, NULL );
-		if( optimizedSurface == nullptr )
-		{
-			Log::Error(TAG, "  Failed to load optimized version of: " + filename);
-		}
-        else{
-            Log::Debug(TAG, "  Successfully loaded optimized image");
-        }
-        
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
-    
-	return optimizedSurface;
-}
-
-
-/**
- *  Loads Sprite resources.
- */
-void n8::ResourceManager::LoadSprite(std::string p_filename, std::string p_id){
-    SDL_Surface* spriteImage = LoadOptimizedImage(p_filename);
-    
-    if(spriteImage != nullptr){
-        m_loadedResources[p_id] = new Sprite(p_filename, spriteImage);
-        Log::Debug(TAG, "  Successfully loaded sprite: " + p_filename);
-    }
-    else{
-        Log::Error(TAG, "  Failed to load sprite: " + p_filename);
     }
 }
 
@@ -300,7 +230,5 @@ n8::Resource* n8::ResourceManager::GetResource(std::string p_resourceID){
     return m_loadedResources[p_resourceID];
 }
 
-void n8::ResourceManager::OnNotify(n8::Event* event){
-    
-}
+void n8::ResourceManager::OnNotify(std::shared_ptr<Event> event){ }
 

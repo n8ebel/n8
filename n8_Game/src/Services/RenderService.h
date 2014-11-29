@@ -46,7 +46,7 @@ namespace n8 {
         
         void SetRenderMode(ERenderMode);
         
-        void OnNotify(Event*);
+        void OnNotify(std::shared_ptr<Event>) override;
         
         void Draw(Sprite*, int, int);
         

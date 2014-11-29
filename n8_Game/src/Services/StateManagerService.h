@@ -43,7 +43,7 @@ public:
     
     void ProcessState(Uint32 time, Window* screen);
     
-    void OnNotify(Event*);
+    void OnNotify(std::shared_ptr<Event>) override;
     
 private:
     

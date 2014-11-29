@@ -53,7 +53,7 @@ public:
     void RegisterMouseButtonUpAction(std::function<void(int,int)> func);
     void UnregisterMouseButtonUpAction();
     
-    void OnNotify(Event* event);
+    void OnNotify(std::shared_ptr<Event>) override;
     
 private:
     

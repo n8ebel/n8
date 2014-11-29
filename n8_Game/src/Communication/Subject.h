@@ -27,7 +27,7 @@ public:
     void AddObserver(Observer* observer);
     void RemoveObserver(Observer* observer);
     
-    void Notify(Event*);
+    void Notify(std::shared_ptr<Event>);
 
 private:
     std::vector<Observer*> m_observers; /** < List of observers that can be notified of events > */

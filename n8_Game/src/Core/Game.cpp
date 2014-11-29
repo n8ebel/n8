@@ -61,6 +61,7 @@ void n8::Game::Init(){
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         // Unrecoverable error, exit here.
         Log::Error(TAG, "SDL_Init failed: " + string(SDL_GetError()));
+        exit(FAILURE_SDL_INIT);
     }
     else{
         Log::Info(TAG, "SDL Initializaed");
@@ -71,6 +72,7 @@ void n8::Game::Init(){
         {
             std::string msg( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
             Log::Error(TAG, msg);
+            exit(FAILURE_SDL_IMG);
         }
         else{
             Log::Info(TAG, "SDL_Image Initialized");
@@ -81,6 +83,7 @@ void n8::Game::Init(){
         {
             std::string msg("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
             Log::Error(TAG, msg);
+            exit(FAILURE_SDL_MIX);
             
         }
         else{
@@ -92,6 +95,7 @@ void n8::Game::Init(){
         {
             std::string msg( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
             Log::Error(TAG, msg);
+            exit(FAILURE_SDL_TTF);
         }
         else{
             Log::Info(TAG, "SDL_ttf Initialized");

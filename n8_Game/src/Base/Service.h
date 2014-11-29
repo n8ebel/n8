@@ -29,7 +29,7 @@ public:
     Service(std::shared_ptr<n8::Game> game);
     virtual ~Service();
         
-    virtual void OnNotify(Event* event) = 0;
+    virtual void OnNotify(std::shared_ptr<Event>) = 0;
     
 protected:
     std::shared_ptr<n8::Game> m_game;

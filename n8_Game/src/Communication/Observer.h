@@ -22,7 +22,7 @@ class Observer
 {
 public:
     virtual ~Observer() {}
-    virtual void OnNotify(Event* event) = 0;
+    virtual void OnNotify(std::shared_ptr<Event>) = 0;
 };
     
 }

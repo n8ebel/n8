@@ -34,7 +34,7 @@ namespace n8 {
         AudioService(std::shared_ptr<n8::Game>);
         ~AudioService();
         
-        void OnNotify(Event*);
+        void OnNotify(std::shared_ptr<Event>) override;
         
         void PlayMusic(Music* p_music);
         void PauseMusic();

@@ -21,7 +21,7 @@ n8::AudioService::~AudioService(){
     Log::Info(TAG, "Destructor");
 }
 
-void n8::AudioService::OnNotify(Event* p_event){
+void n8::AudioService::OnNotify(std::shared_ptr<Event> p_event){
     
 }
 

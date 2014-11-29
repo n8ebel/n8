@@ -49,6 +49,14 @@ class Game : public enable_shared_from_this<Game>{
 public:
     static const int DEFAULT_FPS = 200; /** < Defaul fps value */
     
+    static const int FAILURE_SDL_INIT = -1;
+    
+    static const int FAILURE_SDL_IMG = -2;
+    
+    static const int FAILURE_SDL_MIX = -3;
+    
+    static const int FAILURE_SDL_TTF = -4;
+    
     Game(const char*);
     ~Game();
     

@@ -36,7 +36,7 @@ void n8::RenderService::SetRenderMode(n8::RenderService::ERenderMode p_mode){
     m_renderMode = p_mode;
 }
 
-void n8::RenderService::OnNotify(Event* event){
+void n8::RenderService::OnNotify(std::shared_ptr<Event> event){
     
 }
 

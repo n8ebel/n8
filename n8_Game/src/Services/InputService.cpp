@@ -55,8 +55,7 @@ void n8::InputService::HandleInput(){
         
         if (m_event.type == SDL_QUIT || m_event.type == SDL_WINDOWEVENT_CLOSE)
 		{
-            Event event(ExitEvent);
-            Notify(&event);
+            Notify(make_shared<Event>(ExitEvent));
 		}
         
         if (!guiHasFocus) {
@@ -270,6 +269,6 @@ void n8::InputService::UnregisterMouseButtonUpAction(){
  *
  *  @param event The event that was broadcast by a registered subject
  */
-void n8::InputService::OnNotify(Event* event){
+void n8::InputService::OnNotify(std::shared_ptr<Event> event){
     
 }

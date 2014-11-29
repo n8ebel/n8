@@ -40,7 +40,7 @@ void n8::Subject::RemoveObserver(Observer* observer){
  *
  *  @param event The event that has occured and can be handled
  */
-void n8::Subject::Notify(n8::Event* event){
+void n8::Subject::Notify(std::shared_ptr<n8::Event> event){
     for (int i = 0; i < m_observers.size(); i++) {
         m_observers[i]->OnNotify(event);
     }

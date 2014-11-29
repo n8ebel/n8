@@ -165,7 +165,7 @@ void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
     }
 }
 
-void n8::StateManagerService::OnNotify(n8::Event* event){ }
+void n8::StateManagerService::OnNotify(std::shared_ptr<Event> event){ }
 
 void n8::StateManagerService::ResumeState(n8::State * state){
     auto inputService = m_game->getInputService();
