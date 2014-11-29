@@ -48,12 +48,10 @@ namespace n8 {
         
         void OnNotify(std::shared_ptr<Event>) override;
         
-        void Draw(Sprite*, int, int);
-        
         //renders texture at position with default size
-        void Draw(Texture* p_texture, int p_x, int p_y);
+        void Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_y);
         //renders texture over a specified area
-        void Draw(Texture* p_texture, int p_x, int p_y, int p_w, int p_h);
+        void Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_y, int p_w, int p_h);
         
         void DrawText(std::string p_text, Font* p_font, EColor p_color,int p_x, int p_y);
         

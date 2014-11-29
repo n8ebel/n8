@@ -41,31 +41,6 @@ void n8::RenderService::OnNotify(std::shared_ptr<Event> event){
 }
 
 /**
- *  Draws a sprite to the window surface at a specified location
- *
- *  @param p_sprite The sprite to draw
- *  @param p_x The x position where sprite will be drawn
- *  @param p_h The y position where sprite will be drawn
- *
- *  @see Sprite
- */
-void n8::RenderService::Draw(Sprite* p_sprite, int p_x, int p_y){
-    assert(p_sprite);
-    
-	
-	//Make a temporary rectangle to hold the offsets
-    SDL_Rect offset;
-    
-    //Give the offsets to the rectangle
-    offset.x = p_x;
-    offset.y = p_y;
-	
-    
-    //Blit the surface
-    SDL_BlitSurface( p_sprite->m_image, NULL, const_cast<SDL_Surface*>(&m_gameWindow->GetSurface()), &offset );
-}
-
-/**
  *  Renders a texture to the window renderer at a specified location
  *
  *  @param p_texture The texture to draw
@@ -74,7 +49,7 @@ void n8::RenderService::Draw(Sprite* p_sprite, int p_x, int p_y){
  *
  *  @see Texture
  */
-void n8::RenderService::Draw(n8::Texture* p_texture, int p_x, int p_y){
+void n8::RenderService::Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_y){
     
     SDL_Rect dest;
     
@@ -98,7 +73,7 @@ void n8::RenderService::Draw(n8::Texture* p_texture, int p_x, int p_y){
  *
  *  @see Texture
  */
-void n8::RenderService::Draw(n8::Texture* p_texture, int p_x, int p_y, int p_w, int p_h){
+void n8::RenderService::Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_y, int p_w, int p_h){
     
     SDL_Rect dest;
     

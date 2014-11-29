@@ -25,12 +25,7 @@ gui::GUI::~GUI(){
         mDialogStack.pop();
     }
     
-    for (auto element : m_guiElements){
-        if (element) {
-            delete element;
-            element = nullptr;
-        }
-    }
+    m_guiElements.clear();
     
     m_window = nullptr;
 }
@@ -39,7 +34,7 @@ gui::GUI::~GUI(){
  *
  *  @param p_newWidget The new element to add to the gui
  */
-void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
+void gui::GUI::AddElement(std::shared_ptr<GUIElement> p_newWidget){
     m_guiElements.push_back(p_newWidget);
 }
 
@@ -48,7 +43,7 @@ void gui::GUI::ShowDialog(gui::Dialog * pDialog){
     mDialogStack.push(pDialog);
 }
 
-void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
+void gui::GUI::RemoveElement(std::shared_ptr<GUIElement> p_widget){
     for (int i = 0; i < m_guiElements.size(); i++) {
         if (m_guiElements[i] == p_widget) {
             m_guiElements.erase(m_guiElements.begin() + i);
@@ -160,9 +155,9 @@ void gui::GUI::ProcessInput(SDL_Event* e){
         return;
     }
     
-    for(GUIElement* element : m_guiElements){
-        if (dynamic_cast<InputBox*>(element) != nullptr) {
-            dynamic_cast<InputBox*>(element)->HandleKeyboardInput(e);
+    for(auto element : m_guiElements){
+        if (dynamic_pointer_cast<std::shared_ptr<InputBox>>(element) != nullptr) {
+            dynamic_pointer_cast<InputBox>(element)->HandleKeyboardInput(e);
         }
     }
 }

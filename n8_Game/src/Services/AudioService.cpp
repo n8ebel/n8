@@ -32,19 +32,12 @@ void n8::AudioService::OnNotify(std::shared_ptr<Event> p_event){
  *
  *  @see Music
  */
-void n8::AudioService::PlayMusic(Music* p_music){
-    if (dynamic_cast<Music*>(dynamic_cast<Resource*>(p_music)) != nullptr){
-    //if(true){
-        if( Mix_PlayMusic(p_music->m_music, -1) == 0 ){
-            m_musicPlaying = true;
-        }
-        else{
-            std::string msg("Error playing music: %s\n", Mix_GetError());
-            Log::Error(TAG, msg);
-        }
+void n8::AudioService::PlayMusic(const std::shared_ptr<Music> p_music){
+    if( Mix_PlayMusic(p_music->m_music, -1) == 0 ){
+        m_musicPlaying = true;
     }
     else{
-        std::string msg(p_music->GetId() + " is not a valid Music resource");
+        std::string msg("Error playing music: %s\n", Mix_GetError());
         Log::Error(TAG, msg);
     }
 }
@@ -85,19 +78,12 @@ void n8::AudioService::StopMusic(){
  *
  *  @see SoundEffect
  */
-void n8::AudioService::PlaySoundEffect(SoundEffect* p_soundEffect){
-   if (dynamic_cast<SoundEffect*>(dynamic_cast<Resource*>(p_soundEffect)) != nullptr){
-    //if(true){
-        if( Mix_PlayChannel(-1, p_soundEffect->m_soundEffect, 0) != -1 ){
-            
-        }
-        else{
-            std::string msg("Error playing sound effect: %s\n", Mix_GetError());
-            Log::Error(TAG, msg);
-        }
+void n8::AudioService::PlaySoundEffect(const std::shared_ptr<SoundEffect> p_soundEffect){
+    if( Mix_PlayChannel(-1, p_soundEffect->m_soundEffect, 0) != -1 ){
+
     }
     else{
-        std::string msg(p_soundEffect->GetId()+ " is not valid sound effect");
+        std::string msg("Error playing sound effect: %s\n", Mix_GetError());
         Log::Error(TAG, msg);
     }
 }

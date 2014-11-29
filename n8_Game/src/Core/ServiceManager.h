@@ -42,8 +42,6 @@ public:
     void RegisterService(int, std::shared_ptr<Service>);
     void UnregisterService(int);
     
-    void RemoveAllServices();
-    
     const std::shared_ptr<Service> GetService(int) const;
     
 private:

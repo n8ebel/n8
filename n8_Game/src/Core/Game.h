@@ -69,7 +69,7 @@ public:
     void SetFPS(unsigned);
     void DefineWindowSize(unsigned, unsigned);
     
-    void StartState(State*);
+    void StartState(std::shared_ptr<n8::State>);
     void EndState();
     
     void ShowDebugInfo(bool);

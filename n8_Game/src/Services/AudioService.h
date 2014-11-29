@@ -36,12 +36,12 @@ namespace n8 {
         
         void OnNotify(std::shared_ptr<Event>) override;
         
-        void PlayMusic(Music* p_music);
+        void PlayMusic(const std::shared_ptr<Music> p_music);
         void PauseMusic();
         void Unpause();
         void StopMusic();
         
-        void PlaySoundEffect(SoundEffect* p_soundEffect);
+        void PlaySoundEffect(const std::shared_ptr<SoundEffect> p_soundEffect);
         
     private:
         bool m_musicPlaying; /**< Indicates if music is currently being played **/

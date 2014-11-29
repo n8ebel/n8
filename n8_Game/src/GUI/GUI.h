@@ -38,8 +38,8 @@ namespace gui{
         GUI(std::shared_ptr<n8::Window> p_window);
         ~GUI();
         
-        void AddElement(GUIElement*);
-        void RemoveElement(GUIElement*);
+        void AddElement(std::shared_ptr<GUIElement>);
+        void RemoveElement(std::shared_ptr<GUIElement>);
         
         void ShowDialog(Dialog*);
         
@@ -55,7 +55,7 @@ namespace gui{
     private:
         std::shared_ptr<n8::Window> m_window;
         
-        std::vector<GUIElement*> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
+        std::vector<std::shared_ptr<GUIElement>> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
         std::stack<Dialog*> mDialogStack;
         
         bool m_built;  /** < Flag to determine if the gui has been built by the user. */

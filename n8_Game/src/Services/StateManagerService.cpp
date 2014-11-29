@@ -41,8 +41,8 @@ n8::StateManagerService::~StateManagerService(){
  *
  *  @return True if the state was succesffuly stored in the map; False otherwise.
  */
-bool n8::StateManagerService::RegisterState(int identifier, State* state){
-    map<int, State*>::iterator ii = m_registeredStates.find(identifier);
+bool n8::StateManagerService::RegisterState(int identifier, std::shared_ptr<n8::State> state){
+    map<int, std::shared_ptr<n8::State>>::iterator ii = m_registeredStates.find(identifier);
     
     if(ii == m_registeredStates.end()){
         m_registeredStates[identifier] = state;
@@ -67,7 +67,7 @@ bool n8::StateManagerService::RegisterState(int identifier, State* state){
  *  @return True if a State was pushed onto the stack, false otherwise.
  *
  */
-bool n8::StateManagerService::PushState(n8::State* state){
+bool n8::StateManagerService::PushState(std::shared_ptr<n8::State> state){
     //if there is a state to push
     if(state != nullptr){
         
@@ -167,7 +167,7 @@ void n8::StateManagerService::ProcessState(Uint32 time, const std::shared_ptr<n8
 
 void n8::StateManagerService::OnNotify(std::shared_ptr<Event> event){ }
 
-void n8::StateManagerService::ResumeState(n8::State * state){
+void n8::StateManagerService::ResumeState(std::shared_ptr<n8::State> state){
     auto inputService = m_game->getInputService();
     if(inputService == nullptr){
         return;

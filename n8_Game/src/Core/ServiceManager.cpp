@@ -44,15 +44,6 @@ void n8::ServiceManager::UnregisterService(int key){
     }
 }
 
-/** RemoveAllServices
- *  Removes and deletes all services from the map
- */
-void n8::ServiceManager::RemoveAllServices(){
-    m_registeredServices.clear();
-}
-
-
-
 /** GetService
  *  Returns the service specified by the input key
  *

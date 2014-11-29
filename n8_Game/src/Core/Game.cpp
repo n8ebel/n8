@@ -194,9 +194,7 @@ void n8::Game::Start(){
 /** Stop
  *  Stops the running game loop
  */
-void n8::Game::Stop(){
-    m_serviceManager.RemoveAllServices();
-}
+void n8::Game::Stop(){ }
 
 /** Changes the frame per second value for the game loop
  *
@@ -226,7 +224,7 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
 }
 
 
-void n8::Game::StartState(n8::State* newState){
+void n8::Game::StartState(std::shared_ptr<n8::State> newState){
     getStateManagerService()->PushState(newState);
 }
 

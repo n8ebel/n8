@@ -46,7 +46,7 @@ namespace n8{
         ResourceManager(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window> p_window, std::string p_path);
         ~ResourceManager();
         
-        Resource* GetResource(std::string);
+        std::shared_ptr<Resource> GetResource(std::string);
         
         void OnNotify(std::shared_ptr<Event>) override;
         
@@ -73,7 +73,7 @@ namespace n8{
         
         std::string m_resourcesListPath; /**< Filepath to the resource list */
         
-        std::map<std::string,Resource*> m_loadedResources;  /**< Stores all images loaded by the system  */
+        std::map<std::string, std::shared_ptr<Resource>> m_loadedResources;  /**< Stores all images loaded by the system  */
         
         std::shared_ptr<n8::Window> m_gameWindow;
         

@@ -32,15 +32,7 @@ n8::ResourceManager::ResourceManager(std::shared_ptr<n8::Game> game, std::shared
 
 n8::ResourceManager::~ResourceManager() {
     Log::Info(TAG, "Destructor");
-    
-	map<string, Resource*>::iterator ii;
-    
-    for (ii=m_loadedResources.begin(); ii != m_loadedResources.end(); ii++) {
-        Resource* tmp = ii->second;
-        ii->second = nullptr;
-        delete tmp;
-    }
-    
+    m_loadedResources.clear();
 }
 
 void n8::ResourceManager::LoadResources(){
@@ -159,7 +151,7 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     }
     
     if (texture != nullptr) {
-        m_loadedResources[p_id] = new Texture(p_filename, texture, texW, texH);
+        m_loadedResources[p_id] = std::make_shared<Texture>(p_filename, texture, texW, texH);
         Log::Debug(TAG, "  Successfully loaded texture: " + p_filename);
     }
 }
@@ -172,7 +164,7 @@ void n8::ResourceManager::LoadMusic(std::string p_filename, std::string p_id){
     Mix_Music* music = Mix_LoadMUS(p_filename.c_str());
     
     if(music != nullptr){
-        m_loadedResources[p_id] = new Music(p_filename, music);
+        m_loadedResources[p_id] = std::make_shared<Music>(p_filename, music);
         Log::Debug(TAG, "  Successfully loaded music: " + p_filename);
     }
     else{
@@ -190,7 +182,7 @@ void n8::ResourceManager::LoadSoundEffect(std::string p_filename, std::string p_
     Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
     
     if(soundEffect != nullptr){
-        m_loadedResources[p_id] = new SoundEffect(p_filename, soundEffect);
+        m_loadedResources[p_id] = std::make_shared<SoundEffect>(p_filename, soundEffect);
         Log::Debug(TAG, "  Successfully loaded sound effect: " + p_filename);
     }
     else{
@@ -209,7 +201,7 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
     TTF_Font* font = TTF_OpenFont( p_filename.c_str(), p_size );
     
     if(font != nullptr){
-        m_loadedResources[p_id] = new Font(p_filename, font);
+        m_loadedResources[p_id] = std::make_shared<Font>(p_filename, font);
         Log::Debug(TAG, "  Successfully loaded font: " + p_filename);
     }
     else{
@@ -226,7 +218,7 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
  *
  *  @return Pointer to a resource object matching the passed key, nullptr otherwise
  */
-n8::Resource* n8::ResourceManager::GetResource(std::string p_resourceID){
+std::shared_ptr<n8::Resource> n8::ResourceManager::GetResource(std::string p_resourceID){
     return m_loadedResources[p_resourceID];
 }
 
