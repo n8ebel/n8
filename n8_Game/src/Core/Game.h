@@ -45,15 +45,15 @@ namespace n8 {
      *
      *  Game is the core class for the n8 game framework.  It controls timing, setup, shutdown, and the game loop.  This class also initializes core game services using configuration files.
      */
-class Game{
+class Game : public enable_shared_from_this<Game>{
 public:
     static const int DEFAULT_FPS = 200; /** < Defaul fps value */
     
-    static void Init();
-    static void Shutdown();
-    
     Game(const char*);
     ~Game();
+    
+    void Init();
+    void Shutdown();
     
     void Start();
     void Stop();

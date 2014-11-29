@@ -26,7 +26,7 @@ namespace n8{
 class InputService : public Service {
     friend class StateManagerService;
 public:
-    InputService(Game*);
+    InputService(std::shared_ptr<n8::Game>);
     
     ~InputService();
     

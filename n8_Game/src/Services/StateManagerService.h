@@ -28,7 +28,7 @@ namespace n8{
 class StateManagerService : public Service{
     
 public:
-    StateManagerService(Game*);
+    StateManagerService(std::shared_ptr<n8::Game>);
     ~StateManagerService();
     
     

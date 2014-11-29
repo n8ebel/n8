@@ -31,7 +31,7 @@ namespace n8 {
      */
     class AudioService : public Service{
     public:
-        AudioService(Game*);
+        AudioService(std::shared_ptr<n8::Game>);
         ~AudioService();
         
         void OnNotify(Event*);

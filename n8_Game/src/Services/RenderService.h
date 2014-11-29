@@ -41,7 +41,7 @@ namespace n8 {
         
         enum class EColor{Black,White};
         
-        RenderService(Game*, Window*);
+        RenderService(std::shared_ptr<n8::Game>, Window*);
         ~RenderService();
         
         void SetRenderMode(ERenderMode);

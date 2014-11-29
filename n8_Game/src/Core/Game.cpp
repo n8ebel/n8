@@ -27,27 +27,6 @@ n8::Game::Game(const char* configFile) : m_serviceManager(){
     m_showDebugInfo = false;
     
     m_resourceConfigPath = configFile;
-    
-    InitializeDirectoryPath();
-    ProcessConfigFile();
-    InitializeResourcesPath();
-    
-    Log::GetInstance();
-    
-        
-    auto resourceManagerService = std::make_shared<ResourceManager>(this, &m_window, m_resourceConfigPath.c_str());
-    auto inputService = std::make_shared<InputService>(this);
-    auto stateManagerService = std::make_shared<StateManagerService>(this);
-    auto renderService = std::make_shared<RenderService>(this, &m_window);
-    auto audioService = std::make_shared<AudioService>(this);
-    
-    inputService->AddObserver(stateManagerService.get());
-    
-    m_serviceManager.RegisterService(ServiceManager::INPUT, inputService);
-    m_serviceManager.RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
-    m_serviceManager.RegisterService(ServiceManager::RESOURCES, resourceManagerService);
-    m_serviceManager.RegisterService(ServiceManager::RENDER, renderService);
-    m_serviceManager.RegisterService(ServiceManager::AUDIO, audioService);
 }
 
 /** Destructor */
@@ -117,6 +96,26 @@ void n8::Game::Init(){
         else{
             Log::Info(TAG, "SDL_ttf Initialized");
         }
+        
+        InitializeDirectoryPath();
+        ProcessConfigFile();
+        InitializeResourcesPath();
+        
+        Log::GetInstance();
+        
+        auto resourceManagerService = std::make_shared<ResourceManager>(shared_from_this(), &m_window, m_resourceConfigPath.c_str());
+        auto inputService = std::make_shared<InputService>(shared_from_this());
+        auto stateManagerService = std::make_shared<StateManagerService>(shared_from_this());
+        auto renderService = std::make_shared<RenderService>(shared_from_this(), &m_window);
+        auto audioService = std::make_shared<AudioService>(shared_from_this());
+        
+        inputService->AddObserver(stateManagerService.get());
+        
+        m_serviceManager.RegisterService(ServiceManager::INPUT, inputService);
+        m_serviceManager.RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
+        m_serviceManager.RegisterService(ServiceManager::RESOURCES, resourceManagerService);
+        m_serviceManager.RegisterService(ServiceManager::RENDER, renderService);
+        m_serviceManager.RegisterService(ServiceManager::AUDIO, audioService);
     }
 }
 

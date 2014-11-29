@@ -18,20 +18,10 @@
  *  @param p_window Pointer to game window.  Used to load image resources.
  *  @param p_path Path to resources directory
  */
-n8::ResourceManager::ResourceManager(Game* game, Window* p_window, std::string p_path) : Service(game){
-	// TODO Auto-generated constructor stub
-    
+n8::ResourceManager::ResourceManager(std::shared_ptr<n8::Game> game, Window* p_window, std::string p_path) : Service(game){
     
     m_gameWindow = p_window;
-    //m_screenSurface = screen;
-    
     m_resourcesListPath = p_path;
-    
-    /*
-    m_imagesDirectoryPath = path +IMAGES_DIRECTORY_SUFFIX;
-    m_texturesDirectoryPath = path + TEXTURES_DIRECTORY_SUFFIX;
-    m_audioDirectoryPath = path + AUDIO_DIRECTORY_SUFFIX;
-    */
     
     LoadResources();
 }

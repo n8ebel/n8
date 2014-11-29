@@ -14,7 +14,7 @@
  *
  *  @param p_window Pointer the the game's window object
  */
-n8::RenderService::RenderService(Game* game, Window* p_window) : Service(game){
+n8::RenderService::RenderService(std::shared_ptr<n8::Game> game, Window* p_window) : Service(game){
     m_gameWindow = p_window;
     m_renderMode = ETexture;
 }

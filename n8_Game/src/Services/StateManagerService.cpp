@@ -16,7 +16,7 @@
 #define TAG "StateManagerService"
 
 
-n8::StateManagerService::StateManagerService(Game* game) : Service(game){
+n8::StateManagerService::StateManagerService(std::shared_ptr<n8::Game> game) : Service(game){
     Log::Info(TAG, "Constructor");
 }
 

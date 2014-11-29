@@ -19,7 +19,7 @@
 /** Default constructor
  *  Initializes event_
  */
-n8::InputService::InputService(Game* game) : Service(game){
+n8::InputService::InputService(std::shared_ptr<n8::Game> game) : Service(game){
     Log::Info(TAG, "Constructor");
     //m_event = new SDL_Event;
     

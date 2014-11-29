@@ -26,13 +26,13 @@ namespace n8 {
      */
 class Service : public Subject, public Observer{
 public:
-    Service(Game* game){m_game = game;}
-    virtual ~Service() {};
+    Service(std::shared_ptr<n8::Game> game);
+    virtual ~Service();
         
     virtual void OnNotify(Event* event) = 0;
     
 protected:
-    Game* m_game;
+    std::shared_ptr<n8::Game> m_game;
 
 };
     
