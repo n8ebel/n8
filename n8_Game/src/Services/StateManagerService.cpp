@@ -140,13 +140,13 @@ ID n8::StateManagerService::GetCurrentStateId(){
  *  @param screen The screen canvas for rendering
  *
  */
-void n8::StateManagerService::ProcessState(Uint32 time, Window* screen){
+void n8::StateManagerService::ProcessState(Uint32 time, const std::shared_ptr<n8::Window> screen){
     
     if(time > 0 && screen){
     
         if(m_stateStack.size() > 0){
             m_stateStack.top()->Update(time);
-            m_stateStack.top()->Render(screen);
+            m_stateStack.top()->Render();
         }
         
         if(m_stateStack.size() > 0){

@@ -11,7 +11,7 @@
 #include "GUI.h"
 
 /** Constructor */
-gui::GUI::GUI(n8::Window* p_window) :
+gui::GUI::GUI(std::shared_ptr<n8::Window> p_window) :
                     m_window(p_window),
                     m_hasFocus(false),
                     m_built(false)
@@ -132,18 +132,18 @@ bool gui::GUI::CheckMove(int p_x, int p_y){
  *
  *  @param p_window The game's window that can be drawn to
  */
-void gui::GUI::Draw(n8::Window* p_window){
+void gui::GUI::Draw(){
     
     // Draw the gui elements to the screen
     for (int i = 0; i < m_guiElements.size(); i++) {
-        m_guiElements[i]->Draw(p_window);
+        m_guiElements[i]->Draw(m_window);
     }
     
     // Draw dialogs after rest of gui elements because there is an implicit z-order
     // with dialogs on top of other elements
     //
     if(!mDialogStack.empty()){
-        mDialogStack.top()->Draw(p_window);
+        mDialogStack.top()->Draw(m_window);
     }
 }
 

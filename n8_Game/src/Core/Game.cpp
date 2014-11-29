@@ -27,6 +27,8 @@ n8::Game::Game(const char* configFile) : m_serviceManager(){
     m_showDebugInfo = false;
     
     m_resourceConfigPath = configFile;
+    
+    m_window = std::make_shared<n8::Window>();
 }
 
 /** Destructor */
@@ -107,10 +109,10 @@ void n8::Game::Init(){
         
         Log::GetInstance();
         
-        auto resourceManagerService = std::make_shared<ResourceManager>(shared_from_this(), &m_window, m_resourceConfigPath.c_str());
+        auto resourceManagerService = std::make_shared<ResourceManager>(shared_from_this(), m_window, m_resourceConfigPath.c_str());
         auto inputService = std::make_shared<InputService>(shared_from_this());
         auto stateManagerService = std::make_shared<StateManagerService>(shared_from_this());
-        auto renderService = std::make_shared<RenderService>(shared_from_this(), &m_window);
+        auto renderService = std::make_shared<RenderService>(shared_from_this(), m_window);
         auto audioService = std::make_shared<AudioService>(shared_from_this());
         
         inputService->AddObserver(stateManagerService.get());
@@ -181,7 +183,7 @@ void n8::Game::Start(){
         
         
         //process state
-        stateManager->ProcessState(m_timer.GetTime(), &m_window);
+        stateManager->ProcessState(m_timer.GetTime(), m_window);
                 
         m_timer.SyncGame(m_fps);  //ensures proper fps
         
@@ -220,8 +222,7 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
     m_windowWidth = width;
     m_windowHeight = height;
     
-    assert(&m_window);
-    m_window.ResizeWindow(m_windowWidth,m_windowHeight);
+    m_window->ResizeWindow(m_windowWidth,m_windowHeight);
 }
 
 
@@ -231,6 +232,10 @@ void n8::Game::StartState(n8::State* newState){
 
 void n8::Game::EndState(){
     getStateManagerService()->PopState();
+}
+
+const std::shared_ptr<n8::Window> n8::Game::getWindow() const{
+    return m_window;
 }
 
 const std::shared_ptr<n8::ResourceManager> n8::Game::getResourceManager() const{

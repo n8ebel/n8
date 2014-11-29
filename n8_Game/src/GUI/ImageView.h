@@ -25,7 +25,7 @@ public:
     
     ~ImageView();
     
-    void Draw(n8::Window*) override;
+    void Draw(const std::shared_ptr<n8::Window>) override;
     bool Update(Uint32) override;
     
 private:

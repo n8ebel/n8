@@ -45,7 +45,7 @@ public:
     virtual void OnPause() = 0;
     
     virtual void Update(Uint32 currentTime);
-    virtual void Render(Window* window);
+    virtual void Render();
     
     const std::shared_ptr<gui::GUI> GetGUI() const;
     

@@ -28,7 +28,7 @@ namespace gui {
         InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint);
         ~InputBox();
         
-        void Draw(n8::Window*) override;
+        void Draw(const std::shared_ptr<n8::Window>) override;
         
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual void HandleKeyboardInput(SDL_Event*);
@@ -53,7 +53,7 @@ namespace gui {
         
         unsigned m_lastTime; /** < Tracks time since cursor was toggled on or off */
         
-        void UpdateTexture(n8::Window*);
+        void UpdateTexture(const std::shared_ptr<n8::Window>);
     };
 }
 

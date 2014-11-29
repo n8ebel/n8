@@ -74,6 +74,7 @@ public:
     
     void ShowDebugInfo(bool);
     
+    const std::shared_ptr<n8::Window> getWindow() const;
     const std::shared_ptr<ResourceManager> getResourceManager() const;
     const std::shared_ptr<InputService> getInputService() const;
     const std::shared_ptr<StateManagerService> getStateManagerService() const;
@@ -84,7 +85,7 @@ private:
     const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";  /** < Default resource file name */
     
     ServiceManager m_serviceManager; /** < Game service manager */
-    n8::Window m_window; /** < Game window */
+    std::shared_ptr<n8::Window> m_window; /** < Game window */
     n8::Timer m_timer; /** < Game timer */
     bool m_showDebugInfo;
      

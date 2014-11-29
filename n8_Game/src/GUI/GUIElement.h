@@ -63,7 +63,7 @@ public:
     
 //Pure virtual methods
     
-    virtual void Draw(n8::Window*) = 0;  /** < Renders the element to the screen. **/
+    virtual void Draw(const std::shared_ptr<n8::Window>) = 0;  /** < Renders the element to the screen. **/
     
     virtual bool CheckMouseClickDown(int p_x, int p_y);  /** Checks if a mouse click down action took place within the element and responds appropriately.  **/
     virtual bool CheckMouseClickUp(int p_x, int p_y);  /** Checks if a mouse click up action took place within the element and responds appropriately.  **/

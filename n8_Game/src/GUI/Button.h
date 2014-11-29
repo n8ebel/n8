@@ -47,7 +47,7 @@ class Button : public GUIElement{
     
         void SetTextSize(int);
     
-        void Draw(n8::Window*) override;
+        void Draw(const std::shared_ptr<n8::Window>) override;
         bool Update(Uint32 p_currentTime) override;
     
     private:

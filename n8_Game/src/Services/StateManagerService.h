@@ -41,7 +41,7 @@ public:
     int GetStackSize();
     ID GetCurrentStateId();
     
-    void ProcessState(Uint32 time, Window* screen);
+    void ProcessState(Uint32 time, const std::shared_ptr<n8::Window> screen);
     
     void OnNotify(std::shared_ptr<Event>) override;
     

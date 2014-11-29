@@ -76,7 +76,7 @@ void gui::Button::SetTextSize(int textSize){
  *
  *  @param p_window Pointer to the game window object
  */
-void gui::Button::Draw(n8::Window* p_window){
+void gui::Button::Draw(const std::shared_ptr<n8::Window> p_window){
     
     SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     

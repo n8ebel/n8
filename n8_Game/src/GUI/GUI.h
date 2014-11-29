@@ -35,7 +35,7 @@ namespace gui{
      */
     class GUI {
     public:
-        GUI(n8::Window* p_window);
+        GUI(std::shared_ptr<n8::Window> p_window);
         ~GUI();
         
         void AddElement(GUIElement*);
@@ -49,11 +49,11 @@ namespace gui{
         bool HasFocus();
         
         
-        void Draw(n8::Window*);
+        void Draw();
         void ProcessInput(SDL_Event*);
         bool Update(Uint32 p_currentTime);
     private:
-        n8::Window* m_window;
+        std::shared_ptr<n8::Window> m_window;
         
         std::vector<GUIElement*> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
         std::stack<Dialog*> mDialogStack;

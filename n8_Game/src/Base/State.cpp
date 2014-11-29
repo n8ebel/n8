@@ -13,7 +13,7 @@
 
 n8::State::State(std::shared_ptr<n8::Game> game){
     m_game = game;
-    m_gui = std::make_shared<gui::GUI>(const_cast<n8::Window*>(game->getRenderService()->GetWindow()));
+    m_gui = std::make_shared<gui::GUI>(game->getWindow());
 }
 
 n8::State::~State(){ m_game = nullptr; }
@@ -26,7 +26,7 @@ void n8::State::Update(Uint32 currentTime){
     m_gui->Update(currentTime);
 }
 
-void n8::State::Render(n8::Window *window){
-    m_gui->Draw(window);
+void n8::State::Render() {
+    m_gui->Draw();
     m_game->getRenderService()->PostToScreen();
 }

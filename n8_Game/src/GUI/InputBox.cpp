@@ -106,7 +106,7 @@ bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
  *  @param p_window Pointer to the game window passed from
  *   {@link State#Render(n8::Window*) State.Render(n8::Window*)}
  */
-void gui::InputBox::Draw(n8::Window* p_window){
+void gui::InputBox::Draw(const std::shared_ptr<n8::Window> p_window){
     
     if(m_updateTexture){
         UpdateTexture(p_window);
@@ -241,7 +241,7 @@ std::string gui::InputBox::GetText(){
 /** Updates the text texture based on the current
  *   input within the inputbox
  */
-void gui::InputBox::UpdateTexture(n8::Window* p_window){
+void gui::InputBox::UpdateTexture(const std::shared_ptr<n8::Window> p_window){
     
     //Text is not empty
     if( m_inputString.length() > 0)

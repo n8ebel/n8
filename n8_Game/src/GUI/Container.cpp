@@ -107,7 +107,7 @@ void gui::Container::SetStyle(Style p_style){
  *
  *  @param p_window The game's window that can be drawn to
  */
-void gui::Container::Draw(n8::Window* p_window){
+void gui::Container::Draw(const std::shared_ptr<n8::Window> p_window){
     SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     
     SDL_SetRenderDrawColor( renderer, m_style.GetColor(Style::EStyleColor::Container).GetR(), m_style.GetColor(Style::EStyleColor::Container).GetG(), m_style.GetColor(Style::EStyleColor::Container).GetB(), m_style.GetColor(Style::EStyleColor::Container).GetA() );

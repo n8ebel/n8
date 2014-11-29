@@ -43,7 +43,7 @@ namespace n8{
      */
     class ResourceManager : public Service{
     public:
-        ResourceManager(std::shared_ptr<n8::Game>, Window* p_window, std::string p_path);
+        ResourceManager(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window> p_window, std::string p_path);
         ~ResourceManager();
         
         Resource* GetResource(std::string);
@@ -75,7 +75,7 @@ namespace n8{
         
         std::map<std::string,Resource*> m_loadedResources;  /**< Stores all images loaded by the system  */
         
-        Window* m_gameWindow;
+        std::shared_ptr<n8::Window> m_gameWindow;
         
         SDL_Surface* LoadOptimizedImage(std::string filename);
         

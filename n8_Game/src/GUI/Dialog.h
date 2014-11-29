@@ -61,7 +61,7 @@ public:
     virtual void Build() = 0;
 
     bool Update(Uint32 p_currentTime);
-    void Draw(n8::Window*) override;
+    void Draw(const std::shared_ptr<n8::Window>) override;
     
 protected:
     

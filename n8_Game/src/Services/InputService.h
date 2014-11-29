@@ -35,15 +35,11 @@ public:
     bool KeyIsDown(int key);
     bool KeyIsUp(int key);
     
-    void RegisterKeyUpCommand(int,Command*);
     void RegisterKeyUpAction(int, std::function<void()> func);
-    void RegisterKeyDownCommand(int,Command*);
     void RegisterKeyDownAction(int, std::function<void()> func);
     
-    void UnregisterKeyCommands();
     void UnregisterKeyActions();
     
-    void RegisterMouseMoveAction(Command*);
     void RegisterMouseMoveAction(std::function<void(int, int)> func);
     void UnregisterMouseMoveAction();
     
@@ -57,15 +53,12 @@ public:
     
 private:
     
-   
-    
     SDL_Event m_event; /** < SDL_Event pointer to get dequeued events */
     
     std::shared_ptr<gui::GUI> m_userInterface;
     
     bool m_keysHeld[323];  /** < Array to store whether or not a key is being held down **/
-    Command* m_registeredKeyDownCommands[323];
-    Command* m_registeredKeyUpCommands[323];
+    
     std::function<void()> m_registeredKeyDownActions[323];
     std::function<void()> m_registeredKeyUpActions[323];
     

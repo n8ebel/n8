@@ -159,7 +159,7 @@ bool gui::Dialog::Update(Uint32 p_currentTime){
     return mIsOpen;
 }
 
-void gui::Dialog::Draw(n8::Window* pWindow){
+void gui::Dialog::Draw(const std::shared_ptr<n8::Window> pWindow){
     
     Container::Draw(pWindow);
     

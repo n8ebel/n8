@@ -17,7 +17,7 @@ gui::ImageView::~ImageView(){
     
 }
 
-void gui::ImageView::Draw(n8::Window* p_window){
+void gui::ImageView::Draw(const std::shared_ptr<n8::Window> p_window){
     
 }
 
