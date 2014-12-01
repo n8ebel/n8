@@ -72,9 +72,9 @@ protected:
     
     EResultCode mResult;
     
-    gui::Button* mPositiveButton;
-    gui::Button* mNegativeButton;
-    gui::Button* mNeutralButton;
+    std::shared_ptr<gui::Button> mPositiveButton;
+    std::shared_ptr<gui::Button> mNegativeButton;
+    std::shared_ptr<gui::Button> mNeutralButton;
     
     std::function<void(EResultCode)> mDismissedListener;
     std::function<void()> mPositiveListener;

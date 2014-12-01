@@ -32,7 +32,7 @@ public:
         
     private:
         std::string mHintText;
-        InputDialog* mDialog;
+        std::shared_ptr<InputDialog> mDialog;
     };
     
     void SetHintText(std::string);
@@ -51,7 +51,7 @@ private:
     
     
     
-    InputBox* mInputBox;
+    std::shared_ptr<InputBox> mInputBox;
     
 };
     

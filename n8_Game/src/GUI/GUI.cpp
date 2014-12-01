@@ -38,7 +38,7 @@ void gui::GUI::AddElement(std::shared_ptr<GUIElement> p_newWidget){
     m_guiElements.push_back(p_newWidget);
 }
 
-void gui::GUI::ShowDialog(gui::Dialog * pDialog){
+void gui::GUI::ShowDialog(std::shared_ptr<gui::Dialog> pDialog){
     pDialog->SetIsOpen();
     mDialogStack.push(pDialog);
 }
@@ -148,7 +148,7 @@ void gui::GUI::Draw(){
  */
 void gui::GUI::ProcessInput(SDL_Event* e){
     if (!mDialogStack.empty()) {
-        InputDialog* inputDialog = dynamic_cast<InputDialog*>(mDialogStack.top());
+        auto inputDialog = dynamic_pointer_cast<InputDialog>(mDialogStack.top());
         if (inputDialog) {
             inputDialog->HandleKeyboardInput(e);
         }

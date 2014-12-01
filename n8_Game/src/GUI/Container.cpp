@@ -30,13 +30,6 @@ gui::Container::~Container(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
-    
-    for (auto element : m_guiElements){
-        if (element) {
-            delete element;
-            element = nullptr;
-        }
-    }
 }
 
 /** Checks all added elements for whether or not the mouse 
@@ -123,7 +116,7 @@ void gui::Container::Draw(const std::shared_ptr<n8::Window> p_window){
  *
  *  @param p_widget The gui element to add
  */
-void gui::Container::AddElement(GUIElement* pElement){
+void gui::Container::AddElement(std::shared_ptr<GUIElement> pElement){
     if (pElement) {
         pElement->OffsetPosition(m_x, m_y);
         m_guiElements.push_back(pElement);

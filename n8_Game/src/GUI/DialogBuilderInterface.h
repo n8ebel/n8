@@ -19,7 +19,7 @@ public:
     
     DialogBuilderInterface(std::shared_ptr<n8::Window>);
     
-    virtual Dialog* Create();
+    virtual std::shared_ptr<Dialog> Create();
     
     virtual DialogBuilderInterface* SetHeight(int height);
     virtual DialogBuilderInterface* SetWidth(int width);
@@ -38,7 +38,7 @@ public:
     virtual DialogBuilderInterface* SetOnDismissListener(std::function<void(Dialog::EResultCode)>);
     
 protected:
-    Dialog* mDialog;
+    std::shared_ptr<Dialog> mDialog;
     
 private:
     

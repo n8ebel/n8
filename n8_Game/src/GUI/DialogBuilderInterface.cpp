@@ -16,7 +16,7 @@ namespace gui {
 
     DialogBuilderInterface::DialogBuilderInterface(std::shared_ptr<n8::Window> pWindow){ }
 
-    Dialog* DialogBuilderInterface::Create(){
+    std::shared_ptr<Dialog> DialogBuilderInterface::Create(){
         mDialog->Build();
         return mDialog;
     }

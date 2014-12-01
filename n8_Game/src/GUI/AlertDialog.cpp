@@ -13,7 +13,7 @@ namespace gui {
     AlertDialog::Builder::Builder(std::shared_ptr<n8::Window> pWindow) : DialogBuilderInterface(pWindow){
         int x = pWindow->GetWidth()/2 - Style::DEFAULT_DIALOG_WIDTH/2;
         int y = pWindow->GetHeight()/2 - Style::DEFAULT_DIALOG_HEIGHT/2;
-        mDialog = new AlertDialog(pWindow, x, y, Style::DEFAULT_DIALOG_WIDTH, Style::DEFAULT_DIALOG_HEIGHT);
+        mDialog = std::make_shared<AlertDialog>(pWindow, x, y, Style::DEFAULT_DIALOG_WIDTH, Style::DEFAULT_DIALOG_HEIGHT);
         DialogBuilderInterface::mDialog = mDialog;
     }
     

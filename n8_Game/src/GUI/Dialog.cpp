@@ -28,21 +28,6 @@ gui::Dialog::~Dialog(){
     mPositiveListener = nullptr;
     mNegativeListener = nullptr;
     mNeutralListener = nullptr;
-    if (mPositiveButton) {
-        delete mPositiveButton;
-        mPositiveButton = nullptr;
-    }
-    
-    if (mNegativeButton) {
-        delete mNegativeButton;
-        mNegativeButton = nullptr;
-    }
-    
-    if (mNeutralButton) {
-        delete mNeutralButton;
-        mNeutralButton = nullptr;
-    }
-    
 }
 
 void gui::Dialog::SetIsOpen(){
@@ -89,7 +74,7 @@ void gui::Dialog::SetPositiveButton(std::string text, std::function<void()> func
 }
 
 void gui::Dialog::SetPositiveButton(std::string text, int width, int height, std::function<void()> function){
-    mPositiveButton = new Button(m_window, "positive", text, 0, 0, width, height);
+    mPositiveButton = std::make_shared<Button>(m_window, "positive", text, 0, 0, width, height);
     mPositiveButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
     mPositiveListener = function;
     SetOnPositiveClickedListener(function);
@@ -100,7 +85,7 @@ void gui::Dialog::SetNegativeButton(std::string text, std::function<void()> func
 }
 
 void gui::Dialog::SetNegativeButton(std::string text, int width, int height, std::function<void()> function){
-    mNegativeButton = new Button(m_window, "negative", text, 0, 0, width, height);
+    mNegativeButton = std::make_shared<Button>(m_window, "negative", text, 0, 0, width, height);
     mNegativeButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
     mNegativeListener = function;
     SetOnNegativeClickedListener(function);
@@ -111,7 +96,7 @@ void gui::Dialog::SetNeutralButton(std::string text, std::function<void()> funct
 }
 
 void gui::Dialog::SetNeutralButton(std::string text, int width, int height, std::function<void()> function){
-    mNeutralButton = new Button(m_window, "neutral", text, 0, 0, width, height);
+    mNeutralButton = std::make_shared<Button>(m_window, "neutral", text, 0, 0, width, height);
     mNeutralButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
     SetOnNeutralClickedListener(function);
 }
