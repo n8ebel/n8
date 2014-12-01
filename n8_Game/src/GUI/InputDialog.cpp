@@ -36,7 +36,7 @@ namespace gui {
     void gui::InputDialog::SetHintText(std::string hintText){
         mInputBox->SetHintText(hintText);
     }
-    std::string gui::InputDialog::GetInput(){
+    std::string gui::InputDialog::GetInput() const{
         if (mInputBox) {
             return mInputBox->GetText();
         }
@@ -44,7 +44,7 @@ namespace gui {
         return "Error: InputDialog.mInputBox was null";
     }
     
-    void InputDialog::HandleKeyboardInput(SDL_Event* event){
+    void InputDialog::HandleKeyboardInput(SDL_Event* event) const{
         if (mInputBox) {
             mInputBox->HandleKeyboardInput(event);
         }

@@ -137,11 +137,15 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     else
     {
         //Create texture from surface pixels
-        texture = SDL_CreateTextureFromSurface( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), loadedSurface );
+        auto renderer = const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer());
+        texture = SDL_CreateTextureFromSurface( renderer, loadedSurface );
         if( texture == nullptr )
         {
-            std::string msg( "  Unable to create texture from " + p_filename + "SDL Error: " +SDL_GetError() );
+            std::string msg( "  Unable to create texture from " + p_filename + " SDL Error: " +SDL_GetError() );
             Log::Error(TAG, msg);
+            if (renderer == nullptr) {
+                Log::Error(TAG, "    Window was null");
+            }
         }
         
         texW = loadedSurface->w;

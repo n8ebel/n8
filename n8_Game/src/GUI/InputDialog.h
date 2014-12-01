@@ -36,8 +36,8 @@ public:
     };
     
     void SetHintText(std::string);
-    std::string GetInput();
-    void HandleKeyboardInput(SDL_Event*);
+    std::string GetInput() const;
+    void HandleKeyboardInput(SDL_Event*) const;
     
     InputDialog(std::shared_ptr<n8::Window> p_window, std::string, int p_x, int p_y, int p_w, int p_h);
     ~InputDialog();
@@ -48,8 +48,6 @@ private:
     static const Uint16 INPUTBOX_VERTICAL_MARGIN;
     
     static const Uint16 INPUTBOX_HEIGHT;
-    
-    
     
     std::shared_ptr<InputBox> mInputBox;
     

@@ -159,7 +159,7 @@ namespace gui {
      *
      *  @return The specified color if it is valid, or a default color
      */
-    n8::Color Style::GetColor(EStyleColor p_color){
+    n8::Color Style::GetColor(EStyleColor p_color) const{
         if (p_color == EStyleColor::Button) {
             return m_buttonColor;
         }

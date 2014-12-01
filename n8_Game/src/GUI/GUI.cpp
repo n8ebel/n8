@@ -89,7 +89,7 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
  *
  *  @return bool Returns true if any element was clicked up
  */
-bool gui::GUI::CheckClickUp(int p_x, int p_y){
+bool gui::GUI::CheckClickUp(int p_x, int p_y) const{
     if(!mDialogStack.empty()){
         return mDialogStack.top()->CheckMouseClickUp(p_x, p_y);
     }
@@ -108,7 +108,7 @@ bool gui::GUI::CheckClickUp(int p_x, int p_y){
  *
  *  @return bool Returns True if any element was moved over
  */
-bool gui::GUI::CheckMove(int p_x, int p_y){
+bool gui::GUI::CheckMove(int p_x, int p_y) const{
     if(!mDialogStack.empty()){
         return mDialogStack.top()->CheckMouseMove(p_x, p_y);
     }
@@ -127,7 +127,7 @@ bool gui::GUI::CheckMove(int p_x, int p_y){
  *
  *  @param p_window The game's window that can be drawn to
  */
-void gui::GUI::Draw(){
+void gui::GUI::Draw() const{
     
     // Draw the gui elements to the screen
     for (int i = 0; i < m_guiElements.size(); i++) {
@@ -146,7 +146,7 @@ void gui::GUI::Draw(){
  *
  *  @param e The event to check
  */
-void gui::GUI::ProcessInput(SDL_Event* e){
+void gui::GUI::ProcessInput(SDL_Event* e) const{
     if (!mDialogStack.empty()) {
         auto inputDialog = dynamic_pointer_cast<InputDialog>(mDialogStack.top());
         if (inputDialog) {
@@ -192,6 +192,6 @@ bool gui::GUI::Update(Uint32 p_currentTime){
  *
  *  @return bool True if the gui has user focus
  */
-bool gui::GUI::HasFocus(){
+bool gui::GUI::HasFocus() const{
     return m_hasFocus;
 }

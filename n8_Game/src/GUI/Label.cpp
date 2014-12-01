@@ -48,7 +48,7 @@ gui::Label::~Label(){
  *
  *  @param p_window Pointer to the game window object
  */
-void gui::Label::Draw(const std::shared_ptr<n8::Window> p_window){
+void gui::Label::Draw(const std::shared_ptr<n8::Window> p_window) const{
    m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), m_rectangle.GetX(), m_rectangle.GetY());
 }
 

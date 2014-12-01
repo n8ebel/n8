@@ -28,7 +28,7 @@ namespace gui {
         InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint);
         ~InputBox();
         
-        void Draw(const std::shared_ptr<n8::Window>) override;
+        void Draw(const std::shared_ptr<n8::Window>) const override;
         
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual void HandleKeyboardInput(SDL_Event*);
@@ -36,7 +36,7 @@ namespace gui {
         
         void SetHintText(std::string);
         
-        std::string GetText();
+        std::string GetText() const;
     
     private:
         static const Uint16 TEXT_OFFSET_X;  /** < X offset for drawing text within the input region of the element */

@@ -47,7 +47,7 @@ class Button : public GUIElement{
     
         void SetTextSize(int);
     
-        void Draw(const std::shared_ptr<n8::Window>) override;
+        void Draw(const std::shared_ptr<n8::Window>) const override;
         bool Update(Uint32 p_currentTime) override;
     
     private:
@@ -55,13 +55,13 @@ class Button : public GUIElement{
         std:: string m_text;  /** < The test displayed on the button */
         LTexture m_textTexture; /** < Texture used to display the text */
     
-        void drawHovered(SDL_Renderer*);
-        void drawNeutral(SDL_Renderer*);
-        void drawFocused(SDL_Renderer*);
-        void drawPressed(SDL_Renderer*);
-        void drawPressedAndHovered(SDL_Renderer*);
-        void drawSelected(SDL_Renderer*);
-        void drawSelectedAndHovered(SDL_Renderer*);
+        void drawHovered(const std::shared_ptr<n8::Window>) const;
+        void drawNeutral(const std::shared_ptr<n8::Window>) const;
+        void drawFocused(const std::shared_ptr<n8::Window>) const;
+        void drawPressed(const std::shared_ptr<n8::Window>) const;
+        void drawPressedAndHovered(const std::shared_ptr<n8::Window>) const;
+        void drawSelected(const std::shared_ptr<n8::Window>) const;
+        void drawSelectedAndHovered(const std::shared_ptr<n8::Window>) const;
     
         void loadFontTexture(int);
 };

@@ -76,36 +76,34 @@ void gui::Button::SetTextSize(int textSize){
  *
  *  @param p_window Pointer to the game window object
  */
-void gui::Button::Draw(const std::shared_ptr<n8::Window> p_window){
-    
-    SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
+void gui::Button::Draw(const std::shared_ptr<n8::Window> p_window) const{
     
     if (m_state == State::Hovered) {
-        drawHovered(renderer);
+        drawHovered(p_window);
     }
     else if (m_state == State::Focused){
-        drawFocused(renderer);
+        drawFocused(p_window);
     }
     else if(m_state == State::Pressed){
-        drawPressed(renderer);
+        drawPressed(p_window);
     }
     else if(m_state == State::PressedAndHovered){
-        drawPressedAndHovered(renderer);
+        drawPressedAndHovered(p_window);
     }
     else if (m_state == State::Selected){
-        drawSelected(renderer);
+        drawSelected(p_window);
     }
     else if (m_state == State::SelectedAndHovered){
-        drawSelectedAndHovered(renderer);
+        drawSelectedAndHovered(p_window);
     }
     else {
-        drawNeutral(renderer);
+        drawNeutral(p_window);
     }
     
     if(m_textTexture.HasTexture()){
         int x = m_x + (m_w - m_textTexture.getWidth())/2;
         int y = m_y + (m_h - m_textTexture.getHeight())/2;
-        m_textTexture.render(renderer, x,y);
+        m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), x,y);
     }
 }
 
@@ -132,152 +130,160 @@ bool gui::Button::Update(Uint32 p_currentTime){
     return hasFocus;
 }
 
-void gui::Button::drawHovered(SDL_Renderer* p_renderer){
+void gui::Button::drawHovered(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Button);
     n8::Color filterColor = m_style.GetColor(Style::EStyleColor::Hover);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
                            drawColor.GetG(),
                            drawColor.GetB(),
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            filterColor.GetR(),
                            filterColor.GetG(),
                            filterColor.GetB(),
                            filterColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
     
-    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
+    SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     
 }
 
-void gui::Button::drawNeutral(SDL_Renderer* p_renderer){
+void gui::Button::drawNeutral(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Button);
     n8::Color outlineColor = m_style.GetColor(Style::EStyleColor::ButtonOutline);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
                            drawColor.GetG(),
                            drawColor.GetB(),
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            outlineColor.GetR(),
                            outlineColor.GetG(),
                            outlineColor.GetB(),
                            outlineColor.GetA()
                            );
     
-    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
+    SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
 }
-void gui::Button::drawFocused(SDL_Renderer* p_renderer){
+void gui::Button::drawFocused(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Focus);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
                            drawColor.GetG(),
                            drawColor.GetB(),
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
-}
-void gui::Button::drawPressed(SDL_Renderer* p_renderer){
-    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
-    
-    SDL_SetRenderDrawColor( p_renderer,
-                           drawColor.GetR(),
-                           drawColor.GetG(),
-                           drawColor.GetB(),
-                           drawColor.GetA()
-                           );
-    
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
 }
 
-void gui::Button::drawPressedAndHovered(SDL_Renderer* p_renderer){
+void gui::Button::drawPressed(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
+    n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
+    
+    SDL_SetRenderDrawColor( renderer,
+                           drawColor.GetR(),
+                           drawColor.GetG(),
+                           drawColor.GetB(),
+                           drawColor.GetA()
+                           );
+    
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
+}
+
+void gui::Button::drawPressedAndHovered(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Pressed);
     n8::Color filterColor = m_style.GetColor(Style::EStyleColor::Hover);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
                            drawColor.GetG(),
                            drawColor.GetB(),
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            filterColor.GetR(),
                            filterColor.GetG(),
                            filterColor.GetB(),
                            filterColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
     
-    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
+    SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
 }
 
-void gui::Button::drawSelected(SDL_Renderer* p_renderer){
+void gui::Button::drawSelected(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Selected);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
                            drawColor.GetG(),
                            drawColor.GetB(),
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
 }
 
-void gui::Button::drawSelectedAndHovered(SDL_Renderer* p_renderer){
+void gui::Button::drawSelectedAndHovered(const std::shared_ptr<n8::Window> p_window) const{
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Selected);
     n8::Color filterColor = m_style.GetColor(Style::EStyleColor::Hover);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
                            drawColor.GetG(),
                            drawColor.GetB(),
                            drawColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
-    SDL_SetRenderDrawColor( p_renderer,
+    SDL_SetRenderDrawColor( renderer,
                            filterColor.GetR(),
                            filterColor.GetG(),
                            filterColor.GetB(),
                            filterColor.GetA()
                            );
     
-    SDL_RenderFillRect( p_renderer, &m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
-    SDL_SetRenderDrawBlendMode(p_renderer, SDL_BLENDMODE_NONE);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
     
-    SDL_RenderDrawRect(p_renderer, &m_rectangle.GetRect());
+    SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
 
 }
 

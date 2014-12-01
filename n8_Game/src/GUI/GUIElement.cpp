@@ -72,13 +72,13 @@ void gui::GUIElement::SetHeight(int height){
     m_rectangle.Resize(m_rectangle.GetW(), height);
 }
 
-int gui::GUIElement::GetWidth(){ return m_w; }
+int gui::GUIElement::GetWidth() const { return m_w; }
 
-int gui::GUIElement::GetHeight(){ return m_h; }
+int gui::GUIElement::GetHeight() const { return m_h; }
 
-int gui::GUIElement::GetX(){ return m_x; }
+int gui::GUIElement::GetX() const { return m_x; }
 
-int gui::GUIElement::GetY(){ return m_y; }
+int gui::GUIElement::GetY() const { return m_y; }
 
 /** Sets the style pointer of the element.
  *
@@ -202,7 +202,7 @@ void gui::GUIElement::setClickHandler(std::function<void()> function){
 /**
  *  Checks whether a specified location is within the bounds of the element.
  */
-bool gui::GUIElement::positionWithinElement(int p_x, int p_y){
+bool gui::GUIElement::positionWithinElement(int p_x, int p_y) const{
     if( p_x >= m_x && p_x < m_x + m_w && p_y >= m_y && p_y < m_y + m_h){
         return true;
     }else{

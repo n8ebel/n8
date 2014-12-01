@@ -21,15 +21,15 @@ namespace gui{
     
 class ImageView : public GUIElement{
 public:
-    ImageView(std::shared_ptr<n8::Window> p_window, std::string, n8::Texture*, int p_x, int p_y, int p_w, int p_h);
+    ImageView(std::shared_ptr<n8::Window> p_window, std::string, std::shared_ptr<n8::Texture>, int p_x, int p_y, int p_w, int p_h);
     
     ~ImageView();
     
-    void Draw(const std::shared_ptr<n8::Window>) override;
+    void Draw(const std::shared_ptr<n8::Window>) const override;
     bool Update(Uint32) override;
     
 private:
-    n8::Texture* m_texture;
+    std::shared_ptr<n8::Texture> m_texture;
 };
     
 }

@@ -106,11 +106,7 @@ bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
  *  @param p_window Pointer to the game window passed from
  *   {@link State#Render(n8::Window*) State.Render(n8::Window*)}
  */
-void gui::InputBox::Draw(const std::shared_ptr<n8::Window> p_window){
-    
-    if(m_updateTexture){
-        UpdateTexture(p_window);
-    }
+void gui::InputBox::Draw(const std::shared_ptr<n8::Window> p_window) const{
     
     SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     
@@ -217,6 +213,10 @@ void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
  *  @return m_hasFocus
  */
 bool gui::InputBox::Update(Uint32 p_currentTime){
+    if(m_updateTexture){
+        UpdateTexture(m_window);
+    }
+    
     if ( (p_currentTime - m_lastTime) > 500) {
         m_cursorShown = !m_cursorShown;
         m_lastTime = p_currentTime;
@@ -229,7 +229,7 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
  *
  *  @return m_inputString The string entered into the inputbox
  */
-std::string gui::InputBox::GetText(){
+std::string gui::InputBox::GetText() const{
     if (m_inputString.length() > 0) {
         return m_inputString;
     }else{

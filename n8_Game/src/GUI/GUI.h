@@ -24,6 +24,7 @@
 #include "Label.h"
 #include "Dialog.h"
 #include "InputDialog.h"
+#include "ImageView.h"
 
 namespace gui{
     
@@ -44,13 +45,13 @@ namespace gui{
         void ShowDialog(std::shared_ptr<Dialog>);
         
         bool CheckClickDown(int p_x, int p_y);
-        bool CheckClickUp(int p_x, int p_y);
-        bool CheckMove(int p_x, int p_y);
-        bool HasFocus();
+        bool CheckClickUp(int p_x, int p_y) const;
+        bool CheckMove(int p_x, int p_y) const;
+        bool HasFocus() const;
         
         
-        void Draw();
-        void ProcessInput(SDL_Event*);
+        void Draw() const;
+        void ProcessInput(SDL_Event*) const;
         bool Update(Uint32 p_currentTime);
     private:
         std::shared_ptr<n8::Window> m_window;
