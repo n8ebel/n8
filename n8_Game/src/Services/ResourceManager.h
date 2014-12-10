@@ -47,6 +47,7 @@ namespace n8{
         ~ResourceManager();
         
         std::shared_ptr<Resource> GetResource(std::string);
+        n8::Texture* GetTexture(std::string);
         
         void OnNotify(std::shared_ptr<Event>) override;
         
@@ -74,6 +75,7 @@ namespace n8{
         std::string m_resourcesListPath; /**< Filepath to the resource list */
         
         std::map<std::string, std::shared_ptr<Resource>> m_loadedResources;  /**< Stores all images loaded by the system  */
+        std::map<std::string, n8::Resource*> m_resources;
         
         std::shared_ptr<n8::Window> m_gameWindow;
         

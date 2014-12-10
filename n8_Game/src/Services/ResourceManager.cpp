@@ -138,24 +138,25 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     {
         //Create texture from surface pixels
         auto renderer = const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer());
+        
         texture = SDL_CreateTextureFromSurface( renderer, loadedSurface );
         if( texture == nullptr )
         {
             std::string msg( "  Unable to create texture from " + p_filename + " SDL Error: " +SDL_GetError() );
             Log::Error(TAG, msg);
-            if (renderer == nullptr) {
-                Log::Error(TAG, "    Window was null");
-            }
         }
         
         texW = loadedSurface->w;
         texH = loadedSurface->h;
+        
         //Get rid of old loaded surface
         SDL_FreeSurface( loadedSurface );
     }
     
     if (texture != nullptr) {
-        m_loadedResources[p_id] = std::make_shared<Texture>(p_filename, texture, texW, texH);
+        auto sharedPointer = std::make_shared<Texture>(p_filename, texture, texW, texH);
+        m_loadedResources[p_id] = sharedPointer;
+        m_resources[p_id] = new n8::Texture(p_filename, sharedPointer.get()->Get_SDLTexture(), texW, texH);
         Log::Debug(TAG, "  Successfully loaded texture: " + p_filename);
     }
 }
@@ -224,6 +225,10 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
  */
 std::shared_ptr<n8::Resource> n8::ResourceManager::GetResource(std::string p_resourceID){
     return m_loadedResources[p_resourceID];
+}
+
+n8::Texture* n8::ResourceManager::GetTexture(std::string p_resourceID){
+    return static_cast<n8::Texture*>(m_resources[p_resourceID]);
 }
 
 void n8::ResourceManager::OnNotify(std::shared_ptr<Event> event){ }

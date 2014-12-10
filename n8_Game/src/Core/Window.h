@@ -54,6 +54,7 @@ public:
     const SDL_Surface& GetSurface() const;
     const SDL_Window& GetWindow() const;
     const SDL_Renderer& GetRenderer() const;
+    SDL_Renderer* foobar();
     
     unsigned GetWidth() const { return m_screenWidth; }
     unsigned GetHeight() const { return m_screenHeight; }
@@ -68,10 +69,13 @@ private:
     unsigned m_screenWidth;  /** < width of the screen surface **/
     unsigned m_screenHeight; /** < height of the screen surface **/
     
-    std::unique_ptr<SDL_Surface, SDL_Screen_Surface_Deleter> m_screenSurface;  /** < surface to render things to **/
-    std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> m_screenRenderer; /** < The window renderer **/
-    std::unique_ptr<SDL_Window, SDL_Window_Deleter> m_window;
-    
+//    std::unique_ptr<SDL_Surface, SDL_Screen_Surface_Deleter> m_screenSurface;  /** < surface to render things to **/
+//    std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> m_screenRenderer; /** < The window renderer **/
+//    std::unique_ptr<SDL_Window, SDL_Window_Deleter> m_window;
+
+    SDL_Surface* m_screenSurface;  /** < surface to render things to **/
+    SDL_Renderer* m_screenRenderer; /** < The window renderer **/
+    SDL_Window* m_window;
 };
 
 }

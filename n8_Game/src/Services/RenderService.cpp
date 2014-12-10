@@ -82,6 +82,9 @@ void n8::RenderService::Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_
     dest.w = p_w;
     dest.h = p_h;
     
+    SDL_SetRenderDrawColor(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), 99, 199, 99, 50);
+    SDL_RenderDrawRect(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), &dest);
+    
     //Render texture to screen
     SDL_RenderCopy( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_texture->m_texture, NULL, &dest );
 }

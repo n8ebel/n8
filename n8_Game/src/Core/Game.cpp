@@ -28,38 +28,6 @@ n8::Game::Game(const char* configFile) : m_serviceManager(){
     
     m_resourceConfigPath = configFile;
     
-    m_window = std::make_shared<n8::Window>();
-}
-
-/** Destructor */
-n8::Game::~Game(){
-    Log::Info(TAG, "Destructor");
-}
-
-/** ProcessConfigFile
- *  NOT CURRENTLY IMPLEMENTED
- *  Reads and processes the configuration file
- *  Needed information is saved to member variables so they can be used later
- */
- void n8::Game::ProcessConfigFile(){
-     // nothing currently implemented
- }
-
-/** Shutdown
- *  Stops all SDL subsystems
- */
-void n8::Game::Shutdown(){
-    
-    Mix_Quit();
-    IMG_Quit();
-    TTF_Quit();
-    SDL_Quit();
-}
-
-/** Init
- *  Initializes SDL and SDL subsystems for images, sound, font
- */
-void n8::Game::Init(){
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         // Unrecoverable error, exit here.
         Log::Error(TAG, "SDL_Init failed: " + string(SDL_GetError()));
@@ -109,6 +77,39 @@ void n8::Game::Init(){
         
         Log::GetInstance();
         
+        m_window = std::make_shared<n8::Window>();
+    }
+}
+
+/** Destructor */
+n8::Game::~Game(){
+    Log::Info(TAG, "Destructor");
+}
+
+/** ProcessConfigFile
+ *  NOT CURRENTLY IMPLEMENTED
+ *  Reads and processes the configuration file
+ *  Needed information is saved to member variables so they can be used later
+ */
+ void n8::Game::ProcessConfigFile(){
+     // nothing currently implemented
+ }
+
+/** Shutdown
+ *  Stops all SDL subsystems
+ */
+void n8::Game::Shutdown(){
+    
+    Mix_Quit();
+    IMG_Quit();
+    TTF_Quit();
+    SDL_Quit();
+}
+
+/** Init
+ *  Initializes SDL and SDL subsystems for images, sound, font
+ */
+void n8::Game::Init(){
         auto resourceManagerService = std::make_shared<ResourceManager>(shared_from_this(), m_window, m_resourceConfigPath.c_str());
         auto inputService = std::make_shared<InputService>(shared_from_this());
         auto stateManagerService = std::make_shared<StateManagerService>(shared_from_this());
@@ -122,7 +123,6 @@ void n8::Game::Init(){
         m_serviceManager.RegisterService(ServiceManager::RESOURCES, resourceManagerService);
         m_serviceManager.RegisterService(ServiceManager::RENDER, renderService);
         m_serviceManager.RegisterService(ServiceManager::AUDIO, audioService);
-    }
 }
 
 /** Gets and stores the path for the working project directory
