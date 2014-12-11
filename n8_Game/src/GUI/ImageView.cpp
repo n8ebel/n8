@@ -18,17 +18,22 @@ gui::ImageView::~ImageView(){
 }
 
 void gui::ImageView::Draw(const std::shared_ptr<n8::Window> p_window) const{
+    if (m_texture == nullptr || m_texture->Get_SDLTexture() == nullptr) {
+        return;
+    }
+    
+    auto renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
+    if (renderer == nullptr) {
+        return;
+    }
+    
     SDL_Rect destination;
     destination.x = m_rectangle.GetX();
     destination.y = m_rectangle.GetY();
     destination.w = m_rectangle.GetW();
     destination.h = m_rectangle.GetH();
-    std::cout << "drawing imageview" << std::endl;
-    std::cout << "  x " << m_rectangle.GetX() << std::endl;
-    std::cout << "  y " << m_rectangle.GetY() << std::endl;
-    std::cout << "  w " << m_rectangle.GetW() << std::endl;
-    std::cout << "  h " << m_rectangle.GetH() << std::endl;
-    SDL_RenderCopy(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), m_texture->Get_SDLTexture(), nullptr, &destination);
+    
+    SDL_RenderCopy(renderer, m_texture->Get_SDLTexture(), nullptr, &destination);
 }
 
 bool gui::ImageView::Update(Uint32 p_currentTime){

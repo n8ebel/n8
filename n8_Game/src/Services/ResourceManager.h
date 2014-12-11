@@ -46,8 +46,11 @@ namespace n8{
         ResourceManager(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window> p_window, std::string p_path);
         ~ResourceManager();
         
-        std::shared_ptr<Resource> GetResource(std::string);
-        n8::Texture* GetTexture(std::string);
+        const std::shared_ptr<Texture>& GetTexture(std::string) const;
+        const std::shared_ptr<Music>& GetMusic(std::string) const;
+        const std::shared_ptr<SoundEffect>& GetSoundEffect(std::string) const;
+        const std::shared_ptr<Font>& GetFont(std::string) const;
+
         
         void OnNotify(std::shared_ptr<Event>) override;
         
@@ -74,8 +77,10 @@ namespace n8{
         
         std::string m_resourcesListPath; /**< Filepath to the resource list */
         
-        std::map<std::string, std::shared_ptr<Resource>> m_loadedResources;  /**< Stores all images loaded by the system  */
-        std::map<std::string, n8::Resource*> m_resources;
+        std::map<std::string, std::shared_ptr<Texture>> m_loadedTextures;
+        std::map<std::string, std::shared_ptr<Music>> m_loadedMusic;
+        std::map<std::string, std::shared_ptr<SoundEffect>> m_loadedSoundEffects;
+        std::map<std::string, std::shared_ptr<Font>> m_loadedFonts;
         
         std::shared_ptr<n8::Window> m_gameWindow;
         

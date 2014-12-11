@@ -32,7 +32,10 @@ n8::ResourceManager::ResourceManager(std::shared_ptr<n8::Game> game, std::shared
 
 n8::ResourceManager::~ResourceManager() {
     Log::Info(TAG, "Destructor");
-    m_loadedResources.clear();
+    m_loadedTextures.clear();
+    m_loadedMusic.clear();
+    m_loadedSoundEffects.clear();
+    m_loadedFonts.clear();
 }
 
 void n8::ResourceManager::LoadResources(){
@@ -155,8 +158,7 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     
     if (texture != nullptr) {
         auto sharedPointer = std::make_shared<Texture>(p_filename, texture, texW, texH);
-        m_loadedResources[p_id] = sharedPointer;
-        m_resources[p_id] = new n8::Texture(p_filename, sharedPointer.get()->Get_SDLTexture(), texW, texH);
+        m_loadedTextures[p_id] = sharedPointer;
         Log::Debug(TAG, "  Successfully loaded texture: " + p_filename);
     }
 }
@@ -169,7 +171,7 @@ void n8::ResourceManager::LoadMusic(std::string p_filename, std::string p_id){
     Mix_Music* music = Mix_LoadMUS(p_filename.c_str());
     
     if(music != nullptr){
-        m_loadedResources[p_id] = std::make_shared<Music>(p_filename, music);
+        m_loadedMusic[p_id] = std::make_shared<Music>(p_filename, music);
         Log::Debug(TAG, "  Successfully loaded music: " + p_filename);
     }
     else{
@@ -187,7 +189,7 @@ void n8::ResourceManager::LoadSoundEffect(std::string p_filename, std::string p_
     Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
     
     if(soundEffect != nullptr){
-        m_loadedResources[p_id] = std::make_shared<SoundEffect>(p_filename, soundEffect);
+        m_loadedSoundEffects[p_id] = std::make_shared<SoundEffect>(p_filename, soundEffect);
         Log::Debug(TAG, "  Successfully loaded sound effect: " + p_filename);
     }
     else{
@@ -206,7 +208,7 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
     TTF_Font* font = TTF_OpenFont( p_filename.c_str(), p_size );
     
     if(font != nullptr){
-        m_loadedResources[p_id] = std::make_shared<Font>(p_filename, font);
+        m_loadedFonts[p_id] = std::make_shared<Font>(p_filename, font);
         Log::Debug(TAG, "  Successfully loaded font: " + p_filename);
     }
     else{
@@ -216,19 +218,48 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
     TTF_CloseFont(font);
 }
 
-/** GetResource
- *  Used to get resource object pointers from the resource manager
+/** GetTexture
+ *  Used to get a texture resource from the resource manager
  *
- *  @param p_resourceID The identifier for the desired resource.  Used as the key for looking up the resource in the resource map
+ *  @param p_resourceID The identifer for the desired resource.
  *
- *  @return Pointer to a resource object matching the passed key, nullptr otherwise
+ *  @return A const reference to the specified texture, nullptr otherwise
  */
-std::shared_ptr<n8::Resource> n8::ResourceManager::GetResource(std::string p_resourceID){
-    return m_loadedResources[p_resourceID];
+const std::shared_ptr<n8::Texture>& n8::ResourceManager::GetTexture(std::string p_resourceID) const{
+    return m_loadedTextures.at(p_resourceID);
 }
 
-n8::Texture* n8::ResourceManager::GetTexture(std::string p_resourceID){
-    return static_cast<n8::Texture*>(m_resources[p_resourceID]);
+/** GetMusic
+ *  Used to get a music resource from the resource manager
+ *
+ *  @param p_resourceID The identifer for the desired resource.
+ *
+ *  @return A const reference to the specified music object, nullptr otherwise
+ */
+const std::shared_ptr<n8::Music>& n8::ResourceManager::GetMusic(std::string p_resourceID) const{
+    return m_loadedMusic.at(p_resourceID);
+}
+
+/** GetSoundEffect
+ *  Used to get a SoundEffect resource from the resource manager
+ *
+ *  @param p_resourceID The identifer for the desired resource.
+ *
+ *  @return A const reference to the specified SoundEffect resource, nullptr otherwise
+ */
+const std::shared_ptr<n8::SoundEffect>& n8::ResourceManager::GetSoundEffect(std::string p_resourceID) const{
+    return m_loadedSoundEffects.at(p_resourceID);
+}
+
+/** GetFont
+ *  Used to get a Font resource from the resource manager
+ *
+ *  @param p_resourceID The identifer for the desired resource.
+ *
+ *  @return A const reference to the specified Font resource, nullptr otherwise
+ */
+const std::shared_ptr<n8::Font>& n8::ResourceManager::GetFont(std::string p_resourceID) const{
+    return m_loadedFonts.at(p_resourceID);
 }
 
 void n8::ResourceManager::OnNotify(std::shared_ptr<Event> event){ }
