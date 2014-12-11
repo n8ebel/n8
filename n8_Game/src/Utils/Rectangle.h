@@ -29,11 +29,11 @@ namespace n8 {
         void Resize(int p_width, int p_height);
         void Offset(int p_xOffset, int p_yOffset);
         void RepositionAndResize(int p_x, int p_y, int p_w, int p_h);
-        int GetX();
-        int GetY();
-        int GetW();
-        int GetH();
-        SDL_Rect* GetRect();
+        int GetX() const;
+        int GetY() const;
+        int GetW() const;
+        int GetH() const;
+        const SDL_Rect& GetRect() const;
         
     private:
         SDL_Rect m_rectangle; /** < SDL_Rect object that is wrapped by class.  Needed by many SDL_functions **/

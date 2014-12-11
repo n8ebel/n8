@@ -25,40 +25,33 @@
 
 namespace n8{
     
-/**
- *  State_Manager handles the state stack and holds pointers
- *    to each registered game state.
- *
- *  The singleton pattern is used so there is a single
- *    state stack and access point to state information.
- */
 class StateManagerService : public Service{
     
 public:
-    StateManagerService(Game*);
+    StateManagerService(std::shared_ptr<n8::Game>);
     ~StateManagerService();
     
     
-    bool RegisterState(int identifier, State* state);
+    bool RegisterState(int identifier, std::shared_ptr<n8::State> state);
     
-    bool PushState(n8::State*);
+    bool PushState(std::shared_ptr<n8::State>);
     void PopState();
     void Clear();
     
     int GetStackSize();
     ID GetCurrentStateId();
     
-    void ProcessState(Uint32 time, Window* screen);
+    void ProcessState(Uint32 time, const std::shared_ptr<n8::Window> screen);
     
-    void OnNotify(Event*);
+    void OnNotify(std::shared_ptr<Event>) override;
     
 private:
     
     
-    map<int, State*> m_registeredStates; /** < map of identifiers and game state objects */
-    stack<State*> m_stateStack; /** < stack of state objects */
+    map<int, std::shared_ptr<n8::State>> m_registeredStates; /** < map of identifiers and game state objects */
+    stack<std::shared_ptr<n8::State>> m_stateStack; /** < stack of state objects */
     
-    void ResumeState(State*);
+    void ResumeState(std::shared_ptr<n8::State>);
     
 };
 

@@ -7,6 +7,7 @@
 */
 
 #include <assert.h>
+#include <memory>
 
 #include "Game.h"
 
@@ -16,10 +17,9 @@
  *  Initializes member variables, and constructs path variables.
  *  Process configuration file
  */
-n8::Game::Game(const char* configFile){
+n8::Game::Game(const char* configFile) : m_serviceManager(){
     Log::Info(TAG, "Constructor");
     
-    m_serviceManager = nullptr;
     m_windowWidth = 1;
     m_windowHeight = 1;
     m_fps = DEFAULT_FPS;
@@ -28,37 +28,62 @@ n8::Game::Game(const char* configFile){
     
     m_resourceConfigPath = configFile;
     
-    InitializeDirectoryPath();
-    ProcessConfigFile();
-    InitializeResourcesPath();
-    
-    Log::Create();
-    
-    m_serviceManager = ServiceManager::GetInstance();
-    
-    ResourceManager* resourceManagerService = new ResourceManager(this, &m_window, m_resourceConfigPath.c_str());
-    
-    InputService* inputService = new InputService(this);
-    StateManagerService* stateManagerService = new StateManagerService(this);
-    RenderService* renderService = new RenderService(this, &m_window);
-    AudioService* audioService = new AudioService(this);
-    
-    inputService->AddObserver(stateManagerService);
-    
-    m_serviceManager->RegisterService(ServiceManager::INPUT, inputService);
-    m_serviceManager->RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
-    m_serviceManager->RegisterService(ServiceManager::RESOURCES, resourceManagerService);
-    m_serviceManager->RegisterService(ServiceManager::RENDER, renderService);
-    m_serviceManager->RegisterService(ServiceManager::AUDIO, audioService);
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        // Unrecoverable error, exit here.
+        Log::Error(TAG, "SDL_Init failed: " + string(SDL_GetError()));
+        exit(FAILURE_SDL_INIT);
+    }
+    else{
+        Log::Info(TAG, "SDL Initializaed");
+        
+        //Initialize PNG loading
+        int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+        if( !( IMG_Init( imgFlags ) & imgFlags ) )
+        {
+            std::string msg( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+            Log::Error(TAG, msg);
+            exit(FAILURE_SDL_IMG);
+        }
+        else{
+            Log::Info(TAG, "SDL_Image Initialized");
+        }
+        
+        //Initialize SDL_mixer
+        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            std::string msg("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+            Log::Error(TAG, msg);
+            exit(FAILURE_SDL_MIX);
+            
+        }
+        else{
+            Log::Info(TAG, "SDL_Mixer Initialized");
+        }
+        
+        //Initialize SDL_ttf
+        if( TTF_Init() == -1 )
+        {
+            std::string msg( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+            Log::Error(TAG, msg);
+            exit(FAILURE_SDL_TTF);
+        }
+        else{
+            Log::Info(TAG, "SDL_ttf Initialized");
+        }
+        
+        InitializeDirectoryPath();
+        ProcessConfigFile();
+        InitializeResourcesPath();
+        
+        Log::GetInstance();
+        
+        m_window = std::make_shared<n8::Window>();
+    }
 }
 
 /** Destructor */
 n8::Game::~Game(){
     Log::Info(TAG, "Destructor");
-    if(m_serviceManager){
-        delete m_serviceManager;
-        m_serviceManager = nullptr;
-    }
 }
 
 /** ProcessConfigFile
@@ -85,45 +110,19 @@ void n8::Game::Shutdown(){
  *  Initializes SDL and SDL subsystems for images, sound, font
  */
 void n8::Game::Init(){
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        // Unrecoverable error, exit here.
-        Log::Error(TAG, "SDL_Init failed: " + string(SDL_GetError()));
-    }
-    else{
-        Log::Info(TAG, "SDL Initializaed");
+        auto resourceManagerService = std::make_shared<ResourceManager>(shared_from_this(), m_window, m_resourceConfigPath.c_str());
+        auto inputService = std::make_shared<InputService>(shared_from_this());
+        auto stateManagerService = std::make_shared<StateManagerService>(shared_from_this());
+        auto renderService = std::make_shared<RenderService>(shared_from_this(), m_window);
+        auto audioService = std::make_shared<AudioService>(shared_from_this());
         
-        //Initialize PNG loading
-        int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
-        if( !( IMG_Init( imgFlags ) & imgFlags ) )
-        {
-            std::string msg( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-            Log::Error(TAG, msg);
-        }
-        else{
-            Log::Info(TAG, "SDL_Image Initialized");
-        }
+        inputService->AddObserver(stateManagerService.get());
         
-        //Initialize SDL_mixer
-        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
-        {
-            std::string msg("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
-            Log::Error(TAG, msg);
-            
-        }
-        else{
-            Log::Info(TAG, "SDL_Mixer Initialized");
-        }
-        
-        //Initialize SDL_ttf
-        if( TTF_Init() == -1 )
-        {
-            std::string msg( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
-            Log::Error(TAG, msg);
-        }
-        else{
-            Log::Info(TAG, "SDL_ttf Initialized");
-        }
-    }
+        m_serviceManager.RegisterService(ServiceManager::INPUT, inputService);
+        m_serviceManager.RegisterService(ServiceManager::STATE_MANAGER, stateManagerService);
+        m_serviceManager.RegisterService(ServiceManager::RESOURCES, resourceManagerService);
+        m_serviceManager.RegisterService(ServiceManager::RENDER, renderService);
+        m_serviceManager.RegisterService(ServiceManager::AUDIO, audioService);
 }
 
 /** Gets and stores the path for the working project directory
@@ -157,8 +156,8 @@ void n8::Game::Start(){
     unsigned curtime = m_timer.GetTime();
     int frames = 0;
     
-    InputService* inputService = getInputService();
-    StateManagerService* stateManager = getStateManagerService();
+    auto inputService = getInputService();
+    auto stateManager = getStateManagerService();
     while (m_quit == false) {
         
         if (m_showDebugInfo) {
@@ -184,7 +183,7 @@ void n8::Game::Start(){
         
         
         //process state
-        stateManager->ProcessState(m_timer.GetTime(), &m_window);
+        stateManager->ProcessState(m_timer.GetTime(), m_window);
                 
         m_timer.SyncGame(m_fps);  //ensures proper fps
         
@@ -195,14 +194,7 @@ void n8::Game::Start(){
 /** Stop
  *  Stops the running game loop
  */
-void n8::Game::Stop(){
-    m_serviceManager->RemoveAllServices();
-    
-    ServiceManager::Destroy();
-    m_serviceManager = nullptr;
-    
-    Log::Destroy();
-}
+void n8::Game::Stop(){ }
 
 /** Changes the frame per second value for the game loop
  *
@@ -228,12 +220,11 @@ void n8::Game::DefineWindowSize(unsigned width, unsigned height){
     m_windowWidth = width;
     m_windowHeight = height;
     
-    assert(&m_window);
-    m_window.ResizeWindow(m_windowWidth,m_windowHeight);
+    m_window->ResizeWindow(m_windowWidth,m_windowHeight);
 }
 
 
-void n8::Game::StartState(n8::State* newState){
+void n8::Game::StartState(std::shared_ptr<n8::State> newState){
     getStateManagerService()->PushState(newState);
 }
 
@@ -241,22 +232,26 @@ void n8::Game::EndState(){
     getStateManagerService()->PopState();
 }
 
-n8::ResourceManager* n8::Game::getResourceManager(){
-    return static_cast<ResourceManager*>(m_serviceManager->GetService(ServiceManager::RESOURCES));
+const std::shared_ptr<n8::Window> n8::Game::getWindow() const{
+    return m_window;
 }
 
-n8::InputService* n8::Game::getInputService(){
-    return static_cast<InputService*>(m_serviceManager->GetService(ServiceManager::INPUT));
+const std::shared_ptr<n8::ResourceManager> n8::Game::getResourceManager() const{
+    return std::static_pointer_cast<ResourceManager>(m_serviceManager.GetService(ServiceManager::RESOURCES));
 }
 
-n8::StateManagerService* n8::Game::getStateManagerService(){
-    return static_cast<StateManagerService*>(m_serviceManager->GetService(ServiceManager::STATE_MANAGER));
+const std::shared_ptr<n8::InputService> n8::Game::getInputService() const{
+    return std::static_pointer_cast<InputService>(m_serviceManager.GetService(ServiceManager::INPUT));
 }
 
-n8::RenderService* n8::Game::getRenderService(){
-    return static_cast<RenderService*>(m_serviceManager->GetService(ServiceManager::RENDER));
+const std::shared_ptr<n8::StateManagerService> n8::Game::getStateManagerService() const{
+    return std::static_pointer_cast<StateManagerService>(m_serviceManager.GetService(ServiceManager::STATE_MANAGER));
 }
 
-n8::AudioService* n8::Game::getAudioService(){
-    return static_cast<AudioService*>(m_serviceManager->GetService(ServiceManager::AUDIO));
+const std::shared_ptr<n8::RenderService> n8::Game::getRenderService() const{
+    return std::static_pointer_cast<RenderService>(m_serviceManager.GetService(ServiceManager::RENDER));
+}
+
+const std::shared_ptr<n8::AudioService> n8::Game::getAudioService() const{
+    return std::static_pointer_cast<AudioService>(m_serviceManager.GetService(ServiceManager::AUDIO));
 }

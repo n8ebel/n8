@@ -27,10 +27,10 @@ class Label : public GUIElement{
     public:
         enum class EColor{Black,White};
     
-        Label(n8::Window* p_window, std::string p_id,std::string p_text, int p_x, int p_y);
+        Label(std::shared_ptr<n8::Window> p_window, std::string p_id,std::string p_text, int p_x, int p_y);
         ~Label();
     
-        virtual void Draw(n8::Window*) override;
+        virtual void Draw(const std::shared_ptr<n8::Window>) const override;
         virtual bool Update(Uint32 p_currentTime)override;
         
         void OffsetPosition(int p_x, int p_y) override;

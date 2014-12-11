@@ -27,6 +27,8 @@ namespace n8{
         ~Texture();
         Texture(std::string p_id, SDL_Texture* p_img, int p_w, int p_h);
         
+        SDL_Texture* Get_SDLTexture() const;
+        
     private:
         
         SDL_Texture* m_texture;  /** < The texture that can be rendered to the screen  **/

@@ -81,7 +81,7 @@ void n8::Rectangle::RepositionAndResize(int p_x, int p_y, int p_w, int p_h){
  *
  *  @return The x coordinate of the rectangle
  */
-int n8::Rectangle::GetX(){
+int n8::Rectangle::GetX() const{
     return m_rectangle.x;
 }
 
@@ -89,7 +89,7 @@ int n8::Rectangle::GetX(){
  *
  *  @return The y coordinate of the rectangle
  */
-int n8::Rectangle::GetY(){
+int n8::Rectangle::GetY() const{
     return m_rectangle.y;
 }
 
@@ -97,7 +97,7 @@ int n8::Rectangle::GetY(){
  *
  *  @return The width of the rectangle
  */
-int n8::Rectangle::GetW(){
+int n8::Rectangle::GetW() const{
     return m_rectangle.w;
 }
 
@@ -105,7 +105,7 @@ int n8::Rectangle::GetW(){
  *
  *  @return The height of the rectangle
  */
-int n8::Rectangle::GetH(){
+int n8::Rectangle::GetH() const{
     return m_rectangle.h;
 }
 
@@ -114,6 +114,6 @@ int n8::Rectangle::GetH(){
  *
  *  @return Pointer to the SDL_Rect member variable
  */
-SDL_Rect* n8::Rectangle::GetRect(){
-    return &m_rectangle;
+const SDL_Rect& n8::Rectangle::GetRect() const {
+    return m_rectangle;
 }

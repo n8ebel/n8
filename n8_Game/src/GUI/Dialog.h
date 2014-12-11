@@ -31,7 +31,7 @@ class Dialog : public Container {
 public:
     enum class EResultCode{POSITIVE, NEUTRAL, NEGATIVE};
     
-    Dialog(n8::Window*, int, int, int, int );
+    Dialog(std::shared_ptr<n8::Window>, int, int, int, int );
     ~Dialog();
     
     void SetIsOpen();
@@ -61,7 +61,7 @@ public:
     virtual void Build() = 0;
 
     bool Update(Uint32 p_currentTime);
-    void Draw(n8::Window*) override;
+    void Draw(const std::shared_ptr<n8::Window>) const override;
     
 protected:
     
@@ -72,9 +72,9 @@ protected:
     
     EResultCode mResult;
     
-    gui::Button* mPositiveButton;
-    gui::Button* mNegativeButton;
-    gui::Button* mNeutralButton;
+    std::shared_ptr<gui::Button> mPositiveButton;
+    std::shared_ptr<gui::Button> mNegativeButton;
+    std::shared_ptr<gui::Button> mNeutralButton;
     
     std::function<void(EResultCode)> mDismissedListener;
     std::function<void()> mPositiveListener;

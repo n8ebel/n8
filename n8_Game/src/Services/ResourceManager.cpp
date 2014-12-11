@@ -18,20 +18,10 @@
  *  @param p_window Pointer to game window.  Used to load image resources.
  *  @param p_path Path to resources directory
  */
-n8::ResourceManager::ResourceManager(Game* game, Window* p_window, std::string p_path) : Service(game){
-	// TODO Auto-generated constructor stub
-    
+n8::ResourceManager::ResourceManager(std::shared_ptr<n8::Game> game, std::shared_ptr<n8::Window> p_window, std::string p_path) : Service(game){
     
     m_gameWindow = p_window;
-    //m_screenSurface = screen;
-    
     m_resourcesListPath = p_path;
-    
-    /*
-    m_imagesDirectoryPath = path +IMAGES_DIRECTORY_SUFFIX;
-    m_texturesDirectoryPath = path + TEXTURES_DIRECTORY_SUFFIX;
-    m_audioDirectoryPath = path + AUDIO_DIRECTORY_SUFFIX;
-    */
     
     LoadResources();
 }
@@ -42,15 +32,10 @@ n8::ResourceManager::ResourceManager(Game* game, Window* p_window, std::string p
 
 n8::ResourceManager::~ResourceManager() {
     Log::Info(TAG, "Destructor");
-    
-	map<string, Resource*>::iterator ii;
-    
-    for (ii=m_loadedResources.begin(); ii != m_loadedResources.end(); ii++) {
-        Resource* tmp = ii->second;
-        ii->second = nullptr;
-        delete tmp;
-    }
-    
+    m_loadedTextures.clear();
+    m_loadedMusic.clear();
+    m_loadedSoundEffects.clear();
+    m_loadedFonts.clear();
 }
 
 void n8::ResourceManager::LoadResources(){
@@ -63,21 +48,7 @@ void n8::ResourceManager::LoadResources(){
     
     root = resourcesListFile.FirstChildElement( RESOURCES_TAG.c_str() );
     
-    if(root){
-        // Get Images
-        tinyxml2::XMLElement* imageElements = root->FirstChildElement( IMAGE_RESOURCES_TAG.c_str() );
-        
-        tinyxml2::XMLElement* imageElement = imageElements->FirstChildElement(IMAGE_TAG.c_str());
-        for( imageElement; imageElement; imageElement = imageElement->NextSiblingElement()){
-            
-            idElement = imageElement->FirstChildElement(ID_TAG.c_str());
-            std::string imagePath = imageElement->GetText();
-            std::string imageID = idElement->GetText();
-            
-            Log::Debug( TAG,"Loading Image: " + imagePath + " with ID: " + imageID );
-            LoadSprite(imagePath,imageID);
-        }
-        
+    if(root){        
         // Get Textures
         tinyxml2::XMLElement* textureElements = root->FirstChildElement( TEXTURE_RESOURCES_TAG.c_str() );
         
@@ -149,62 +120,6 @@ void n8::ResourceManager::LoadResources(){
     else{
         Log::Error(TAG, "Couldn't load root element of resources file list");
     }
-    
-    
-}
-
-/**
- *  Loads an image from a specified filepath, then creates an optimzed copy of the image
- *
- *  @param filename the filename of the image to load and optimize
- *  @return a pointer to the optimized copy of the image
- */
-SDL_Surface* n8::ResourceManager::LoadOptimizedImage( string filename )
-{
-    
-    //The final optimized image
-	SDL_Surface* optimizedSurface = nullptr;
-    
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( filename.c_str() );
-	if( loadedSurface == nullptr )
-	{
-        std::string msg = "  IMG_Load failed." + filename;
-		Log::Error(TAG, msg);
-	}
-    else
-	{
-        //Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, m_gameWindow->GetSurface()->format, NULL );
-		if( optimizedSurface == nullptr )
-		{
-			Log::Error(TAG, "  Failed to load optimized version of: " + filename);
-		}
-        else{
-            Log::Debug(TAG, "  Successfully loaded optimized image");
-        }
-        
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
-    
-	return optimizedSurface;
-}
-
-
-/**
- *  Loads Sprite resources.
- */
-void n8::ResourceManager::LoadSprite(std::string p_filename, std::string p_id){
-    SDL_Surface* spriteImage = LoadOptimizedImage(p_filename);
-    
-    if(spriteImage != nullptr){
-        m_loadedResources[p_id] = new Sprite(p_filename, spriteImage);
-        Log::Debug(TAG, "  Successfully loaded sprite: " + p_filename);
-    }
-    else{
-        Log::Error(TAG, "  Failed to load sprite: " + p_filename);
-    }
 }
 
 /** 
@@ -225,21 +140,25 @@ void n8::ResourceManager::LoadTexture(std::string p_filename, std::string p_id){
     else
     {
         //Create texture from surface pixels
-        texture = SDL_CreateTextureFromSurface( m_gameWindow->GetRenderer(), loadedSurface );
+        auto renderer = const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer());
+        
+        texture = SDL_CreateTextureFromSurface( renderer, loadedSurface );
         if( texture == nullptr )
         {
-            std::string msg( "  Unable to create texture from " + p_filename + "SDL Error: " +SDL_GetError() );
+            std::string msg( "  Unable to create texture from " + p_filename + " SDL Error: " +SDL_GetError() );
             Log::Error(TAG, msg);
         }
         
         texW = loadedSurface->w;
         texH = loadedSurface->h;
+        
         //Get rid of old loaded surface
         SDL_FreeSurface( loadedSurface );
     }
     
     if (texture != nullptr) {
-        m_loadedResources[p_id] = new Texture(p_filename, texture, texW, texH);
+        auto sharedPointer = std::make_shared<Texture>(p_filename, texture, texW, texH);
+        m_loadedTextures[p_id] = sharedPointer;
         Log::Debug(TAG, "  Successfully loaded texture: " + p_filename);
     }
 }
@@ -252,7 +171,7 @@ void n8::ResourceManager::LoadMusic(std::string p_filename, std::string p_id){
     Mix_Music* music = Mix_LoadMUS(p_filename.c_str());
     
     if(music != nullptr){
-        m_loadedResources[p_id] = new Music(p_filename, music);
+        m_loadedMusic[p_id] = std::make_shared<Music>(p_filename, music);
         Log::Debug(TAG, "  Successfully loaded music: " + p_filename);
     }
     else{
@@ -270,7 +189,7 @@ void n8::ResourceManager::LoadSoundEffect(std::string p_filename, std::string p_
     Mix_Chunk* soundEffect = Mix_LoadWAV(p_filename.c_str());
     
     if(soundEffect != nullptr){
-        m_loadedResources[p_id] = new SoundEffect(p_filename, soundEffect);
+        m_loadedSoundEffects[p_id] = std::make_shared<SoundEffect>(p_filename, soundEffect);
         Log::Debug(TAG, "  Successfully loaded sound effect: " + p_filename);
     }
     else{
@@ -289,7 +208,7 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
     TTF_Font* font = TTF_OpenFont( p_filename.c_str(), p_size );
     
     if(font != nullptr){
-        m_loadedResources[p_id] = new Font(p_filename, font);
+        m_loadedFonts[p_id] = std::make_shared<Font>(p_filename, font);
         Log::Debug(TAG, "  Successfully loaded font: " + p_filename);
     }
     else{
@@ -299,18 +218,49 @@ void n8::ResourceManager::LoadFont(std::string p_filename, std::string p_id, int
     TTF_CloseFont(font);
 }
 
-/** GetResource
- *  Used to get resource object pointers from the resource manager
+/** GetTexture
+ *  Used to get a texture resource from the resource manager
  *
- *  @param p_resourceID The identifier for the desired resource.  Used as the key for looking up the resource in the resource map
+ *  @param p_resourceID The identifer for the desired resource.
  *
- *  @return Pointer to a resource object matching the passed key, nullptr otherwise
+ *  @return A const reference to the specified texture, nullptr otherwise
  */
-n8::Resource* n8::ResourceManager::GetResource(std::string p_resourceID){
-    return m_loadedResources[p_resourceID];
+const std::shared_ptr<n8::Texture>& n8::ResourceManager::GetTexture(std::string p_resourceID) const{
+    return m_loadedTextures.at(p_resourceID);
 }
 
-void n8::ResourceManager::OnNotify(n8::Event* event){
-    
+/** GetMusic
+ *  Used to get a music resource from the resource manager
+ *
+ *  @param p_resourceID The identifer for the desired resource.
+ *
+ *  @return A const reference to the specified music object, nullptr otherwise
+ */
+const std::shared_ptr<n8::Music>& n8::ResourceManager::GetMusic(std::string p_resourceID) const{
+    return m_loadedMusic.at(p_resourceID);
 }
+
+/** GetSoundEffect
+ *  Used to get a SoundEffect resource from the resource manager
+ *
+ *  @param p_resourceID The identifer for the desired resource.
+ *
+ *  @return A const reference to the specified SoundEffect resource, nullptr otherwise
+ */
+const std::shared_ptr<n8::SoundEffect>& n8::ResourceManager::GetSoundEffect(std::string p_resourceID) const{
+    return m_loadedSoundEffects.at(p_resourceID);
+}
+
+/** GetFont
+ *  Used to get a Font resource from the resource manager
+ *
+ *  @param p_resourceID The identifer for the desired resource.
+ *
+ *  @return A const reference to the specified Font resource, nullptr otherwise
+ */
+const std::shared_ptr<n8::Font>& n8::ResourceManager::GetFont(std::string p_resourceID) const{
+    return m_loadedFonts.at(p_resourceID);
+}
+
+void n8::ResourceManager::OnNotify(std::shared_ptr<Event> event){ }
 

@@ -24,6 +24,7 @@
 #include "Label.h"
 #include "Dialog.h"
 #include "InputDialog.h"
+#include "ImageView.h"
 
 namespace gui{
     
@@ -35,28 +36,28 @@ namespace gui{
      */
     class GUI {
     public:
-        GUI(n8::Window* p_window);
+        GUI(std::shared_ptr<n8::Window> p_window);
         ~GUI();
         
-        void AddElement(GUIElement*);
-        void RemoveElement(GUIElement*);
+        void AddElement(std::shared_ptr<GUIElement>);
+        void RemoveElement(std::shared_ptr<GUIElement>);
         
-        void ShowDialog(Dialog*);
+        void ShowDialog(std::shared_ptr<Dialog>);
         
         bool CheckClickDown(int p_x, int p_y);
-        bool CheckClickUp(int p_x, int p_y);
-        bool CheckMove(int p_x, int p_y);
-        bool HasFocus();
+        bool CheckClickUp(int p_x, int p_y) const;
+        bool CheckMove(int p_x, int p_y) const;
+        bool HasFocus() const;
         
         
-        void Draw(n8::Window*);
-        void ProcessInput(SDL_Event*);
+        void Draw() const;
+        void ProcessInput(SDL_Event*) const;
         bool Update(Uint32 p_currentTime);
     private:
-        n8::Window* m_window;
+        std::shared_ptr<n8::Window> m_window;
         
-        std::vector<GUIElement*> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
-        std::stack<Dialog*> mDialogStack;
+        std::vector<std::shared_ptr<GUIElement>> m_guiElements; /** < List of gui elements that have been added and can be interacted with.  */
+        std::stack<std::shared_ptr<Dialog>> mDialogStack;
         
         bool m_built;  /** < Flag to determine if the gui has been built by the user. */
         bool m_hasFocus; /** < Flag to indicate if the gui has the user focus. */

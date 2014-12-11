@@ -10,10 +10,10 @@
 
 namespace gui {
     
-    AlertDialog::Builder::Builder(n8::Window* pWindow) : DialogBuilderInterface(pWindow){
+    AlertDialog::Builder::Builder(std::shared_ptr<n8::Window> pWindow) : DialogBuilderInterface(pWindow){
         int x = pWindow->GetWidth()/2 - Style::DEFAULT_DIALOG_WIDTH/2;
         int y = pWindow->GetHeight()/2 - Style::DEFAULT_DIALOG_HEIGHT/2;
-        mDialog = new AlertDialog(pWindow, x, y, Style::DEFAULT_DIALOG_WIDTH, Style::DEFAULT_DIALOG_HEIGHT);
+        mDialog = std::make_shared<AlertDialog>(pWindow, x, y, Style::DEFAULT_DIALOG_WIDTH, Style::DEFAULT_DIALOG_HEIGHT);
         DialogBuilderInterface::mDialog = mDialog;
     }
     
@@ -21,7 +21,7 @@ namespace gui {
         mDialog = nullptr;
     }
     
-    gui::AlertDialog::AlertDialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h ) : Dialog(p_window, p_x, p_y, p_w, p_h){
+    gui::AlertDialog::AlertDialog(std::shared_ptr<n8::Window> p_window, int p_x, int p_y, int p_w, int p_h ) : Dialog(p_window, p_x, p_y, p_w, p_h){
         
     }
     
@@ -33,7 +33,7 @@ namespace gui {
         
         TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), Style::DEFAULT_TITLE_HEIGHT);
         
-        m_built = mTitleTextTexture.loadFromRenderedText(  m_window->GetRenderer(), font, mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+        m_built = mTitleTextTexture.loadFromRenderedText(  const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
         
         TTF_CloseFont(font);
         

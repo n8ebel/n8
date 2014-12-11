@@ -11,7 +11,7 @@
 #include "GUI.h"
 
 /** Constructor */
-gui::GUI::GUI(n8::Window* p_window) :
+gui::GUI::GUI(std::shared_ptr<n8::Window> p_window) :
                     m_window(p_window),
                     m_hasFocus(false),
                     m_built(false)
@@ -25,12 +25,7 @@ gui::GUI::~GUI(){
         mDialogStack.pop();
     }
     
-    for (auto element : m_guiElements){
-        if (element) {
-            delete element;
-            element = nullptr;
-        }
-    }
+    m_guiElements.clear();
     
     m_window = nullptr;
 }
@@ -39,16 +34,16 @@ gui::GUI::~GUI(){
  *
  *  @param p_newWidget The new element to add to the gui
  */
-void gui::GUI::AddElement(gui::GUIElement* p_newWidget){
+void gui::GUI::AddElement(std::shared_ptr<GUIElement> p_newWidget){
     m_guiElements.push_back(p_newWidget);
 }
 
-void gui::GUI::ShowDialog(gui::Dialog * pDialog){
+void gui::GUI::ShowDialog(std::shared_ptr<gui::Dialog> pDialog){
     pDialog->SetIsOpen();
     mDialogStack.push(pDialog);
 }
 
-void gui::GUI::RemoveElement(gui::GUIElement* p_widget){
+void gui::GUI::RemoveElement(std::shared_ptr<GUIElement> p_widget){
     for (int i = 0; i < m_guiElements.size(); i++) {
         if (m_guiElements[i] == p_widget) {
             m_guiElements.erase(m_guiElements.begin() + i);
@@ -94,7 +89,7 @@ bool gui::GUI::CheckClickDown(int p_x, int p_y){
  *
  *  @return bool Returns true if any element was clicked up
  */
-bool gui::GUI::CheckClickUp(int p_x, int p_y){
+bool gui::GUI::CheckClickUp(int p_x, int p_y) const{
     if(!mDialogStack.empty()){
         return mDialogStack.top()->CheckMouseClickUp(p_x, p_y);
     }
@@ -113,7 +108,7 @@ bool gui::GUI::CheckClickUp(int p_x, int p_y){
  *
  *  @return bool Returns True if any element was moved over
  */
-bool gui::GUI::CheckMove(int p_x, int p_y){
+bool gui::GUI::CheckMove(int p_x, int p_y) const{
     if(!mDialogStack.empty()){
         return mDialogStack.top()->CheckMouseMove(p_x, p_y);
     }
@@ -132,18 +127,18 @@ bool gui::GUI::CheckMove(int p_x, int p_y){
  *
  *  @param p_window The game's window that can be drawn to
  */
-void gui::GUI::Draw(n8::Window* p_window){
+void gui::GUI::Draw() const{
     
     // Draw the gui elements to the screen
     for (int i = 0; i < m_guiElements.size(); i++) {
-        m_guiElements[i]->Draw(p_window);
+        m_guiElements[i]->Draw(m_window);
     }
     
     // Draw dialogs after rest of gui elements because there is an implicit z-order
     // with dialogs on top of other elements
     //
     if(!mDialogStack.empty()){
-        mDialogStack.top()->Draw(p_window);
+        mDialogStack.top()->Draw(m_window);
     }
 }
 
@@ -151,18 +146,18 @@ void gui::GUI::Draw(n8::Window* p_window){
  *
  *  @param e The event to check
  */
-void gui::GUI::ProcessInput(SDL_Event* e){
+void gui::GUI::ProcessInput(SDL_Event* e) const{
     if (!mDialogStack.empty()) {
-        InputDialog* inputDialog = dynamic_cast<InputDialog*>(mDialogStack.top());
+        auto inputDialog = dynamic_pointer_cast<InputDialog>(mDialogStack.top());
         if (inputDialog) {
             inputDialog->HandleKeyboardInput(e);
         }
         return;
     }
     
-    for(GUIElement* element : m_guiElements){
-        if (dynamic_cast<InputBox*>(element) != nullptr) {
-            dynamic_cast<InputBox*>(element)->HandleKeyboardInput(e);
+    for(auto element : m_guiElements){
+        if (dynamic_pointer_cast<std::shared_ptr<InputBox>>(element) != nullptr) {
+            dynamic_pointer_cast<InputBox>(element)->HandleKeyboardInput(e);
         }
     }
 }
@@ -197,6 +192,6 @@ bool gui::GUI::Update(Uint32 p_currentTime){
  *
  *  @return bool True if the gui has user focus
  */
-bool gui::GUI::HasFocus(){
+bool gui::GUI::HasFocus() const{
     return m_hasFocus;
 }

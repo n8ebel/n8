@@ -41,19 +41,17 @@ namespace n8 {
         
         enum class EColor{Black,White};
         
-        RenderService(Game*, Window*);
+        RenderService(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window>);
         ~RenderService();
         
         void SetRenderMode(ERenderMode);
         
-        void OnNotify(Event*);
-        
-        void Draw(Sprite*, int, int);
+        void OnNotify(std::shared_ptr<Event>) override;
         
         //renders texture at position with default size
-        void Draw(Texture* p_texture, int p_x, int p_y);
+        void Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_y);
         //renders texture over a specified area
-        void Draw(Texture* p_texture, int p_x, int p_y, int p_w, int p_h);
+        void Draw(std::shared_ptr<Texture> p_texture, int p_x, int p_y, int p_w, int p_h);
         
         void DrawText(std::string p_text, Font* p_font, EColor p_color,int p_x, int p_y);
         
@@ -62,11 +60,9 @@ namespace n8 {
         void ColorBackground();
         void PostToScreen();
         
-        const Window* GetWindow(){return m_gameWindow;}
-        
     private:
         
-        Window* m_gameWindow; /**< Pointer to the game window object **/
+        std::shared_ptr<n8::Window> m_gameWindow; /**< Pointer to the game window object **/
         ERenderMode m_renderMode; /**< The current rendering mode **/
         
         int m_red; /**< red value for drawing color **/

@@ -18,26 +18,13 @@
  *  Creates SDL window, gets pointers to screen surface and renderer, and sets inital drawing render color
  */
 n8::Window::Window(){
-    m_screenSurface = nullptr;
-    m_screenRenderer = nullptr;
-    m_window = nullptr;
     ResizeWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 }
 
 /** Destructor
  *  Destroys SDL window object
  */
-n8::Window::~Window(){
-    
-    if(m_window){
-        SDL_DestroyWindow(m_window);
-        m_window = nullptr;
-    }
-    
-    m_screenSurface = nullptr;
-    m_screenRenderer = nullptr;
-    m_window = nullptr;
-}
+n8::Window::~Window(){ }
 
 /** Resizes the screen to the specified dimensions
  *
@@ -53,26 +40,45 @@ void n8::Window::ResizeWindow(int w, int h){
     m_screenWidth = w;
     m_screenHeight = h;
     
-    SDL_DestroyWindow(m_window);
-    
-    // create a window
+//    m_window = std::unique_ptr<SDL_Window, SDL_Window_Deleter>(
+//    
+//    
+//                                         SDL_CreateWindow(
+//                                                          
+//                                                          "SDL 2 window",             // window title
+//                                                          
+//                                                          SDL_WINDOWPOS_CENTERED,     // x position, centered
+//                                                          
+//                                                          SDL_WINDOWPOS_CENTERED,     // y position, centered
+//                                                          
+//                                                          m_screenWidth,                        // width, in pixels
+//                                                          
+//                                                          m_screenHeight,                        // height, in pixels
+//                                                          
+//                                                          0           // flags
+//                                                          
+//                                                          
+//                                                          ));
     
     m_window = SDL_CreateWindow(
-                                           
-                                           "SDL 2 window",             // window title
-                                           
-                                           SDL_WINDOWPOS_CENTERED,     // x position, centered
-                                           
-                                           SDL_WINDOWPOS_CENTERED,     // y position, centered
-                                           
-                                           m_screenWidth,                        // width, in pixels
-                                           
-                                           m_screenHeight,                        // height, in pixels
-                                           
-                                           0           // flags
-                                           
-           
-                                );
+                                                                                
+                                                                                "SDL 2 window",             // window title
+                                                                                
+                                                                                SDL_WINDOWPOS_CENTERED,     // x position, centered
+                                                                                
+                                                                                SDL_WINDOWPOS_CENTERED,     // y position, centered
+                                                                                
+                                                                                m_screenWidth,                        // width, in pixels
+                                                                                
+                                                                                m_screenHeight,                        // height, in pixels
+                                                                                
+                                                                                0           // flags
+                                                                                
+                                                                                
+                                                                                );
+
+    
+    
     if( m_window == nullptr )
     {
         std::string msg("Window could not be created: SDL Error: %s\n", SDL_GetError() );
@@ -80,6 +86,7 @@ void n8::Window::ResizeWindow(int w, int h){
         assert(m_window);
     }
     
+    //m_screenSurface = std::unique_ptr<SDL_Surface, SDL_Screen_Surface_Deleter>(SDL_GetWindowSurface(m_window.get()));
     m_screenSurface = SDL_GetWindowSurface(m_window);
     if( m_screenSurface == nullptr )
     {
@@ -88,7 +95,10 @@ void n8::Window::ResizeWindow(int w, int h){
         assert(m_screenSurface);
     }
     
+    //m_screenRenderer = std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter>(SDL_GetRenderer(m_window.get()));
+//    m_screenRenderer = std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter>(SDL_CreateRenderer(m_window.get(), -1, 0));
     m_screenRenderer = SDL_GetRenderer(m_window);
+
     if( m_screenRenderer == nullptr )
     {
         std::string msg("Could not get renderer: SDL Error: %s\n", SDL_GetError() );
@@ -108,17 +118,19 @@ void n8::Window::ResizeWindow(int w, int h){
  *
  *  @return a pointer to the window surface
  */
-SDL_Surface* n8::Window::GetSurface() const{
-    assert(m_window);
-    return m_screenSurface;
+const SDL_Surface& n8::Window::GetSurface() const{
+    return *m_screenSurface;
 }
 
 /** Gets a pointer to the window renderer
  *
  *  @return Pointer to the screen renderer
  */
-SDL_Renderer* n8::Window::GetRenderer() const{
-    assert(m_screenRenderer);
+const SDL_Renderer& n8::Window::GetRenderer() const{
+    return *m_screenRenderer;
+}
+
+SDL_Renderer* n8::Window::foobar(){
     return m_screenRenderer;
 }
 
@@ -126,10 +138,10 @@ SDL_Renderer* n8::Window::GetRenderer() const{
  *
  *  @return Pointer to the SDL_Window object
  */
-SDL_Window* n8::Window::GetWindow() const{
-    assert(m_window);
-    return m_window;
+const SDL_Window& n8::Window::GetWindow() const{
+    return *m_window;
 }
+
 
 /** Sets the window caption 
  *

@@ -73,9 +73,9 @@ namespace gui {
         void SetColor(EStyleColor p_color, int p_r, int p_g, int p_b);
         void SetColor(EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
         
-        std::string GetFontPath() { return m_fontFilepath; }
+        std::string GetFontPath() const { return m_fontFilepath; }
         
-        n8::Color GetColor(EStyleColor p_color);
+        n8::Color GetColor(EStyleColor p_color) const;
         
     
     private:

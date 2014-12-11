@@ -16,6 +16,24 @@
 
 namespace n8{
     
+    struct SDL_Window_Deleter {
+        void operator()(SDL_Window* window) {
+            SDL_DestroyWindow(window);
+        }
+    };
+    
+    struct SDL_Screen_Surface_Deleter {
+        void operator()(SDL_Surface* surface){
+            
+        }
+    };
+    
+    struct SDL_Renderer_Deleter {
+        void operator()(SDL_Renderer* renderer){
+            
+        }
+    };
+    
     /** \class Window
      *  \brief Represents game window.
      *
@@ -32,12 +50,14 @@ public:
     
     void SetTitle(char* caption);
     void ResizeWindow(int w, int h);
-    SDL_Surface* GetSurface() const;
-    SDL_Window* GetWindow() const;
-    SDL_Renderer* GetRenderer() const;
     
-    unsigned GetWidth(){ return m_screenWidth; }
-    unsigned GetHeight(){ return m_screenHeight; }
+    const SDL_Surface& GetSurface() const;
+    const SDL_Window& GetWindow() const;
+    const SDL_Renderer& GetRenderer() const;
+    SDL_Renderer* foobar();
+    
+    unsigned GetWidth() const { return m_screenWidth; }
+    unsigned GetHeight() const { return m_screenHeight; }
     
 private:
     
@@ -48,11 +68,14 @@ private:
     
     unsigned m_screenWidth;  /** < width of the screen surface **/
     unsigned m_screenHeight; /** < height of the screen surface **/
+    
+//    std::unique_ptr<SDL_Surface, SDL_Screen_Surface_Deleter> m_screenSurface;  /** < surface to render things to **/
+//    std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> m_screenRenderer; /** < The window renderer **/
+//    std::unique_ptr<SDL_Window, SDL_Window_Deleter> m_window;
+
     SDL_Surface* m_screenSurface;  /** < surface to render things to **/
     SDL_Renderer* m_screenRenderer; /** < The window renderer **/
-    SDL_Window* m_window;  /** < Pointer to SDL window object */
-    
-    
+    SDL_Window* m_window;
 };
 
 }

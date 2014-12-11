@@ -76,18 +76,15 @@ void LTexture::free()
 }
 
 
-int LTexture::getWidth()
-{
+int LTexture::getWidth() const {
     return mWidth;
 }
 
-int LTexture::getHeight()
-{
+int LTexture::getHeight() const {
     return mHeight;
 }
 
-void LTexture::render( SDL_Renderer* p_renderer,int x, int y )
-{
+void LTexture::render( SDL_Renderer* p_renderer,int x, int y ) const{
     //Set rendering space and render to screen
     SDL_Rect renderQuad = { x, y, mWidth, mHeight };
     SDL_RenderCopy( p_renderer, mTexture, NULL, &renderQuad );
@@ -134,7 +131,7 @@ bool LTexture::loadFromRenderedText( SDL_Renderer* p_renderer,TTF_Font* p_font, 
     return mTexture != nullptr;
 }
 
-bool LTexture::HasTexture(){
+bool LTexture::HasTexture() const{
     if (mTexture) {
         return true;
     }

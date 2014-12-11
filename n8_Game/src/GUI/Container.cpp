@@ -17,7 +17,7 @@
  *  @param p_w The width of the container
  *  @param p_h The height of the container
  */
-gui::Container::Container(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
+gui::Container::Container(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
     
 }
@@ -29,13 +29,6 @@ gui::Container::~Container(){
     if (m_texture) {
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
-    }
-    
-    for (auto element : m_guiElements){
-        if (element) {
-            delete element;
-            element = nullptr;
-        }
     }
 }
 
@@ -107,11 +100,11 @@ void gui::Container::SetStyle(Style p_style){
  *
  *  @param p_window The game's window that can be drawn to
  */
-void gui::Container::Draw(n8::Window* p_window){
-    SDL_Renderer* renderer= p_window->GetRenderer();
+void gui::Container::Draw(const std::shared_ptr<n8::Window> p_window) const{
+    SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     
     SDL_SetRenderDrawColor( renderer, m_style.GetColor(Style::EStyleColor::Container).GetR(), m_style.GetColor(Style::EStyleColor::Container).GetG(), m_style.GetColor(Style::EStyleColor::Container).GetB(), m_style.GetColor(Style::EStyleColor::Container).GetA() );
-    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
     for (const auto& widget : m_guiElements){
         widget->Draw(p_window);
@@ -123,7 +116,7 @@ void gui::Container::Draw(n8::Window* p_window){
  *
  *  @param p_widget The gui element to add
  */
-void gui::Container::AddElement(GUIElement* pElement){
+void gui::Container::AddElement(std::shared_ptr<GUIElement> pElement){
     if (pElement) {
         pElement->OffsetPosition(m_x, m_y);
         m_guiElements.push_back(pElement);

@@ -35,29 +35,28 @@ namespace n8{
 class State{
 public:
     
-    State(n8::Game* game);
+    State(std::shared_ptr<n8::Game> game);
     ~State();
     
-    ID GetId();
+    const ID& GetId() const;
     
     
     virtual void OnResume() = 0;
     virtual void OnPause() = 0;
     
     virtual void Update(Uint32 currentTime);
-    virtual void Render(Window* window);
+    virtual void Render();
     
-    gui::GUI* GetGUI();
+    const std::shared_ptr<gui::GUI> GetGUI() const;
     
 protected:
     Uint32 m_time;  /** < holds current game time > */
-    ID* m_id;  /** < unique identifier for the state oobject > */
-    //vector<n8::entities::Entity*> m_stateEntities;
+    std::unique_ptr<ID> m_id;  /** < unique identifier for the state oobject > */
     
-    n8::Game* m_game;
+    std::shared_ptr<n8::Game> m_game;
     
 private:
-    gui::GUI* m_gui;
+    std::shared_ptr<gui::GUI> m_gui;
     
 };
     

@@ -45,13 +45,13 @@ public:
     void setAlpha( Uint8 alpha );
     
     //Renders texture at given point
-    void render( SDL_Renderer* p_renderer,int x, int y );
+    void render( SDL_Renderer* p_renderer,int x, int y ) const;
     
     //Gets image dimensions
-    int getWidth();
-    int getHeight();
+    int getWidth() const;
+    int getHeight() const;
     
-    bool HasTexture();
+    bool HasTexture() const;
     
 private:
     //The actual hardware texture

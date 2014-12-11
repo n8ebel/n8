@@ -43,24 +43,24 @@ namespace n8{
      */
     class ResourceManager : public Service{
     public:
-        ResourceManager(Game*, Window* p_window, std::string p_path);
+        ResourceManager(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window> p_window, std::string p_path);
         ~ResourceManager();
         
-        Resource* GetResource(std::string);
+        const std::shared_ptr<Texture>& GetTexture(std::string) const;
+        const std::shared_ptr<Music>& GetMusic(std::string) const;
+        const std::shared_ptr<SoundEffect>& GetSoundEffect(std::string) const;
+        const std::shared_ptr<Font>& GetFont(std::string) const;
+
         
-        
-        
-        void OnNotify(Event*);
+        void OnNotify(std::shared_ptr<Event>) override;
         
     private:
         const std::string RESOURCES_TAG = "Resources";
-        const std::string IMAGE_RESOURCES_TAG = "ImageResources";
         const std::string TEXTURE_RESOURCES_TAG = "TextureResources";
         const std::string SOUND_EFFECT_RESOURCES_TAG = "SoundEffectResources";
         const std::string MUSIC_RESOURCES_TAG = "MusicResources";
         const std::string FONT_RESOURCES_TAG = "FontResources";
         
-        const std::string IMAGE_TAG = "Image";
         const std::string TEXTURE_TAG = "Texture";
         const std::string SOUND_EFFECT_TAG = "SoundEffect";
         const std::string MUSIC_TAG = "Music";
@@ -70,28 +70,23 @@ namespace n8{
         const std::string ID_TAG = "ID";
         
         const std::string RESOURCE_DIRECTORIES_PREFIX = "Resources";
-        const std::string IMAGES_DIRECTORY_SUFFIX = "Images";
         const std::string TEXTURES_DIRECTORY_SUFFIX = "Textures";
         const std::string SOUND_EFFECT_DIRECTORY_SUFFIX = "SoundEffect";
         const std::string MUSIC_DIRECTORY_SUFFIX = "Music";
         const std::string FONT_DIRECTORY_SUFFIX = "Font";
         
         std::string m_resourcesListPath; /**< Filepath to the resource list */
-        /*
-        std::string m_imagesDirectoryPath;
-        std::string m_texturesDirectoryPath;
-        std::string m_audioDirectoryPath;
-        */
         
-        std::map<std::string,Resource*> m_loadedResources;  /**< Stores all images loaded by the system  */
+        std::map<std::string, std::shared_ptr<Texture>> m_loadedTextures;
+        std::map<std::string, std::shared_ptr<Music>> m_loadedMusic;
+        std::map<std::string, std::shared_ptr<SoundEffect>> m_loadedSoundEffects;
+        std::map<std::string, std::shared_ptr<Font>> m_loadedFonts;
         
-        Window* m_gameWindow;
-        //SDL_Surface* m_screenSurface;  /**< Stores pointer to the game's screen surface.  Used to load optimized versions of images */
+        std::shared_ptr<n8::Window> m_gameWindow;
         
         SDL_Surface* LoadOptimizedImage(std::string filename);
         
         void LoadResources();
-        void LoadSprite(std::string, std::string);
         void LoadTexture(std::string, std::string);
         void LoadMusic(std::string, std::string);
         void LoadSoundEffect(std::string, std::string);

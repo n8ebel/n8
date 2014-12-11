@@ -8,7 +8,7 @@
 
 #include "Dialog.h"
 
-gui::Dialog::Dialog(n8::Window* p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
+gui::Dialog::Dialog(std::shared_ptr<n8::Window> p_window, int p_x, int p_y, int p_w, int p_h ) : Container(p_window, "",p_x,p_y,p_w,p_h)
 {
     mTitle = "";
     mIsOpen = false;
@@ -28,21 +28,6 @@ gui::Dialog::~Dialog(){
     mPositiveListener = nullptr;
     mNegativeListener = nullptr;
     mNeutralListener = nullptr;
-    if (mPositiveButton) {
-        delete mPositiveButton;
-        mPositiveButton = nullptr;
-    }
-    
-    if (mNegativeButton) {
-        delete mNegativeButton;
-        mNegativeButton = nullptr;
-    }
-    
-    if (mNeutralButton) {
-        delete mNeutralButton;
-        mNeutralButton = nullptr;
-    }
-    
 }
 
 void gui::Dialog::SetIsOpen(){
@@ -89,7 +74,7 @@ void gui::Dialog::SetPositiveButton(std::string text, std::function<void()> func
 }
 
 void gui::Dialog::SetPositiveButton(std::string text, int width, int height, std::function<void()> function){
-    mPositiveButton = new Button(m_window, "positive", text, 0, 0, width, height);
+    mPositiveButton = std::make_shared<Button>(m_window, "positive", text, 0, 0, width, height);
     mPositiveButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
     mPositiveListener = function;
     SetOnPositiveClickedListener(function);
@@ -100,7 +85,7 @@ void gui::Dialog::SetNegativeButton(std::string text, std::function<void()> func
 }
 
 void gui::Dialog::SetNegativeButton(std::string text, int width, int height, std::function<void()> function){
-    mNegativeButton = new Button(m_window, "negative", text, 0, 0, width, height);
+    mNegativeButton = std::make_shared<Button>(m_window, "negative", text, 0, 0, width, height);
     mNegativeButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
     mNegativeListener = function;
     SetOnNegativeClickedListener(function);
@@ -111,7 +96,7 @@ void gui::Dialog::SetNeutralButton(std::string text, std::function<void()> funct
 }
 
 void gui::Dialog::SetNeutralButton(std::string text, int width, int height, std::function<void()> function){
-    mNeutralButton = new Button(m_window, "neutral", text, 0, 0, width, height);
+    mNeutralButton = std::make_shared<Button>(m_window, "neutral", text, 0, 0, width, height);
     mNeutralButton->SetTextSize(Style::DEFAULT_DIALOG_BUTTON_FONT_SIZE);
     SetOnNeutralClickedListener(function);
 }
@@ -159,12 +144,12 @@ bool gui::Dialog::Update(Uint32 p_currentTime){
     return mIsOpen;
 }
 
-void gui::Dialog::Draw(n8::Window* pWindow){
+void gui::Dialog::Draw(const std::shared_ptr<n8::Window> pWindow) const{
     
     Container::Draw(pWindow);
     
     // Set draw color for text
-    SDL_Renderer* renderer = pWindow->GetRenderer();
+    auto renderer = const_cast<SDL_Renderer*>(&pWindow->GetRenderer());
     n8::Color drawColor = m_style.GetColor(Style::EStyleColor::Font);
     SDL_SetRenderDrawColor( renderer,
                            drawColor.GetR(),
@@ -182,7 +167,7 @@ void gui::Dialog::Draw(n8::Window* pWindow){
                            drawColor.GetA()
                            );
     
-    SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+    SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     
     if(mTitleTextTexture.HasTexture()){
         int x = m_x + (m_w - mTitleTextTexture.getWidth())/2;

@@ -38,7 +38,7 @@ class GUIElement{
 public:
     enum class State{Neutral, Focused, Hovered, Pressed, PressedAndHovered, Selected, SelectedAndHovered };
     
-    GUIElement(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h);
+    GUIElement(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h);
     virtual ~GUIElement();
     
 //Implemented methods
@@ -47,10 +47,10 @@ public:
     virtual void SetSize(int width, int height);
     virtual void SetWidth(int width);
     virtual void SetHeight(int height);
-    int GetWidth();
-    int GetHeight();
-    int GetX();
-    int GetY();
+    int GetWidth() const;
+    int GetHeight() const;
+    int GetX() const;
+    int GetY() const;
     
     Style GetStyle(){return m_style;}
     void SetStyle(Style p_style);
@@ -61,9 +61,7 @@ public:
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b);
     void SetColor(Style::EStyleColor p_color, int p_r, int p_g, int p_b, int p_a);
     
-//Pure virtual methods
-    
-    virtual void Draw(n8::Window*) = 0;  /** < Renders the element to the screen. **/
+    virtual void Draw(const std::shared_ptr<n8::Window>) const = 0;  /** < Renders the element to the screen. **/
     
     virtual bool CheckMouseClickDown(int p_x, int p_y);  /** Checks if a mouse click down action took place within the element and responds appropriately.  **/
     virtual bool CheckMouseClickUp(int p_x, int p_y);  /** Checks if a mouse click up action took place within the element and responds appropriately.  **/
@@ -73,10 +71,9 @@ public:
     virtual bool Update(Uint32 p_currentTime) = 0;  /** Handles any updating of the element that needs to happen during every frame.  **/
     
     void setClickHandler(std::function<void()> function);
-    
-
-//protected:
-    n8::Window* m_window;
+ 
+protected:
+    std::shared_ptr<n8::Window> m_window;
     Style m_style; /** < Pointer to a Style object that determeins the color style of the element **/
     n8::Rectangle m_rectangle; /** < Stores the positions and size of the element **/
     SDL_Texture* m_texture; /** < Pointer to texture used render the element **/
@@ -97,7 +94,7 @@ public:
     int m_w;
     int m_h;
     
-    bool positionWithinElement(int x, int y);
+    bool positionWithinElement(int x, int y) const;
     
 };
     

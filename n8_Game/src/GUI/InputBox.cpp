@@ -25,7 +25,7 @@ const Uint16 gui::InputBox::CURSOR_OFFSET_X = 2;
  *  @param p_w The width of the inputbox
  *  @param p_h The height of the inputbox
  */
-gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h){
+gui::InputBox::InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h){
     
     m_lastTime = 0;
     m_hintString = "";
@@ -47,7 +47,7 @@ gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y
  *  @param p_h The height of the inputbox
  *  @param p_hint The hint string for the input box
  */
-gui::InputBox::InputBox(n8::Window* p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
+gui::InputBox::InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, int p_x, int p_y, int p_w, int p_h, std::string p_hint) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
 
     m_lastTime = 0;
@@ -106,13 +106,9 @@ bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
  *  @param p_window Pointer to the game window passed from
  *   {@link State#Render(n8::Window*) State.Render(n8::Window*)}
  */
-void gui::InputBox::Draw(n8::Window* p_window){
+void gui::InputBox::Draw(const std::shared_ptr<n8::Window> p_window) const{
     
-    if(m_updateTexture){
-        UpdateTexture(p_window);
-    }
-    
-    SDL_Renderer* renderer= p_window->GetRenderer();
+    SDL_Renderer* renderer = const_cast<SDL_Renderer*>(&p_window->GetRenderer());
     
     //draw box background
     SDL_SetRenderDrawColor( renderer,   m_style.GetColor(Style::EStyleColor::InputBackground).GetR(),
@@ -121,7 +117,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
                                         m_style.GetColor(Style::EStyleColor::InputBackground).GetA()
                            );
     
-    SDL_RenderFillRect( renderer, m_rectangle.GetRect() );
+    SDL_RenderFillRect( renderer, &m_rectangle.GetRect() );
     
     //draw outline if has focus
     if (m_state >= State::Pressed) {
@@ -131,7 +127,7 @@ void gui::InputBox::Draw(n8::Window* p_window){
                                             m_style.GetColor(Style::EStyleColor::Focus).GetA()
         );
         
-        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+        SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     }
     else{
         SDL_SetRenderDrawColor( renderer,    m_style.GetColor(Style::EStyleColor::Default).GetR(),
@@ -140,12 +136,12 @@ void gui::InputBox::Draw(n8::Window* p_window){
                                m_style.GetColor(Style::EStyleColor::Default).GetA()
                                );
         
-        SDL_RenderDrawRect(renderer, m_rectangle.GetRect());
+        SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     }
     
     //draw text
     if (m_hintString != "" || m_inputString != "") {
-        m_textTexture.render(p_window->GetRenderer(),   m_rectangle.GetX() + TEXT_OFFSET_X,
+        m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()),   m_rectangle.GetX() + TEXT_OFFSET_X,
                              m_rectangle.GetY());
     }
     
@@ -217,6 +213,10 @@ void gui::InputBox::HandleKeyboardInput(SDL_Event* p_event){
  *  @return m_hasFocus
  */
 bool gui::InputBox::Update(Uint32 p_currentTime){
+    if(m_updateTexture){
+        UpdateTexture(m_window);
+    }
+    
     if ( (p_currentTime - m_lastTime) > 500) {
         m_cursorShown = !m_cursorShown;
         m_lastTime = p_currentTime;
@@ -229,7 +229,7 @@ bool gui::InputBox::Update(Uint32 p_currentTime){
  *
  *  @return m_inputString The string entered into the inputbox
  */
-std::string gui::InputBox::GetText(){
+std::string gui::InputBox::GetText() const{
     if (m_inputString.length() > 0) {
         return m_inputString;
     }else{
@@ -241,7 +241,7 @@ std::string gui::InputBox::GetText(){
 /** Updates the text texture based on the current
  *   input within the inputbox
  */
-void gui::InputBox::UpdateTexture(n8::Window* p_window){
+void gui::InputBox::UpdateTexture(const std::shared_ptr<n8::Window> p_window){
     
     //Text is not empty
     if( m_inputString.length() > 0)
@@ -253,7 +253,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
         }
         
         //load input text to texture
-        m_textTexture.loadFromRenderedText( p_window->GetRenderer(), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        m_textTexture.loadFromRenderedText( const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
         
         TTF_CloseFont(font);
        
@@ -270,7 +270,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
             }
             
             //load hint text to texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
             
             TTF_CloseFont(font);
         }
@@ -283,7 +283,7 @@ void gui::InputBox::UpdateTexture(n8::Window* p_window){
             }
             
             //load empty texture
-            m_textTexture.loadFromRenderedText(p_window->GetRenderer(), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
             
             TTF_CloseFont(font);
         }

@@ -31,3 +31,7 @@ n8::Texture::~Texture(){
     SDL_DestroyTexture(m_texture);
     m_texture = nullptr;
 }
+
+SDL_Texture* n8::Texture::Get_SDLTexture() const{
+    return m_texture;
+}

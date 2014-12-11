@@ -45,15 +45,23 @@ namespace n8 {
      *
      *  Game is the core class for the n8 game framework.  It controls timing, setup, shutdown, and the game loop.  This class also initializes core game services using configuration files.
      */
-class Game{
+class Game : public enable_shared_from_this<Game>{
 public:
     static const int DEFAULT_FPS = 200; /** < Defaul fps value */
     
-    static void Init();
-    static void Shutdown();
+    static const int FAILURE_SDL_INIT = -1;
+    
+    static const int FAILURE_SDL_IMG = -2;
+    
+    static const int FAILURE_SDL_MIX = -3;
+    
+    static const int FAILURE_SDL_TTF = -4;
     
     Game(const char*);
     ~Game();
+    
+    void Init();
+    void Shutdown();
     
     void Start();
     void Stop();
@@ -61,21 +69,23 @@ public:
     void SetFPS(unsigned);
     void DefineWindowSize(unsigned, unsigned);
     
-    void StartState(State*);
+    void StartState(std::shared_ptr<n8::State>);
     void EndState();
     
     void ShowDebugInfo(bool);
     
-    ResourceManager* getResourceManager();
-    InputService* getInputService();
-    StateManagerService* getStateManagerService();
-    RenderService* getRenderService();
-    AudioService* getAudioService();
+    const std::shared_ptr<n8::Window> getWindow() const;
+    const std::shared_ptr<ResourceManager> getResourceManager() const;
+    const std::shared_ptr<InputService> getInputService() const;
+    const std::shared_ptr<StateManagerService> getStateManagerService() const;
+    const std::shared_ptr<RenderService> getRenderService() const;
+    const std::shared_ptr<AudioService> getAudioService() const;
+    
 private:
     const std::string RESOURCE_FILE_SUFFIX = "Resources.xml";  /** < Default resource file name */
     
-    ServiceManager* m_serviceManager; /** < Game service manager */
-    n8::Window m_window; /** < Game window */
+    ServiceManager m_serviceManager; /** < Game service manager */
+    std::shared_ptr<n8::Window> m_window; /** < Game window */
     n8::Timer m_timer; /** < Game timer */
     bool m_showDebugInfo;
      

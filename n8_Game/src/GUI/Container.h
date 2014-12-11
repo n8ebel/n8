@@ -27,12 +27,12 @@ namespace gui{
      */
     class Container : public GUIElement{
     public:
-        Container(n8::Window* p_window,std::string p_id, int p_x, int p_y, int p_w, int p_h);
+        Container(std::shared_ptr<n8::Window> p_window,std::string p_id, int p_x, int p_y, int p_w, int p_h);
         virtual ~Container();
         
-        void AddElement(GUIElement*);
+        void AddElement(std::shared_ptr<GUIElement>);
         
-        virtual void Draw(n8::Window*) override;
+        virtual void Draw(const std::shared_ptr<n8::Window>) const override;
         virtual bool CheckMouseClickDown(int p_x, int p_y) override;
         virtual bool CheckMouseClickUp(int p_x, int p_y) override;
         virtual bool CheckMouseMove(int p_x, int p_y) override;
@@ -44,7 +44,7 @@ namespace gui{
         
         virtual void OffsetPosition(int p_x, int p_y) override;
         
-        std::vector<GUIElement*> m_guiElements; /** < List of elements contained by the container.  All elements will be drawn relative to the container's position */
+        std::vector<std::shared_ptr<GUIElement>> m_guiElements; /** < List of elements contained by the container.  All elements will be drawn relative to the container's position */
         
     };
 }

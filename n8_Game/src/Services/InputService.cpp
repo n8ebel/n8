@@ -19,18 +19,14 @@
 /** Default constructor
  *  Initializes event_
  */
-n8::InputService::InputService(Game* game) : Service(game){
+n8::InputService::InputService(std::shared_ptr<n8::Game> game) : Service(game){
     Log::Info(TAG, "Constructor");
     //m_event = new SDL_Event;
     
     for (int i = 0; i < 323; i++) {
-        m_registeredKeyDownCommands[i] = nullptr;
-        m_registeredKeyUpCommands[i] = nullptr;
         m_registeredKeyDownActions[i] = nullptr;
         m_registeredKeyUpActions[i] = nullptr;
     }
-    
-    m_userInterface = nullptr;
     
     m_mouseMoveFunction = nullptr;
     m_mouseButtonDownFunction = nullptr;
@@ -40,7 +36,6 @@ n8::InputService::InputService(Game* game) : Service(game){
 /** Default destructor */
 n8::InputService::~InputService(){
     Log::Info(TAG, "Destructor");
-    m_userInterface = nullptr;
 }
 
 
@@ -58,17 +53,14 @@ void n8::InputService::HandleInput(){
         
         if (m_event.type == SDL_QUIT || m_event.type == SDL_WINDOWEVENT_CLOSE)
 		{
-            Event event(ExitEvent);
-            Notify(&event);
+            Notify(make_shared<Event>(ExitEvent));
 		}
         
         if (!guiHasFocus) {
             if (m_event.type == SDL_KEYDOWN)
             {
                 m_keysHeld[m_event.key.keysym.sym] = true;
-                if(m_registeredKeyDownCommands[m_event.key.keysym.sym] != nullptr){
-                    m_registeredKeyDownCommands[m_event.key.keysym.sym]->execute();
-                }
+                
                 if(m_registeredKeyDownActions[m_event.key.keysym.sym] != nullptr){
                     m_registeredKeyDownActions[m_event.key.keysym.sym]();
                 }
@@ -76,9 +68,7 @@ void n8::InputService::HandleInput(){
             if (m_event.type == SDL_KEYUP)
             {
                 m_keysHeld[m_event.key.keysym.sym] = false;
-                if (m_registeredKeyUpCommands[m_event.key.keysym.sym] != nullptr) {
-                    m_registeredKeyUpCommands[m_event.key.keysym.sym]->execute();
-                }
+                
                 if (m_registeredKeyUpActions[m_event.key.keysym.sym] != nullptr) {
                     m_registeredKeyUpActions[m_event.key.keysym.sym]();
                 }
@@ -149,43 +139,16 @@ bool n8::InputService::KeyIsUp(int key){
  *
  *  @param p_gui Pointer to a user interface
  */
-void n8::InputService::RegisterUserInterface(gui::GUI* p_gui){
+void n8::InputService::RegisterUserInterface(const std::shared_ptr<gui::GUI> p_gui){
     m_userInterface = p_gui;
-}
-
-/** Stores a pointer to a command that will be executed when the specified key is pressed down.
- *
- *  @param key The integer keyboard key identifier
- *  @param command Pointer to command object to execute when specified key is pressed down.
- */
-void n8::InputService::RegisterKeyDownCommand(int key,Command* command){
-    m_registeredKeyDownCommands[key] = command;
 }
 
 void n8::InputService::RegisterKeyDownAction(int key, std::function<void()> func){
     m_registeredKeyDownActions[key] = func;
 }
 
-/** Stores a pointer to a command that will be executed when the specified key is release up.
- *
- *  @param key The integer keyboard key identifier
- *  @param command Pointer to command object to execute when specified key is released up.
- */
-void n8::InputService::RegisterKeyUpCommand(int key,Command* command){
-    m_registeredKeyUpCommands[key] = command;
-}
-
 void n8::InputService::RegisterKeyUpAction(int key, std::function<void()> func){
     m_registeredKeyUpActions[key] = func;
-}
-
-/** Removes all command pointers so nothing is executed when a key is pressed.
- */
-void n8::InputService::UnregisterKeyCommands(){
-    for (int i = 0; i < 323; i++) {
-        m_registeredKeyUpCommands[i] = nullptr;
-        m_registeredKeyDownCommands[i] = nullptr;
-    }
 }
 
 void n8::InputService::UnregisterKeyActions(){
@@ -273,6 +236,6 @@ void n8::InputService::UnregisterMouseButtonUpAction(){
  *
  *  @param event The event that was broadcast by a registered subject
  */
-void n8::InputService::OnNotify(Event* event){
+void n8::InputService::OnNotify(std::shared_ptr<Event> event){
     
 }
