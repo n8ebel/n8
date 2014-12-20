@@ -41,6 +41,8 @@ namespace n8 {
         
         enum class EColor{Black,White};
         
+        static uint8_t DEFAULT_ALPHA;
+        
         RenderService(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window>);
         ~RenderService();
         
@@ -55,9 +57,12 @@ namespace n8 {
         
         void DrawText(std::string p_text, Font* p_font, EColor p_color,int p_x, int p_y);
         
-        void SetDrawingColor(int p_r, int p_g, int p_b, int p_a);
+        void SetDrawingColor(int red, int green, int blue);
+        void SetDrawingColor(int red, int green, int blue, int alpha);
+            
+        void ColorBackground(int red, int green, int blue);
+        void ColorBackground(int red, int green, int blue, int alpha);
         
-        void ColorBackground();
         void PostToScreen();
         
     private:
