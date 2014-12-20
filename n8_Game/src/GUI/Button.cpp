@@ -28,6 +28,7 @@
 gui::Button::Button(std::shared_ptr<n8::Window> p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
     m_text = p_text;
+    m_textTexture = nullptr;
     
     loadFontTexture(Style::DEFAULT_FONT_SIZE);
     
@@ -65,6 +66,9 @@ gui::Button::~Button(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
+    if (m_textTexture) {
+        delete m_textTexture;
+    }
     m_function = nullptr;
 }
 
@@ -100,11 +104,12 @@ void gui::Button::Draw(const std::shared_ptr<n8::Window> p_window) const{
         drawNeutral(p_window);
     }
     
-    if(m_textTexture.HasTexture()){
-        int x = m_x + (m_w - m_textTexture.getWidth())/2;
-        int y = m_y + (m_h - m_textTexture.getHeight())/2;
-        m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), x,y);
+    if (m_textTexture) {
+        int x = m_x + (m_w - m_textTexture->GetWidth())/2;
+        int y = m_y + (m_h - m_textTexture->GetHeight())/2;
+        m_textTexture->Render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), x,y);
     }
+    
 }
 
 /** Updates the button every frame.
@@ -295,7 +300,8 @@ void gui::Button::loadFontTexture(int textSize){
         return;
     }
     
-    m_built = m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture != nullptr;
     
     TTF_CloseFont(font);
 }

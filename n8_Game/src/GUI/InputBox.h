@@ -15,7 +15,7 @@
 #include <string>
 
 #include "GUIElement.h"
-#include "LTexture.h"
+#include "Texture.h"
 
 namespace gui {
     
@@ -43,7 +43,7 @@ namespace gui {
         static const Uint16 TEXT_OFFSET_Y;  /** < Y offset for drawing text within the input region of the element */
         static const Uint16 CURSOR_OFFSET_X; /** < X offset for drawing cursor after drawn text */
         
-        LTexture m_textTexture; /** < Texture used to draw input text */
+        n8::Texture* m_textTexture; /** < Texture used to draw input text */
         
         
         std::string m_hintString;  /** < String to hold hint message */

@@ -21,6 +21,7 @@
 
 #include "Window.h"
 #include "GUIElement.h"
+#include "Texture.h"
 #include "Log.h"
 
 namespace gui{
@@ -53,7 +54,7 @@ class Button : public GUIElement{
     private:
     
         std:: string m_text;  /** < The test displayed on the button */
-        LTexture m_textTexture; /** < Texture used to display the text */
+        n8::Texture* m_textTexture; /** < Texture used to display the text */
     
         void drawHovered(const std::shared_ptr<n8::Window>) const;
         void drawNeutral(const std::shared_ptr<n8::Window>) const;

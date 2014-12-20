@@ -95,7 +95,7 @@ void n8::RenderService::DrawText(std::string p_text, Font* p_font, EColor p_colo
     
     if (p_font != nullptr) {
         SDL_Color textColor;
-        LTexture textTexture;
+        Texture* textTexture;
         
         if (p_color == EColor::Black) {
             textColor.r = 0;
@@ -111,9 +111,10 @@ void n8::RenderService::DrawText(std::string p_text, Font* p_font, EColor p_colo
             
         }
         
-        if( textTexture.loadFromRenderedText( const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_font->m_font, p_text.c_str(), textColor ) ){
-        
-            textTexture.render(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_x, p_y);
+        textTexture = new Texture("", const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_font->m_font, p_text.c_str(), textColor );
+        if( textTexture ){
+            textTexture->Render(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), p_x, p_y);
+            delete textTexture;
         }
         else{
             Log::Debug(TAG, "Couldn't load text texture");

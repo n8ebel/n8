@@ -16,7 +16,6 @@
 #include "Window.h"
 #include "Sprite.h"
 #include "Texture.h"
-#include "LTexture.h"
 #include "Font.h"
 #include "Log.h"
 

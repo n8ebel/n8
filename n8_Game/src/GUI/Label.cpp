@@ -17,6 +17,7 @@ gui::Label::Label(std::shared_ptr<n8::Window> p_window, std::string p_id,std::st
     
     m_labelText = p_text;
     m_texture = nullptr;
+    m_textTexture = nullptr;
     
     // Build
     TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
@@ -25,7 +26,8 @@ gui::Label::Label(std::shared_ptr<n8::Window> p_window, std::string p_id,std::st
         return;
     }
     
-    m_built = m_textTexture.loadFromRenderedText(  const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_built = m_textTexture != nullptr;
     
     TTF_CloseFont(font);
     
@@ -42,6 +44,9 @@ gui::Label::~Label(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
+    if (m_textTexture) {
+        delete m_textTexture;
+    }
 }
 
 /** Draws the label element
@@ -49,7 +54,9 @@ gui::Label::~Label(){
  *  @param p_window Pointer to the game window object
  */
 void gui::Label::Draw(const std::shared_ptr<n8::Window> p_window) const{
-   m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), m_rectangle.GetX(), m_rectangle.GetY());
+    if (m_textTexture) {
+        m_textTexture->Render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), m_rectangle.GetX(), m_rectangle.GetY());
+    }
 }
 
 /** Updates the Label

@@ -23,6 +23,10 @@ gui::Dialog::~Dialog(){
     Container::~Container();
     
     m_window = nullptr;
+    if (mTitleTextTexture) {
+        delete mTitleTextTexture;
+        mTitleTextTexture = nullptr;
+    }
     
     mDismissedListener = nullptr;
     mPositiveListener = nullptr;
@@ -169,10 +173,10 @@ void gui::Dialog::Draw(const std::shared_ptr<n8::Window> pWindow) const{
     
     SDL_RenderDrawRect(renderer, &m_rectangle.GetRect());
     
-    if(mTitleTextTexture.HasTexture()){
-        int x = m_x + (m_w - mTitleTextTexture.getWidth())/2;
+    if(mTitleTextTexture){
+        int x = m_x + (m_w - mTitleTextTexture->GetWidth())/2;
         int y = m_y + Style::DEFAULT_MARGIN;
-        mTitleTextTexture.render(renderer, x,y);
+        mTitleTextTexture->Render(renderer, x,y);
     }
 }
 

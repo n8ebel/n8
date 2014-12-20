@@ -24,10 +24,17 @@ namespace n8{
      */
     class Texture :public Resource{
     public:
+        Texture();
         ~Texture();
         Texture(std::string p_id, SDL_Texture* p_img, int p_w, int p_h);
+        Texture(std::string p_id, SDL_Renderer* p_renderer,TTF_Font* p_font, std::string textureText, SDL_Color textColor );
+        
+        void Render(SDL_Renderer*, int, int) const;
         
         SDL_Texture* Get_SDLTexture() const;
+        
+        int GetWidth() const { return m_width; }
+        int GetHeight() const { return m_height; }
         
     private:
         
