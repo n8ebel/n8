@@ -10,6 +10,8 @@
 
 #define TAG "RenderService"
 
+u_int8_t n8::RenderService::DEFAULT_ALPHA = 255;
+
 /** Constructor
  *
  *  @param p_window Pointer the the game's window object
@@ -130,13 +132,25 @@ void n8::RenderService::DrawText(std::string p_text, Font* p_font, EColor p_colo
  *  @param p_r The red value
  *  @param p_g The green value
  *  @param p_b The blue value
+ */
+void n8::RenderService::SetDrawingColor(int p_red, int p_green, int p_blue){
+    SetDrawingColor(p_red, p_green, p_blue, DEFAULT_ALPHA);
+}
+
+/**
+ *  Sets the color to use when drawing shapes or coloring the background.
+ *  If in texture rendering mode it sets RenderDrawColor
+ *
+ *  @param p_r The red value
+ *  @param p_g The green value
+ *  @param p_b The blue value
  *  @param p_a The alpha value
  */
-void n8::RenderService::SetDrawingColor(int p_r, int p_g, int p_b, int p_a){
-    m_red = p_r;
-    m_green = p_g;
-    m_blue = p_b;
-    m_alpha = p_a;
+void n8::RenderService::SetDrawingColor(int p_red, int p_green, int p_blue, int p_alpha){
+    m_red = p_red;
+    m_green = p_green;
+    m_blue = p_blue;
+    m_alpha = p_alpha;
     
     if(m_renderMode == ETexture){
         SDL_SetRenderDrawColor(const_cast<SDL_Renderer*>(&m_gameWindow->GetRenderer()), m_red , m_green, m_blue, m_alpha);
@@ -144,10 +158,24 @@ void n8::RenderService::SetDrawingColor(int p_r, int p_g, int p_b, int p_a){
 }
 
 /**
+ *  Colors the window background using the specified colors
+ *
+ *  @param p_red The red component used to color the game window
+ *  @param p_green The green component used to color the game window
+ *  @param p_blue The blude componenet used to color the game window
+ *
+ */
+void n8::RenderService::ColorBackground(int p_red, int p_green, int p_blue){
+    ColorBackground(p_red, p_green, p_blue, DEFAULT_ALPHA);
+}
+
+/**
  *  Colors the background to the stored drawing color.
  *  Coloring is done differently for each rendering mode.
  */
-void n8::RenderService::ColorBackground(){
+void n8::RenderService::ColorBackground(int p_red, int p_green, int p_blue, int p_alpha){
+    SetDrawingColor(p_red, p_green, p_blue, p_alpha);
+    
     if (m_renderMode == ESprite) {
         SDL_Surface* surface = SDL_GetWindowSurface(const_cast<SDL_Window*>(&m_gameWindow->GetWindow()));
         SDL_FillRect(const_cast<SDL_Surface*>(&m_gameWindow->GetSurface()), NULL, SDL_MapRGBA(surface->format, m_red,m_green,m_blue,m_alpha));
