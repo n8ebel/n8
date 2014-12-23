@@ -111,7 +111,7 @@ gui::GUIElement::State gui::GUIElement::GetState(){
  *
  *  @return True if mouse if moving within the button
  */
-bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
+bool gui::GUIElement::CheckMouseMove(int p_x, int p_y) const{
     if (positionWithinElement(p_x, p_y)) {
         if (m_state == State::Pressed) {
             m_state = State::PressedAndHovered;
@@ -145,7 +145,7 @@ bool gui::GUIElement::CheckMouseMove(int p_x, int p_y){
  *
  *  @return bool Returns true if element was clicked up
  */
-bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
+bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y) const{
     
     if( positionWithinElement(p_x, p_y)){
         m_state = State::PressedAndHovered;
@@ -169,7 +169,7 @@ bool gui::GUIElement::CheckMouseClickDown(int p_x, int p_y){
  *
  *  @return bool Returns true if element was clicked up
  */
-bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y){
+bool gui::GUIElement::CheckMouseClickUp(int p_x, int p_y) const{
     
     if (!m_mouseClickedDown) {
         return false;

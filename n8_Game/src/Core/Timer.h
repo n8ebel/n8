@@ -23,12 +23,12 @@ public:
     void UpdateCurrentTime();
     void SyncGame(unsigned);
     
-    unsigned int GetElapsedTime();
-    unsigned int GetTime();
+    unsigned int GetElapsedTime() const;
+    unsigned int GetTime() const;
     
 private:
     Uint32 m_startTime;  /** < Time when the timer was created */
-    Uint32 m_currentTime;  /** < current game time **/
+    mutable Uint32 m_currentTime;  /** < current game time **/
 };
 
 }

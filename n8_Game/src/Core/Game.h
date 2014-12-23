@@ -66,8 +66,8 @@ public:
     void Start();
     void Stop();
     
-    void SetFPS(unsigned);
-    void DefineWindowSize(unsigned, unsigned);
+    void SetFPS(Uint8);
+    void DefineWindowSize(Uint16, Uint16);
     
     void StartState(std::shared_ptr<n8::State>);
     void EndState();
@@ -87,8 +87,8 @@ private:
     ServiceManager m_serviceManager; /** < Game service manager */
     std::shared_ptr<n8::Window> m_window; /** < Game window */
     n8::Timer m_timer; /** < Game timer */
+
     bool m_showDebugInfo;
-     
     
     int m_fps;  /** < value to control game loop speed **/
     bool m_quit;  /** < flag to control when game loop ends **/

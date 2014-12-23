@@ -123,13 +123,12 @@ int n8::StateManagerService::GetStackSize(){
  *
  *  @return The ID object of the current state object
  */
-ID n8::StateManagerService::GetCurrentStateId(){
+ID const * const n8::StateManagerService::GetCurrentStateId(){
     if(m_stateStack.size() >= 1){
-        //return m_stateStack.top()->GetId();
-        return NULL;
+        return &m_stateStack.top()->GetId();
     }
     else{
-        return NULL;
+        return nullptr;
     }
 }
 

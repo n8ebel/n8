@@ -39,7 +39,7 @@ public:
     ~State();
     
     const ID& GetId() const;
-    const virtual std::string GetName() const = 0;
+    virtual const std::string GetName() const = 0;
     
     virtual void OnResume() = 0;
     virtual void OnPause() = 0;
@@ -50,7 +50,7 @@ public:
     const std::shared_ptr<gui::GUI> GetGUI() const;
     
 protected:
-    Uint32 m_time;  /** < holds current game time > */
+    Uint64 m_time;  /** < holds current game time > */
     std::unique_ptr<ID> m_id;  /** < unique identifier for the state oobject > */
     
     std::shared_ptr<n8::Game> m_game;

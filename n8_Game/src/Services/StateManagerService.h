@@ -39,7 +39,7 @@ public:
     void Clear();
     
     int GetStackSize();
-    ID GetCurrentStateId();
+    ID const* const GetCurrentStateId();
     
     void ProcessState(Uint32 time, const std::shared_ptr<n8::Window> screen);
     

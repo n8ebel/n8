@@ -29,7 +29,7 @@ namespace n8{
         Font(std::string p_id, TTF_Font* p_ttfFont);
         ~Font();
         
-        TTF_Font* GetFont();
+        TTF_Font* GetFont() const;
         
     private:
         std::string m_id; /** < Identifier of the font */

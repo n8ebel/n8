@@ -87,7 +87,7 @@ void gui::InputBox::SetHintText(std::string hintString){
  *
  *  @return bool Returns true if the inputbox was clicked
  */
-bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y){
+bool gui::InputBox::CheckMouseClickDown(int p_x, int p_y) const {
     m_updateTexture = true;
     if( GUIElement::CheckMouseClickDown(p_x, p_y)){
         SDL_StartTextInput();

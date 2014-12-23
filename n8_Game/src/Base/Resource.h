@@ -30,7 +30,7 @@ public:
     /**
      *  @return The string id of the resource
      */
-    std::string GetId(){return m_id;}
+    const std::string GetId() const {return m_id;}
     
 private:
     std::string m_id; /** < The identifier of the resource > */

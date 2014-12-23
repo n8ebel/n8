@@ -40,9 +40,9 @@ public:
     
     virtual void Dismiss();
 
-    virtual bool CheckMouseClickDown(int, int) override;
-    virtual bool CheckMouseClickUp(int, int) override;
-    virtual bool CheckMouseMove(int,int) override;
+    virtual bool CheckMouseClickDown(int, int) const override;
+    virtual bool CheckMouseClickUp(int, int) const override;
+    virtual bool CheckMouseMove(int,int) const override;
     
     virtual void SetPositiveButton(std::string, std::function<void()>);
     virtual void SetPositiveButton(std::string, int, int, std::function<void()>);

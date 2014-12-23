@@ -36,6 +36,6 @@ n8::Font::~Font(){
  *
  *  @return Pointer to the TTF_Font data
  */
-TTF_Font* n8::Font::GetFont(){
+TTF_Font* n8::Font::GetFont() const{
     return m_font;
 }
