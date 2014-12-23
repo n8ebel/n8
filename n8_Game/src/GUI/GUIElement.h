@@ -19,7 +19,6 @@
 
 #include "Window.h"
 #include "Rectangle.h"
-#include "LTexture.h"
 #include "Font.h"
 #include "Color.h"
 #include "Style.h"

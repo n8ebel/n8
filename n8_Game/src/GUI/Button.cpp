@@ -65,6 +65,7 @@ gui::Button::~Button(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
+    
     m_function = nullptr;
 }
 
@@ -100,11 +101,12 @@ void gui::Button::Draw(const std::shared_ptr<n8::Window> p_window) const{
         drawNeutral(p_window);
     }
     
-    if(m_textTexture.HasTexture()){
-        int x = m_x + (m_w - m_textTexture.getWidth())/2;
-        int y = m_y + (m_h - m_textTexture.getHeight())/2;
-        m_textTexture.render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), x,y);
+    if (m_textTexture) {
+        int x = m_x + (m_w - m_textTexture->GetWidth())/2;
+        int y = m_y + (m_h - m_textTexture->GetHeight())/2;
+        m_textTexture->Render(const_cast<SDL_Renderer*>(&p_window->GetRenderer()), x,y);
     }
+    
 }
 
 /** Updates the button every frame.
@@ -288,14 +290,24 @@ void gui::Button::drawSelectedAndHovered(const std::shared_ptr<n8::Window> p_win
 }
 
 void gui::Button::loadFontTexture(int textSize){
-    // Build
-    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), textSize);
-    if (!font) {
-        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+    
+    // If there is no text for the button, dont bother creating a text texture for it
+    if (m_text.empty()) {
+        m_built = true;
         return;
     }
     
-    m_built = m_textTexture.loadFromRenderedText(const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    // Build
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), textSize);
+    
+    if (!font) {
+        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+    }else{
+        m_textTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(),
+                                                      m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    }
+    
+    m_built = m_textTexture != nullptr;
     
     TTF_CloseFont(font);
 }

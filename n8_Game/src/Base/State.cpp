@@ -16,7 +16,7 @@ n8::State::State(std::shared_ptr<n8::Game> game){
     m_gui = std::make_shared<gui::GUI>(game->getWindow());
 }
 
-n8::State::~State(){ m_game = nullptr; }
+n8::State::~State(){ }
 
 const ID& n8::State::GetId() const { return *m_id; };
 

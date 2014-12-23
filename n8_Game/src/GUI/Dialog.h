@@ -20,6 +20,7 @@
 #include "Window.h"
 #include "Container.h"
 #include "Button.h"
+#include "Texture.h"
 
 #include <string>
 
@@ -66,7 +67,7 @@ public:
 protected:
     
     std::string mTitle;
-    LTexture mTitleTextTexture; /** < Texture used to display the text */
+    std::unique_ptr<n8::Texture> mTitleTextTexture; /** < Texture used to display the text */
     
     bool mIsOpen;
     

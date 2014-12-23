@@ -20,6 +20,7 @@
 #include "Button.h"
 #include "Dialog.h"
 #include "DialogBuilderInterface.h"
+#include "Texture.h"
 
 #include <string>
 

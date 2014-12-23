@@ -17,6 +17,7 @@
 
 #include "Window.h"
 #include "Log.h"
+#include "Texture.h"
 
 namespace gui {
     
@@ -35,7 +36,7 @@ class Label : public GUIElement{
         
         void OffsetPosition(int p_x, int p_y) override;
     protected:
-        LTexture m_textTexture; /** < Texture used to store text */
+        std::unique_ptr<n8::Texture> m_textTexture; /** < Texture used to store text */
         std::string m_labelText; /** < String holding the text to render */
     
     };
