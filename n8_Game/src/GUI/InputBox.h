@@ -30,7 +30,7 @@ namespace gui {
         
         void Draw(const std::shared_ptr<n8::Window>) const override;
         
-        virtual bool CheckMouseClickDown(int p_x, int p_y) override;
+        virtual bool CheckMouseClickDown(int p_x, int p_y) const override;
         virtual void HandleKeyboardInput(SDL_Event*);
         virtual bool Update(Uint32 p_currentTime) override;
         
@@ -48,7 +48,8 @@ namespace gui {
         
         std::string m_hintString;  /** < String to hold hint message */
         std::string m_inputString; /** < Holds the user input */
-        bool m_updateTexture;  /** < Flag to indicate if text texture needs updated */
+        
+        mutable bool m_updateTexture;  /** < Flag to indicate if text texture needs updated */
         bool m_cursorShown;  /** < Flag to indicate if the cursor should be drawn */
         
         unsigned m_lastTime; /** < Tracks time since cursor was toggled on or off */

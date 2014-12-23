@@ -43,7 +43,7 @@ void n8::Timer::SyncGame(unsigned p_fps){
  *
  *  @return Milliseconds since the timer was created
  */
-unsigned int n8::Timer::GetElapsedTime(){
+unsigned int n8::Timer::GetElapsedTime() const{
     m_currentTime = SDL_GetTicks();
     return m_currentTime - m_startTime;
 }
@@ -52,6 +52,6 @@ unsigned int n8::Timer::GetElapsedTime(){
  *
  *  @return The current game time
  */
-unsigned int n8::Timer::GetTime(){
+unsigned int n8::Timer::GetTime() const{
     return m_currentTime;
 }

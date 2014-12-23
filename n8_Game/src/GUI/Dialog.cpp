@@ -38,7 +38,7 @@ void gui::Dialog::SetTitle(std::string title){
     mTitle = title;
 }
 
-bool gui::Dialog::CheckMouseClickDown(int pX, int pY){
+bool gui::Dialog::CheckMouseClickDown(int pX, int pY) const {
     bool clickedWithinDialog = positionWithinElement(pX, pY);
     
     // If the click was not within the bounds of the dialog, we return false so it may be dismissed
@@ -53,7 +53,7 @@ bool gui::Dialog::CheckMouseClickDown(int pX, int pY){
     return true;
 }
 
-bool gui::Dialog::CheckMouseClickUp(int pX, int pY){
+bool gui::Dialog::CheckMouseClickUp(int pX, int pY) const {
     bool clickedUpWithDialog = positionWithinElement(pX, pY);
     if (!clickedUpWithDialog) {
         return false;
@@ -64,7 +64,7 @@ bool gui::Dialog::CheckMouseClickUp(int pX, int pY){
     return true;
 }
 
-bool gui::Dialog::CheckMouseMove(int pX, int py){
+bool gui::Dialog::CheckMouseMove(int pX, int py) const {
     
     return Container::CheckMouseMove(pX, py);
 }

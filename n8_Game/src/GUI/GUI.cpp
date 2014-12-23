@@ -60,7 +60,7 @@ void gui::GUI::RemoveElement(std::shared_ptr<GUIElement> p_widget){
  *
  *  @return bool Returns true if any element was clicked
  */
-bool gui::GUI::CheckClickDown(int p_x, int p_y){
+bool gui::GUI::CheckClickDown(int p_x, int p_y) {
     if(!mDialogStack.empty()){
         bool clickedDown = mDialogStack.top()->CheckMouseClickDown(p_x, p_y);
         if (!clickedDown) {

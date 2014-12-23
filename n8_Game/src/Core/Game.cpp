@@ -202,7 +202,7 @@ void n8::Game::Stop(){ }
  *
  *  @return The fps value
  */
-void n8::Game::SetFPS(unsigned newFPS){
+void n8::Game::SetFPS(Uint8 newFPS){
     m_fps = newFPS;
 }
 
@@ -216,7 +216,7 @@ void n8::Game::ShowDebugInfo(bool showDebugInfo){
 *   @param unsigned width The desired width of the window
 *   @param unsigned height The desired height of the window
 */
-void n8::Game::DefineWindowSize(unsigned width, unsigned height){
+void n8::Game::DefineWindowSize(Uint16 width, Uint16 height){
     m_windowWidth = width;
     m_windowHeight = height;
     

@@ -40,7 +40,7 @@ gui::Container::~Container(){
  *
  *  @return bool Returns true if any element was clicked
  */
-bool gui::Container::CheckMouseClickDown(int p_x, int p_y){
+bool gui::Container::CheckMouseClickDown(int p_x, int p_y) const {
     for (const auto element : m_guiElements){
         if ( element->CheckMouseClickDown(p_x, p_y) ){
             return true;
@@ -58,7 +58,7 @@ bool gui::Container::CheckMouseClickDown(int p_x, int p_y){
  *
  *  @return bool Returns true if any element was clicked up
  */
-bool gui::Container::CheckMouseClickUp(int p_x, int p_y){
+bool gui::Container::CheckMouseClickUp(int p_x, int p_y) const {
     for (const auto& widget : m_guiElements){
         if ( widget->CheckMouseClickUp(p_x, p_y) ){
             return true;
@@ -75,7 +75,7 @@ bool gui::Container::CheckMouseClickUp(int p_x, int p_y){
  *
  *  @return True if any element handled the event
  */
-bool gui::Container::CheckMouseMove(int p_x, int p_y){
+bool gui::Container::CheckMouseMove(int p_x, int p_y) const{
     for (const auto& widget : m_guiElements){
         if ( widget->CheckMouseMove(p_x,p_y) ){
             return true;

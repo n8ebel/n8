@@ -33,9 +33,9 @@ namespace gui{
         void AddElement(std::shared_ptr<GUIElement>);
         
         virtual void Draw(const std::shared_ptr<n8::Window>) const override;
-        virtual bool CheckMouseClickDown(int p_x, int p_y) override;
-        virtual bool CheckMouseClickUp(int p_x, int p_y) override;
-        virtual bool CheckMouseMove(int p_x, int p_y) override;
+        virtual bool CheckMouseClickDown(int p_x, int p_y) const override;
+        virtual bool CheckMouseClickUp(int p_x, int p_y) const override;
+        virtual bool CheckMouseMove(int p_x, int p_y) const override;
         
         virtual void SetStyle(Style p_style);
         
