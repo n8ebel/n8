@@ -10,6 +10,9 @@
 
 #include "Texture.h"
 #include "Color.h"
+#include "Log.h"
+
+#define TAG "Texture"
 
 n8::Texture::Texture() : Resource("") { }
 
@@ -29,20 +32,31 @@ n8::Texture::Texture(std::string p_id, SDL_Texture* p_texture, int p_w, int p_h)
     
 }
 
-n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer, TTF_Font* p_font, std::string textureText, SDL_Color p_textColor ) : Resource(p_id)
+/** Constructor
+ *  Creates a texture instance for rendering text.
+ *
+ *  @param p_id The string identifier of the resource
+ *  @param p_renderer The window renderer used to create the text texture
+ *  @param p_font Pointer to a TTF_Font object used to render the text
+ *  @param p_textureText The string to render
+ *  @param p_textColor The color to render the text as
+ */
+n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer, TTF_Font* p_font, std::string p_textureText, SDL_Color p_textColor ) : Resource(p_id)
 {
     
-    SDL_Surface* textSurface = TTF_RenderText_Solid( p_font, textureText.c_str(), p_textColor );
+    SDL_Surface* textSurface = TTF_RenderText_Solid( p_font, p_textureText.c_str(), p_textColor );
     if( textSurface == nullptr )
     {
-        printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
-        if(p_font == nullptr)
-            printf( "   font was null");
-        else
-            printf( "   font wasn't null");
+        std::string msg( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+        n8::Log::Error(TAG, msg);
         
-        printf( "   texture text was: %s", textureText.c_str());
-        printf( "   texture color was %i,%i,%i", p_textColor.r, p_textColor.g, p_textColor.b);
+        if(p_font == nullptr)
+            n8::Log::Error( TAG, "   font was null");
+        else
+            n8::Log::Error( TAG, "   font wasn't null");
+        
+        string textMessage( "   texture text was: %s", p_textureText.c_str());
+        n8::Log::Error(TAG, textMessage);
     }
     else
     {
@@ -50,7 +64,8 @@ n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer, TTF_Font* p_fon
         m_texture = SDL_CreateTextureFromSurface( p_renderer, textSurface );
         if( m_texture == nullptr )
         {
-            printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
+            string textureCreationFailedMsg("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
+            n8::Log::Error(TAG, textureCreationFailedMsg);
         }
         else
         {
@@ -68,7 +83,6 @@ n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer, TTF_Font* p_fon
  *  Destroys the texture
  */
 n8::Texture::~Texture(){
-    std::cout << "Texture destructor" << std::endl;
     SDL_DestroyTexture(m_texture);
     m_texture = nullptr;
 }
