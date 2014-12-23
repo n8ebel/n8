@@ -54,7 +54,7 @@ class Button : public GUIElement{
     private:
     
         std:: string m_text;  /** < The test displayed on the button */
-        n8::Texture* m_textTexture; /** < Texture used to display the text */
+        std::unique_ptr<n8::Texture> m_textTexture; /** < Texture used to display the text */
     
         void drawHovered(const std::shared_ptr<n8::Window>) const;
         void drawNeutral(const std::shared_ptr<n8::Window>) const;

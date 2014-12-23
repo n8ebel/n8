@@ -28,7 +28,6 @@
 gui::Button::Button(std::shared_ptr<n8::Window> p_window, std::string p_id,std::string p_text, int p_x, int p_y, int p_w, int p_h ) : GUIElement(p_window, p_id,p_x,p_y,p_w,p_h)
 {
     m_text = p_text;
-    m_textTexture = nullptr;
     
     loadFontTexture(Style::DEFAULT_FONT_SIZE);
     
@@ -66,9 +65,7 @@ gui::Button::~Button(){
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
     }
-    if (m_textTexture) {
-        delete m_textTexture;
-    }
+    
     m_function = nullptr;
 }
 
@@ -293,14 +290,23 @@ void gui::Button::drawSelectedAndHovered(const std::shared_ptr<n8::Window> p_win
 }
 
 void gui::Button::loadFontTexture(int textSize){
-    // Build
-    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), textSize);
-    if (!font) {
-        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+    
+    // If there is no text for the button, dont bother creating a text texture for it
+    if (m_text.empty()) {
+        m_built = true;
         return;
     }
     
-    m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    // Build
+    TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), textSize);
+    
+    if (!font) {
+        n8::Log::Error(TAG, "Button failed to load font: " + m_style.GetFontPath());
+    }else{
+        m_textTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, m_text.c_str(),
+                                                      m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    }
+    
     m_built = m_textTexture != nullptr;
     
     TTF_CloseFont(font);

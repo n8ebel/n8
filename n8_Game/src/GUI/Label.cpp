@@ -17,7 +17,6 @@ gui::Label::Label(std::shared_ptr<n8::Window> p_window, std::string p_id,std::st
     
     m_labelText = p_text;
     m_texture = nullptr;
-    m_textTexture = nullptr;
     
     // Build
     TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), 16);
@@ -26,7 +25,7 @@ gui::Label::Label(std::shared_ptr<n8::Window> p_window, std::string p_id,std::st
         return;
     }
     
-    m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
+    m_textTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_labelText.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor() );
     m_built = m_textTexture != nullptr;
     
     TTF_CloseFont(font);
@@ -43,9 +42,6 @@ gui::Label::~Label(){
     if (m_texture) {
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
-    }
-    if (m_textTexture) {
-        delete m_textTexture;
     }
 }
 

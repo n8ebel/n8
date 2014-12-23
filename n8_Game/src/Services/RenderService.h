@@ -40,7 +40,7 @@ namespace n8 {
         
         enum class EColor{Black,White};
         
-        static uint8_t DEFAULT_ALPHA;
+        static Uint8 DEFAULT_ALPHA;
         
         RenderService(std::shared_ptr<n8::Game>, std::shared_ptr<n8::Window>);
         ~RenderService();

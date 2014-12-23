@@ -17,6 +17,8 @@
 
 namespace n8{
     
+    class Color;
+    
     /** \class Texture
      *  \brief Texture resource to be rendered to game screen.
      *

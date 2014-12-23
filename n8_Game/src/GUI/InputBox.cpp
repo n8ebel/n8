@@ -34,8 +34,6 @@ gui::InputBox::InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, 
     m_cursorShown = false;
     m_updateTexture = true;
     
-    m_textTexture = nullptr;
-    
     m_built = true;
 }
 
@@ -59,8 +57,6 @@ gui::InputBox::InputBox(std::shared_ptr<n8::Window> p_window, std::string p_id, 
     m_cursorShown = false;
     m_updateTexture = true;
     
-    m_textTexture = nullptr;
-    
     // Build
     m_built = true;
 }
@@ -72,9 +68,6 @@ gui::InputBox::~InputBox(){
     if (m_texture != nullptr) {
         SDL_DestroyTexture(m_texture);
         m_texture = nullptr;
-    }
-    if (m_textTexture) {
-        delete m_textTexture;
     }
 }
 
@@ -252,7 +245,7 @@ void gui::InputBox::UpdateTexture(const std::shared_ptr<n8::Window> p_window){
     
     // Free previous texture beforew we updated it
     if (m_textTexture){
-        delete m_textTexture;
+        m_textTexture.release();
     }
     
     //Text is not empty
@@ -265,7 +258,7 @@ void gui::InputBox::UpdateTexture(const std::shared_ptr<n8::Window> p_window){
         }
         
         //load input text to texture
-        m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+        m_textTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font, m_inputString.c_str(), (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
         
         TTF_CloseFont(font);
        
@@ -282,7 +275,7 @@ void gui::InputBox::UpdateTexture(const std::shared_ptr<n8::Window> p_window){
             }
             
             //load hint text to texture
-            m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
+            m_textTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font,  m_hintString, (m_style.GetColor(Style::EStyleColor::Hint).GetColor()) );
             
             TTF_CloseFont(font);
         }
@@ -295,7 +288,7 @@ void gui::InputBox::UpdateTexture(const std::shared_ptr<n8::Window> p_window){
             }
             
             //load empty texture
-            m_textTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
+            m_textTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&p_window->GetRenderer()), font," ", (m_style.GetColor(Style::EStyleColor::Font).GetColor()) );
             
             TTF_CloseFont(font);
         }

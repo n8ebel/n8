@@ -21,6 +21,7 @@ gui::GUI::GUI(std::shared_ptr<n8::Window> p_window) :
 
 /** Destructor */
 gui::GUI::~GUI(){
+    std::cout << "GUI destructor" << std::endl;
     while (!mDialogStack.empty()) {
         mDialogStack.pop();
     }

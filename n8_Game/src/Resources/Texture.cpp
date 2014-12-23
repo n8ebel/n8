@@ -9,6 +9,7 @@
  */
 
 #include "Texture.h"
+#include "Color.h"
 
 n8::Texture::Texture() : Resource("") { }
 
@@ -28,11 +29,10 @@ n8::Texture::Texture(std::string p_id, SDL_Texture* p_texture, int p_w, int p_h)
     
 }
 
-n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer,TTF_Font* p_font, std::string textureText, SDL_Color textColor ) : Resource(p_id)
+n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer, TTF_Font* p_font, std::string textureText, SDL_Color p_textColor ) : Resource(p_id)
 {
     
-    //Render text surface
-    SDL_Surface* textSurface = TTF_RenderText_Solid( p_font, textureText.c_str(), textColor );
+    SDL_Surface* textSurface = TTF_RenderText_Solid( p_font, textureText.c_str(), p_textColor );
     if( textSurface == nullptr )
     {
         printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
@@ -42,7 +42,7 @@ n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer,TTF_Font* p_font
             printf( "   font wasn't null");
         
         printf( "   texture text was: %s", textureText.c_str());
-        printf( "   texture color was %i,%i,%i", textColor.r, textColor.g, textColor.b);
+        printf( "   texture color was %i,%i,%i", p_textColor.r, p_textColor.g, p_textColor.b);
     }
     else
     {
@@ -68,6 +68,7 @@ n8::Texture::Texture(std::string p_id, SDL_Renderer* p_renderer,TTF_Font* p_font
  *  Destroys the texture
  */
 n8::Texture::~Texture(){
+    std::cout << "Texture destructor" << std::endl;
     SDL_DestroyTexture(m_texture);
     m_texture = nullptr;
 }

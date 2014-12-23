@@ -39,7 +39,7 @@ public:
     ~State();
     
     const ID& GetId() const;
-    
+    const virtual std::string GetName() const = 0;
     
     virtual void OnResume() = 0;
     virtual void OnPause() = 0;

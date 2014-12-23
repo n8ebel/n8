@@ -33,7 +33,7 @@ namespace gui {
         
         TTF_Font* font = TTF_OpenFont(m_style.GetFontPath().c_str(), Style::DEFAULT_TITLE_HEIGHT);
         
-        mTitleTextTexture = new n8::Texture("", const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor());
+        mTitleTextTexture = std::make_unique<n8::Texture>("", const_cast<SDL_Renderer*>(&m_window->GetRenderer()), font, mTitle.c_str(), m_style.GetColor(Style::EStyleColor::Font).GetColor());
         m_built = mTitleTextTexture != nullptr;
         
         TTF_CloseFont(font);

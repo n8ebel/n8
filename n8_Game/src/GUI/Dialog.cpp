@@ -23,10 +23,6 @@ gui::Dialog::~Dialog(){
     Container::~Container();
     
     m_window = nullptr;
-    if (mTitleTextTexture) {
-        delete mTitleTextTexture;
-        mTitleTextTexture = nullptr;
-    }
     
     mDismissedListener = nullptr;
     mPositiveListener = nullptr;

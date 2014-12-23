@@ -67,7 +67,7 @@ public:
 protected:
     
     std::string mTitle;
-    n8::Texture* mTitleTextTexture; /** < Texture used to display the text */
+    std::unique_ptr<n8::Texture> mTitleTextTexture; /** < Texture used to display the text */
     
     bool mIsOpen;
     
